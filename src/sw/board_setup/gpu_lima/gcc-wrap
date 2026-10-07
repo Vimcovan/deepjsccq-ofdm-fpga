@@ -1,0 +1,5 @@
+#!/bin/bash
+# gcc 11 wrapper: drop the gcc-12-only flag the kernel config adds (CONFIG_INIT_STACK_ALL_ZERO)
+a=()
+for x in "$@"; do [ "$x" = -ftrivial-auto-var-init=zero ] || a+=("$x"); done
+exec gcc "${a[@]}"

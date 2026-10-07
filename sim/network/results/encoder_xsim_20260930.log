@@ -1,0 +1,235 @@
+#-----------------------------------------------------------
+# xsim v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Wed Sep 30 12:52:28 2026
+# Process ID         : 32392
+# Current directory  : D:/CodexPrj/DeepJSCC-Q-FPGA/sim/work_full_chain_20260930_125500/encoder
+# Command line       : xsim.exe -mode tcl -source {xsim.dir/top_blk_enc_0_latent_idx/xsim_script.tcl}
+# Log file           : D:/CodexPrj/DeepJSCC-Q-FPGA/sim/work_full_chain_20260930_125500/encoder/xsim.log
+# Journal file       : D:/CodexPrj/DeepJSCC-Q-FPGA/sim/work_full_chain_20260930_125500/encoder\xsim.jou
+# Running On         : DESKTOP-MCAH50K
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 28000
+# Processor Detail   : Intel(R) Core(TM) i5-14600KF
+# CPU Frequency      : 3494 MHz
+# CPU Physical cores : 14
+# CPU Logical cores  : 20
+# Host memory        : 34128 MB
+# Swap memory        : 34359 MB
+# Total Virtual      : 68487 MB
+# Available Virtual  : 35633 MB
+#-----------------------------------------------------------
+source xsim.dir/top_blk_enc_0_latent_idx/xsim_script.tcl
+# xsim {top_blk_enc_0_latent_idx} -autoloadwcfg -runall
+Time resolution is 1 ps
+run -all
+  100000 cycles: in 5376/393216 out 0/65536
+  200000 cycles: in 8448/393216 out 0/65536
+  300000 cycles: in 13056/393216 out 0/65536
+  400000 cycles: in 16128/393216 out 0/65536
+  500000 cycles: in 18980/393216 out 0/65536
+  600000 cycles: in 20736/393216 out 0/65536
+  700000 cycles: in 23808/393216 out 0/65536
+  800000 cycles: in 25494/393216 out 0/65536
+  900000 cycles: in 28416/393216 out 0/65536
+  1000000 cycles: in 29952/393216 out 0/65536
+  1100000 cycles: in 33024/393216 out 0/65536
+  1200000 cycles: in 36096/393216 out 0/65536
+  1300000 cycles: in 37632/393216 out 0/65536
+  1400000 cycles: in 40704/393216 out 0/65536
+  1500000 cycles: in 42240/393216 out 0/65536
+  1600000 cycles: in 45312/393216 out 0/65536
+  1700000 cycles: in 48384/393216 out 0/65536
+  1800000 cycles: in 49920/393216 out 0/65536
+  1900000 cycles: in 51456/393216 out 0/65536
+  2000000 cycles: in 54528/393216 out 0/65536
+  2100000 cycles: in 57600/393216 out 0/65536
+  2200000 cycles: in 59136/393216 out 464/65536
+  2300000 cycles: in 62208/393216 out 824/65536
+  2400000 cycles: in 63744/393216 out 1176/65536
+  2500000 cycles: in 66816/393216 out 1536/65536
+  2600000 cycles: in 69888/393216 out 2048/65536
+  2700000 cycles: in 71424/393216 out 2443/65536
+  2800000 cycles: in 72960/393216 out 2800/65536
+  2900000 cycles: in 76032/393216 out 3154/65536
+  3000000 cycles: in 79104/393216 out 3584/65536
+  3100000 cycles: in 80640/393216 out 4072/65536
+  3200000 cycles: in 83712/393216 out 4424/65536
+  3300000 cycles: in 85248/393216 out 4776/65536
+  3400000 cycles: in 88320/393216 out 5136/65536
+  3500000 cycles: in 91392/393216 out 5632/65536
+  3600000 cycles: in 92928/393216 out 6048/65536
+  3700000 cycles: in 94464/393216 out 6400/65536
+  3800000 cycles: in 97536/393216 out 6760/65536
+  3900000 cycles: in 100608/393216 out 7168/65536
+  4000000 cycles: in 102144/393216 out 7680/65536
+  4100000 cycles: in 105216/393216 out 8024/65536
+  4200000 cycles: in 106752/393216 out 8381/65536
+  4300000 cycles: in 109824/393216 out 8736/65536
+  4400000 cycles: in 112896/393216 out 9216/65536
+  4500000 cycles: in 114432/393216 out 9648/65536
+  4600000 cycles: in 117504/393216 out 10000/65536
+  4700000 cycles: in 119040/393216 out 10360/65536
+  4800000 cycles: in 122112/393216 out 10752/65536
+  4900000 cycles: in 124090/393216 out 11264/65536
+  5000000 cycles: in 126720/393216 out 11624/65536
+  5100000 cycles: in 128256/393216 out 11984/65536
+  5200000 cycles: in 131328/393216 out 12336/65536
+  5300000 cycles: in 134400/393216 out 12800/65536
+  5400000 cycles: in 135936/393216 out 13248/65536
+  5500000 cycles: in 139008/393216 out 13608/65536
+  5600000 cycles: in 140544/393216 out 13960/65536
+  5700000 cycles: in 143616/393216 out 14336/65536
+  5800000 cycles: in 146688/393216 out 14848/65536
+  5900000 cycles: in 148224/393216 out 15227/65536
+  6000000 cycles: in 149760/393216 out 15584/65536
+  6100000 cycles: in 152832/393216 out 15938/65536
+  6200000 cycles: in 155904/393216 out 16384/65536
+  6300000 cycles: in 157440/393216 out 16848/65536
+  6400000 cycles: in 160512/393216 out 17208/65536
+  6500000 cycles: in 162048/393216 out 17560/65536
+  6600000 cycles: in 165120/393216 out 17920/65536
+  6700000 cycles: in 168192/393216 out 18432/65536
+  6800000 cycles: in 169728/393216 out 18832/65536
+  6900000 cycles: in 171264/393216 out 19184/65536
+  7000000 cycles: in 174336/393216 out 19544/65536
+  7100000 cycles: in 177408/393216 out 19968/65536
+  7200000 cycles: in 178944/393216 out 20462/65536
+  7300000 cycles: in 182016/393216 out 20808/65536
+  7400000 cycles: in 183552/393216 out 21166/65536
+  7500000 cycles: in 186624/393216 out 21520/65536
+  7600000 cycles: in 189696/393216 out 22016/65536
+  7700000 cycles: in 191232/393216 out 22432/65536
+  7800000 cycles: in 192768/393216 out 22784/65536
+  7900000 cycles: in 195840/393216 out 23144/65536
+  8000000 cycles: in 199680/393216 out 23552/65536
+  8100000 cycles: in 200448/393216 out 24064/65536
+  8200000 cycles: in 203520/393216 out 24408/65536
+  8300000 cycles: in 205056/393216 out 24768/65536
+  8400000 cycles: in 208128/393216 out 25312/65536
+  8500000 cycles: in 211200/393216 out 25856/65536
+  8600000 cycles: in 214272/393216 out 26400/65536
+  8700000 cycles: in 215808/393216 out 26944/65536
+  8800000 cycles: in 218880/393216 out 27488/65536
+  8900000 cycles: in 220416/393216 out 28032/65536
+  9000000 cycles: in 223488/393216 out 28576/65536
+  9100000 cycles: in 226560/393216 out 29121/65536
+  9200000 cycles: in 228096/393216 out 29679/65536
+  9300000 cycles: in 229632/393216 out 30224/65536
+  9400000 cycles: in 232704/393216 out 30920/65536
+  9500000 cycles: in 235776/393216 out 32023/65536
+  9600000 cycles: in 237312/393216 out 32768/65536
+  9700000 cycles: in 240384/393216 out 32768/65536
+  9800000 cycles: in 241920/393216 out 32768/65536
+  9900000 cycles: in 244992/393216 out 32768/65536
+  10000000 cycles: in 248064/393216 out 32768/65536
+  10100000 cycles: in 249600/393216 out 32768/65536
+  10200000 cycles: in 251629/393216 out 32768/65536
+  10300000 cycles: in 254208/393216 out 32880/65536
+  10400000 cycles: in 257280/393216 out 33280/65536
+  10500000 cycles: in 258816/393216 out 33792/65536
+  10600000 cycles: in 261888/393216 out 34144/65536
+  10700000 cycles: in 263424/393216 out 34504/65536
+  10800000 cycles: in 266496/393216 out 34856/65536
+  10900000 cycles: in 269568/393216 out 35328/65536
+  11000000 cycles: in 271104/393216 out 35768/65536
+  11100000 cycles: in 274176/393216 out 36128/65536
+  11200000 cycles: in 275712/393216 out 36480/65536
+  11300000 cycles: in 278784/393216 out 36864/65536
+  11400000 cycles: in 281856/393216 out 37376/65536
+  11500000 cycles: in 283392/393216 out 37752/65536
+  11600000 cycles: in 284928/393216 out 38104/65536
+  11700000 cycles: in 288000/393216 out 38464/65536
+  11800000 cycles: in 291072/393216 out 38912/65536
+  11900000 cycles: in 292608/393216 out 39371/65536
+  12000000 cycles: in 295680/393216 out 39728/65536
+  12100000 cycles: in 297216/393216 out 40082/65536
+  12200000 cycles: in 300288/393216 out 40448/65536
+  12300000 cycles: in 303360/393216 out 40960/65536
+  12400000 cycles: in 304896/393216 out 41352/65536
+  12500000 cycles: in 306432/393216 out 41704/65536
+  12600000 cycles: in 309504/393216 out 42064/65536
+  12700000 cycles: in 312576/393216 out 42496/65536
+  12800000 cycles: in 314112/393216 out 42976/65536
+  12900000 cycles: in 317184/393216 out 43328/65536
+  13000000 cycles: in 318720/393216 out 43688/65536
+  13100000 cycles: in 321792/393216 out 44040/65536
+  13200000 cycles: in 324864/393216 out 44544/65536
+  13300000 cycles: in 326400/393216 out 44952/65536
+  13400000 cycles: in 327936/393216 out 45310/65536
+  13500000 cycles: in 331008/393216 out 45664/65536
+  13600000 cycles: in 334080/393216 out 46080/65536
+  13700000 cycles: in 335616/393216 out 46592/65536
+  13800000 cycles: in 338688/393216 out 46928/65536
+  13900000 cycles: in 340224/393216 out 47288/65536
+  14000000 cycles: in 343296/393216 out 47640/65536
+  14100000 cycles: in 346368/393216 out 48128/65536
+  14200000 cycles: in 347904/393216 out 48552/65536
+  14300000 cycles: in 350232/393216 out 48912/65536
+  14400000 cycles: in 352512/393216 out 49264/65536
+  14500000 cycles: in 355584/393216 out 49664/65536
+  14600000 cycles: in 357120/393216 out 50176/65536
+  14700000 cycles: in 360192/393216 out 50536/65536
+  14800000 cycles: in 361728/393216 out 50888/65536
+  14900000 cycles: in 364800/393216 out 51248/65536
+  15000000 cycles: in 367872/393216 out 51712/65536
+  15100000 cycles: in 369408/393216 out 52155/65536
+  15200000 cycles: in 372480/393216 out 52512/65536
+  15300000 cycles: in 374016/393216 out 52866/65536
+  15400000 cycles: in 377088/393216 out 53248/65536
+  15500000 cycles: in 380160/393216 out 53760/65536
+  15600000 cycles: in 381696/393216 out 54136/65536
+  15700000 cycles: in 383232/393216 out 54488/65536
+  15800000 cycles: in 386304/393216 out 54848/65536
+  15900000 cycles: in 389376/393216 out 55296/65536
+  16000000 cycles: in 390912/393216 out 55760/65536
+  16100000 cycles: in 393216/393216 out 56112/65536
+  16200000 cycles: in 393216/393216 out 56472/65536
+  16300000 cycles: in 393216/393216 out 56832/65536
+  16400000 cycles: in 393216/393216 out 57344/65536
+  16500000 cycles: in 393216/393216 out 57736/65536
+  16600000 cycles: in 393216/393216 out 58280/65536
+  16700000 cycles: in 393216/393216 out 58824/65536
+  16800000 cycles: in 393216/393216 out 59389/65536
+  16900000 cycles: in 393216/393216 out 59904/65536
+  17000000 cycles: in 393216/393216 out 60448/65536
+  17100000 cycles: in 393216/393216 out 60992/65536
+  17200000 cycles: in 393216/393216 out 61536/65536
+  17300000 cycles: in 393216/393216 out 62083/65536
+  17400000 cycles: in 393216/393216 out 62632/65536
+  17500000 cycles: in 393216/393216 out 63248/65536
+  17600000 cycles: in 393216/393216 out 63942/65536
+  17700000 cycles: in 393216/393216 out 65296/65536
+frame 0 done at cycle 9553688
+frame 1 done at cycle 17717220
+PASS  256x256x3 -> 1x32768x2: 2 frame(s) bit-exact, 17717420 cycles
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_0_out_b 6142 of 6142
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_1_out_a 128 of 128
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_1_out_b 13819 of 13819
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_2_out_b 2141 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_a0_out_b 2145 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_a1_out_b 2163 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_a2_out_b 2742 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_b0_out_b 2161 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_b1_out_b 2163 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_b2_out_b 2807 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_out_x 6478 of 7678
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_3_out_a 128 of 128
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_4_out_b 4694 of 7678
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_5_out_b 4273 of 7678
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_6_out_b 4247 of 7678
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_7_out_b 1067 of 1534
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_a0_out_b 1056 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_a1_out_b 1064 of 1534
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_a2_out_b 1073 of 1534
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_b0_out_b 1059 of 3070
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_b1_out_b 1064 of 1534
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_b2_out_b 1064 of 1534
+FIFO_PEAK tb_top(H=256,W=256,CIN=3,HO=1,WO=32768,COUT=2,OUT_W=24,IN_ELEMS=196608,OUT_ELEMS=32768,IN_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/input.mem",OUT_FILE="D:/CodexPrj/DeepJSCC-Q-FPGA/runs/fpga_export_w8a12/golden/div2k_val_00/tx_iq24.mem",NFRAMES=2).dut.u_fifo_enc_8_out_x 3164 of 4606
+$finish called at time : 70869698 ns : File "D:/CodexPrj/DeepJSCC-Q-FPGA/sim/tb_top.sv" Line 106
+run: Time (s): cpu = 00:00:01 ; elapsed = 02:18:56 . Memory (MB): peak = 236.398 ; gain = 0.000
+exit
+INFO: xsimkernel Simulation Memory Usage: 27132 KB (Peak: 27132 KB), Simulation CPU Usage: 7294031 ms
+INFO: [Common 17-206] Exiting xsim at Wed Sep 30 15:11:26 2026...

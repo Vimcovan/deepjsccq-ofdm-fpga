@@ -1,0 +1,12 @@
+{
+ "name": "dec.6.out",
+ "MA": 57869,
+ "MB": 117237,
+ "SH": 17,
+ "RELU": 0,
+ "in": [
+  "dec.6.conv2",
+  "dec.5.out"
+ ],
+ "out": "dec.6.out"
+}

@@ -1,0 +1,12 @@
+{
+ "name": "enc.7.out",
+ "MA": 29410,
+ "MB": 70933,
+ "SH": 16,
+ "RELU": 0,
+ "in": [
+  "enc.7.gdn",
+  "enc.7.skip"
+ ],
+ "out": "enc.7.out"
+}

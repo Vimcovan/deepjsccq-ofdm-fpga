@@ -1,0 +1,25 @@
+{
+ "name": "dec.4.igdn",
+ "op": "igdn",
+ "C": 32,
+ "LANES": 1,
+ "INVERSE": 1,
+ "X2_SHIFT": 0,
+ "LSH": 14,
+ "F": 0,
+ "QW": 1,
+ "DW": 46,
+ "NUNITS": 1,
+ "PRE": 8,
+ "M": 87705,
+ "SH": 30,
+ "in": "dec.4.conv2",
+ "out": "dec.4.igdn",
+ "shape_hwc": [
+  64,
+  64,
+  32
+ ],
+ "mac_cycles_per_frame": 4194304,
+ "budget_cycles": 6666666.666666667
+}

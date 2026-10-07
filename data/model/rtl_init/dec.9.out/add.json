@@ -1,0 +1,12 @@
+{
+ "name": "dec.9.out",
+ "MA": 58413,
+ "MB": 129448,
+ "SH": 17,
+ "RELU": 0,
+ "in": [
+  "dec.9.igdn",
+  "dec.9.skip.ps2"
+ ],
+ "out": "dec.9.out"
+}

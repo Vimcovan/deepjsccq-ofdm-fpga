@@ -1,0 +1,43 @@
+{
+ "name": "dec.9.conv2",
+ "ops": [
+  "dec.9.conv2"
+ ],
+ "CIN": 3,
+ "COUT": 3,
+ "K": 3,
+ "STRIDE": 1,
+ "PAD": 1,
+ "P": 1,
+ "GROUPS": 3,
+ "ACT": "none",
+ "ACT2": "none",
+ "ACT_SPLIT": 3,
+ "WROM_STYLE": "distributed",
+ "WROM_MODE": "direct",
+ "WG_NCOL": 1,
+ "WROM_DEPTH": 81,
+ "WROM_WIDTH": 8,
+ "WROM_BANK_DEPTH": 0,
+ "RQ_MUL": "lut",
+ "PRE": 0,
+ "SH_MIN": 24,
+ "SH_BITS": 1,
+ "in": "dec.9.conv.ps2",
+ "in_shape_hwc": [
+  256,
+  256,
+  3
+ ],
+ "out": [
+  "dec.9.conv2"
+ ],
+ "out_shape_hwc": [
+  [
+   256,
+   256,
+   3
+  ]
+ ],
+ "note": ""
+}

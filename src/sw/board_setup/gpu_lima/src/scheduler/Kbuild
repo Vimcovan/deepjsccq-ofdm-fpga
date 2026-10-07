@@ -1,0 +1,3 @@
+obj-m := gpu-sched.o
+gpu-sched-y := sched_main.o sched_fence.o sched_entity.o
+ccflags-y += -I$(src)

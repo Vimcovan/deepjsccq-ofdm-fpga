@@ -1,0 +1,9 @@
+set configs {
+    enc.0.conv1 {CIN=3 COUT=32 K=3 P=3 ACT="leaky" ACT2="none" ACT_SPLIT=32 WROM_STYLE="distributed" WROM_MODE="direct" WG_NCOL=1 WROM_BANK_DEPTH=0 RQ_MUL="dsp" PRE=0 SH_MIN=23 SH_BITS=1} {P=3 mode=direct/distributed rq=dsp: expect ROM 0 BRAM36 (LUTRAM), DSP 4}
+    enc.0.conv2 {CIN=32 COUT=32 K=3 P=32 ACT="none" ACT2="none" ACT_SPLIT=32 WROM_STYLE="block" WROM_MODE="direct" WG_NCOL=1 WROM_BANK_DEPTH=0 RQ_MUL="dsp" PRE=0 SH_MIN=26 SH_BITS=2} {P=32 mode=direct/block rq=dsp: expect ROM 4 BRAM36 (4 slice(s) x 1 bank(s) of 512x72), DSP 33}
+    enc.2.conv1 {CIN=32 COUT=32 K=3 P=7 ACT="leaky" ACT2="none" ACT_SPLIT=32 WROM_STYLE="block" WROM_MODE="gear" WG_NCOL=5 WROM_BANK_DEPTH=0 RQ_MUL="lut" PRE=0 SH_MIN=26 SH_BITS=1} {P=7 mode=gear/block rq=lut: expect ROM 2.5 BRAM36 (5x BRAM18 512x32 + gearbox), DSP 7}
+    enc.3.ab0.c0 {CIN=32 COUT=32 K=1 P=1 ACT="relu" ACT2="relu" ACT_SPLIT=16 WROM_STYLE="distributed" WROM_MODE="direct" WG_NCOL=1 WROM_BANK_DEPTH=0 RQ_MUL="lut" PRE=0 SH_MIN=24 SH_BITS=2} {P=1 mode=direct/distributed rq=lut: expect ROM 0 BRAM36 (LUTRAM), DSP 1}
+    enc.3.a0.c1 {CIN=16 COUT=16 K=3 P=2 ACT="relu" ACT2="none" ACT_SPLIT=16 WROM_STYLE="block" WROM_MODE="gear" WG_NCOL=2 WROM_BANK_DEPTH=0 RQ_MUL="lut" PRE=0 SH_MIN=25 SH_BITS=1} {P=2 mode=gear/block rq=lut: expect ROM 1 BRAM36 (2x BRAM18 512x32 + gearbox), DSP 2}
+    dec.2.conv+skip {CIN=32 COUT=64 K=3 P=13 ACT="leaky" ACT2="none" ACT_SPLIT=32 WROM_STYLE="block" WROM_MODE="direct" WG_NCOL=1 WROM_BANK_DEPTH=512 RQ_MUL="lut" PRE=0 SH_MIN=24 SH_BITS=2} {P=13 mode=direct/block rq=lut: expect ROM 4.5 BRAM36 (2 slice(s) x 3 bank(s) of 512x72), DSP 13}
+    dec.7.conv+skip {CIN=32 COUT=256 K=3 P=52 ACT="leaky" ACT2="none" ACT_SPLIT=128 WROM_STYLE="block" WROM_MODE="direct" WG_NCOL=1 WROM_BANK_DEPTH=512 RQ_MUL="dsp" PRE=0 SH_MIN=24 SH_BITS=2} {P=52 mode=direct/block rq=dsp: expect ROM 18 BRAM36 (6 slice(s) x 3 bank(s) of 512x72), DSP 53}
+}

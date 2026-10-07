@@ -1,0 +1,2 @@
+obj-m := drm_shmem_helper.o
+drm_shmem_helper-y := drm_gem_shmem_helper.o

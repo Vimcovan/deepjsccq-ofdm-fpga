@@ -1,0 +1,519 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date             : Wed Oct  7 19:17:03 2026
+| Host             : DESKTOP-MCAH50K running 64-bit major release  (build 9200)
+| Command          : report_power -file D:/ClaudePrj/deepjsccq-ofdm-fpga/build/out/rx_power.rpt
+| Design           : jscc_rx_ps_top
+| Device           : xczu5eg-sfvc784-2-e
+| Design State     : routed
+| Grade            : extended
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 4.942        |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 4.488        |
+| Device Static (W)        | 0.454        |
+| Effective TJA (C/W)      | 2.3          |
+| Max Ambient (C)          | 88.5         |
+| Junction Temperature (C) | 36.5         |
+| Confidence Level         | Low          |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Clocks                   |     0.327 |        9 |       --- |             --- |
+| CLB Logic                |     0.369 |   177406 |       --- |             --- |
+|   LUT as Logic           |     0.267 |    64958 |    117120 |           55.46 |
+|   LUT as Distributed RAM |     0.041 |     3856 |     57600 |            6.69 |
+|   CARRY8                 |     0.028 |     3681 |     14640 |           25.14 |
+|   Register               |     0.020 |    76845 |    234240 |           32.81 |
+|   LUT as Shift Register  |     0.012 |     1954 |     57600 |            3.39 |
+|   BUFG                   |    <0.001 |        6 |        32 |           18.75 |
+|   Others                 |     0.000 |     3749 |       --- |             --- |
+|   F7/F8 Muxes            |     0.000 |     1737 |    117120 |            1.48 |
+| Signals                  |     0.472 |   141338 |       --- |             --- |
+| Block RAM                |     0.114 |    123.5 |       144 |           85.76 |
+| URAM                     |     0.135 |       25 |        64 |           39.06 |
+| MMCM                     |     0.089 |        0 |       --- |             --- |
+| DSPs                     |     0.125 |      394 |      1248 |           31.57 |
+| I/O                      |     0.124 |       57 |       252 |           22.62 |
+| PS8                      |     2.733 |        1 |       --- |             --- |
+| Static Power             |     0.454 |          |           |                 |
+|   PS Static              |     0.110 |          |           |                 |
+|   PL Static              |     0.344 |          |           |                 |
+| Total                    |     4.942 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Source           | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Vccint           |       0.850 |     1.935 |       1.810 |      0.125 |       NA    | Unspecified | NA         |
+| Vccint_io        |       0.850 |     0.041 |       0.004 |      0.037 |       NA    | Unspecified | NA         |
+| Vccbram          |       0.850 |     0.007 |       0.005 |      0.002 |       NA    | Unspecified | NA         |
+| Vccaux           |       1.800 |     0.123 |       0.049 |      0.074 |       NA    | Unspecified | NA         |
+| Vccaux_io        |       1.800 |     0.044 |       0.013 |      0.031 |       NA    | Unspecified | NA         |
+| Vcco33           |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco25           |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco18           |       1.800 |     0.054 |       0.054 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco15           |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco135          |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco12           |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco10           |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccadc           |       1.800 |     0.008 |       0.000 |      0.008 |       NA    | Unspecified | NA         |
+| VCC_PSINTFP      |       0.850 |     0.941 |       0.897 |      0.044 |       NA    | Unspecified | NA         |
+| VCC_PSINTLP      |       0.850 |     0.265 |       0.256 |      0.009 |       NA    | Unspecified | NA         |
+| VPS_MGTRAVCC     |       0.850 |     0.135 |       0.134 |      0.001 |       NA    | Unspecified | NA         |
+| VCC_PSINTFP_DDR  |       0.850 |     0.822 |       0.816 |      0.005 |       NA    | Unspecified | NA         |
+| VCC_PSPLL        |       1.200 |     0.075 |       0.073 |      0.002 |       NA    | Unspecified | NA         |
+| VPS_MGTRAVTT     |       1.800 |     0.034 |       0.033 |      0.001 |       NA    | Unspecified | NA         |
+| VCCO_PSDDR_504   |       1.200 |     0.677 |       0.643 |      0.034 |       NA    | Unspecified | NA         |
+| VCC_PSAUX        |       1.800 |     0.002 |       0.000 |      0.002 |       NA    | Unspecified | NA         |
+| VCC_PSBATT       |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSDDR_PLL    |       1.800 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| VCCO_PSIO0_500   |       1.800 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| VCCO_PSIO1_501   |       3.300 |     0.008 |       0.007 |      0.001 |       NA    | Unspecified | NA         |
+| VCCO_PSIO2_502   |       1.800 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| VCCO_PSIO3_503   |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
+| VCC_PSADC        |       1.800 |     0.002 |       0.000 |      0.002 |       NA    | Unspecified | NA         |
+| VMGTAVCC (GTH)   |       0.900 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VMGTAVTT (GTH)   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VMGTVCCAUX (GTH) |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
++------------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                                | Action                                                                                                     |
++-----------------------------+------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                                       |                                                                                                            |
+| Clock nodes activity        | High       | User specified more than 95% of clocks                 |                                                                                                            |
+| I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view   |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                           |                                                                                                            |
+|                             |            |                                                        |                                                                                                            |
+| Overall confidence level    | Low        |                                                        |                                                                                                            |
++-----------------------------+------------+--------------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 2.3                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 5.5                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-----------------+
+| Clock                                                                                               | Domain                                                             | Constraint (ns) |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-----------------+
+| clk_100M_clk_gen                                                                                    | u_clk/inst/clk_100M_clk_gen                                        |            10.0 |
+| clk_20M_clk_gen                                                                                     | u_clk/inst/clk_20M_clk_gen                                         |            50.0 |
+| clk_250M_clk_gen                                                                                    | u_clk/inst/clk_250M_clk_gen                                        |             4.0 |
+| dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/SERIES7_BSCAN.bscan_inst/INTERNAL_TCK | dbg_hub/inst/BSCANID.u_xsdbm_id/SWITCH_N_EXT_BSCAN.bscan_inst/DRCK |            50.0 |
+| rx_clk                                                                                              | rx_clk_in_p                                                        |            25.0 |
+| sysclk_p                                                                                            | sysclk_p                                                           |             8.0 |
++-----------------------------------------------------------------------------------------------------+--------------------------------------------------------------------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++-----------------------------------+-----------+
+| Name                              | Power (W) |
++-----------------------------------+-----------+
+| jscc_rx_ps_top                    |     4.488 |
+|   dbg_hub                         |     0.001 |
+|     inst                          |     0.001 |
+|       BSCANID.u_xsdbm_id          |     0.001 |
+|   u_clk                           |     0.091 |
+|     inst                          |     0.091 |
+|       clkin1_ibufds               |     0.002 |
+|   u_dec_cdc                       |     0.002 |
+|     u_xpm_fifo_axis               |     0.002 |
+|       xpm_fifo_base_inst          |     0.002 |
+|   u_decoder                       |     1.243 |
+|     u_dec_0_a0_c1                 |     0.004 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_0_a0_c2                 |     0.006 |
+|     u_dec_0_a0_out                |     0.005 |
+|     u_dec_0_a1_c0                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_a1_c1                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_a1_c2                 |     0.005 |
+|     u_dec_0_a1_out                |     0.004 |
+|     u_dec_0_a2_c0                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_a2_c1                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_a2_c2                 |     0.005 |
+|     u_dec_0_a2_out                |     0.005 |
+|     u_dec_0_ab0_c0                |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b0_c1                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b0_c2                 |     0.008 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|     u_dec_0_b0_out                |     0.005 |
+|     u_dec_0_b1_c0                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b1_c1                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b1_c2                 |     0.009 |
+|     u_dec_0_b1_out                |     0.002 |
+|     u_dec_0_b2_c0                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b2_c1                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_b2_c2                 |     0.008 |
+|     u_dec_0_b2_out                |     0.004 |
+|     u_dec_0_b3                    |     0.005 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_0_out                   |     0.002 |
+|     u_dec_0_sig                   |     0.002 |
+|     u_dec_1_conv1                 |     0.009 |
+|       g_gear.u_ws                 |     0.004 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_1_conv2                 |     0.018 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_gear.u_ws                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_1_out                   |     0.007 |
+|     u_dec_1_skip                  |     0.006 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_2_conv2                 |     0.016 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_gear.u_ws                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_2_conv_skip             |     0.019 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_direct.g_wrom[0].u_wrom   |     0.003 |
+|       g_direct.g_wrom[1].u_wrom   |     0.001 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_2_igdn                  |     0.018 |
+|       g_unit[0].u_unit            |     0.001 |
+|     u_dec_2_out                   |     0.007 |
+|     u_dec_3_conv1                 |     0.017 |
+|       g_gear.u_ws                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_3_conv2                 |     0.017 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_gear.u_ws                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_3_out                   |     0.006 |
+|     u_dec_4_conv2                 |     0.018 |
+|       g_gear.u_ws                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_4_conv_skip             |     0.021 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_direct.g_wrom[0].u_wrom   |     0.003 |
+|       g_direct.g_wrom[1].u_wrom   |     0.001 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_4_igdn                  |     0.020 |
+|       g_unit[0].u_unit            |     0.001 |
+|     u_dec_4_out                   |     0.007 |
+|     u_dec_5_a0_c1                 |     0.009 |
+|       g_gear.u_ws                 |     0.002 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_a0_c2                 |     0.008 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_a0_out                |     0.006 |
+|     u_dec_5_a1_c0                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_a1_c1                 |     0.009 |
+|       g_gear.u_ws                 |     0.003 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_a1_c2                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_a1_out                |     0.006 |
+|     u_dec_5_a2_c0                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_a2_c1                 |     0.009 |
+|       g_gear.u_ws                 |     0.003 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_a2_c2                 |     0.006 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_a2_out                |     0.006 |
+|     u_dec_5_ab0_c0                |     0.006 |
+|       fifo_mem_reg_0_15_0_13      |     0.002 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b0_c1                 |     0.008 |
+|       g_gear.u_ws                 |     0.002 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_b0_c2                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b0_out                |     0.005 |
+|     u_dec_5_b1_c0                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b1_c1                 |     0.008 |
+|       g_gear.u_ws                 |     0.003 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_b1_c2                 |     0.006 |
+|       fifo_mem_reg_0_15_0_13      |     0.001 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b1_out                |     0.005 |
+|     u_dec_5_b2_c0                 |     0.005 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b2_c1                 |     0.009 |
+|       g_gear.u_ws                 |     0.003 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_5_b2_c2                 |     0.007 |
+|       fifo_mem_reg_0_15_0_13      |     0.002 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_b2_out                |     0.005 |
+|     u_dec_5_b3                    |     0.006 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_5_out                   |     0.003 |
+|     u_dec_5_sig                   |     0.003 |
+|       u_mul                       |     0.001 |
+|     u_dec_6_conv1                 |     0.016 |
+|       g_gear.u_ws                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_6_conv2                 |     0.021 |
+|       fifo_mem_reg_0_15_0_13      |     0.002 |
+|       g_gear.u_ws                 |     0.007 |
+|       g_mul_lut.u_mul             |     0.001 |
+|     u_dec_6_out                   |     0.006 |
+|     u_dec_7_conv2                 |     0.056 |
+|       g_direct.g_wrom[0].u_wrom   |     0.002 |
+|       g_direct.g_wrom[1].u_wrom   |     0.002 |
+|       g_direct.g_wrom[2].u_wrom   |     0.002 |
+|       g_direct.g_wrom[3].u_wrom   |     0.002 |
+|     u_dec_7_conv_ps2              |     0.004 |
+|       u_rb                        |     0.002 |
+|     u_dec_7_conv_skip             |     0.064 |
+|       g_direct.g_wrom[0].u_wrom   |     0.003 |
+|       g_direct.g_wrom[1].u_wrom   |     0.003 |
+|       g_direct.g_wrom[2].u_wrom   |     0.003 |
+|       g_direct.g_wrom[3].u_wrom   |     0.003 |
+|       g_direct.g_wrom[4].u_wrom   |     0.003 |
+|       g_direct.g_wrom[5].u_wrom   |     0.003 |
+|     u_dec_7_igdn                  |     0.036 |
+|       g_unit[0].u_unit            |     0.004 |
+|       g_unit[1].u_unit            |     0.001 |
+|       g_unit[2].u_unit            |     0.001 |
+|     u_dec_7_out                   |     0.009 |
+|     u_dec_7_skip_ps2              |     0.004 |
+|       u_rb                        |     0.002 |
+|     u_dec_8_conv1                 |     0.060 |
+|       g_direct.g_wrom[0].u_wrom   |     0.002 |
+|       g_direct.g_wrom[1].u_wrom   |     0.002 |
+|       g_direct.g_wrom[2].u_wrom   |     0.002 |
+|       g_direct.g_wrom[3].u_wrom   |     0.002 |
+|     u_dec_8_conv2                 |     0.049 |
+|       g_direct.g_wrom[0].u_wrom   |     0.001 |
+|       g_direct.g_wrom[1].u_wrom   |     0.001 |
+|       g_direct.g_wrom[2].u_wrom   |     0.001 |
+|       g_direct.g_wrom[3].u_wrom   |     0.001 |
+|     u_dec_8_out                   |     0.007 |
+|     u_dec_9_conv2                 |     0.006 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_9_conv_ps2              |     0.002 |
+|     u_dec_9_conv_skip             |     0.034 |
+|       g_direct.g_wrom[0].u_wrom   |     0.001 |
+|       g_direct.g_wrom[1].u_wrom   |     0.001 |
+|       g_direct.g_wrom[2].u_wrom   |     0.001 |
+|       g_mul_lut.u_mul             |     0.002 |
+|     u_dec_9_igdn                  |     0.019 |
+|       g_unit[0].u_unit            |     0.001 |
+|       g_unit[1].u_unit            |     0.001 |
+|     u_dec_9_out                   |     0.006 |
+|     u_dec_9_skip_ps2              |     0.002 |
+|     u_fifo_dec_0_a0_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_0_a1_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_0_a2_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_0_b0_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_0_b1_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_0_b2_out_b         |     0.002 |
+|     u_fifo_dec_0_out_x            |     0.005 |
+|       g_packed.u_ram              |     0.004 |
+|     u_fifo_dec_1_out_b            |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_2_out_b            |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_3_out_b            |     0.009 |
+|       g_packed.u_ram              |     0.008 |
+|     u_fifo_dec_4_out_b            |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_a0_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_a1_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_a2_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_b0_out_b         |     0.002 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_b1_out_b         |     0.003 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_b2_out_b         |     0.003 |
+|       g_packed.u_ram              |     0.001 |
+|     u_fifo_dec_5_out_a            |     0.001 |
+|     u_fifo_dec_5_out_x            |     0.009 |
+|       g_packed.u_ram              |     0.008 |
+|     u_fifo_dec_6_out_b            |     0.009 |
+|       g_packed.u_ram              |     0.008 |
+|     u_fifo_dec_7_out_b            |     0.008 |
+|       g_packed.u_ram              |     0.007 |
+|     u_fifo_dec_8_out_a            |     0.004 |
+|     u_fifo_dec_8_out_b            |     0.008 |
+|       g_packed.u_ram              |     0.007 |
+|     u_fifo_dec_9_out_b            |     0.003 |
+|       g_packed.u_ram              |     0.002 |
+|     u_lb_dec_0_a0_c1              |     0.004 |
+|       u_ram                       |     0.001 |
+|     u_lb_dec_0_a1_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_0_a2_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_0_b0_c1              |     0.004 |
+|       u_ram                       |     0.001 |
+|     u_lb_dec_0_b1_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_0_b2_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_1_conv1              |     0.003 |
+|     u_lb_dec_1_conv2              |     0.014 |
+|       u_ram                       |     0.010 |
+|     u_lb_dec_2_conv2              |     0.014 |
+|       u_ram                       |     0.011 |
+|     u_lb_dec_2_conv_skip          |     0.014 |
+|       u_ram                       |     0.010 |
+|     u_lb_dec_3_conv1              |     0.011 |
+|       u_ram                       |     0.008 |
+|     u_lb_dec_3_conv2              |     0.013 |
+|       u_ram                       |     0.010 |
+|     u_lb_dec_4_conv2              |     0.011 |
+|       u_ram                       |     0.008 |
+|     u_lb_dec_4_conv_skip          |     0.014 |
+|       u_ram                       |     0.011 |
+|     u_lb_dec_5_a0_c1              |     0.005 |
+|       u_ram                       |     0.003 |
+|     u_lb_dec_5_a1_c1              |     0.006 |
+|       u_ram                       |     0.004 |
+|     u_lb_dec_5_a2_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_5_b0_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_5_b1_c1              |     0.005 |
+|       u_ram                       |     0.003 |
+|     u_lb_dec_5_b2_c1              |     0.004 |
+|       u_ram                       |     0.002 |
+|     u_lb_dec_6_conv1              |     0.012 |
+|       u_ram                       |     0.009 |
+|     u_lb_dec_6_conv2              |     0.013 |
+|       u_ram                       |     0.009 |
+|     u_lb_dec_7_conv2              |     0.013 |
+|       u_ram                       |     0.010 |
+|     u_lb_dec_7_conv_skip          |     0.008 |
+|       u_ram                       |     0.006 |
+|     u_lb_dec_8_conv1              |     0.010 |
+|       u_ram                       |     0.008 |
+|     u_lb_dec_8_conv2              |     0.010 |
+|       u_ram                       |     0.007 |
+|     u_lb_dec_9_conv2              |     0.003 |
+|       u_ram                       |     0.001 |
+|     u_lb_dec_9_conv_skip          |     0.014 |
+|       u_ram                       |     0.010 |
+|     u_output                      |     0.002 |
+|   u_img_cdc                       |     0.002 |
+|     u_xpm_fifo_axis               |     0.002 |
+|       xpm_fifo_base_inst          |     0.002 |
+|   u_ps                            |     2.837 |
+|     ps_rx_i                       |     2.836 |
+|       cap_dma                     |     0.005 |
+|       cap_fifo                    |     0.003 |
+|       img_dma                     |     0.005 |
+|       ps_e_0                      |     2.734 |
+|       sc_ctl                      |     0.063 |
+|       sc_mem                      |     0.028 |
+|   u_regs                          |     0.002 |
+|   u_rf                            |     0.120 |
+|     u_ad9361_lvds_mode            |     0.117 |
+|       IBUFGDS_data_clk            |     0.003 |
+|       g_rx_data[0].i_rx_data_ibuf |     0.003 |
+|       g_rx_data[1].i_rx_data_ibuf |     0.003 |
+|       g_rx_data[2].i_rx_data_ibuf |     0.003 |
+|       g_rx_data[3].i_rx_data_ibuf |     0.003 |
+|       g_rx_data[4].i_rx_data_ibuf |     0.003 |
+|       g_rx_data[5].i_rx_data_ibuf |     0.003 |
+|       i_rx_frame_ibuf             |     0.003 |
+|   u_rx_baseband                   |     0.098 |
+|     equalizer_top_inst            |     0.039 |
+|       u_ce                        |     0.007 |
+|       u_cpe                       |     0.010 |
+|       u_fft                       |     0.010 |
+|       u_sfo_res                   |     0.001 |
+|       u_sfo_rot                   |     0.009 |
+|     synchronizer_top_inst         |     0.059 |
+|       frame_detection_inst        |     0.017 |
+|       time_sync_inst              |     0.042 |
+|   u_rx_frame_buf                  |     0.009 |
+|   u_sscc                          |     0.023 |
+|     u_bits                        |     0.005 |
+|     u_fifo                        |     0.001 |
+|     u_viterbi                     |     0.015 |
+|       U0                          |     0.015 |
+|   u_telemetry                     |     0.007 |
++-----------------------------------+-----------+
+
+

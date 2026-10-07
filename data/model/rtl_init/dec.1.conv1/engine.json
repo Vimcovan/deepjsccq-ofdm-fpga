@@ -1,0 +1,43 @@
+{
+ "name": "dec.1.conv1",
+ "ops": [
+  "dec.1.conv1"
+ ],
+ "CIN": 16,
+ "COUT": 32,
+ "K": 3,
+ "STRIDE": 1,
+ "PAD": 1,
+ "P": 3,
+ "GROUPS": 11,
+ "ACT": "leaky",
+ "ACT2": "none",
+ "ACT_SPLIT": 32,
+ "WROM_STYLE": "block",
+ "WROM_MODE": "gear",
+ "WG_NCOL": 3,
+ "WROM_DEPTH": 1584,
+ "WROM_WIDTH": 24,
+ "WROM_BANK_DEPTH": 0,
+ "RQ_MUL": "lut",
+ "PRE": 0,
+ "SH_MIN": 24,
+ "SH_BITS": 2,
+ "in": "dec.0.out",
+ "in_shape_hwc": [
+  64,
+  64,
+  16
+ ],
+ "out": [
+  "dec.1.conv1"
+ ],
+ "out_shape_hwc": [
+  [
+   64,
+   64,
+   32
+  ]
+ ],
+ "note": ""
+}

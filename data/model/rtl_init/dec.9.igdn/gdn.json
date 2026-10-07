@@ -1,0 +1,25 @@
+{
+ "name": "dec.9.igdn",
+ "op": "igdn",
+ "C": 3,
+ "LANES": 1,
+ "INVERSE": 1,
+ "X2_SHIFT": 0,
+ "LSH": 14,
+ "F": 0,
+ "QW": 1,
+ "DW": 46,
+ "NUNITS": 2,
+ "PRE": 8,
+ "M": 65912,
+ "SH": 30,
+ "in": "dec.9.conv2",
+ "out": "dec.9.igdn",
+ "shape_hwc": [
+  256,
+  256,
+  3
+ ],
+ "mac_cycles_per_frame": 589824,
+ "budget_cycles": 6666666.666666667
+}

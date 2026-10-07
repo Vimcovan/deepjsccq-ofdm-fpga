@@ -1,0 +1,16 @@
+# Vivado build outputs (build/build_hw.tcl)
+build/work/
+build/out/
+build/logs/
+*.jou
+*.log
+*.str
+.Xil/
+# Python / MATLAB
+__pycache__/
+*.pyc
+*.asv
+# backups and scratch
+*.bak*
+*.try*
+!sim/network/results/*.log

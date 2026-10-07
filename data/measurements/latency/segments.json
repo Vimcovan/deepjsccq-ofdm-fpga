@@ -1,0 +1,145 @@
+{
+ "1_tx_ps_to_encoder": {
+  "median": 0.855,
+  "p1": 0.626,
+  "p99": 4.947,
+  "min": 0.614,
+  "max": 7.159,
+  "n": 2172,
+  "meaning": "TX PS takes the frame -> first image byte into the encoder (PS)"
+ },
+ "2_encoder_input": {
+  "median": 31.726,
+  "p1": 31.679,
+  "p99": 31.779,
+  "min": 31.665,
+  "max": 31.81,
+  "n": 1706,
+  "meaning": "image bytes flowing into the encoder (DMA, paced by the encoder)"
+ },
+ "3a_encoder_first_out": {
+  "median": 5.004,
+  "p1": 0.935,
+  "p99": 5.475,
+  "min": 0.0,
+  "max": 5.53,
+  "n": 2158,
+  "meaning": "first byte in -> first symbol out (encoder pipeline)"
+ },
+ "3b_encoder_tail": {
+  "median": 6.471,
+  "p1": 6.42,
+  "p99": 6.516,
+  "min": 6.377,
+  "max": 6.531,
+  "n": 1706,
+  "meaning": "last byte in -> last symbol out (encoder pipeline)"
+ },
+ "4_tx_buffer_to_air": {
+  "median": 2.752,
+  "p1": 2.691,
+  "p99": 2.815,
+  "min": 0.0,
+  "max": 2.843,
+  "n": 1706,
+  "meaning": "last symbol -> frame finished on the air (OFDM + frame buffer + 2.75 ms air)"
+ },
+ "5_air_start_to_rx_sync": {
+  "median": 0.154,
+  "p1": 0.08,
+  "p99": 0.224,
+  "min": 0.036,
+  "max": 2.865,
+  "n": 1701,
+  "meaning": "frame starts on the air -> first RX PHY data symbol (preamble, sync, CE)"
+ },
+ "6_rx_phy_frame": {
+  "median": 2.714,
+  "p1": 2.659,
+  "p99": 2.766,
+  "min": 2.483,
+  "max": 4.462,
+  "n": 1701,
+  "meaning": "first -> last RX PHY symbol"
+ },
+ "7_decoding": {
+  "median": 33.108,
+  "p1": 33.051,
+  "p99": 33.177,
+  "min": 32.894,
+  "max": 37.179,
+  "n": 1701,
+  "meaning": "first RX PHY symbol -> last decoded byte"
+ },
+ "7b_decoding_after_last_symbol": {
+  "median": 30.394,
+  "p1": 30.34,
+  "p99": 30.476,
+  "min": 28.646,
+  "max": 34.49,
+  "n": 1701,
+  "meaning": "last RX PHY symbol -> last decoded byte"
+ },
+ "8_rx_pl_to_dma": {
+  "median": 0.0,
+  "p1": 0.0,
+  "p99": 0.0,
+  "min": 0.0,
+  "max": 0.0,
+  "n": 1456,
+  "meaning": "last decoded byte -> forwarded to the PS DMA path"
+ },
+ "9_rx_ps_receive": {
+  "median": 9.122,
+  "p1": 6.962,
+  "p99": 23.003,
+  "min": 0.0,
+  "max": 29.806,
+  "n": 1456,
+  "meaning": "image forwarded -> PS has it (DMA + rx_server, first UDP chunk)"
+ },
+ "PL_encoder_in_to_decoder_out": {
+  "median": 71.465,
+  "p1": 71.391,
+  "p99": 71.547,
+  "min": 71.356,
+  "max": 75.523,
+  "n": 1701,
+  "meaning": "first image byte into the encoder -> last decoded byte (TX clock -> RX clock)"
+ },
+ "TX_PS_take_to_air_start": {
+  "median": 39.069,
+  "p1": 38.816,
+  "p99": 40.532,
+  "min": 36.316,
+  "max": 45.089,
+  "n": 1706,
+  "meaning": "TX PS takes the frame -> frame starts on the air"
+ },
+ "END_TO_END_ps_to_ps": {
+  "median": 81.455,
+  "p1": 79.241,
+  "p99": 95.279,
+  "min": 72.317,
+  "max": 102.136,
+  "n": 1456,
+  "meaning": "TX PS takes the frame -> RX PS has the decoded image"
+ },
+ "_decoder_end_minus_next_sync": {
+  "median": -0.126,
+  "p1": -4.398,
+  "p99": 0.357,
+  "corr_decoding_vs_frame_period": 0.022,
+  "frame_period_ms_p1_p99": [
+   32.773,
+   37.49
+  ]
+ },
+ "_clock": {
+  "offset_drift_us": 528.0,
+  "rtt_ms_median": 0.581,
+  "n_sync": 18,
+  "frame_air_ms": 2.748,
+  "frames": 2697
+ }
+}

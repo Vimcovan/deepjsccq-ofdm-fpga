@@ -1,0 +1,12 @@
+{
+  "started": "2026-09-30T16:36:17.5663347+09:00",
+  "pid": 33888,
+  "state": "passed",
+  "simulator": "xsim (native XPM, assertions enabled)",
+  "image": "div2k_val_00",
+  "frames": 2,
+  "valid_pct": 90,
+  "ready_pct": 80,
+  "decoder": "passed",
+  "finished": "2026-09-30T18:54:47.2730002+09:00"
+}

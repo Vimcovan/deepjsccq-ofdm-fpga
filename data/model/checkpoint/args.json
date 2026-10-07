@@ -1,0 +1,21 @@
+{
+  "cache": "data/cache",
+  "kodak": "data/Kodak",
+  "output_dir": "runs/long1200_paper_arch",
+  "epochs": 1200,
+  "batch_size": 8,
+  "effective_batch_size": 16,
+  "workers": 6,
+  "lr": 0.0002,
+  "beta2": 0.999,
+  "plateau": true,
+  "plateau_patience": 20,
+  "kl_lambda": 0.05,
+  "paper_arch": true,
+  "sigma_count": "micro",
+  "snr_db": 10.0,
+  "seed": 20260928,
+  "no_amp": false,
+  "channels_last": true,
+  "resume": "runs/long1200_paper_arch/latest.pt"
+}

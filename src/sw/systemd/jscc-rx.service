@@ -1,0 +1,18 @@
+[Unit]
+Description=DeepJSCC-Q RX: decoded images + telemetry server (rx_server.py)
+# bootpy.service runs PYNQ's /boot/boot.py, which loads base.bit: load our overlay only after it
+After=network.target systemd-modules-load.service bootpy.service
+Wants=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/xilinx/claude/rx
+ExecStartPre=/bin/sleep 5
+ExecStart=/bin/bash -lc 'source /etc/profile.d/pynq_venv.sh && exec python3 rx_server.py'
+StandardOutput=append:/home/xilinx/claude/rx/rx_server.log
+StandardError=inherit
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

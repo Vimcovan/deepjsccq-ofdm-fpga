@@ -1,0 +1,21 @@
+[Unit]
+Description=DeepJSCC-Q RX board display: full-screen GUI on DisplayPort (jscc_gui.py --lite)
+After=pynq-x11.service jscc-rx.service
+Wants=pynq-x11.service jscc-rx.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/xilinx/claude/rx
+Environment=DISPLAY=:0 HOME=/root XAUTHORITY=/root/.Xauthority
+# wait (up to 60 s) until the X server started by pynq-x11 accepts clients
+ExecStartPre=/bin/bash -c 'for i in $(seq 60); do xset -q >/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+# the screen may have been plugged after X started: 1024x600 at 52.01 MHz (51.2 MHz harmonic is an RX spur, see display_mode.sh)
+ExecStartPre=-/home/xilinx/claude/rx/display_mode.sh
+ExecStart=/bin/bash -lc 'source /etc/profile.d/pynq_venv.sh && exec python3 jscc_gui.py --rx 127.0.0.1 --lite'
+StandardOutput=append:/home/xilinx/claude/rx/gui.log
+StandardError=inherit
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
