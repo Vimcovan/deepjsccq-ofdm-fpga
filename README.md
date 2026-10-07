@@ -6,9 +6,9 @@
 
 全国大学生嵌入式芯片与系统设计竞赛 · 2026 FPGA 赛道 · 自主选题（高级组）
 
-<p align="center"><a href="../../releases"><img src="report/figures/demo_video_thumb.jpg" alt="演示视频" width="720"></a></p>
+<p align="center"><a href="https://www.bilibili.com/video/BV1UDHy6aEp8/"><img src="report/figures/demo_video_thumb.jpg" alt="演示视频" width="720"></a></p>
 
-**演示视频**（4 分钟，点击图片进入 Release 页面下载）：AI 代理按脚本控制两块板卡完成全部演示，包括系统介绍、
+**演示视频**（4 分钟，点击图片或[此处](https://www.bilibili.com/video/BV1UDHy6aEp8/)在 B 站观看）：AI 代理按脚本控制两块板卡完成全部演示，包括系统介绍、
 SSCC 与 DeepJSCC-Q 的衰减对比实验、物理层与硬件架构讲解；画面为相机实拍与触摸屏、代理显示器的同步录屏。
 
 ---
