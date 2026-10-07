@@ -2,9 +2,9 @@
 SSCC sim: 1 frames, SNR 0.0 dB (sigma 0.0 per dimension)
 frame 0: 0 byte errors of 12272 (fifo overflow 0) at 2796326000
 SSCC_RESULT frames 1 byte_errors 0 tx_symbols 32768
-D:\ClaudePrj\AD9361\sscc_rtl\tb\sscc_ref.py:59: RuntimeWarning: overflow encountered in scalar multiply
+sscc_ref.py:59: RuntimeWarning: overflow encountered in scalar multiply
   return 158 * (2 * (4 * k2 + 2 * k1 + k0) - 7)
-D:\ClaudePrj\AD9361\sscc_rtl\tb\sscc_ref.py:59: RuntimeWarning: overflow encountered in scalar subtract
+sscc_ref.py:59: RuntimeWarning: overflow encountered in scalar subtract
   return 158 * (2 * (4 * k2 + 2 * k1 + k0) - 7)
 reference 32768 symbols, RTL 32768: 32269 mismatches, first at 0: rtl [474 158] ref [218 158]
 == FRAMES:1 SNR:16

@@ -1,4 +1,4 @@
-"""OFDM evaluation matched to the user's receiver (D:/MATLABPrj/PHY_80211a.m).
+"""OFDM evaluation matched to the user's MATLAB receiver (PHY_80211a.m, not included).
 
 Channel: the 5-path TGn-style PDP of PHY_80211a.m (0..40 ns, rms delay spread ~4 ns,
 i.e. almost flat Rayleigh per frame), static over the frame.  Transmitter uses a

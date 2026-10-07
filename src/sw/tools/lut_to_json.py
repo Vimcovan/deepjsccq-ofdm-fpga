@@ -7,11 +7,13 @@ condition holds (POLL below, copied from its case table) or a delay (addr 0x3FF:
 0xFF = end). Other reads are plain reads (done once).
 """
 import json
+import os
 import re
 import sys
 
-LUT = sys.argv[1] if len(sys.argv) > 1 else r"D:\ClaudePrj\AD9361\OFDM_JSCC_PS_RX\rtl\phy\ad9361_config_lut.v"
-OUT = sys.argv[2] if len(sys.argv) > 2 else r"D:\ClaudePrj\AD9361\jscc_link\ad9361_rx_init.json"
+REPO = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "..")
+LUT = sys.argv[1] if len(sys.argv) > 1 else os.path.join(REPO, "src", "hw", "rx", "rtl", "phy", "ad9361_config_lut.v")
+OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(REPO, "src", "sw", "rx", "ad9361_rx_init.json")
 # (addr, lut data) -> (mask, wanted value) of the read data, as in ad9361_config.v state 3
 POLL = {(0x037, 0x08): (0x08, 0x08), (0x05E, 0x80): (0x80, 0x80), (0x244, 0x80): (0x80, 0x80),
         (0x284, 0x80): (0x80, 0x80), (0x247, 0x02): (0x02, 0x02), (0x287, 0x02): (0x02, 0x02),
@@ -36,6 +38,7 @@ for i, w, a, d, c in ent:
         ops.append(["poll", a, m, v, c])
     else:
         ops.append(["r", a, c])
-json.dump(dict(source=LUT, ops=ops), open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
+SRC = os.path.relpath(LUT, REPO).replace(os.sep, "/") if os.path.abspath(LUT).startswith(os.path.abspath(REPO)) else os.path.basename(LUT)
+json.dump(dict(source=SRC, ops=ops), open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=0)
 n = {k: sum(1 for o in ops if o[0] == k) for k in ("w", "r", "poll", "delay")}
 print(f"{len(ops)} ops -> {OUT}: {n}")

@@ -3,7 +3,7 @@
 param([string]$Layers = 'enc.0.gdn,enc.7.gdn,dec.7.igdn,dec.9.igdn',
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 100, [int]$ReadyPct = 100)
 $ErrorActionPreference = 'Stop'
-$viv    = 'D:\AMDDesignTools\2025.2\Vivado\bin'
+$viv    = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
 $root   = Split-Path -Parent $PSScriptRoot
 $export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
 $work   = Join-Path $PSScriptRoot 'work_gdn'

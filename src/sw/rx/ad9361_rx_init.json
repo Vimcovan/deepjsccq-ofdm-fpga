@@ -1,5 +1,5 @@
 {
-"source": "D:\\ClaudePrj\\AD9361\\OFDM_JSCC_PS_RX\\rtl\\phy\\ad9361_config_lut.v",
+"source": "src/hw/rx/rtl/phy/ad9361_config_lut.v",
 "ops": [
 [
 "w",

@@ -1,10 +1,12 @@
 from pathlib import Path
 import json
+import os
 import re
 import shutil
 import argparse
 
-ROOT = Path(r"D:\CodexPrj\DeepJSCC-Q-FPGA")
+# network workspace root (rtl/, rtl/gen/, runs/fpga_export_w8a12/, syn/); set DEEPJSCCQ_WS, default: current dir
+ROOT = Path(os.environ.get("DEEPJSCCQ_WS", ".")).resolve()
 EXPORT = ROOT / "runs" / "fpga_export_w8a12"
 OUT_ROOT = ROOT / "vivado_projects"
 PART = "xczu5eg-sfvc784-1-e"
@@ -16,7 +18,7 @@ PROJECTS = {
 
 
 def copy_mem_assets(top_text: str, out_dir: Path):
-    abs_re = re.compile(r'"(D:/[^"\r\n]+)"')
+    abs_re = re.compile(r'"([A-Za-z]:/[^"\r\n]+)"')
     refs = sorted({m.group(1) for m in abs_re.finditer(top_text)})
     rewritten = top_text
     copied = []

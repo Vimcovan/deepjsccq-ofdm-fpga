@@ -8,8 +8,8 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
-$py = 'D:\CodexPrj\DeepJSCC\DeepJSCC_retrain_bundle_20260901\.venv\Scripts\python.exe'
-$questa = 'D:\questasim64_2024.1\win64'
+$py = $(if ($env:PYTHON) { $env:PYTHON } else { 'python' })
+$questa = $(if ($env:QUESTA_BIN) { $env:QUESTA_BIN } else { 'D:\questasim64_2024.1\win64' })
 $export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
 if ($Last -eq '') { $Last = $First }
 $msg = & $py (Join-Path $root 'gen_rtl_top.py') $First $Last

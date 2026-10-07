@@ -6,8 +6,8 @@ param([string]$First = 'enc.3', [string]$Last = '', [switch]$Measure,
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 90, [int]$ReadyPct = 80, [int]$Frames = 1,
       [string]$WorkDir = '')
 $ErrorActionPreference = 'Stop'
-$viv  = 'D:\AMDDesignTools\2025.2\Vivado\bin'
-$py   = 'D:\CodexPrj\DeepJSCC\DeepJSCC_retrain_bundle_20260901\.venv\Scripts\python.exe'
+$viv  = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
+$py   = $(if ($env:PYTHON) { $env:PYTHON } else { 'python' })
 $root = Split-Path -Parent $PSScriptRoot
 $export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
 if ($Last -eq '') { $Last = $First }

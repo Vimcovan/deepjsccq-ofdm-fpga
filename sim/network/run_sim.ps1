@@ -1,7 +1,7 @@
 # Compile axis_line_buffer + testbench once, then elaborate/run several parameter sets with xsim.
 #   powershell -ExecutionPolicy Bypass -File sim\run_sim.ps1
 $ErrorActionPreference = 'Stop'
-$viv  = 'D:\AMDDesignTools\2025.2\Vivado\bin'
+$viv  = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
 $root = Split-Path -Parent $PSScriptRoot
 $work = Join-Path $PSScriptRoot 'work'
 New-Item -ItemType Directory -Force $work | Out-Null

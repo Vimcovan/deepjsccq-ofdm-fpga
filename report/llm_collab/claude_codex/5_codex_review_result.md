@@ -1,0 +1,120 @@
+1. **2.5、4.4：“CRC 校验失败……按中灰图计分”“再往下基本不可解码”**  
+   **问题类型：矛盾。**  
+   **证据：**[measure_link.py](<work>/deepjsccq-ofdm-fpga/board/tests/measure_link.py:271) 独立统计 CRC，但 CRC 错误时仍尝试 JPEG 解码，仅解码失败或尺寸不符才按中灰图计分。[k0802_v3_da.json](<work>/deepjsccq-ofdm-fpga/data/measurements/psnr_snr/k0802_v3_da.json) 中，SSCC 在 SNR 16.62 dB 时 `crc_ok=0`、`decoded=0.898`；13.38 dB 时仍有 `decoded=0.686`，11.30 dB 时为 `0.481`。  
+   **建议改法：**明确“CRC 错误但可解码时按实际重建图计分”；“再往下基本不可解码”改为“CRC 正确率接近零，重建质量严重下降”。不要混用完整性校验通过率与 JPEG 可解码率。
+
+2. **2.5：“每帧选不超出包长的最大质量因子”**  
+   **问题类型：表述。**  
+   **证据：**[sscc_pkt.py](<work>/deepjsccq-ofdm-fpga/src/sw/common/sscc_pkt.py:41) 的 `JpegFit` 从上次质量开始，超长时每次减 5；直接装得下时至多尝试一次加 5，上限为 95。它不保证当前帧取得可容纳的最大质量因子。  
+   **建议改法：**写成“按 5 档步长自适应调整 JPEG 质量，使其装入包长”。若保留“最大”，需要完善搜索并重测基线。
+
+3. **4.5：“46,054 LUT / 233 DSP / 100 BRAM36（OOC 网络核）”**  
+   **问题类型：矛盾。**  
+   **证据：**[编码器 OOC 报告](<work>/deepjsccq-ofdm-fpga/build/reports/network/blk_enc_0_latent_idx.util.rpt:85) 明确为 **4 URAM**，4.1 的存储表也列出 4；4.5 只给解码器列了 URAM，遗漏编码器这一资源。  
+   **建议改法：**编码器补为“100 BRAM36 + 4 URAM”，并在表旁明确网络核数据为 `-1-e` 器件的 OOC 综合结果，整机数据为 `-2-e` 的布局布线结果。
+
+4. **1.3：“114 个卷积算子各自独立实例化”**  
+   **问题类型：矛盾。**  
+   **证据：**[manifest.json](<work>/deepjsccq-ofdm-fpga/data/model/manifest.json) 的卷积算子数为 55/59，但 `memory_plan.encoder/decoder.engines` 排除 GDN 后各为 **53 个引擎**；两个生成顶层中的 `conv_engine #(` 也各出现 53 次，与 4.1 一致。  
+   **建议改法：**“114 个卷积算子经分支合并，映射为 106 个独立卷积引擎，编码、解码各 53 个。”
+
+5. **2.3：“64QAM 外圈的判决余量（约 ±4.7°）”**  
+   **问题类型：数值错误。**  
+   **证据：**[sscc_tx.sv](<work>/deepjsccq-ofdm-fpga/src/hw/tx/rtl/ps/sscc_tx.sv:9) 使用方形 64QAM 电平 `158×{±1,±3,±5,±7}`。无噪声、纯相位旋转时，最坏角点 `(7,7)` 到边界 `I=6` 满足 `cosθ−sinθ=6/7`，得到 **7.69257°**。本段的 1 ppm→0.05496 采样→边缘子载波约 8.0379° 则正确。  
+   **建议改法：**改为“最坏角点的纯相位误差容限约 7.7°”；若 4.7° 包含噪声裕量，需要给出定义与推导。
+
+6. **4.4：“加上 PS 取图与显示……端到端时延中位数为 81.7 ms”**  
+   **问题类型：表述。**  
+   **证据：**[tx_camera.py](<work>/deepjsccq-ofdm-fpga/src/sw/tx/tx_camera.py:352) 在取得图像后记录源时间；[measure_link.py](<work>/deepjsccq-ofdm-fpga/board/tests/measure_link.py:107) 的终点为 UDP 完整消息重组时间，没有屏幕呈现事件。FPS JSON 的 `latency_e2e_ms=81.74`、`n_lat_e2e=17656`；分段测量对应的 [segments.json](<work>/deepjsccq-ofdm-fpga/data/measurements/latency/segments.json:119) 则为 `81.455 ms`、`n=1456`。  
+   **建议改法：**“另一轮 10 min 测量中，从 TX 应用取得源帧到 RX 测量进程完整收图，中位时延为 81.74 ms，17656 个有效匹配样本。”明确不含屏幕呈现，也不是上述分段测量的同批结果。
+
+7. **1.3、2.5：“同功率”“发射功率相同（同一 TX 数字电平与衰减）”**  
+   **问题类型：过度结论。**  
+   **证据：**[sscc_tx.sv](<work>/deepjsccq-ofdm-fpga/src/hw/tx/rtl/ps/sscc_tx.sv:9) 支持相同星座电平；PN 模块仅翻转符号，不调整能量。2.2 已明确没有逐帧 RMS 归一化，固定星座平均能量不保证不同符号分布的实际平均功率相同。仓库没有两模式的发射功率校准记录。  
+   **建议改法：**改为“同 PHY、同星座电平、同 TX 衰减设置、同符号预算”；保留“同功率”需补测量值及容差。
+
+8. **1.3、4.4：“18000 帧无丢帧”；2.5：“总能输出一幅图”**  
+   **问题类型：过度结论。**  
+   **证据：**[FPS JSON](<work>/deepjsccq-ofdm-fpga/data/measurements/fps/lat_video_10min_jscc2.json:29) 支持 `600.06 s`、`18000` 接收帧和 `30.0 fps`，但未保存同一窗口的逐帧对应关系或丢帧计数；TX 预览消息 18001、RX 消息 18000 的边界差异不能证明零丢帧。[uram_frame_fifo.sv](<work>/deepjsccq-ofdm-fpga/src/hw/rx/rtl/phy/jscc/uram_frame_fifo.sv:48) 明确存在整帧丢弃及 `dropped_frames` 计数。  
+   **建议改法：**写“600.06 s 内接收 18000 帧，平均 30.0 fps”；“总能输出”限定为“收到完整符号帧时仍可产生重建图”。如保留零丢帧结论，补充对应计数或帧序列证据。
+
+9. **4.4：“横轴为数据辅助 SNR……SNR = …”**  
+   **问题类型：表述。**  
+   **证据：**全部 58 个星座 NPZ 的 `start_sym=0`，`cpe` 每快照仅含 **20 个 OFDM 符号**。[analyze_const.py](<work>/deepjsccq-ofdm-fpga/board/tests/analyze_const.py:48) 还排除不稳定判决位置，SSCC 去除前三个符号；第 66–72 行保留 `rho≥0.5` 的快照，并使用 `10log10(num/den)`。  
+   **建议改法：**说明横轴是“帧首 20 个 OFDM 符号有效数据载波的筛选后估计”，不是整帧 683 个符号的平均 SNR；公式补上 `10log10`。
+
+10. **1.3、4.2：“星座熵约束的一个附带好处……PAPR 尾部更低”**  
+    **问题类型：过度结论。**  
+    **证据：**[train_v2.py](<work>/deepjsccq-ofdm-fpga/src/model/train_v2.py) 能证明训练使用 KL 正则；仓库没有同一模型仅关闭该正则的 PAPR 消融。SSCC 与 JSCC 同时改变信源编码、符号分布及相关性，不能把历史约 0.8 dB 差异单独归因于熵正则。  
+    **建议改法：**保留“所测 DeepJSCC-Q 波形的 PAPR 尾部较低”这一观察，将因果解释改为可能原因，并注明未单独消融验证。
+
+11. **2.4：“因而不随信道和环境变化失效”；1.3：“只依赖同步率”**  
+    **问题类型：过度结论。**  
+    **证据：**[ad9361_ps.py](<work>/deepjsccq-ofdm-fpga/src/sw/rx/ad9361_ps.py:112) 的判据同时使用同步率、当前增益、增益上限及复位冷却时间：`0.5 s`、`5 fps`、`g<gmax`、`3 s`。这些规则不能保证任意环境下有效。  
+    **建议改法：**“依据同步率与增益状态判断，避免依赖 RSSI/底噪绝对门限；已在所列条件下验证恢复。”
+
+12. **1.3：“SFO / CPE 二阶跟踪环”**  
+    **问题类型：表述。**  
+    **证据：**[sfo_rotator.sv](<work>/deepjsccq-ofdm-fpga/src/hw/rx/rtl/phy/ofdm_rx/sfo_rotator.sv:77) 实现二阶状态更新；[CPE_compensation.sv](<work>/deepjsccq-ofdm-fpga/src/hw/rx/rtl/phy/ofdm_rx/CPE_compensation.sv:64) 则逐符号求四导频和及复倒数，没有跨符号二阶状态。  
+    **建议改法：**“SFO 二阶跟踪与逐符号 CPE/幅度归一化。”
+
+13. **4.4：“抖动来自 PS 调度”“两板时钟偏差……插值消除”**  
+    **问题类型：过度结论。**  
+    **证据：**[pl_events.py](<work>/deepjsccq-ofdm-fpga/board/tests/pl_events.py:83) 使用往返中点估计时差，[seg_latency.py](<work>/deepjsccq-ofdm-fpga/board/tests/seg_latency.py:46) 线性插值；`segments.json._clock` 中 RTT 中位数为 **0.581 ms**、偏移漂移 **528 μs**。没有调度跟踪或单向时延数据证明抖动全部来自 PS，也不能证明时差完全消除。  
+    **建议改法：**分别改为“抖动包含 PS 调度和测量链路影响”“通过往返测量与插值估计、校正时钟偏差”。
+
+14. **2.3、2.4、4.2：历史 PHY/射频实验数字；报告开头“文中数值均可在仓库中找到出处”**  
+    **问题类型：无出处。以下应标为“仓库内无原始测量出处”，不认定为数值错误。**  
+    **证据：**[sim/README.md](<work>/deepjsccq-ofdm-fpga/sim/README.md:6) 明确 PHY 激励、输出未入库；现有 RTL、配置和测试脚本不足以复核下列实验结果：
+    - 相关系数 `0.17–0.27 / 0.28–0.42`；PAPR 高 `1–2 dB`、99% 分位 `10.1–10.7→9.4–9.8 dB`；PN 约 `20 LUT / 0 DSP`。
+    - `±40 ppm、683 符号零误码`；板上 `364 fps、7.15×10⁸ 比特零误码/零丢帧`；EVM `−36.6/−34.9 dB`。
+    - 4.2 整张 EVM/镜像修复表；误差底 `−34→−36 dB`、CP 外能量约 `−29 dB`、能量 `−24.7→−44.8 dB`。
+    - `3 张图、1765/2047`；AGC 的 `0.45 ms、下降2档、11.2/10.4 dB、0/45、LMT低16 dB、9/45→0/44、SNR改善0.1–1.9 dB`；看门狗 `180 s零误复位、6次全部恢复、1.3–3.1 s`。
+    
+    [ad9361_rx_init.json](<work>/deepjsccq-ofdm-fpga/src/sw/rx/ad9361_rx_init.json:9442) 注释转述了 `9/45→0/44` 和 SNR 改善，但没有原始记录；当前 [agc_guard_test.py](<work>/deepjsccq-ofdm-fpga/board/tests/agc_guard_test.py:74) 还以恢复不超过 **2.5 s** 判通过，需要说明其与报告“验收 1.3–3.1 s”的版本或口径关系。  
+    **建议改法：**统一标注历史调试结果的证据边界，并收窄开头“数值均有仓库出处”的承诺。
+
+15. **4.3：“仅 PHY……TX 约 2.9 k LUT……RX 约 11.0 k LUT……”；4.1、4.5 的文献 [3] 数值**  
+    **问题类型：无出处。**  
+    **证据：**`build/reports/` 的整机报告和 `network/` 报告均存在，但没有所述 PRBS 替代网络版本的独立资源报告。文献 [3] 的资源、时延、功耗原表及层形状也未入库；[脚注 reference](<work>/deepjsccq-ofdm-fpga/report/design_report.md:508) 只引用其 Fig.2/Table II，无法在仓库内独立复算 `0.110886912 GMAC/端` 及相关倍率。  
+    **建议改法：**PHY 数值注明历史综合结果、仓库内无原报告；外部比较补论文原表出处及 MAC 层形状计算表。现阶段不把这些数值列为已核对正确。
+
+16. **4.4：“5 张预设图中 PSNR 最接近均值的一张”**  
+    **问题类型：无出处。**  
+    **证据：**[make_presets.py](<work>/deepjsccq-ofdm-fpga/src/sw/tools/make_presets.py:14) 能确认五张图为 0801、0802、0803、0830、0843；现有实测没有五图同条件 PSNR、均值及选择记录，`k0802_v3_da.json.args` 只记录 `preset:div2k_0802`、一次扫描。  
+    **建议改法：**删去“最接近均值”，或补五图选择依据；3.8 dB 优势等结论明确限定于本次 0802 测试。
+
+17. **4.4 图9：“分段时延 CDF（1701 帧）”**  
+    **问题类型：数值错误。**  
+    **证据：**[segments_3seg.json](<work>/deepjsccq-ofdm-fpga/data/measurements/latency/segments_3seg.json:8) 中 `encoding.n=1706`，其余三项为 `1701`；绘图脚本分别使用各段完整 CSV，没有统一筛成同一批 1701 帧。  
+    **建议改法：**“编码段 1706 个有效样本，传输、解码和 PL 合计各 1701 个有效样本。”
+
+18. **4.4 图7：“同一信道条件下的解码图像”**  
+    **问题类型：表述。**  
+    **证据：**[plot_visual_compare.py](<work>/deepjsccq-ofdm-fpga/board/tests/plot_visual_compare.py:53) 按相同 TX 衰减选图，第72行取两模式 SNR 均值作为标题。标注 17.4 dB 的列实际为 JSCC **16.99**、SSCC **17.71 dB**；图下 PSNR/SSIM 为选中单帧值。  
+    **建议改法：**“相同 TX 衰减条件下的代表图像；列标题为两方案实测 SNR 均值，图下为单帧 PSNR/SSIM。”
+
+19. **1.1：“每帧 2.33 GMAC……在一块 ZU5EG 的 PL 中以 30 fps 运行”**  
+    **问题类型：表述。**  
+    **证据：**2.1 框图与独立 TX/RX 工程均为两板部署；`manifest.ops` 得到编码 **0.912785408**、解码 **1.417216 GMAC/帧**，2.33 是两端合计。  
+    **建议改法：**“编码、解码分别部署于一块 ZU5EG，两端名义卷积工作量合计 2.33 GMAC/帧。”
+
+20. **第3节：“以太网……用于 TX 预览图……图像数据只经射频空口传输”**  
+    **问题类型：矛盾。**  
+    **证据：**[tx_camera.py](<work>/deepjsccq-ofdm-fpga/src/sw/tx/tx_camera.py:1) 明确通过 UDP 发送进入编码器的原图预览。  
+    **建议改法：**“用于无线重建的编码载荷仅经射频空口；原图预览经以太网用于显示和评测。”
+
+21. **2.4：“128 阶”“TX 64 阶 / RX 48 阶”**  
+    **问题类型：表述。**  
+    **证据：**[ad9361_config_lut.v](<work>/deepjsccq-ofdm-fpga/src/hw/tx/rtl/phy/ad9361_config_lut.v:58) 及第448行写的是 **64 taps / 48 taps**，严格阶数应为 63/47。  
+    **建议改法：**统一使用“128 抽头”“TX 64 抽头 / RX 48 抽头”。
+
+**已核对无误的数值**
+
+- **整机资源、时序、功耗：**4.3 的 TX/RX 全部数量、百分比、WNS/WHS 均正确；功耗实际为 **4.490/4.942 W**，PS8 各 **2.733 W**。重建与部署的资源、时序报告除日期和输出路径外一致。
+- **模型与训练：**通道32/16、下采样4、32768符号、spp 0.5；训练10 dB、KL权重0.05、学习率0.0002、批量8/16、epoch1186；软件PSNR及量化损失均正确。
+- **网络统计与规划：**55/59算子、141584/245704参数、0.912785408/1.417216 GMAC；并行通路217/296、参照1120/1191；4.1全部存储规划和单缓存OOC数值均正确。
+- **RTL仿真：**两端各2帧PASS；完成间隔8163532/6521051拍及32.654128/26.084204 ms；90% valid、80% ready均正确。
+- **PHY与软件参数：**683符号、54960采样、2.748 ms、约8%占空比；PN多项式、SFO系数、LTF门限/提前量、6 URAM容量、CDC深度32、看门狗参数及SSCC 12272字节包/128尾零均正确。
+- **实测数值：**4.4两表全部SNR/PSNR/CRC、分段中位数和分位数均正确；58点SNR、图7全部PSNR/SSIM已重算吻合。约17–20 dB与20.0→16.7 dB的悬崖区表述一致。
+- **合稿核查：**当前保存的 `report/drafts/codex_network.md` 与2.2、4.1正文及脚注一致，引用文件路径存在；未发现可归因于此次合稿的新增数值错误。现存草稿也已无“最终资源与相关实现对照”小节，无法据此判断更早删节过程。

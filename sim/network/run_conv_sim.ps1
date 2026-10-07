@@ -3,7 +3,7 @@
 param([string]$Engines = 'enc.3.ab0.c0,enc.3.a0.c1,enc.2.skip,enc.2.conv1,enc.0.conv1,enc.0.conv2,dec.1.conv1,dec.2.conv+skip',
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 90, [int]$ReadyPct = 80)
 $ErrorActionPreference = 'Stop'
-$viv    = 'D:\AMDDesignTools\2025.2\Vivado\bin'
+$viv    = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
 $root   = Split-Path -Parent $PSScriptRoot
 $export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
 $work   = Join-Path $PSScriptRoot 'work_conv'
