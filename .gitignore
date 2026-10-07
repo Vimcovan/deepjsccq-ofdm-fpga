@@ -14,3 +14,6 @@ __pycache__/
 *.bak*
 *.try*
 !sim/network/results/*.log
+
+# Vivado runtime statistics written to the working directory
+dfx_runtime.txt
