@@ -11,8 +11,8 @@ DeepJSCC-Q 编解码器（W8A12 量化，逐层流式卷积引擎）与类 802.1
 
 | 指标 | 结果 | 数据 |
 |---|---|---|
-| PSNR–SNR | DeepJSCC-Q：SNR ≥ 20 dB 时 31.7–32.0 dB，SNR 5.5 dB 时 26.5 dB，平缓退化；SSCC 在 SNR ≈ 17.5–20 dB 处悬崖式失效 | `data/measurements/psnr_snr/` |
-| 帧率 | 30 fps，10 min 内 18000 帧无丢帧 | `data/measurements/fps/` |
+| PSNR–SNR | DeepJSCC-Q：SNR ≥ 20 dB 时 31.7–32.0 dB，SNR 5.5 dB 时 26.5 dB，平缓退化；SSCC 在 SNR 约 17–20 dB 处悬崖式失效 | `data/measurements/psnr_snr/` |
+| 帧率 | 30 fps：连续 600 s 收到 18000 帧 | `data/measurements/fps/` |
 | 时延（PL + 空口） | 编码 38.20 ms / 传输 2.87 ms / 解码 30.39 ms，合计 71.47 ms（中位数） | `data/measurements/latency/` |
 | 视觉对比 | 同一信道下原图 / DeepJSCC-Q / SSCC 解码图与 PSNR / SSIM | `data/measurements/psnr_snr/k0802_v3_visual*` |
 | 资源 / 时序 | TX：LUT 52 666（45 %）、BRAM 104.5（73 %）、URAM 10、DSP 243，WNS +0.151 ns；RX：LUT 70 768（60 %）、BRAM 123.5（86 %）、URAM 25、DSP 394，WNS +0.234 ns（xczu5eg） | `build/reports/` |
