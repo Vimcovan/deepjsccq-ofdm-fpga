@@ -6,7 +6,7 @@
 
 | 文件 | 内容 |
 |---|---|
-| [`cases.md`](cases.md) | **17 个典型案例**：提示 → AI 的做法 → 纠错 → 结果，含出处 |
+| [`cases.md`](cases.md) | **17 个典型案例**：背景、模型做了什么、用户做了什么、结果，含出处 |
 | [`claude_codex/`](claude_codex/) | 两个代理之间的协作：Claude Code 写给 Codex 的任务书、Codex 的网络章节原稿与合稿后版本、Codex 对全文的交叉审查及逐条处理 |
 | [`transcripts/`](transcripts/) | 会话全文的压缩、脱敏版本：`claude/`（10 个会话）、`codex/`（30 个会话），文件名为 工作区_时间_会话 ID（见下） |
 | [`tools/export_transcripts.py`](tools/export_transcripts.py) | 从 Claude Code / Codex 的原始 jsonl 记录生成上述转写的脚本 |
