@@ -51,23 +51,7 @@
 
 ### 2.1 系统总框图
 
-```mermaid
-flowchart LR
-  subgraph TX["TX 板 · PYNQ-ZU (xczu5eg)"]
-    direction LR
-    CAM["摄像头 / 演示视频 / 预设图"] --> PSTX["PS：裁剪 256×256<br/>（SSCC：JPEG 编码）"]
-    PSTX -- "DMA 100 MHz" --> ENC["PL：DeepJSCC-Q 编码器<br/>W8A12 · 250 MHz"]
-    ENC -- "24 位 {Q,I} · CDC" --> TXPHY["PL：PN 符号翻转 → 导频 / IFFT / CP<br/>→ 前导 → URAM 帧缓存（100 MHz）"]
-    TXPHY --> RF1["AD9361 · 20 MSPS · 915 MHz"]
-  end
-  RF1 -. "空口" .-> RF2
-  subgraph RX["RX 板 · PYNQ-ZU (xczu5eg)"]
-    direction LR
-    RF2["AD9361 · 快速 AGC"] --> RXPHY["PL：STF 检测 / CFO → LTF 定时<br/>→ FFT → 双 LTF 信道估计 → SFO / CPE 跟踪<br/>→ PN 去翻转 → URAM 帧缓存"]
-    RXPHY -- "软符号 Q10 · CDC" --> DEC["PL：DeepJSCC-Q 解码器<br/>W8A12 · 250 MHz"]
-    DEC -- "DMA" --> PSRX["PS：rx_server<br/>（SSCC：JPEG 解码）"] --> GUI["1024×600 触摸屏 GUI"]
-  end
-```
+![系统结构](figures/system_diagram.png)
 
 图 1　系统数据流。网络时钟 250 MHz，PHY 时钟 100 MHz，二者之间只经过 Gray 码指针的异步 FIFO。
 
