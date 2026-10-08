@@ -81,7 +81,7 @@ $$
 
 ![部署网络的模块与张量尺寸](figures/network/fig02_network.png)
 
-图 2　部署网络的编码与解码结构（图内 [2] 即本文参考文献 [2]）。结构、尺寸与当前模型代码及 manifest 对应。[^figures][^model]
+图 2　部署网络的编码与解码结构。模块序号、步长 / 上采样倍率与各块输出尺寸取自 manifest。[^figures][^model]
 
 训练由 `train_v2.py` 完成，采用 $10\ \mathrm{dB}$ AWGN 信道，损失为重构均方误差加权重 $0.05$ 的星座分布 KL 正则项：[^train]
 
@@ -132,7 +132,7 @@ GDN/IGDN 先对整数激活平方、与量化 $\gamma$ 加权求和，再加入 
 
 ![RU、投影残差与ATT的分支复用](figures/network/fig06_branch_reuse.png)
 
-图 4　共享输入分支的局部复用；合并卷积入口不改变名义乘加工作量。[^figures][^branch]
+图 4　共享输入分支的局部复用：RU、带投影旁路的 RG / RB、ATT。合并卷积入口不改变名义乘加工作量，只减少窗口读取和引擎数量。[^figures][^branch]
 
 权重 ROM 的逻辑宽度为 $PB_w$，深度为 $\lceil C_o/P\rceil K_hK_wC_i$。生成器在分布式 LUT ROM、宽字分存储体 BRAM ROM、紧密字节打包 BRAM 加位宽转换器之间选择。小 ROM 使用 LUT，大 ROM 比较按原语宽深粒度计算的 BRAM 占用。激活采用按层配置行数的环形缓存、残差延迟 FIFO 和 PixelShuffle 行缓存；较大的缓存迁入 URAM，权重保留原有 ROM 映射。激活可将 $6$ 个 $12$ 位元素组成 $72$ 位字，顺序攒满后整字写入，读端再选择元素。[^memory] 不同层同时工作且读写端口已被占用，不能仅按总位数把所有缓存视为可任意合并的一块存储。
 
@@ -297,7 +297,7 @@ $$
 
 ![并行预算和片上存储映射](figures/network/fig07_memory.png)
 
-图 5　并行度、权重宽深形状与激活存储的联合规划。[^figures][^memory]
+图 5　(a) 按层选择的并行度 P 与统一并行度参考；(b) 权重 ROM 的三种映射及各自的引擎数；(c) 大激活缓存迁入 URAM 前后的 BRAM36 规划用量。数据取自 manifest。[^figures][^memory]
 
 **与相关实现的对照**见 4.5 节。按同一名义 MAC 定义，[3] 的参考网络编码、解码端各为 $0.110886912\ \mathrm{GMAC/frame}$（转置卷积按输入位置计数），本文编码、解码工作量分别约为其 $8.23/12.78$ 倍（计算值）。这是任务规模之比，不是加速比；而本文网络核的 DSP 与 BRAM 块数仍少于 [3] 的对应端（解码核 LUT、FF 更高，并额外使用 URAM），说明资源没有随网络复杂度同比增长。由于网络、精度、器件和外围范围都不同，该对照不是同模型消融，不能把差异归因于某一项优化。[^counts][^reference]
 
@@ -525,4 +525,4 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 [^parallel]: 由 `data/model/manifest.json` 的 `memory_plan.encoder/decoder.engines` 计算，排除 `note` 含 `GDN` 的归一化引擎：当前 $\sum P$；统一参照 $\sum\min(\max P,C_o)$。算子数为各卷积引擎 `ops` 数之和，引擎数为条目数；中心抽头条目仍计作独立引擎。参照无综合报告，不能换算为实测 DSP、LUT 或功耗。
 [^ooc]: `build/reports/network/blk_enc_0_latent_idx.{util,timing}.rpt`（编码器）、`blk_rx_in_output.{util,timing}.rpt`（解码器）；Vivado 2025.2，`xczu5eg-sfvc784-1-e`，OOC 综合（Synthesized）。
 [^reference]: 文献 [3]：网络结构见其 Fig. 2，资源见其 Table II。名义 MAC 按其公布的层形状（3×3 卷积；编码 3→16 s2 输出 128²、16→32 s2 64²、32→32 64²、32→32 64²、32→8 64²，解码为其转置并按输入位置计数）以与本文相同的定义计算：128²×16×3×9 + 64²×32×16×9 + 2×64²×32×32×9 + 64²×8×32×9 = 110,886,912。文献未说明资源是否为独立网络核范围；URAM 未报告不代表为零。
-[^figures]: 网络部分的修订图，原样复制到 `report/figures/network/`，未修改图内数据。
+[^figures]: 图 2、图 4、图 5 由 `report/figures/visio/` 中的脚本驱动 Visio 绘制（`.vsdx` 可直接编辑，数据从 manifest 读取）；图 3 为作者手绘。
