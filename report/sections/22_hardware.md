@@ -107,12 +107,12 @@ ROWS行输入以环形方式存放在一块RAM中，每6个12位元素打包成�
 
 $$
 a=\sum x\,w+b,\qquad
-y=\operatorname{sat}_{12}\!\left(\operatorname{rsr}\!\left[\operatorname{sat}_{27}\big(\operatorname{rsr}(a,p)\big)\cdot M_c,\;s_c\right]\right)
+y=\mathrm{sat}_{12}\!\left(\mathrm{rsr}\!\left[\mathrm{sat}_{27}\big(\mathrm{rsr}(a,p)\big)\cdot M_c,\;s_c\right]\right)
 $$
 
 - 激活为12位补码、权重为8位补码（W8A12），偏置已换算到累加器的尺度；累加器位宽按$B_{\mathrm{acc}}=B_x+B_w+\lceil\log_2(K^2C_{in})\rceil+1$生成。
 - 激活函数在a上执行：ReLU取max(a, 0)；leaky ReLU在a < 0时取rsr(a, 7)，只需移位。
-- $\operatorname{rsr}(v,k)=(v+2^{k-1})\gg k$为四舍五入的算术右移。
+- $\mathrm{rsr}(v,k)=(v+2^{k-1})\gg k$为四舍五入的算术右移。
 - 预移位p是层常数；$M_c$（17位无符号）与$s_c$是逐通道参数，$s_c$只存相对于层内最小移位的偏移（2–3位）。先饱和到27位，是为了让乘法正好放进DSP48E2的27×18乘法器。
 
 重定标乘法按该层的结果产生间隔选择实现方式：结果间隔短的层用1个DSP；间隔足够长的层（P·SER_II ≤ K·K·C_in）用`mul_serial`，即基4的串行乘法器，每拍处理乘数的2位，只用LUT。
@@ -144,7 +144,7 @@ GDN[4]的计算为$y_i=x_i/\sqrt{\beta_i+\sum_j\gamma_{ij}x_j^2}$，IGDN把除�
 
 1. 输入：两个像素槽（LUTRAM）轮换，保存当前像素的x和x²，平方用LUT实现。
 2. 乘加：LANES条DSP通路，第g遍时通路l计算通道g·LANES + l的分母$D_i$：依次读x²[j]（j = 0…C−1），乘以按通路打包存放的 γ，读到j = i时同时锁存x_i。
-3. 迭代运算：分母交给NUNITS个`gdn_unit`轮流处理。开方用逐位的恢复余数法求$r=\lfloor\sqrt D\rfloor$，每拍得到2位；GDN再用恢复余数除法求$\operatorname{sign}(x)\lfloor|x|2^F/r\rfloor$，IGDN用移位相加计算x·r。结果按派发顺序回收，输出保持通道顺序。
+3. 迭代运算：分母交给NUNITS个`gdn_unit`轮流处理。开方用逐位的恢复余数法求$r=\lfloor\sqrt D\rfloor$，每拍得到2位；GDN再用恢复余数除法求$\mathrm{sign}(x)\lfloor|x|2^F/r\rfloor$，IGDN用移位相加计算x·r。结果按派发顺序回收，输出保持通道顺序。
 4. 重定标：与卷积引擎相同的公式，常数乘法用LUT实现。
 
 LANES和NUNITS按该层的像素率配置，例如128×128的`enc.0.gdn`用3条通路、5个迭代单元，64×64的层只用1条通路。
