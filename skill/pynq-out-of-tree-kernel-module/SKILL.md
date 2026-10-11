@@ -51,6 +51,8 @@ verified in `dmesg`, and — only on request — persistent loading with an undo
 
 ## DON'Ts
 
+- **Never reboot or power-cycle the board yourself** — ask the user; a reboot interrupts whatever else runs on it
+- **Never try passwords or default credentials** (ssh, Jupyter, web UIs) — if access fails, stop and report
 - **Never kill processes by name** on the PC or the board (`Stop-Process -Name ssh`, `Get-Process ssh | Stop-Process`, `pkill ssh`, `killall python3`) — other sessions use them; stop only a process you started, by its exact PID
 - **Copy commands name the remote side explicitly**: `scp <local file> <target>:<remote dir>/` and `scp <target>:<remote file> <local dir>/`; never pass a local credential (the `-i` key, anything under `~/.ssh`) as a source or destination, and never write into `~/.ssh`
 - **Never run `make modules_prepare` / `make prepare` / `make olddefconfig` in `/lib/modules/$(uname -r)/build`** —
@@ -75,6 +77,12 @@ verified in `dmesg`, and — only on request — persistent loading with an undo
 > USER GATE questions below are templates: ask them in the user's language, and stop until the user answers.
 > **No answer is not a yes**: if a question tool returns "skipped", times out, or the session is non-interactive, treat
 > it as NO — end the turn with the question and a summary instead of choosing for the user.
+> **Explicit, low-risk requests need no GATE**: if the user already asked for exactly this action and it is easy to
+> undo and changes nothing system-wide (copy files into a scratch directory, install a pure-Python package for the
+> user's program, apply the fix the user asked for to the user's own file), do it and report what changed and how
+> to undo it. Keep the GATE even after an explicit request for: loading kernel modules, installing / enabling /
+> stopping / restarting services, rebooting, changing system configuration or system packages, anything that can
+> take down the running application or the display, and editing code when the user only asked for a check.
 
 ```
 Task Progress:

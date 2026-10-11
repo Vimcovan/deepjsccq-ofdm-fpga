@@ -1,6 +1,6 @@
 ---
 name: pynq-local-display-gui
-description: Run a full-screen Python / PyQt5 GUI on the display attached to a PYNQ board (DisplayPort / HDMI, optionally a USB touch screen) for a stand-alone demo — check the display stack, verify the layout off-screen on the board before anyone looks at the screen, keep the GUI within the Cortex-A CPU budget next to the real workload, set the display mode, and make touch work (including press-and-hold / drag when the kernel lacks hid-multitouch). Use when the user wants to show results on a monitor or touch screen connected to the board, says the GUI is slow / laggy on the board, text does not fit the small screen, the screen stays black, or touch only produces single taps.
+description: Run a full-screen Python / PyQt5 GUI on the display attached to a PYNQ board (DisplayPort / HDMI, optionally a USB touch screen) for a stand-alone demo — check the display stack, verify the layout on the board with the real screen's fonts but without showing anything on the screen, keep the GUI within the Cortex-A CPU budget next to the real workload, set the display mode, and make touch work (including press-and-hold / drag when the kernel lacks hid-multitouch). Use when the user wants to show results on a monitor or touch screen connected to the board, says the GUI is slow / laggy on the board, text does not fit the small screen, the screen stays black, or touch only produces single taps.
 argument-hint: "[GUI script] [ssh-target]"
 ---
 
@@ -11,13 +11,14 @@ argument-hint: "[GUI script] [ssh-target]"
 Bring a GUI that works on a PC to the monitor or touch screen attached to the board, without a PC in the loop,
 and without starving the program that does the real work.
 
-**Expected outcome:** a display/touch probe report, off-screen screenshots of every page at the real screen size
+**Expected outcome:** a display/touch probe report, hidden-window screenshots of every page at the real screen size
 with a list of text overflows, CPU measurements of the GUI on the board, and the GUI running full screen
 (as a service, see skill `pynq-systemd-autostart`).
 
 **Prerequisites:**
 - Board with a display output (PYNQ-ZU / ZCU104 DisplayPort, or an HDMI-out overlay) and the PYNQ X server
-- PyQt5 on the board (if missing: apt `python3-pyqt5`; offline boards: skill `pynq-offline-packages`, if installed)
+- PyQt5 on the board (if missing: apt `python3-pyqt5`; offline board: run `apt-get install --print-uris -qq python3-pyqt5`
+  on the board to get the exact .deb list from its own index, download those files on a PC, copy them over, `dpkg -i`)
 - The GUI's code; the screen's resolution
 
 ---
@@ -43,8 +44,9 @@ with a list of text overflows, CPU measurements of the GUI on the board, and the
   before any clarifying question (scripts, copies of the user's program, screenshots, error logs in `/tmp`)
 - Stay inside the workspace and the board paths the user named; do not search other directories on the PC for the user's files — ask
 - Probe first (`display_probe.sh`): connector, X server, mode, input devices and their drivers, PyQt5 in the venv
-- **Check the layout off-screen on the board** (`offscreen_shots.py`) before asking a person to look at the screen;
-  read the screenshots yourself
+- **Check the layout on the board's X server with a hidden window** (`offscreen_shots.py`: `WA_DontShowOnScreen`)
+  before asking a person to look at the screen; read the screenshots yourself
+- Compare the window size with the window manager's work area (`_NET_WORKAREA`): panels and title bars take space
 - Measure the GUI's CPU use **on the board, with the real workload running**, per page
 - Update only the visible page; throttle plots to what the eye needs (2–5 Hz for curves, image at source rate)
 - Draw dense data (scatter plots, heat maps) into one `QImage` instead of thousands of plot items
@@ -53,13 +55,25 @@ with a list of text overflows, CPU measurements of the GUI on the board, and the
 
 ## DON'Ts
 
+- **Never reboot or power-cycle the board yourself** — ask the user; a reboot interrupts whatever else runs on it
+- **Never try passwords or default credentials** (ssh, Jupyter, web UIs) — if access fails, stop and report
 - **Never kill processes by name** on the PC or the board (`Stop-Process -Name ssh`, `Get-Process ssh | Stop-Process`, `pkill ssh`, `killall python3`) — other sessions use them; stop only a process you started, by its exact PID
 - **Copy commands name the remote side explicitly**: `scp <local file> <target>:<remote dir>/` and `scp <target>:<remote file> <local dir>/`; never pass a local credential (the `-i` key, anything under `~/.ssh`) as a source or destination, and never write into `~/.ssh`
 - **Never judge layout from a PC screenshot** — fonts, Qt version and DPI differ from the board
+- **Never measure text with `QT_QPA_PLATFORM=offscreen`** when an X server is running — the offscreen platform ignores
+  the X session's font settings
+- Do not pop the GUI up on the real screen to measure it while another program is shown there — the hidden window
+  gives the same fonts without disturbing the demo
 - **Never move the whole GUI to `QT_QPA_PLATFORM=eglfs` hoping for GPU speed** — widgets stay CPU-drawn and the full screen is uploaded every frame (CPU rose from 27 % to 85 % on the reference board)
 - **Never edit the user's GUI code, change the display mode, X configuration or kernel modules without the user's go-ahead** (USER GATE 1 / 2)
 - Do not use `pyqtgraph.opengl` (3-D) on the board — software OpenGL, unusable frame rates
 - Do not chase touch problems in Qt before looking at the raw evdev events (Step 5)
+
+> **Anti-pattern (observed):** measuring with `QT_QPA_PLATFORM=offscreen` on PYNQ-ZU. That platform picks DejaVu
+> 12 pt (17 px) while the X session uses Sans Serif 9 pt (12 px): every text comes out ~40 % wider, so "Start
+> acquisition" was reported as cut off (139 px vs 112 px) although it measures 98 px on the real screen. A fixed-size
+> off-screen render also cannot show that the 22 px panel leaves a 578 px work area, so a 600 px window plus title bar
+> pushes the tab bar off the top of the screen.
 
 > **Measured, not guessed:** the PC GUI copied to the board unchanged used 100 % of one A53 core and redrew its plot
 > page 2.4 times per second with 1–3 s stalls. After the changes in Step 4 the image page used 27 % (30 frames/s)
@@ -72,11 +86,17 @@ with a list of text overflows, CPU measurements of the GUI on the board, and the
 > USER GATE questions below are templates: ask them in the user's language, and stop until the user answers.
 > **No answer is not a yes**: if a question tool returns "skipped", times out, or the session is non-interactive, treat
 > it as NO — end the turn with the question and a summary instead of choosing for the user.
+> **Explicit, low-risk requests need no GATE**: if the user already asked for exactly this action and it is easy to
+> undo and changes nothing system-wide (copy files into a scratch directory, install a pure-Python package for the
+> user's program, apply the fix the user asked for to the user's own file), do it and report what changed and how
+> to undo it. Keep the GATE even after an explicit request for: loading kernel modules, installing / enabling /
+> stopping / restarting services, rebooting, changing system configuration or system packages, anything that can
+> take down the running application or the display, and editing code when the user only asked for a check.
 
 ```
 Task Progress:
 - [ ] Step 1: Probe display, input, Python stack
-- [ ] Step 2: Off-screen screenshots + overflow check
+- [ ] Step 2: Hidden-window screenshots + overflow + work-area check
 - [ ] Step 3: CPU budget on the board
 - [ ] USER GATE 1: report findings, ask before changing the GUI code
 - [ ] Step 4: Fix layout / performance
@@ -97,11 +117,12 @@ scp display_probe.sh <target>:/tmp/ ; ssh <target> bash /tmp/display_probe.sh
 | connector (`card*-DP-1` …) | `connected` | cable / adapter / monitor power; DP→HDMI adapters may need a powered model |
 | `pynq-x11.service` | `active`, `Xorg` running, `X reachable on :0` | start the service; GUI processes need `DISPLAY=:0 XAUTHORITY=/root/.Xauthority` |
 | current mode (`*` in xrandr) | screen's native resolution | Step 6, mode setting |
+| work area (`_NET_WORKAREA`) | height = screen height, or the GUI runs full screen | a panel (e.g. fluxbox, 22 px) shrinks it: a non-fullscreen window of screen size is pushed up, its top is cut off |
 | screen saver / DPMS | `timeout: 0`, `DPMS is Disabled` | `xset s off -dpms` before the GUI starts |
 | touch device | an `eventN` handler; HID driver `hid-multitouch` | `hid-generic` + `CONFIG_HID_MULTITOUCH is not set` → taps only, Step 5 |
-| PyQt5 / pyqtgraph | versions printed | install (skill `pynq-offline-packages`) |
+| PyQt5 / pyqtgraph | versions printed | install via apt (offline: see Prerequisites) |
 
-### Step 2 — Off-screen screenshots
+### Step 2 — Hidden-window screenshots
 
 Copy the GUI and `offscreen_shots.py` into one scratch directory on the board (e.g. `/tmp/gui_check/`) and run there:
 
@@ -110,14 +131,18 @@ source /etc/profile.d/pynq_venv.sh
 cd /tmp/gui_check && python3 offscreen_shots.py <module> <WindowClass> <W> <H> /tmp/gui_check/shots [-- <GUI args>]
 ```
 
-It renders at W×H with `QT_QPA_PLATFORM=offscreen`, saves `window.png` and one PNG per tab of every `QTabWidget`,
-and prints `OVERFLOW` for each visible label / button whose text is wider than the widget. Copy the PNGs back and
+It connects to the board's X server (`DISPLAY=:0`, `XAUTHORITY=/root/.Xauthority`), creates the window with
+`WA_DontShowOnScreen` (laid out and rendered with the real fonts and DPI, never mapped — nothing appears on the screen),
+prints the default font, DPI and the window manager's work area, saves `window.png` and one PNG per tab of every
+`QTabWidget`, and prints `OVERFLOW` for each visible label / button whose text is wider than the widget, and a
+WARNING if the window is taller than the work area (fix: `showFullScreen()` for a kiosk GUI, or a smaller size).
+Only if no X server is reachable does it fall back to Qt's offscreen platform, with a warning that widths are unreliable. Copy the PNGs back and
 look at them. For states that are hard to trigger on hardware (error messages, long names, empty data), set them in
 a copy of the script before `shot()` and screenshot them too.
 
 ### Step 3 — CPU budget
 
-Run the real workload, then the GUI on the board (off-screen is fine for a first number), and measure per page:
+Run the real workload, then the GUI on the board (the hidden window is fine for a first number), and measure per page:
 
 ```bash
 top -b -d 5 -n 3 -p $(pgrep -d, -f '<gui script>') | grep -A3 PID
@@ -190,12 +215,13 @@ Copy the screenshots back, then `rm -rf /tmp/gui_check /tmp/display_probe.sh` on
 PYNQ-ZU, PynqLinux 3.0: X from `pynq-x11.service` (`startx` as root, fluxbox, `armsoc` DDX, display `:0`,
 `XAUTHORITY=/root/.Xauthority`), DisplayPort `card0-DP-1`; PyQt5 5.15.6 / Qt 5.15.3 / pyqtgraph 0.12.4 from apt;
 kernel without `CONFIG_HID_MULTITOUCH`. 1024×600 USB touch screen (WCH `USB2IIC_CTP`, ABS range 0–32767,
-≈ 90 reports/s while held) behind a DP→HDMI adapter. `offscreen_shots.py` on a two-tab window: 1.8 s.
+≈ 90 reports/s while held) behind a DP→HDMI adapter. X session default font Sans Serif 9 pt (12 px, 97.7 dpi), fluxbox panel 22 px → work area 1024×578; Qt offscreen
+platform default DejaVu 12 pt (17 px, 100 dpi).
 
 ## Files
 
 | File | Purpose |
 |---|---|
 | `display_probe.sh` | Read-only probe: connectors, X, mode, screen saver, input devices + HID drivers, PyQt5 |
-| `offscreen_shots.py` | Off-screen screenshots of every tab at W×H + text-overflow report |
+| `offscreen_shots.py` | Hidden-window screenshots of every tab at W×H on the real X server + text-overflow and work-area report |
 | `evdev_touch.py` | Finger down / move / up from raw evdev (axis range read from the device) |

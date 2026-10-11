@@ -145,7 +145,7 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 | [`report/design_report.docx`](report/design_report.docx)（[Markdown 版](report/design_report.md)） | 设计报告（竞赛模板）：作品概述、系统组成及功能说明（硬件 / 软件设计细节）、完成情况及性能参数、总结、参考文献、附录（大模型协作、技能包、复现说明） |
 | [`report/poster/`](report/poster/) | 英文海报（A0） |
 | [`report/llm_collab/`](report/llm_collab/) | 大模型协作记录：17 个典型案例、Claude Code 与 Codex 的协作材料、脱敏的会话转写 |
-| [`skill/`](skill/) | 6 个面向 PYNQ / Zynq UltraScale+ 的通用技能（Mali-400 GPU 离屏渲染、补编内核模块、开机自启、离线装包、板载屏 GUI、AXI DMA 遗留传输），按 AMD 官方 [AMD Ross™ Agentic AI Assistant](https://github.com/xilinx/ross-ai-assistant) 的技能格式编写，均在 Cursor + Grok 4.7、CodeBuddy + DeepSeek V4.1 Flash 两套独立会话中测试通过 |
+| [`skill/`](skill/) | 5 个面向 PYNQ / Zynq UltraScale+ 的通用技能（Mali-400 GPU 离屏渲染、补编内核模块、开机自启、板载屏 GUI、AXI DMA 遗留传输），按 AMD 官方 [AMD Ross™ Agentic AI Assistant](https://github.com/xilinx/ross-ai-assistant) 的技能格式编写，在 Cursor + Grok 4.7、CodeBuddy + DeepSeek V4.1 Flash 两套独立会话中测试，并与不提供技能的对照组比较 |
 | [`report/notes/`](report/notes/) | 开发过程记录：AD9361 调试、PHY 与网络对接、AGC |
 | [`THIRD_PARTY.md`](THIRD_PARTY.md) | 第三方内容与来源 |
 

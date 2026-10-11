@@ -10,6 +10,8 @@ if xset -q >/dev/null 2>&1; then
   echo "X reachable on $DISPLAY (XAUTHORITY=$XAUTHORITY)"
   xrandr 2>/dev/null | grep -E ' connected|\*' | head -6
   xset -q | grep -E 'timeout:|DPMS is'
+  WA=`xprop -root _NET_WORKAREA 2>/dev/null | cut -d= -f2 | cut -d, -f1-4`
+  echo "work area _NET_WORKAREA: $WA"
 else echo "X not reachable on $DISPLAY"; fi
 grep -E 'Driver' /etc/X11/xorg.conf 2>/dev/null | head -3
 echo "--- input devices ---"
