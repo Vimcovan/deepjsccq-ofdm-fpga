@@ -4,10 +4,11 @@
 --   * the markdown keeps plain ![alt](path) images and caption paragraphs, so it also reads well on GitHub
 
 local function starts_with_label(para, label)
-  -- caption paragraphs start with e.g. "图2-1" (no space between the label and the number)
+  -- caption paragraphs start with e.g. "图2-1" or, in the appendices, "图B-1" (no space before the number)
   local first = para.content[1]
   if not first or first.t ~= "Str" then return false end
-  return first.text:sub(1, #label) == label and first.text:sub(#label + 1, #label + 1):match("%d") ~= nil
+  local rest = first.text:sub(#label + 1)
+  return first.text:sub(1, #label) == label and (rest:match("^%d") ~= nil or rest:match("^%u%-%d") ~= nil)
 end
 
 local function only_image(para)
