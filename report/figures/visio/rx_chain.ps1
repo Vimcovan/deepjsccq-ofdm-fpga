@@ -38,7 +38,7 @@ Sig 68 $m 74 '24 b'
 Sig 98 $m 104 '24 b'
 [void](Box 104 $y 22 $h $ST.COMPUTE ("sfo_residual`n导频 LS 斜率 L`n（移位相加）") $false 7)
 [void](Path @(115, ($y + $h), 115, ($y + $h + 6), 57, ($y + $h + 6), 57, ($y + $h)))
-[void](Label 60 ($y + $h + 1.5) 54 4.5 'e_valid / e_data（每个符号一次）' 7 1 $ST.INK)
+[void](Label 60 ($y + $h + 1.5) 54 4.5 '相位误差 e（每个符号一次）' 7 1 $ST.INK)
 Sig 126 $m 132 '24 b'
 [void](Box 132 $y 24 $h $ST.STORE ("去导频`nrx_jscc_framer`n去 16 个补零`nPN 解扰`n置 tlast / tuser") $false 7)
 [void](Line 156 $m 162 $m)

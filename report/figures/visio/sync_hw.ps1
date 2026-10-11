@@ -31,7 +31,7 @@ Sig 86 28.5 92 'E'
 [void](Box 92 24 18 9 $ST.STORE ("寄存 8 级`n（对齐）") $false 6.5)
 Sig 110 17.5 116 ''
 Sig 110 28.5 116 ''
-[void](Box 116 12 26 22 $ST.WEIGHT ("判决`n|P| > E/2（移位）`nE > 250`n连续 64 点 → 检测`n状态机 HOLD / OUTPUT") $false 6.5)
+[void](Box 116 12 26 22 $ST.WEIGHT ("判决`n|P| > E/2（移位）`nE > 250`n连续 64 点 → 检测`n状态机：保持 / 输出") $false 6.5)
 [void](Path @(129, 12, 129, 6, 150, 6, 150, 12))
 [void](Label 130 1 20 5 '∠P ≫ 4' 6.5 1 $ST.MUTE)
 [void](Box 142 12 18 10 $ST.COMPUTE ("DDS IP`n相位增量") $false 6.5)
@@ -41,7 +41,7 @@ Sig 110 28.5 116 ''
 [void](Path @(13, 34, 13, 43, 22, 43))
 [void](Box 22 38 50 10 $ST.STORE ("FIFO 128（等待检测与 CFO 估计）") $false 6.5)
 [void](Path @(72, 43, 116, 43))
-[void](Box 116 38 26 10 $ST.GRAY ("OUTPUT 时放行`n一帧 + 100 个余量") $false 6.5); [void](Line 129 34 129 38)
+[void](Box 116 38 26 10 $ST.GRAY ("输出状态放行`n一帧 + 100 个余量") $false 6.5); [void](Line 129 34 129 38)
 [void](Path @(142, 43, 146, 43))
 [void](Box 146 38 18 10 $ST.COMPUTE ("复乘`n纠正 CFO") $false 6.5)
 [void](Line 164 43 170 43)
@@ -74,7 +74,7 @@ Sig 84 21 90 ''
 [void](Path @(108, 21, 114, 21))
 [void](Path @(84, 47, 111, 47, 111, 34, 114, 34))
 [void](Path @(108, 57, 120, 57, 120, 40))
-[void](Box 114 12 32 28 $ST.WEIGHT ("对齐三路（axis_combine）`n判决：|X|² > E/4 + E/8`n且 E > 2500`n`n状态机 IDLE → DATA`n放行 2×64 + 683×80 个采样") $false 6.5)
+[void](Box 114 12 32 28 $ST.WEIGHT ("对齐三路（axis_combine）`n判决：|X|² > E/4 + E/8`n且 E > 2500`n`n状态机：空闲 → 放行`n放行 2×64 + 683×80 个采样") $false 6.5)
 [void](Line 146 26 152 26)
 [void](Box 152 20 18 12 $ST.STORE ("去 CP`n→ FFT") $false 6.5)
 [void](Label 124 44 54 18 ("FIR 系数为 LTF 匹配滤波器循环移位 9 个抽头，使 FFT 窗口落在 CP 内 8 个采样处。三个 FIR 共用一个 FIR Compiler 配置（3 组系数）。") 6.5 0 $ST.MUTE)

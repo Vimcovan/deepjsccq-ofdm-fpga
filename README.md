@@ -69,7 +69,7 @@ SSCC 与 DeepJSCC-Q 的衰减对比实验、物理层与硬件架构讲解；画
 为了在单片 xczu5eg 上实时运行，网络规模做了取舍：原网络（主通道 256、下采样 16 倍）的编码器权重就有 10.6 MB，远超片上约 2.95 MB 的存储，
 30 fps 所需的乘加量也是全部 DSP 能力的 4.6 倍。本作品把主通道减为 32、下采样减为 4 倍，潜变量仍是 65,536 个元素（信道使用量不变），
 乘加量降为原网络的约 1/51、参数量降为约 1/89；与论文同一工作点（Kodak、64-QAM、SNR 10 dB、ρ = 1/6）相比，PSNR 低约 1.6 dB
-（33.3 dB 对 34.9 dB，差值也包含训练数据规模的差异）。
+（33.3 dB 对 34.9 dB，差值也包含训练数据规模的差异）。模型来历、修改与训练流程见 [`src/model/README.md`](src/model/README.md)。
 
 <p align="center"><img src="report/figures/network/fig02_network.png" alt="网络结构" width="700"></p>
 
@@ -188,14 +188,15 @@ vivado -mode batch -source build/build_hw.tcl -tclargs tx 8
 vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 ```
 
+第一个参数选择 TX / RX 板，第二个参数为并行作业数（可省略，默认 8）。
 在 `build/work/<tx|rx>` 新建工程、按 `src/hw/<side>/files.txt` 加入源文件与 IP、用 `bd/` 脚本生成 PS 块设计，
 默认策略综合 / 实现，输出 `build/out/jscc_<side>.{bit,hwh}` 与资源 / 时序 / 功耗报告。工具：Vivado 2025.2。
 
 ## 从模型重新生成网络 RTL
 
 `src/model/export_fpga.py` 导出量化参数（`data/model/params`、`rtl_init`、`manifest.json`）→ `src/network/gen_rtl_init.py`、
-`gen_rtl_top.py` 生成各层 RTL 与初始化文件 → `tools_create_vivado_projects.py` 把权重文件路径展平为文件名
-（`rtl_init__<layer>__<name>.mem`）→ 即 `src/hw/{tx,rx}/rtl/network/` 中的文件。训练与量化流程见 `src/model/README.md`。
+`gen_rtl_top.py` 生成各层 RTL 与初始化文件 → `tools_create_vivado_projects.py` 把各层的权重初始化文件改为不带目录的唯一文件名
+（Vivado 工程中 `$readmemh` 只写文件名）→ 即 `src/hw/{tx,rx}/rtl/network/` 中的文件。训练与量化流程见 `src/model/README.md`。
 
 ## 实测方法
 

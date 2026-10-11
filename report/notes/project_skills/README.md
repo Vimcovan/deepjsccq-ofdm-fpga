@@ -1,7 +1,7 @@
 # 项目经验记录（原技能包中只适用于本系统的部分）
 
-下面 6 项最初按技能格式写成，但只对 AD9361 / SDR 或本作品的系统有用，不算通用技能，因此移出 `skill/`，作为开发记录保留。
-其中触摸与离屏截图两项的通用部分已并入 `skill/pynq-local-display-gui/`。
+下面 6 项按技能格式整理，但只对 AD9361 / SDR 或本作品的系统有用，不属于通用技能，因此作为开发记录放在这里。
+触摸与离屏截图两项的通用部分见 `skill/pynq-local-display-gui/`。
 
 | 记录 | 领域 | 内容 | 附带文件 |
 |---|---|---|---|
@@ -37,16 +37,16 @@
 11. 2 倍插值时 TX 可编程 FIR 的抽头数须为 32 的倍数（48 抽头发出乱码）；芯片 FIR 的冲激响应必须落在 CP 以内。
 12. OFDM 的数字回退至少留 12 dB（PAPR 10–12 dB），否则 IFFT 输出被削顶。
 13. 通过 VIO 读寄存器的第一次可能拿到旧值：先做一次无关的读。
-14. 快速 AGC 状态是 `0x2B3[2:0]`，不是 `0x0A7`；多个解锁条件是"或"的关系，要组合测试（ad9361-ps-control-agc）。
+14. 快速 AGC 状态在寄存器 `0x2B3[2:0]`（快速 AGC 状态机），不是 `0x0A7`（TX 正交校准状态）；多个解锁条件是"或"的关系，要组合测试（ad9361-ps-control-agc）。
 15. 显示像素时钟的谐波可能正好落在射频带内（51.2 MHz × 18 = 921.6 MHz），换显示模式即可（sdr-spur-hunting）。
 
 ### PYNQ / 板上软件
 
-16. AXI DMA 接收挂起后 `stop()` 撤不掉，要写 DMACR 软复位；进程退出时复位所有接收 DMA（pynq-dma-stale-transfer）。
+16. AXI DMA 接收挂起后 `stop()` 撤不掉，要写 DMACR（DMA 控制寄存器）的软复位位；进程退出时复位所有接收 DMA（pynq-dma-stale-transfer）。
 17. ssh 在后台启动板上进程时要把 stdin 重定向到 `/dev/null`，否则 ssh 会等到进程结束才返回。
 18. `pkill -f xxx` 可能匹配到执行它的 shell 本身；用锚定模式 `pkill -f "^python3 xxx.py"`。
 19. PYNQ 内核没有 hid-multitouch，多点触控屏只有点击（touch-without-multitouch）；触摸控制器反复掉线多为 USB 供电 / 线材问题。
-20. TX overlay 加载后偶尔 AD9361 初始化不完成（`rf_ready` 一直为 0，约每几次加载一次）：用 PRBS 检查 DAC 是否在取数据，不正常就重新加载（根因未查，cases.md 案例 12）。
+20. TX overlay 加载后偶尔 AD9361 初始化不完成（射频就绪信号一直为 0，约每几次加载一次）：用 PRBS 检查 DAC 是否在取数据，不正常就重新加载（根因未查，cases.md 案例 12）。
 
 ### 测量
 

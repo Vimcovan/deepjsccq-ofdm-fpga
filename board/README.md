@@ -22,9 +22,9 @@
 |---|---|---|
 | TX | `jscc-tx` | `tx_camera.py`：取图（摄像头 / 演示视频 / 预设图）→ 编码器；UDP 5006 接收模式、信源、衰减命令，发送预览 |
 | RX | `jscc-rx` | `rx_server.py`：下载比特流、PS 初始化 AD9361、AGC 看门狗；UDP 5005 发送解码图、遥测、频谱、SSCC 包 |
-| RX | `jscc-gui` | `jscc_gui.py --lite`：触摸屏 GUI（启动前 `display_mode.sh` 把显示像素时钟设为 52.01 MHz，避开 921.6 MHz 带内杂散） |
+| RX | `jscc-gui` | `jscc_gui.py --lite`：触摸屏 GUI，`--lite` 为板载小屏模式（紧凑排版、降低刷新率、用 Mali-400 渲染 \|H\| 三维图；TX 预览、PSNR 与时延只在两板连网线时显示）（启动前 `display_mode.sh` 把显示像素时钟设为 52.01 MHz，避开 921.6 MHz 带内杂散） |
 
-日志：TX `tx_camera.log`；RX `rx_server.log`（每 5 s 一行：帧率、PHY 计数、AGC 增益）、`agc_events.jsonl`、`gui.log`。
+日志：TX `tx_camera.log`；RX `rx_server.log`（每 5 s 一行：帧率、PHY 计数、AGC 增益）、`agc_events.jsonl`（每次失步时的 AGC 状态快照，每行一条 JSON）、`gui.log`。
 
 ## 测量脚本（`tests/`，在 RX 板上运行，除注明外）
 
@@ -36,7 +36,7 @@
 | `pl_events.py`（两板）+ `seg_latency.py`（PC）+ `plot_seg_cdf.m` | 两板 PS 轮询 PL 帧计数器打时间戳，按数据流配对：编码 / 传输 / 解码三段时延 |
 | `frames_to_csv.py`、`plot_fps_latency_jscc.m` | 逐帧帧率 |
 | `agc_guard_test.py` | AGC 看门狗验收：静置误复位、衰减跳变恢复、无信号恢复 |
-| `agc_trace.py`、`adc_frames.py`、`pl_counters.py` | 诊断：原始 ADC 抓取与 AD9361 CTRL_OUT 同步记录、帧间隔、PL 计数器 |
+| `agc_trace.py`、`adc_frames.py`、`pl_counters.py` | 诊断：原始 ADC 抓取与 AD9361 `CTRL_OUT`（状态输出引脚，此处为 AGC 状态）同步记录、帧间隔、PL 计数器 |
 
 ## 常见问题
 

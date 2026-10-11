@@ -37,7 +37,7 @@ B 66 $y2 24 ("conv_engine`n1" + $X + "1 投影旁路")
 Wire 90 96 $m2
 B 96 $y2 28 ("axis_fifo_packed`n旁路对齐") $ST.STORE
 [void](Path @(124, $m2, 160, $m2, 160, ($m + 13)))
-[void](Label 126 ($m + 4) 32 5 'axis_add：rsr(a·MA + b·MB, SH)' 6.5 0 $ST.MUTE)
+[void](Label 126 ($m + 4) 32 5 'axis_add：两路各乘重定标系数，相加后移位' 6.5 0 $ST.MUTE)
 
 # ---------------------------------------------------------------- (b) RU
 $o = 38
