@@ -17,3 +17,6 @@ __pycache__/
 
 # Vivado runtime statistics written to the working directory
 dfx_runtime.txt
+
+# report build outputs (report/tools/build_docx.ps1)
+report/build/

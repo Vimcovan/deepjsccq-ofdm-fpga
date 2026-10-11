@@ -134,7 +134,7 @@ SSCC 与 DeepJSCC-Q 的衰减对比实验、物理层与硬件架构讲解；画
 
 | 文档 | 内容 |
 |---|---|
-| [`report/design_report.md`](report/design_report.md) | 设计报告：背景与创新点、原理框图、软硬件划分、优化前后对比与实测、大模型协作、技能包、复现说明 |
+| [`report/design_report.docx`](report/design_report.docx)（[Markdown 版](report/design_report.md)） | 设计报告（竞赛模板）：作品概述、系统组成及功能说明（硬件 / 软件设计细节）、完成情况及性能参数、总结、参考文献、附录（大模型协作、技能包、复现说明） |
 | [`report/poster/`](report/poster/) | 英文海报（A0） |
 | [`report/llm_collab/`](report/llm_collab/) | 大模型协作记录：17 个典型案例、Claude Code 与 Codex 的协作材料、脱敏的会话转写 |
 | [`skill/`](skill/) | 7 个技能（PYNQ DMA 复位、UVC 摄像头、触摸屏补救、离屏渲染、SDR 杂散排查、AD9361 与 AGC、PL 计数器测时延）与 25 条踩坑清单 |

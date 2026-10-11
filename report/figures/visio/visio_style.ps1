@@ -95,6 +95,26 @@ function Path($pts, $arrow = $true, $dashed = $false) {
   return $l
 }
 
+function Diamond($cx, $cy, $w, $h, $fill, $text = '', $size = 7) {
+  # decision box of a flowchart, centred at (cx, cy)
+  $pts = @($cx, ($cy - $h / 2), ($cx + $w / 2), $cy, $cx, ($cy + $h / 2), ($cx - $w / 2), $cy, $cx, ($cy - $h / 2))
+  $xy = New-Object 'double[]' $pts.Count
+  for ($i = 0; $i -lt $pts.Count; $i += 2) { $xy[$i] = In $pts[$i]; $xy[$i + 1] = In ($PH - $pts[$i + 1]) }
+  $s = $page.DrawPolyline($xy, 0)
+  $s.CellsU('Geometry1.NoFill').FormulaU = 'FALSE'
+  $s.CellsU('FillForegnd').FormulaU = $fill; $s.CellsU('FillPattern').FormulaU = '1'
+  $s.CellsU('LineColor').FormulaU = $ST.INK; $s.CellsU('LineWeight').FormulaU = '0.75 pt'; $s.CellsU('ShdwPattern').FormulaU = '0'
+  if ($text) { $s.Text = $text; Style-Text $s $size }
+  return $s
+}
+
+function Terminal($x, $y, $w, $h, $fill, $text, $size = 7) {
+  # rounded start / end box of a flowchart
+  $s = Box $x $y $w $h $fill $text $false $size
+  $s.CellsU('Rounding').FormulaU = "$([math]::Round($h / 2, 2)) mm"
+  return $s
+}
+
 function Save-Figure($vsdx, $png, $dpi = 300) {
   if (Test-Path $vsdx) { Remove-Item $vsdx }
   $doc.SaveAs($vsdx)
