@@ -1,64 +1,162 @@
 ---
 name: pynq-dma-stale-transfer
-description: Use on PYNQ (Zynq / Zynq UltraScale+) when an AXI DMA receive (S2MM) transfer can be left pending — a timeout, a process killed or stopped by systemd, a capture waiting for a trigger that never comes — and the next transfer or the next process hangs or reads nothing. Gives the soft-reset recipe that pynq's stop() does not do.
+description: Fix PYNQ programs whose AXI DMA receive (S2MM) transfers hang — after a timeout, after the process was killed or stopped by systemd, or when the PL waits for a trigger / frame that never comes — so that the next transfer or the next process never completes or reads nothing. Gives the DMACR soft-reset recipe that pynq's `stop()` does not do, and where to put it. Use when the user reports `dma.recvchannel.wait()` hanging, a DMA that "works once", a second run that gets no data, or asks how to add timeouts / clean shutdown to PYNQ DMA code.
+argument-hint: "[program path]"
 ---
 
-# PYNQ：AXI DMA 遗留传输的检测与软复位
+# PYNQ AXI DMA: Clearing a Pending Receive Transfer
 
-## 适用场景
+## Purpose
 
-- PYNQ 上用 `pynq.lib.dma` 收数据（S2MM），而数据**不一定会来**：PL 侧等触发、等帧、上游没信号。
-- 现象：等待超时后再发起传输，永远不完成；或者进程被杀 / `systemctl stop` 后，**下一个进程**的第一次传输就卡住或收不到数据；
-  更隐蔽的是，遗留的传输在之后某个时刻写进了已经释放的缓冲区。
+Make AXI DMA receive code robust against transfers that never finish: detect them with a timeout, clear them with a
+soft reset, and never leave one behind when the process exits.
 
-## 原因
+**Expected outcome:** the user's DMA code changed (timeout + reset helper + reset at exit), and a test showing that a
+stopped / restarted program, or a transfer after a timeout, receives data again.
 
-`recvchannel.transfer(buf)` 已经把目标地址和长度写进 DMA，通道在等 PL 送数据。此时：
+**Prerequisites:**
+- PYNQ (2.x / 3.x) with `pynq.lib.dma.DMA` (AXI DMA IP in simple, non-scatter-gather mode)
+- The program's source
 
-- `recvchannel.stop()` 只清运行位（DMACR.RS），并等待 halted；S2MM 在等数据时**不会进入 halted**，`stop()` 可能一直等下去，
-  也不会撤销已经提交的描述。
-- 进程退出时没人复位 DMA，硬件里的那次传输仍然挂着，下一个进程的 `transfer()` 被它挡住，或者数据被写到旧地址。
+---
 
-## 使用方法
+## When to Use
 
-S2MM 控制寄存器 DMACR 在偏移 `0x30`，bit 2 是软复位（MM2S 为 `0x00`）。复位会清掉挂起的传输，完成后位自动清零，再重新启动通道：
+- `recvchannel.wait()` blocks forever, or a polling loop on `recvchannel.idle` never ends
+- The first run works; after Ctrl-C / `kill` / `systemctl stop` / a timeout the next transfer hangs or returns old data
+- S2MM transfers where the PL may legitimately send nothing (trigger, frame sync, radio link down)
+
+## When NOT to Use
+
+- MM2S (send) only, and the PL always accepts data → a hang there is a PL back-pressure problem
+- Scatter-gather mode → not covered here (descriptor rings need their own handling)
+- The PL never produces TLAST → fix the PL; a reset only hides it
+
+---
+
+## DO's
+
+- **Track every file you copy to the board and delete it whenever you stop** — before the summary, at a USER GATE, and
+  before any clarifying question (scripts, copies of the user's program, screenshots, error logs in `/tmp`)
+- Stay inside the workspace and the board paths the user named; do not search other directories on the PC for the user's files — ask
+- Wait with a timeout: poll `recvchannel.idle` (or `wait_async` with `asyncio.wait_for`) instead of a bare `wait()`
+- On timeout: **soft reset** (S2MM DMACR offset `0x30`, bit 2), then `recvchannel.start()`, then retry or report
+- Reset every receive DMA when the process exits (`finally` + a SIGTERM handler that calls `sys.exit(0)`)
+- **Also reset every receive DMA once at start-up**, right after loading the overlay: a previous process killed with
+  SIGKILL, a crash or a power-off of the source cannot run its `finally`
+- Hold the DMA lock while resetting at exit, so no other thread submits a transfer afterwards
+- Keep a buffer alive until its transfer finished or the channel was reset
+
+## DON'Ts
+
+- **Never kill processes by name** on the PC or the board (`Stop-Process -Name ssh`, `Get-Process ssh | Stop-Process`, `pkill ssh`, `killall python3`) — other sessions use them; stop only a process you started, by its exact PID
+- **Copy commands name the remote side explicitly**: `scp <local file> <target>:<remote dir>/` and `scp <target>:<remote file> <local dir>/`; never pass a local credential (the `-i` key, anything under `~/.ssh`) as a source or destination, and never write into `~/.ssh`
+- **Never rely on `recvchannel.stop()`** to cancel a pending S2MM transfer — despite its docstring ("aborts the current
+  transfer"), pynq 3.1's `stop()` only writes 0 to DMACR and then loops until the halted flag is set, which does not
+  happen while the channel still waits for data: it can block forever, and the transfer stays programmed
+- **Never free (`freebuffer()`, let go out of scope) a buffer right after a timeout** — the pending transfer can
+  still write into it later
+- Do not reset a DMA whose MM2S side is busy in another thread without restarting that side too — the reset
+  (`DMACR` bit 2) resets both directions of the same AXI DMA instance
+
+> **Observed failure:** a receiver service left an ADC capture transfer waiting for the next frame when it was stopped
+> with `systemctl stop`; the transmitter was off, so the frame never came. Every later capture process hung on its first
+> transfer until the DMA was soft-reset. The same program's image DMA had been fixed earlier for timeouts; the capture
+> DMA had been missed — **apply the reset to every receive channel**.
+
+---
+
+## Workflow
+
+> USER GATE questions below are templates: ask them in the user's language, and stop until the user answers.
+> **No answer is not a yes**: if a question tool returns "skipped", times out, or the session is non-interactive, treat
+> it as NO — end the turn with the question and a summary instead of choosing for the user.
+
+```
+Task Progress:
+- [ ] Step 1: Find every receive DMA and how it waits
+- [ ] Step 2: Add reset helper + timeout handling
+- [ ] Step 3: Reset at start-up and at exit
+- [ ] Step 4: Test the failure cases
+- [ ] Step 5: Summary
+```
+
+### Step 1 — Inventory
+
+Search the code for `recvchannel.transfer`, `recvchannel.wait`, `.idle`, `allocate(`, `freebuffer`. For each DMA:
+which thread starts transfers, whether the PL may send nothing, how long a transfer normally takes, whether the
+MM2S side of the same DMA is used.
+
+### Step 2 — Reset helper and timeout
 
 ```python
 import time
 
 def dma_reset(dma, timeout=0.1):
-    """AXI DMA soft reset (S2MM DMACR bit 2) and restart: drops a pending receive transfer."""
+    """AXI DMA soft reset (S2MM DMACR = 0x30, bit 2) and restart: drops a pending receive transfer."""
     dma.mmio.write(0x30, 0x4)
     t0 = time.time()
-    while dma.mmio.read(0x30) & 0x4 and time.time() - t0 < timeout:
+    while dma.mmio.read(0x30) & 0x4 and time.time() - t0 < timeout:   # bit clears when the reset is done
         pass
     dma.recvchannel.start()
+
+def recv(dma, buf, timeout):
+    """True if the transfer completed; on timeout the channel is reset and False returned."""
+    dma.recvchannel.transfer(buf)
+    t0 = time.time()
+    while not dma.recvchannel.idle:
+        if time.time() - t0 > timeout:
+            dma_reset(dma)
+            return False
+        time.sleep(0.0005)
+    return True
 ```
 
-三处要用：
+Timeout: a few times the normal transfer time (frame period × 2–3 for frame-triggered data).
+If the program also sends on the same DMA (`sendchannel`), restart it after the reset as well (`dma.sendchannel.start()`).
 
-1. **等待超时后**：先 `dma_reset`，再报错或重试（不要调 `stop()`）。
-2. **进程退出时**：在 `finally` 或 SIGTERM 处理里复位所有接收 DMA。若还有别的线程会发起传输，先拿到同一把锁再复位，防止复位后又被提交新的传输。
-3. **缓冲区生命周期**：超时后缓冲区不要立即释放（遗留传输可能稍后写入），按对象生命周期持有，或者先复位再释放。
+### Step 3 — Reset at start-up and at exit
 
 ```python
+import signal, sys
+signal.signal(signal.SIGTERM, lambda *_: sys.exit(0))     # systemctl stop / kill: run the finally block
+for d in (ol.dma_a, ol.dma_b):     # start-up: clear what a killed predecessor left behind
+    dma_reset(d)
 try:
-    serve()
+    main_loop()
 finally:
-    lock.acquire(timeout=3)          # no thread starts another transfer after the reset
-    dma_reset(ol.cap_dma); dma_reset(ol.img_dma)
+    dma_lock.acquire(timeout=3)        # kept: no thread starts another transfer after the reset
+    for d in (ol.dma_a, ol.dma_b):     # every DMA with a receive channel
+        dma_reset(d)
 ```
 
-同一个 AXI DMA 的 MM2S 与 S2MM 共用复位：如果两个方向同时在用，复位会打断另一个方向，需要一起重启。
+### Step 4 — Test
 
-## 已验证效果
+Show the user the diff, then test on the board (needs the overlay; stop any service using it first):
 
-本项目 RX 板（PYNQ-ZU，PYNQ 3.1）：`rx_server.py` 在 `systemctl stop` 时复位抓取与图像两个 DMA，日志打印
-`rx_server stopped, DMAs reset`；验证：TX 关机（ADC 抓取等不到帧触发）时停掉服务，新进程的抓取能正常完成；图像 DMA 超时后自动恢复，
-长时间运行不再出现卡死。实现见 `src/sw/rx/jscc_rx.py` 的 `_dma_reset`、`src/sw/rx/rx_server.py` 末尾。
+1. Make the PL send nothing (disable the source / trigger), start a receive, let it time out → next transfer with the
+   source enabled must complete.
+2. Start a receive with the source disabled, stop the program (`kill -TERM` / `systemctl stop`), start a new process
+   → its first transfer must complete.
+3. Start a receive with the source disabled, `kill -9` the program, start a new process → its first transfer must
+   complete (start-up reset).
+4. Normal operation for a few minutes: no timeouts, no rate drop.
 
-## 来源（从哪次失败中总结）
+Without the board: mock `mmio` / `recvchannel` and check the call order (transfer → timeout → reset → start; exit → reset → `freebuffer`).
 
-2026-10-06 排查显示杂散时，需要在 TX 关机的条件下抓 ADC 数据。停掉 `jscc-rx` 服务后，新的抓取进程始终拿不到数据：
-`rx_server` 的频谱线程退出前留下了一个"等下一帧"的抓取传输，TX 没信号，这个传输永远不会完成。查 pynq 源码确认 `stop()`
-只清运行位、不撤销传输，于是改为写 DMACR 软复位。图像通道此前已因"超时后再也收不到"用过同样的办法，ADC 抓取通道当时漏掉了。
+### Step 5 — Summary
+
+| DMA | Direction | Timeout | Reset on timeout | Reset at start / exit | Tests 1–4 |
+|---|---|---|---|---|---|
+
+---
+
+## Reference
+
+PYNQ-ZU, pynq 3.1.1, AXI DMA (simple mode): register offsets MM2S DMACR `0x00`, S2MM DMACR `0x30`, bit 2 = reset
+(self-clearing), bit 0 = run/stop. Two receive DMAs (image data and ADC capture) with this recipe: restarts of the
+service and timeouts no longer leave the next process hanging.
+
+## Files
+
+None — the helper above is the whole implementation.

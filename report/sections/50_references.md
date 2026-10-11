@@ -37,3 +37,5 @@
 [18] lzk2211. Zedboard_AD9361_radar[CP/OL]. (2025-01-11)[2026-10-11]. https://github.com/lzk2211/Zedboard_AD9361_radar.
 
 [19] Analog Devices. HDL libraries and projects[CP/OL]. (2026-10-09)[2026-10-11]. https://github.com/analogdevicesinc/hdl.
+
+[20] AMD. AMD Ross agentic AI assistant[CP/OL]. [2026-10-11]. https://github.com/xilinx/ross-ai-assistant.

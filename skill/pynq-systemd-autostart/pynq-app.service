@@ -1,0 +1,33 @@
+# Template: run a PYNQ (overlay) program at boot. Replace every <...>; delete the blocks you do not need.
+# Install:  cp pynq-app.service /etc/systemd/system/<name>.service && systemctl daemon-reload
+[Unit]
+Description=<what the program does>
+# PYNQ's bootpy.service runs /boot/boot.py, which loads base.bit (tens of seconds after boot). An overlay loaded
+# before it finishes is overwritten -> always order after it.
+After=network.target systemd-modules-load.service bootpy.service
+Wants=network.target
+# GUI on the board's display: also wait for the X server
+#After=pynq-x11.service
+#Wants=pynq-x11.service
+
+[Service]
+Type=simple
+WorkingDirectory=<directory of the program>
+# optional arguments, editable without touching the unit (file may be missing: leading '-')
+EnvironmentFile=-<directory of the program>/app.env
+# wait for a device (USB camera, serial adapter, ...) instead of failing at once
+#ExecStartPre=/bin/bash -c 'for i in $(seq 60); do [ -e /dev/video0 ] && exit 0; sleep 1; done; exit 1'
+# GUI: X must accept clients before the program starts
+#Environment=DISPLAY=:0 XAUTHORITY=/root/.Xauthority
+#ExecStartPre=/bin/bash -c 'for i in $(seq 60); do xset -q >/dev/null 2>&1 && exit 0; sleep 1; done; exit 1'
+# pynq lives in the PYNQ venv: source it; 'exec' replaces bash, so the service's main PID (status, exit code) is python
+ExecStart=/bin/bash -lc 'source /etc/profile.d/pynq_venv.sh && exec python3 -u <program>.py ${APP_ARGS}'
+StandardOutput=append:<directory of the program>/<program>.log
+StandardError=inherit
+# on-failure: restart after crashes, not after a clean exit (GUI that must always be on screen: always)
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=15
+
+[Install]
+WantedBy=multi-user.target

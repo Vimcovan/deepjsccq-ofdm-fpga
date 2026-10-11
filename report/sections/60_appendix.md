@@ -33,19 +33,20 @@ AI反复出现的问题有四类：没有证据就下结论；把自己定的经
 
 ## 附录B技能包
 
-从开发过程中提炼了7个技能（仓库`skill/`），采用Agent Skills格式（`SKILL.md`），可直接被Claude Code / Codex加载。每个技能写明适用场景、使用方法、已验证效果和来源的失败案例（表B-1）。`skill/README.md`另附25条踩坑清单（Vivado、AD9361、PYNQ、测量）。
+从开发过程中提炼了6个面向PYNQ / Zynq UltraScale+用户的通用技能（仓库`skill/`），不依赖本作品的硬件设计。格式参照AMD官方的AMD Ross Agentic AI Assistant[20]中的技能：Agent Skills格式（`SKILL.md`），正文是写给AI代理的操作手册，包括触发条件、适用与不适用场景、DO / DON'T与取自真实失败的反例、带检查点的分步流程，以及修改系统或用户代码之前必须等待用户确认的暂停点（表B-1）。只适用于本系统的经验（AD9361配置、杂散排查、时延测量等）和踩坑清单另存于`report/notes/project_skills/`。
 
 表B-1　技能包
 
-| 技能 | 内容 | 适用范围 | 来源的失败 |
-|---|---|---|---|
-| `pynq-dma-stale-transfer` | AXI DMA接收挂起后的软复位 | PYNQ | 新进程抓不到ADC数据，PYNQ的`stop()`撤不掉挂起的传输 |
-| `uvc-camera-controls` | 无v4l-utils时用ioctl调摄像头参数 | PYNQ / Linux | 摄像头画面发灰 |
-| `touch-without-multitouch` | 读evdev实现长按 / 拖动 | PYNQ + Qt | 内核缺hid-multitouch，触摸屏只有单击 |
-| `qt-offscreen-layout-check` | 板上离屏渲染核对小屏排版 | 通用 | 小屏排版问题反复需要人看屏、拍照、描述 |
-| `sdr-spur-hunting` | 增益缩放、频率换算、开关源、挪频定位杂散 | SDR | 显示像素时钟的谐波落入915 MHz频带 |
-| `ad9361-ps-control-agc` | PS初始化、快速AGC排查、看门狗 | AD9361 | 漏抄寄存器、依赖底噪门限的看门狗误复位 |
-| `pl-counter-latency` | PL计数器 + 跨板时钟偏差校正的分段时延 | Zynq | PS抖动混入FPGA时延、帧配对错位 |
+| 技能 | 解决的问题 | 附带文件 |
+|---|---|---|
+| `mali400-offscreen-gles` | ZU EG/EV片上Mali-400 GPU在PYNQ下无驱动、X中只有软件渲染：判断能否使用开源lima驱动，排除走不通的渲染路径，用GBM + EGL在Python中离屏渲染GLES2 | 探测脚本、渲染模板 |
+| `pynq-out-of-tree-kernel-module` | 镜像内核未开启的驱动在板上补编为外部模块；内核与板上gcc版本不一致时不破坏系统构建树 | 头文件与modpost生成脚本、编译器包装 |
+| `pynq-systemd-autostart` | 程序上电自启：排在加载base.bit的`bootpy.service`之后、使用PYNQ venv、等待X与外设、overlay自检重载、SIGTERM干净退出 | service模板、程序骨架 |
+| `pynq-offline-packages` | 板子不能上网时安装apt包或pip wheel：在板上按自身索引解析文件清单，PC下载校验后离线安装 | 清单、下载校验、安装脚本 |
+| `pynq-local-display-gui` | 在板载DP / HDMI屏和USB触摸屏上运行全屏PyQt界面：显示栈探测、板上离屏截图与文字溢出检测、CPU预算、触摸长按与拖动 | 探测、截图、触摸脚本 |
+| `pynq-dma-stale-transfer` | AXI DMA接收在超时或进程被杀后遗留传输，导致下一次接收卡死；PYNQ的`stop()`无法撤销，改用DMACR软复位 | — |
+
+为排除开发会话上下文和模型的影响，每个技能都在全新会话、全新工作区中由另外的代理和模型执行测试，共两套环境：Cursor CLI + Grok 4.7，CodeBuddy CLI + DeepSeek V4.1 Flash。工作区只放该技能和用户场景所需的文件，两套环境使用同一组提示词，提示词采用普通用户口吻、不提技能名，再逐项核对会话记录：是否自动触发技能、是否按步骤执行与验证、是否在暂停点停下、结果是否正确、板上是否留下临时文件。测试暴露的问题（PowerShell下内联命令引号失效、临时文件残留、只要求检查时直接修改了用户代码、删除非本次创建的目录等）改进后重新测试，直至通过；6个技能在两套环境中均通过测试，其中内核模块技能特意换用另一个驱动（hid-multitouch）测试通用性，结果见`skill/README.md`。
 
 ## 附录C复现说明
 
