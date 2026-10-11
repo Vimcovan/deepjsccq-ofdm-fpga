@@ -1,6 +1,7 @@
 ﻿# Build the competition design report (.docx) from report/sections/*.md with pandoc.
 #   powershell -ExecutionPolicy Bypass -File build_docx.ps1 -Template <competition template.docx> [-Pandoc <pandoc.exe>]
-# Output: report/build/design_report.docx (and report/build/design_report.md, the concatenated source).
+# Output: report/build/design_report.docx, report/build/design_report.md (concatenated source) and
+#         report/build/design_report_github.md (math in GitHub syntax; copy it to report/design_report.md).
 param(
   [Parameter(Mandatory = $true)][string]$Template,
   [string]$Pandoc = $(if ($env:PANDOC) { $env:PANDOC } else { 'pandoc' }),
@@ -22,6 +23,9 @@ $md = Join-Path $build 'design_report.md'
 $parts = Get-ChildItem (Join-Path $report 'sections') -Filter '*.md' | Sort-Object Name
 $text = ($parts | ForEach-Object { [IO.File]::ReadAllText($_.FullName).TrimEnd() }) -join "`n`n"
 [IO.File]::WriteAllText($md, $text + "`n", (New-Object Text.UTF8Encoding $false))
+# GitHub copy (report/design_report.md): math rewritten as ```math / $`...`$, which GitHub renders without Markdown escapes
+& $Python -I (Join-Path $tools 'md_github.py') $md (Join-Path $build 'design_report_github.md')
+if ($LASTEXITCODE -ne 0) { throw 'md_github.py failed' }
 
 $out = Join-Path $build $OutName
 $lua = Join-Path $tools 'docx_filter.lua'
