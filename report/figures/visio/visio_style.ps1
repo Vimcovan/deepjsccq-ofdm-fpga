@@ -125,3 +125,51 @@ function Save-Figure($vsdx, $png, $dpi = 300) {
   $doc.Close(); $app.Quit()
   [System.Runtime.InteropServices.Marshal]::ReleaseComObject($app) | Out-Null
 }
+
+# ---------------------------------------------------------------- flowchart elements (light fill, dark outline, width fitted to the text)
+$FC = @{
+  PROC = @('RGB(219,238,243)', 'RGB(32,88,103)')    # processing step
+  DEC  = @('RGB(255,242,204)', 'RGB(127,96,0)')     # decision
+  TERM = @('RGB(235,241,223)', 'RGB(80,99,42)')     # start / end
+  ALT  = @('RGB(242,220,218)', 'RGB(97,38,33)')     # side branch (other mode, reset action)
+  INIT = @('RGB(234,231,242)', 'RGB(64,49,107)')    # set-up / loop variable
+}
+
+function Text-Width($text, $size = 7) {
+  # rough rendered width in mm: CJK and full-width forms 1 em, everything else 0.5 em
+  $em = $size * 0.3528; $best = 0
+  foreach ($ln in ($text -split "`n")) {
+    $wd = 0
+    foreach ($ch in $ln.ToCharArray()) { if ([int]$ch -ge 0x2E80) { $wd += $em } else { $wd += 0.52 * $em } }
+    if ($wd -gt $best) { $best = $wd }
+  }
+  return $best
+}
+
+function Fc-Style($s, $kind) {
+  $s.CellsU('FillForegnd').FormulaU = $FC[$kind][0]; $s.CellsU('FillPattern').FormulaU = '1'
+  $s.CellsU('LineColor').FormulaU = $FC[$kind][1]; $s.CellsU('LineWeight').FormulaU = '0.75 pt'
+  $s.CellsU('ShdwPattern').FormulaU = '0'
+}
+
+function FProc($cx, $y, $h, $text, $kind = 'PROC', $size = 7, $minW = 22) {
+  # processing step centred on cx; returns @{ L; R; T; B; W }
+  $w = [math]::Max($minW, [math]::Ceiling((Text-Width $text $size) + 7))
+  $s = Box ($cx - $w / 2) $y $w $h $null $text $false $size
+  Fc-Style $s $kind; $s.CellsU('Rounding').FormulaU = '1.5 mm'
+  return @{ L = $cx - $w / 2; R = $cx + $w / 2; T = $y; B = $y + $h; W = $w }
+}
+
+function FTerm($cx, $y, $h, $text, $size = 7) {
+  # start / end: stadium shape centred on cx
+  $w = [math]::Max(24, [math]::Ceiling((Text-Width $text $size) + $h + 4))
+  $s = Box ($cx - $w / 2) $y $w $h $null $text $false $size
+  Fc-Style $s 'TERM'; $s.CellsU('Rounding').FormulaU = "$([math]::Round($h / 2, 2)) mm"
+  return @{ L = $cx - $w / 2; R = $cx + $w / 2; T = $y; B = $y + $h; W = $w }
+}
+
+function FDec($cx, $cy, $w, $h, $text, $size = 7) {
+  $s = Diamond $cx $cy $w $h $FC.DEC[0] $text $size
+  $s.CellsU('LineColor').FormulaU = $FC.DEC[1]
+  return @{ L = $cx - $w / 2; R = $cx + $w / 2; T = $cy - $h / 2; B = $cy + $h / 2 }
+}

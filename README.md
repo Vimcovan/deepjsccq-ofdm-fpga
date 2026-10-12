@@ -49,7 +49,7 @@ SSCC 与 DeepJSCC-Q 的衰减对比实验、物理层与硬件架构讲解；画
 左：接收板（PYNQ-ZU + AD9361 + 1024×600 触摸屏）；右：发射板（PYNQ-ZU + AD9361 + USB 摄像头）；两块子卡各接一根 915 MHz 天线。
 编码后的图像只经射频空口传输，板间网线仅用于控制和发送原图预览（GUI 计算 PSNR 用）。
 
-<p align="center"><img src="report/figures/system_diagram.png" alt="系统结构" width="860"></p>
+<p align="center"><img src="report/figures/hw/sys_overview.png" alt="系统结构" width="860"></p>
 
 | 参数 | 值 |
 |---|---|

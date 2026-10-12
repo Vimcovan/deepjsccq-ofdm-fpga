@@ -4,11 +4,10 @@
 
 | 脚本 | 输出 | 内容 |
 |---|---|---|
-| `fig02_network.ps1` | `fig02_network.vsdx`、`../network/fig02_network.png` | 编码器 / 解码器模块结构，各块输出尺寸取自 `data/model/manifest.json` |
-| `fig06_branch_reuse.ps1` | `fig06_branch_reuse.vsdx`、`../network/fig06_branch_reuse.png` | RU、带投影旁路的 RG / RB、ATT 的分支输入复用 |
+| —（手绘） | `fig02_network.vsdx`、`../network/fig02_network.png` | 编码器 / 解码器模块结构，各块输出尺寸与 `data/model/manifest.json` 一致 |
 | `fig07_memory.ps1` | `fig07_memory.vsdx`、`../network/fig07_memory.png` | 按层并行度、权重 ROM 映射、激活缓存迁入 URAM（数据取自 manifest） |
-| `sys_overview.ps1` | `../hw/sys_overview.png` | 系统整体框图 |
-| `block_rtl.ps1` | `../hw/block_rtl.png` | RG / RU / ATT 块的 RTL 组成 |
+| —（手绘） | `sys_overview.vsdx`、`../hw/sys_overview.png` | 系统整体框图 |
+| —（手绘） | `block_rtl.vsdx`、`../hw/block_rtl.png` | RG / RU / ATT 块的 RTL 组成 |
 | `gdn_unit.ps1` | `../hw/gdn_unit.png` | GDN / IGDN 模块 |
 | `tx_chain.ps1`、`rx_chain.ps1` | `../hw/tx_chain.png`、`../hw/rx_chain.png` | OFDM 发射链、接收链 |
 | `frame_format.ps1` | `../hw/frame_format.png` | 帧格式与子载波分配 |
@@ -23,4 +22,4 @@ powershell -ExecutionPolicy Bypass -File fig07_memory.ps1
 ```
 
 PNG 按 300 dpi 导出。脚本含中文，须保存为带 BOM 的 UTF-8（Windows PowerShell 5.1）。
-`fig05_conv_engine.png`（卷积引擎）为手绘图，不由脚本生成。
+`fig05_conv_engine.png`（卷积引擎）、`fig02_network.vsdx`（网络结构）、`block_rtl.vsdx`（块的 RTL 组成）与 `sys_overview.vsdx`（系统框图）为手绘图，不由脚本生成，在 Visio 中修改后另存 300 dpi 的 PNG。
