@@ -44,7 +44,7 @@ $t = $m - $h / 2
 [void](Line 47 $m 55 $m)
 [void](Label 47 ($m - 7) 8 6 'x, x²' 7 1 $ST.MUTE)
 [void](RBox 55 $t 19 $h CALC ("乘加通路 ×L`n（DSP）"))
-[void](RBox 55 ($t + $h + 7) 19 9 CONST ("γ ROM，β"))
+[void](RBox 55 ($t + $h + 7) 19 9 BUF ("γ ROM，β"))
 [void](Line 64.5 ($t + $h + 7) 64.5 ($t + $h))
 [void](Line 74 $m 79 $m)
 [void](RBox 79 $t 17 $h BUF ("分母寄存器`n×L"))
@@ -71,5 +71,6 @@ for ($k = 0; $k -lt 3; $k++) {
 
 Save-Figure (Join-Path $here 'gdn_unit.vsdx') (Join-Path $repo 'report\figures\hw\gdn_unit.png')
 'saved'
+
 
 
