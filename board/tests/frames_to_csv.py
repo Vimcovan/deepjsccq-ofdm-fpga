@@ -1,4 +1,4 @@
-"""measure_link.py --frame-log output (<out>_frames.npz) -> one CSV per window for MATLAB (plot_fps_latency.m):
+"""measure_link.py --frame-log output (<out>_frames.npz) -> one CSV per window (plotted by report/figures/sim/meas_plots.py):
     t_min      arrival time of the frame at the RX board, minutes from the window start
     fps        instantaneous frame rate = 1 / (arrival interval to the previous frame)
     lat_ms     end-to-end latency (TX source -> RX decoded image), ms (empty: frame without TX time / undecodable)

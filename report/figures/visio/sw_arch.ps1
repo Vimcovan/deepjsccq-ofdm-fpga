@@ -13,12 +13,12 @@ Open-Visio 180 124
 [void](Label 4 5 60 5 'TX 板 PS（PYNQ 3.1，Python 3）' 8 0 $ST.INK $true)
 [void](Box 6 13 56 46 $ST.GREEN '' $false)
 [void](Label 8 14 52 5 'jscc-tx.service → tx_camera.py' 7.5 0 $ST.INK $true)
-[void](Box 9 21 24 9 $ST.COMPUTE ("数据源线程`n摄像头 / 视频 / 静态图") $false 6.5)
-[void](Box 35 21 24 9 $ST.COMPUTE ("主循环`n取帧 → 送图") $false 6.5)
-[void](Box 9 33 24 9 $ST.COMPUTE ("控制线程`n信源 / 模式 / 衰减命令") $false 6.5)
-[void](Box 35 33 24 9 $ST.COMPUTE ("衰减线程`n衰减斜坡") $false 6.5)
+[void](Box 9 21 23.5 9 $ST.COMPUTE ("数据源线程`n摄像头 / 视频 / 静态图") $false 6.5)
+[void](Box 35.5 21 23.5 9 $ST.COMPUTE ("主循环`n取帧 → 送图") $false 6.5)
+[void](Box 9 33 23.5 9 $ST.COMPUTE ("控制线程`n信源 / 模式 / 衰减命令") $false 6.5)
+[void](Box 35.5 33 23.5 9 $ST.COMPUTE ("衰减线程`n衰减斜坡") $false 6.5)
 [void](Box 9 45 50 9 $ST.COMPUTE ("预览线程：预览帧 + 时间戳（只留最新一帧）") $false 6.5)
-[void](Line 33 25.5 35 25.5)
+$a = Line 32.5 25.5 35.5 25.5; $a.CellsU('EndArrowSize').FormulaU = '0'
 [void](Box 6 63 56 14 $ST.STORE ("jscc_tx.py（Overlay / MMIO / DMA / SPI）`nsscc_pkt.py（包格式、JpegFit）`nv4l2ctl.py（UVC ioctl）") $false 6.5)
 [void](Line 34 59 34 63)
 [void](Box 6 83 27 14 $ST.WEIGHT ("图像 DMA`nMM2S`n0x8000_0000") $false 6.5)
@@ -54,7 +54,8 @@ for ($k = 0; $k -lt $th.Count; $k++) { [void](Box 80 (21 + $k * 7.6) 42 6.4 $ST.
 
 # ---------------------------------------------------------------- UDP links
 [void](Path @(124, 24.5, 130, 24.5))
-[void](Path @(62, 49.5, 70, 49.5, 70, 118, 176, 118, 176, 39, 174, 39) $true $true)
+$eth = Path @(62, 49.5, 70, 49.5, 70, 118, 177, 118, 177, 39, 174, 39) $true $true
+$eth.CellsU('BeginArrow').FormulaU = '4'; $eth.CellsU('BeginArrowSize').FormulaU = '0'; $eth.CellsU('EndArrowSize').FormulaU = '0'
 [void](Label 72 118.5 104 5 '以太网 UDP：TX 预览帧与时间戳 → GUI；GUI → TX：信源 / 模式 / 衰减命令（双向）' 6.5 0 $ST.MUTE)
 
 Save-Figure (Join-Path $here 'sw_arch.vsdx') (Join-Path $repo 'report\figures\sw\sw_arch.png')

@@ -1,4 +1,4 @@
-"""Export the W12A12 integer DeepJSCC-Q model for RTL: parameter .mem files, golden vectors, manifest.
+"""Export the integer DeepJSCC-Q model (deployed: W8A12, --wbits 8 --abits 12) for RTL: parameter .mem files, golden vectors, manifest.
 
 Layout of --out-dir:
   manifest.json                 numeric contract, tensors, ops in execution order, file index

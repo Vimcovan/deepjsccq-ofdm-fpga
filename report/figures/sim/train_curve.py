@@ -13,8 +13,9 @@ import matplotlib.pyplot as plt
 HERE = os.path.dirname(os.path.abspath(__file__))
 CK = os.path.normpath(os.path.join(HERE, "..", "..", "..", "data", "model", "checkpoint"))
 OUT = os.path.join(HERE, "..", "results")
-plt.rcParams.update({"font.family": ["Times New Roman", "SimSun"], "font.size": 9, "axes.unicode_minus": False})
-ACC, ACC2, INK, GRID = "#2b6c8f", "#c0504d", "#222222", "#d9d9d9"
+import plotstyle as S
+S.apply()
+ACC, ACC2, INK, GRID = S.BLUE, S.ORANGE, S.INK, S.GRID
 
 rows = list(csv.DictReader(open(os.path.join(CK, "training.csv"))))
 ep = np.array([int(r["epoch"]) for r in rows])
@@ -39,8 +40,11 @@ a2.set_xlabel("训练轮数"); a2.set_ylabel("PSNR / dB"); a2.set_xlim(0, 1200);
 a2.grid(color=GRID, lw=0.4)
 ax3 = a2.twinx()
 ax3.semilogy(ep, lr, color="#7f7f7f", lw=0.7, ls="--", label="学习率")
+from matplotlib.ticker import NullFormatter
+ax3.yaxis.set_minor_formatter(NullFormatter())
 ax3.set_ylabel("学习率", color="#7f7f7f"); ax3.tick_params(axis="y", colors="#7f7f7f", labelsize=7)
 h1, l1 = a2.get_legend_handles_labels(); h2, l2 = ax3.get_legend_handles_labels()
 a2.legend(h1 + h2, l1 + l2, frameon=False, fontsize=8, loc="lower right")
+S.finish(a1, grid=None); a2.spines["top"].set_visible(False); ax3.spines["top"].set_visible(False)
 fig.tight_layout(); fig.savefig(os.path.join(OUT, "train_curve.png"), bbox_inches="tight", pad_inches=0.03)
 print("epochs", len(ep), "final val psnr", ps[-1], "best", best["best_epoch"], best["val_psnr"], "lr", lr[0], lr[-1])

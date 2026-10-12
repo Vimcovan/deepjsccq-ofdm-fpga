@@ -80,7 +80,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 - 横轴为数据辅助SNR：静止图像下每帧发送的符号相同，以最强点所有快照平均后的判决作为参考星座，$\mathrm{SNR}=10\log_{10}\overline{|\mathrm{ref}|^2}/\overline{|\mathrm{rx}-\mathrm{ref}|^2}$；
 - SSCC帧CRC错误但JPEG仍可解码时按实际重建图计分，无法解码时按中灰图计分。
 
-![PSNR–SNR](../data/measurements/psnr_snr/k0802_v3_psnr_snr.png "w=75%")
+![PSNR–SNR](figures/results/psnr_snr.png "w=75%")
 
 图3-6　PSNR–SNR实测曲线（DIV2K 0802）。
 
@@ -115,7 +115,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 
 帧率：DeepJSCC-Q播放演示视频连续运行10 min，RX在600.06 s内收到18,000帧，平均30.0 fps（图3-9）。
 
-![帧率](../data/measurements/fps/jscc_10min_fps.png "w=80%")
+![帧率](figures/results/fps_10min.png "w=80%")
 
 图3-9　连续10 min的接收帧率（DeepJSCC-Q，演示视频）。
 
@@ -130,7 +130,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 | 解码 | RX最后一个PHY符号 → 最后一个解码字节 | 30.39 ms | 30.34 / 30.48 ms |
 | PL合计 | | 71.47 ms | 71.39 / 71.55 ms |
 
-![分段时延 CDF](../data/measurements/latency/latency_3seg_cdf.png)
+![分段时延 CDF](figures/results/latency_cdf.png)
 
 图3-10　分段时延的累积分布（编码段1706个样本，其余各段1701个）。传输段的下限2.748 ms即一帧的空中时间。
 

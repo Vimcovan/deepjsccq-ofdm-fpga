@@ -17,6 +17,20 @@ $ST = @{
   SIZE = 9
 }
 
+# fill colour of $ST -> (light fill, dark outline) used by Box; matches block_rtl.vsdx / fig02_network.vsdx:
+# compute yellow, buffers / storage blue, constants and hardware green, alternative paths red, neutral grey
+$OUTLINE = @{
+  $ST.WEIGHT  = @('RGB(235,241,223)', 'RGB(80,99,42)')
+  $ST.COMPUTE = @('RGB(255,242,204)', 'RGB(127,96,0)')
+  $ST.STORE   = @('RGB(219,238,243)', 'RGB(32,88,103)')
+  $ST.OPTION  = @('RGB(242,220,218)', 'RGB(97,38,33)')
+  $ST.PINK    = @('RGB(242,220,218)', 'RGB(97,38,33)')
+  $ST.GREEN   = @('RGB(235,241,223)', 'RGB(80,99,42)')
+  $ST.GRAY    = @('RGB(242,242,242)', 'RGB(89,89,89)')
+}
+
+$ROUND = '1.5 mm'   # corner rounding of Box; set to '0 mm' for charts and segmented bars
+
 function Open-Visio($widthMM, $heightMM) {
   $script:app = New-Object -ComObject Visio.InvisibleApp
   $script:doc = $app.Documents.Add('')
@@ -49,6 +63,12 @@ function Box($x, $y, $w, $h, $fill, $text = '', $dashed = $false, $size = $ST.SI
   $s.CellsU('LineWeight').FormulaU = $lineW
   $s.CellsU('LinePattern').FormulaU = $(if ($dashed) { '2' } else { '1' })
   $s.CellsU('ShdwPattern').FormulaU = '0'
+  if ($fill -and $OUTLINE.ContainsKey($fill)) {
+    # light fill + dark outline of the same hue, rounded corners (style of the hand-drawn figures)
+    $s.CellsU('FillForegnd').FormulaU = $OUTLINE[$fill][0]
+    $s.CellsU('LineColor').FormulaU = $OUTLINE[$fill][1]
+    $s.CellsU('Rounding').FormulaU = $ROUND
+  } elseif (-not $fill -and $ROUND -ne '0 mm') { $s.CellsU('Rounding').FormulaU = '2 mm' }
   if ($text) { $s.Text = $text; Style-Text $s $size }
   return $s
 }
@@ -72,7 +92,7 @@ function Line($x1, $y1, $x2, $y2, $arrow = $true, $dashed = $false, $color = $ST
 
 function Circle($cx, $cy, $r, $text, $size = 10) {
   $s = $page.DrawOval((In ($cx - $r)), (In ($PH - $cy - $r)), (In ($cx + $r)), (In ($PH - $cy + $r)))
-  $s.CellsU('FillForegnd').FormulaU = 'RGB(255,255,255)'; $s.CellsU('LineColor').FormulaU = $ST.INK
+  $s.CellsU('FillForegnd').FormulaU = 'RGB(255,242,204)'; $s.CellsU('LineColor').FormulaU = 'RGB(127,96,0)'
   $s.CellsU('LineWeight').FormulaU = '0.75 pt'; $s.CellsU('ShdwPattern').FormulaU = '0'
   $s.Text = $text; Style-Text $s $size
   return $s
@@ -173,3 +193,16 @@ function FDec($cx, $cy, $w, $h, $text, $size = 7) {
   $s.CellsU('LineColor').FormulaU = $FC.DEC[1]
   return @{ L = $cx - $w / 2; R = $cx + $w / 2; T = $cy - $h / 2; B = $cy + $h / 2 }
 }
+
+function Arc($x1, $y1, $x2, $y2, $bulge, $arrow = $true) {
+  # circular arc from (x1,y1) to (x2,y2) through the point offset by bulge (mm, + = left of the direction of travel)
+  $mx = ($x1 + $x2) / 2; $my = ($y1 + $y2) / 2
+  $dx = $x2 - $x1; $dy = $y2 - $y1; $len = [math]::Sqrt($dx * $dx + $dy * $dy)
+  $cx = $mx + $bulge * $dy / $len; $cy = $my - $bulge * $dx / $len
+  $l = $page.DrawArcByThreePoints((In $x1), (In ($PH - $y1)), (In $x2), (In ($PH - $y2)), (In $cx), (In ($PH - $cy)))
+  $l.CellsU('LineColor').FormulaU = $ST.INK; $l.CellsU('LineWeight').FormulaU = '0.75 pt'
+  $l.CellsU('FillPattern').FormulaU = '0'
+  if ($arrow) { $l.CellsU('EndArrow').FormulaU = '4'; $l.CellsU('EndArrowSize').FormulaU = '1' }
+  return $l
+}
+

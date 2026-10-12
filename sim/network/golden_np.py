@@ -1,11 +1,11 @@
-"""Stand-alone NumPy int64 golden model of the exported W12A12 DeepJSCC-Q.
+"""Stand-alone NumPy int64 golden model of the exported integer DeepJSCC-Q (W8A12).
 
 Reads only manifest.json and the .mem files written by export_fpga.py (no PyTorch
 model), executes the recorded ops in order and compares every tensor with the
 exported golden vectors.  Bit-exact agreement proves that the export is complete and
 that the integer semantics in the manifest are sufficient to rebuild the network.
 
-  python golden_np.py --export runs/fpga_export_w12a12 [--image kodim23_center256]
+  python golden_np.py --export runs/fpga_export_w8a12 [--image kodim23_center256]
 """
 from __future__ import annotations
 
@@ -164,7 +164,7 @@ class Golden:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--export', default='runs/fpga_export_w12a12')
+    ap.add_argument('--export', default='runs/fpga_export_w8a12')
     ap.add_argument('--image', default=None)
     ap.add_argument('--verbose', action='store_true')
     a = ap.parse_args()

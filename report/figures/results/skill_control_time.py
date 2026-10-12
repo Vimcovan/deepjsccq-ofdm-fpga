@@ -1,12 +1,15 @@
 """Skill control experiment: task time with / without the skill, Grok 4.7 (Cursor CLI) and DeepSeek V4.1 Flash
 (CodeBuddy CLI), same prompts, fresh workspaces.  Output: skill_control_time.png next to this script."""
 import os
+import sys
 
 import matplotlib.pyplot as plt
 import numpy as np
 
 OUT = os.path.dirname(os.path.abspath(__file__))
-plt.rcParams.update({"font.family": ["Times New Roman", "SimSun"], "font.size": 9, "axes.unicode_minus": False})
+sys.path.insert(0, os.path.join(OUT, "..", "sim"))
+import plotstyle as S  # noqa: E402
+S.apply()
 
 scenes = ["DMA遗留传输", "Mali-400", "板载屏排版", "开机自启", "补编内核模块"]
 t = {                                     # seconds
@@ -15,7 +18,7 @@ t = {                                     # seconds
     "DeepSeek 无技能": [143, 401, 218, 202, 2530],
     "DeepSeek 有技能": [24, 96, 81, 137, 160],
 }
-colors = ["#b9c7d8", "#2f5d8a", "#f2c6a0", "#c8602a"]
+colors = [S.LBLUE, S.BLUE, S.LORANGE, S.ORANGE]
 hatch = ["", "", "", ""]
 
 fig, ax = plt.subplots(figsize=(6.3, 2.8), dpi=300)

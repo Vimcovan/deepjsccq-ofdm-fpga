@@ -2,7 +2,8 @@
 #   powershell -ExecutionPolicy Bypass -File fig07_memory.ps1   -> fig07_memory.vsdx + ../network/fig07_memory.png
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-. (Join-Path $here 'visio_style.ps1')
+. (Join-Path $here 'visio_style.ps1')
+$ROUND = '0 mm'
 $repo = Resolve-Path (Join-Path $here '..\..\..')
 $plan = (Get-Content (Join-Path $repo 'data\model\manifest.json') -Raw -Encoding UTF8 | ConvertFrom-Json).memory_plan
 

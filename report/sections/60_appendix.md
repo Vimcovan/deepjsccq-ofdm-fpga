@@ -85,4 +85,4 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 
 从模型重新生成神经网络：按`src/model/README.md`准备数据、训练、W8A12导出，再用`src/network/`生成各层RTL与权重初始化文件；RTL与整数参考模型的逐比特比对见`sim/network/`。
 
-复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR、`plot_psnr_snr.m`出图；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对、`plot_seg_cdf.m`出图。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本）生成。
+复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本，实测数据图为`meas_plots.py`）生成。

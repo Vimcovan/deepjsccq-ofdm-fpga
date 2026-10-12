@@ -15,7 +15,7 @@ $PAL = @{
 }
 function RBox($x, $y, $w, $h, $kind, $text, $size = 7.5) {
   $s = Box $x $y $w $h $PAL[$kind][0] $text $false $size
-  $s.CellsU('LineColor').FormulaU = $PAL[$kind][1]
+  $s.CellsU('FillForegnd').FormulaU = $PAL[$kind][0]; $s.CellsU('LineColor').FormulaU = $PAL[$kind][1]
   $s.CellsU('Rounding').FormulaU = '2 mm'
   return $s
 }
@@ -71,6 +71,7 @@ for ($k = 0; $k -lt 3; $k++) {
 
 Save-Figure (Join-Path $here 'gdn_unit.vsdx') (Join-Path $repo 'report\figures\hw\gdn_unit.png')
 'saved'
+
 
 
 

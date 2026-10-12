@@ -91,7 +91,7 @@
 | `export_fpga.py` | 导出 W8A12 整数模型：各层参数文件、网络描述文件、各层中间结果的参考数据 |
 | `arch_compare.py` | 计算原网络与本作品网络的参数量和乘加量 |
 | `eval_kodak_per_image.py` | Kodak 逐图 PSNR 评估 |
-| `ofdm_channel.py`、`ofdm_eval.py`、`ofdm_eval_user.py` | 类 802.11a OFDM 链路模型下的评估（PAPR、限幅、频率选择性信道、LTF 信道估计、ZF / MMSE 均衡） |
+| `ofdm_channel.py`、`ofdm_eval.py` | 类 802.11a OFDM 链路模型下的评估（PAPR、限幅、频率选择性信道、LTF 信道估计、ZF / MMSE 均衡） |
 | `download_flickr2k.ps1` | 下载 Flickr2K |
 
 `data/model/` 中是部署模型的数据：

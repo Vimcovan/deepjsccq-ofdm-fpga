@@ -1,4 +1,4 @@
-# Builds report/poster/poster_en.pptx (A0 portrait, one slide) through PowerPoint COM, plus a PNG preview.
+﻿# Builds report/poster/poster_en.pptx (A0 portrait, one slide) through PowerPoint COM, plus a PNG preview.
 #   powershell -ExecutionPolicy Bypass -File make_poster.ps1 [-Name poster_en]
 # Needs Microsoft PowerPoint (Windows). All figures come from the repository.
 param([string]$Name = 'poster_en')            # output: <Name>.pptx and <Name>_preview.png
@@ -202,20 +202,21 @@ $r.Font.Name = $FONT; $r.Font.Size = 20; $r.Font.Bold = -1; $r.Font.Color.RGB = 
 [void](Txt $xn ($yC + 314) $wn 30 'Decoder: soft I/Q -> image (59 conv)' 21 $MUTE $true)
 [void](Txt $xn ($yC + 346) $wn 30 'RG/RB residual (+GDN), ATT attention, RU PixelShuffle (+IGDN)' 18 $MUTE)
 $b = Bullets $xn ($yC + 386) $wn 220 @(
-  ('C = 32, 16 latent channels, 4' + [char]0x00D7 + ' down-sampling; 387k parameters; trained at 10 dB AWGN with a constellation-entropy (KL) penalty.'),
+  ('C = 32, 16 latent channels, 4' + [char]0x00D7 + ' down-sampling: same 32,768 symbols as [2] with 1/51 of its MACs; trained at 10 dB AWGN with a constellation-entropy (KL) penalty.'),
   'W8A12 post-training quantization: 0.05 dB below float (DIV2K); RTL bit-exact against the integer model.') 23
 
 # 4 PHY and RF
 $yD = $yC + 575
 Card $X1 $yD $CW ($H - 230 - $yD) 4 'OFDM PHY and RF front end'
-$b = Bullets ($X1 + 36) ($yD + 104) ($CW - 72) 230 @(
+$b = Bullets ($X1 + 36) ($yD + 104) ($CW - 72) 300 @(
   '64-pt FFT, 48 data + 4 pilots; PN sign flip: 99 % PAPR 10.1-10.7 -> 9.4-9.8 dB.',
-  'Per-symbol SFO tracking: frame-end EVM within 1.7 dB of the start (683 symbols).',
-  ('AGC lock -14 dBFS: mid-frame gain steps 9/45 -> 0/44; PHY alone: 0 errors in 7.15' + [char]0x00D7 + '10^8 bits.')) 23
-$gw = 620
-$p = Pic $img.gui ($X1 + ($CW - $gw) / 2) ($yD + 330) $gw
+  'Second-order SFO / CPE loop, no steady-state error under a 40 ppm ramp: frame-end EVM within 1.7 dB of the start (683 symbols).',
+  'AD9361: SPI handshake fixed, TX quadrature-calibration phase search in PL, FIR redesigned: loopback EVM -22 -> -32 dB.',
+  ('Fast AGC locked at -14 dBFS with a PL-counter watchdog; PHY alone: 0 errors in 7.15' + [char]0x00D7 + '10^8 bits.')) 23
+$gw = 490
+$p = Pic $img.gui ($X1 + ($CW - $gw) / 2) ($yD + 432) $gw
 $p.Line.Visible = -1; $p.Line.ForeColor.RGB = $LINE; $p.Line.Weight = 1.5
-[void](Txt ($X1 + 36) ($yD + 330 + $p.Height + 8) ($CW - 72) 30 'Live RX GUI: constellations, |H| vs time, per-subcarrier SNR, spectrum' 18 $MUTE $false 2)
+[void](Txt ($X1 + 36) ($yD + 432 + $p.Height + 6) ($CW - 72) 30 'Live RX GUI: constellations, |H| vs time (Mali-400 GPU), per-subcarrier SNR, spectrum' 18 $MUTE $false 2)
 
 # ---------------------------------------------------------------- column 2: engine
 Card $X2 $Y0 $CW 1060 5 'Layer-streaming CNN engine'
@@ -224,19 +225,20 @@ $b = Bullets ($X2 + 36) ($Y0 + 110) ($CW - 72) 360 @(
   'Output-channel parallelism P chosen per layer: the smallest P that meets 30 fps at 250 MHz.',
   'Branches that read the same input share one window reader; weights in LUT, BRAM or packed BRAM + gearbox; large activation buffers in URAM.') 23
 $pw = 140; $pg = ($CW - 72 - 4*$pw) / 3; $py = $Y0 + 400
-$pipe = @(@('Line buffer', 'K-1 rows'), @('Window', ('K' + [char]0x00D7 + 'K' + [char]0x00D7 + 'Cin')), @('P MAC lanes', 'weights x P'), @('Requantize', 'bias, act., shift'))
+$pipe = @(@('Line buffer', 'K or K+1 rows'), @('Window', ('K' + [char]0x00D7 + 'K' + [char]0x00D7 + 'Cin')), @('P MAC lanes', 'weights x P'), @('Requantize', 'bias, act., shift'))
 for ($k = 0; $k -lt 4; $k++) {
   $px = $X2 + 36 + $k * ($pw + $pg)
   [void](Node $px $py $pw 96 $pipe[$k][0] $pipe[$k][1] $(if ($k -eq 2) { RGB 'DCE8F4' } else { $WHITE }))
   if ($k -lt 3) { [void](Arrow ($px + $pw) ($py + 48) ($px + $pw + $pg) ($py + 48)) }
 }
 [void](Txt ($X2 + 36) ($py + 104) ($CW - 72) 30 'per layer; groups of P output channels re-read the window' 19 $MUTE $false 2)
-[void](Txt ($X2 + 36) ($Y0 + 570) ($CW - 72) 34 'Optimization steps (encoder / decoder)' 24 $BLUE $true)
+[void](Txt ($X2 + 36) ($Y0 + 570) ($CW - 72) 34 'Network sized for on-chip storage (256x256 input)' 24 $BLUE $true)
 [void](Table ($X2 + 36) ($Y0 + 610) ($CW - 72) @(
-  @('Step', 'Before', 'After'),
-  @('Per-layer P: MAC lanes', '1120 / 1191', '217 / 296'),
-  @('Weight gearbox: DSP, enc.', '255', '223'),
-  @('Activations to URAM: BRAM36', '114 / 149', '97.5 / 99.5')) @(323, 160, 160) 54 21)
+  @('', 'DeepJSCC-Q [2]', 'This work'),
+  @('Channels / down-sampling', '256 / 16x', '32 / 4x'),
+  @('Conv. MAC enc. / dec.', '47.7 / 70.5 G', '0.91 / 1.42 G'),
+  @('Parameters', '34.4 M', '387 k'),
+  @('Kodak PSNR, 10 dB', '34.9 dB', '33.3 dB')) @(283, 180, 180) 44 21)
 [void](Txt ($X2 + 36) ($Y0 + 842) ($CW - 72) 34 'Full TX / RX designs (xczu5eg, routed)' 24 $BLUE $true)
 [void](Table ($X2 + 36) ($Y0 + 882) ($CW - 72) @(
   @('', 'LUT', 'BRAM36', 'URAM', 'DSP', 'WNS'),
@@ -254,7 +256,7 @@ $yK = $Y0 + 510
 Card $X3 $yK $CW 550 7 'vs. FPGA DeepJSCC [3]'
 [void](Table ($X3 + 36) ($yK + 108) ($CW - 72) @(
   @('', '[3] GLOBECOM 25', 'This work'),
-  @('Conv. work / frame', '0.22 GMAC', '2.33 GMAC'),
+  @('Conv. work / frame', '0.22 GMAC', '2.33 GMAC (10.5x)'),
   @('DSP enc. / dec.', '1597 / 874', '233 / 312'),
   @('BRAM enc. / dec.', '1039 / 1012', '100 / 100'),
   @('Latency enc. / dec.', '39.6 / 52.9 ms *', '38.2 / 30.4 ms'),
@@ -292,3 +294,4 @@ $pres.Close()
 $app.Quit()
 [System.Runtime.InteropServices.Marshal]::ReleaseComObject($app) | Out-Null
 "saved $out"
+

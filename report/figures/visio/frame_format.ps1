@@ -2,7 +2,8 @@
 #   powershell -ExecutionPolicy Bypass -File frame_format.ps1   -> frame_format.vsdx + ../hw/frame_format.png
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-. (Join-Path $here 'visio_style.ps1')
+. (Join-Path $here 'visio_style.ps1')
+$ROUND = '0 mm'
 $repo = Resolve-Path (Join-Path $here '..\..\..')
 $X = [char]0x00D7
 

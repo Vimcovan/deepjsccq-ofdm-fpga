@@ -1,4 +1,4 @@
-"""W16A16 post-training quantization of DeepJSCC-Q with the bit-exact integer model (int_ref.py).
+"""Post-training quantization (weight / activation widths --wbits / --abits; deployed: W8A12) of DeepJSCC-Q with the bit-exact integer model (int_ref.py).
 
 Steps: graph check (float backend == deepjsccq_model), calibration on training
 crops, then evaluation on DIV2K-val center crops and Kodak with identical channel

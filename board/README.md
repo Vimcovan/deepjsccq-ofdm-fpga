@@ -32,9 +32,9 @@
 |---|---|
 | `measure_link.py` | PSNR / 星座 SNR / EVM / SSCC 帧成功率随 TX 衰减扫描；`--top` 先到最大衰减再逐点降低（AGC 只需跟随变强的信号）；`--save-const` 保存星座快照 |
 | `analyze_const.py`（PC） | 固定图像下以参考星座计算数据辅助 SNR（不依赖判决） |
-| `plot_link.py`（PC）、`plot_psnr_snr.m`（MATLAB）、`plot_visual_compare.py`（PC） | 出图（`plot_visual_compare.py`：原图 / DeepJSCC-Q / SSCC 视觉对比，PSNR / SSIM） |
-| `pl_events.py`（两板）+ `seg_latency.py`（PC）+ `plot_seg_cdf.m` | 两板 PS 轮询 PL 帧计数器打时间戳，按数据流配对：编码 / 传输 / 解码三段时延 |
-| `frames_to_csv.py`、`plot_fps_latency_jscc.m` | 逐帧帧率 |
+| `plot_link.py`（PC）、`plot_visual_compare.py`（PC）、`plot_psnr_snr.m`（MATLAB，英文版，用于海报） | 出图（`plot_visual_compare.py`：原图 / DeepJSCC-Q / SSCC 视觉对比，PSNR / SSIM） |
+| `pl_events.py`（两板）+ `seg_latency.py`（PC）+ `plot_seg_cdf.m`（英文版，用于海报） | 两板 PS 轮询 PL 帧计数器打时间戳，按数据流配对：编码 / 传输 / 解码三段时延 |
+| `frames_to_csv.py` | 逐帧帧率 |
 | `agc_guard_test.py` | AGC 看门狗验收：静置误复位、衰减跳变恢复、无信号恢复 |
 | `agc_trace.py`、`adc_frames.py`、`pl_counters.py` | 诊断：原始 ADC 抓取与 AD9361 `CTRL_OUT`（状态输出引脚，此处为 AGC 状态）同步记录、帧间隔、PL 计数器 |
 

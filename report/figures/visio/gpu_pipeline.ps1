@@ -14,16 +14,17 @@ Open-Visio 180 104
 [void](Box 6 13 46 13 $ST.COMPUTE ("收到遥测快照时`nLTF → |H|（52 个子载波，dB）`n追加到最近 5 s 的历史"))
 [void](Line 29 26 29 31)
 [void](Box 6 31 46 14 $ST.STORE ("三维渲染工作线程`n最多一个请求在途`n新请求覆盖未发出的旧请求"))
-[void](Line 29 45 29 72 $true $true)
+[void](Line 29 45 29 72)
+[void](Label 30 55 22 5 '收到图像后触发重绘' 6.5 0 $ST.MUTE)
 [void](Box 6 72 46 16 $ST.COMPUTE ("三维视图控件重绘时`n贴图 + 用同一套相机与投影参数`n画坐标轴刻度文字"))
 [void](Line 29 88 29 93)
 [void](Label 6 93 46 5 '→ 触摸屏（X 服务，2D）' 7 1 $ST.INK)
 
 # ---------------------------------------------------------------- pipe
-[void](Path @(52, 38, 66, 38))
-[void](Label 52 31 16 7 ("stdin`n请求") 6.5 1 $ST.MUTE)
-[void](Path @(66, 80, 52, 80))
-[void](Label 52 81 16 7 ("stdout`n图像") 6.5 1 $ST.MUTE)
+[void](Path @(52, 35, 59, 35, 59, 40, 70, 40))
+[void](Label 59.5 28 7 7 ("stdin`n请求") 6 1 $ST.MUTE)
+[void](Path @(70, 73, 64, 73, 64, 42, 52, 42))
+[void](Label 56.5 55 7.5 7 ("stdout`n图像") 6 1 $ST.MUTE)
 
 # ---------------------------------------------------------------- renderer process
 [void](Box 66 4 64 96 $null '' $true 8 '0.5 pt')
@@ -37,10 +38,10 @@ Open-Visio 180 104
 [void](Box 70 68 56 10 $ST.COMPUTE ("glReadPixels → RGBA（约 45 ms）"))
 
 # ---------------------------------------------------------------- GPU
-[void](Box 136 13 40 60 $ST.GREEN ("Mali-400 MP2`n（1 GP + 2 PP，500 MHz）`n`nlima 内核驱动`n（外部模块，板上编译）`n`nMesa 22 lima_dri`nOpenGL ES 2.0") $false 7)
+[void](Box 136 13 40 68 $ST.GREEN ("Mali-400 MP2`n（1 GP + 2 PP，500 MHz）`n`nlima 内核驱动`n（外部模块，板上编译）`n`nMesa 22 lima_dri`nOpenGL ES 2.0") $false 7)
 [void](Line 126 57.5 136 57.5)
 [void](Line 136 73 126 73)
-[void](Label 134 78 44 20 ("每帧约 60 ms，曲面每秒刷新 2.5 次；`n渲染进程约占一个核的 10 %") 7 0 $ST.INK)
+[void](Label 134 84 44 16 ("每帧约 60 ms，曲面每秒刷新 2.5 次；`n渲染进程约占一个核的 10 %") 7 0 $ST.INK)
 
 Save-Figure (Join-Path $here 'gpu_pipeline.vsdx') (Join-Path $repo 'report\figures\sw\gpu_pipeline.png')
 'saved'

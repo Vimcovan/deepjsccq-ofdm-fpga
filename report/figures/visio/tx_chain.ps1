@@ -5,7 +5,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . (Join-Path $here 'visio_style.ps1')
 $repo = Resolve-Path (Join-Path $here '..\..\..')
 
-Open-Visio 180 92
+Open-Visio 180 102
 
 function Sig($x1, $y, $x2, $txt) {           # arrow with a signal label above it
   [void](Line $x1 $y $x2 $y)
@@ -40,17 +40,20 @@ Sig 110 $m 116 '24 b'
 [void](Box 160 ($y + 4) 18 12 $ST.STORE ("AD9361 侧`nDAC FIFO") $false 7)
 
 # ---------------------------------------------------------------- gate FSM
-$fy = 78
+$fy = 88
 [void](Label 2 ($fy - 4) 40 6 '发送门控状态机：' 8 0 $ST.INK $true)
 [void](Circle 52 $fy 4 '间隔' 7)
 [void](Circle 90 $fy 4 ([string]"等待") 7)
 [void](Circle 128 $fy 4 '发送' 7)
-[void](Line 56 $fy 86 $fy)
-[void](Label 56 ($fy - 6) 30 5 '间隔计满 5000 拍' 7 1 $ST.MUTE)
-[void](Line 94 $fy 124 $fy)
-[void](Label 94 ($fy - 6) 30 5 '1 拍' 7 1 $ST.MUTE)
-[void](Path @(128, ($fy + 4), 128, ($fy + 9), 52, ($fy + 9), 52, ($fy + 4)))
-[void](Label 60 ($fy + 9) 60 5 '已送出 54960 个采样' 7 1 $ST.MUTE)
+# reset -> GAP; arcs between the states (RTL: jscc_tx_ps_top.sv, src_st)
+[void](Line 52 ($fy - 12) 52 ($fy - 4))
+[void](Label 53 ($fy - 14) 10 5 '复位' 7 0 $ST.MUTE)
+[void](Arc 55.5 ($fy - 2) 86.5 ($fy - 2) 6)
+[void](Label 56 ($fy - 13) 30 5 '间隔计满 5000 拍' 7 1 $ST.MUTE)
+[void](Arc 93.5 ($fy - 2) 124.5 ($fy - 2) 6)
+[void](Label 94 ($fy - 13) 30 5 '1 拍后' 7 1 $ST.MUTE)
+[void](Arc 126 ($fy + 3.5) 54 ($fy + 3.5) 10)
+[void](Label 60 ($fy + 14) 60 5 '已送出 54960 个采样' 7 1 $ST.MUTE)
 
 Save-Figure (Join-Path $here 'tx_chain.vsdx') (Join-Path $repo 'report\figures\hw\tx_chain.png')
 'saved'

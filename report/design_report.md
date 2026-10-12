@@ -783,7 +783,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 - 横轴为数据辅助SNR：静止图像下每帧发送的符号相同，以最强点所有快照平均后的判决作为参考星座，$`\mathrm{SNR}=10\log_{10}\overline{|\mathrm{ref}|^2}/\overline{|\mathrm{rx}-\mathrm{ref}|^2}`$；
 - SSCC帧CRC错误但JPEG仍可解码时按实际重建图计分，无法解码时按中灰图计分。
 
-![PSNR–SNR](../data/measurements/psnr_snr/k0802_v3_psnr_snr.png "w=75%")
+![PSNR–SNR](figures/results/psnr_snr.png "w=75%")
 
 图3-6　PSNR–SNR实测曲线（DIV2K 0802）。
 
@@ -818,7 +818,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 
 帧率：DeepJSCC-Q播放演示视频连续运行10 min，RX在600.06 s内收到18,000帧，平均30.0 fps（图3-9）。
 
-![帧率](../data/measurements/fps/jscc_10min_fps.png "w=80%")
+![帧率](figures/results/fps_10min.png "w=80%")
 
 图3-9　连续10 min的接收帧率（DeepJSCC-Q，演示视频）。
 
@@ -833,7 +833,7 @@ PC端训练程序的结果见图3-5：神经网络在10 dB AWGN信道下训练12
 | 解码 | RX最后一个PHY符号 → 最后一个解码字节 | 30.39 ms | 30.34 / 30.48 ms |
 | PL合计 | | 71.47 ms | 71.39 / 71.55 ms |
 
-![分段时延 CDF](../data/measurements/latency/latency_3seg_cdf.png)
+![分段时延 CDF](figures/results/latency_cdf.png)
 
 图3-10　分段时延的累积分布（编码段1706个样本，其余各段1701个）。传输段的下限2.748 ms即一帧的空中时间。
 
@@ -1068,4 +1068,4 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 
 从模型重新生成神经网络：按`src/model/README.md`准备数据、训练、W8A12导出，再用`src/network/`生成各层RTL与权重初始化文件；RTL与整数参考模型的逐比特比对见`sim/network/`。
 
-复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR、`plot_psnr_snr.m`出图；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对、`plot_seg_cdf.m`出图。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本）生成。
+复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本，实测数据图为`meas_plots.py`）生成。

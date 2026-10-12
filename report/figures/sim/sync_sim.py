@@ -19,9 +19,9 @@ import matplotlib.pyplot as plt
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.normpath(os.path.join(HERE, "..", "..", ".."))
 OUT = os.path.join(HERE, "..", "hw")
-plt.rcParams.update({"font.family": ["Times New Roman", "SimSun"], "font.size": 9, "axes.linewidth": 0.6,
-                     "mathtext.fontset": "stix", "axes.unicode_minus": False})
-INK, ACC, ACC2, GRID = "#222222", "#2b6c8f", "#c0504d", "#d9d9d9"
+import plotstyle as S
+S.apply()
+INK, ACC, ACC2, GRID = S.INK, S.BLUE, S.ORANGE, S.GRID
 
 rng = np.random.default_rng(7)
 FS, F0 = 20e6, 915e6
@@ -83,8 +83,8 @@ det = int(np.argmax(run >= 64))
 
 fig, (ax, ax2) = plt.subplots(2, 1, figsize=(6.3, 3.6), dpi=300, sharex=True, gridspec_kw=dict(height_ratios=[3, 2]))
 for a in (ax, ax2):
-    a.axvspan(0, 160, color="#fff2cc", zorder=0)
-    a.axvspan(160, 320, color="#dcedf3", zorder=0)
+    a.axvspan(0, 160, color=S.SHADE_Y, zorder=0)
+    a.axvspan(160, 320, color=S.SHADE_B, zorder=0)
     a.axvline(det - GAP, color=INK, lw=0.8, ls=":")
     a.grid(color=GRID, lw=0.4)
 ax.plot(n, m, color=ACC, lw=0.9, label="归一化自相关 |P(n)| / E(n)")
@@ -99,6 +99,8 @@ ax2.annotate("确认检测", xy=(det - GAP, 64), xytext=(det - GAP + 50, 85), fo
 ax2.set_xlim(-150, 700); ax2.set_ylim(0, 110)
 ax2.set_xlabel("采样序号（相对帧起点）"); ax2.set_ylabel("连续点数")
 ax2.legend(loc="upper right", fontsize=7.5, frameon=False)
+for a in (ax, ax2):
+    S.finish(a, grid=None)
 fig.tight_layout(); fig.savefig(os.path.join(OUT, "fd_sim.png")); plt.close(fig)
 cfo_est = np.angle(P[det]) / (2 * np.pi * 16) * FS
 
@@ -120,7 +122,7 @@ fig, ax = plt.subplots(figsize=(6.3, 2.5), dpi=300)
 ax.plot(n, r_int, color=INK, lw=0.7, alpha=0.6, label="整数采样对齐")
 ax.plot(n, r_half, color=ACC, lw=0.9, label="偏移半个采样（最坏情况）")
 ax.axhline(thr, color=ACC2, lw=0.8, ls="--", label="RTL 门限 |X|² > 0.375E（≈ ρ² 0.46）")
-ax.axvspan(160, 320, color="#dcedf3", zorder=0)
+ax.axvspan(160, 320, color=S.SHADE_B, zorder=0)
 for k, lab in ((255, "LTF1 末点"), (319, "LTF2 末点")):
     ax.annotate(lab, xy=(k, r_half[k + GAP]), xytext=(k + 25, 0.9), fontsize=8,
                 arrowprops=dict(arrowstyle="->", lw=0.6, color=INK))
@@ -141,6 +143,7 @@ z.annotate(f"{r_half[pk + 1]:.2f}", xy=(256, r_half[pk + 1]), xytext=(256.6, 0.5
 z.tick_params(labelsize=6.5); z.grid(color=GRID, lw=0.3)
 z.set_title("LTF1 相关峰（逐采样）", fontsize=7, pad=2)
 ax.indicate_inset_zoom(z, edgecolor="#7f7f7f", lw=0.6)
+S.finish(ax, grid=None)
 fig.tight_layout(); fig.savefig(os.path.join(OUT, "ts_sim.png")); plt.close(fig)
 print(f"detect at {det - GAP}, cfo est {cfo_est:.0f} Hz / {cfo:.0f} Hz, "
       f"LTF1 peak rho2 int {r_int[255 + GAP]:.2f} half {r_half[255 + GAP]:.2f} (max near {r_half[GAP + 240:GAP + 270].max():.2f}), "

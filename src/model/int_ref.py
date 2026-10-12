@@ -6,12 +6,13 @@ One graph description (``encode`` / ``decode``) runs on two backends:
   * IntBackend   - the integer datapath the RTL implements.  Tensors are integers
     carried in float64 (exact below 2^53, asserted), with a per-tensor real scale.
 
-Numeric contract (W16A16, every multiplier operand fits a DSP48E2 27x18 signed):
-  activations      int16, per-tensor scale (not restricted to powers of two)
-  weights          int16, per-output-channel scale; bias at accumulator scale
+Numeric contract (weight / activation widths are parameters, the deployed model is W8A12;
+every multiplier operand fits a DSP48E2 27x18 signed):
+  activations      A-bit signed, per-tensor scale (not restricted to powers of two)
+  weights          W-bit signed, per-output-channel scale; bias at accumulator scale
   accumulator      <= 48 bit signed
-  requantization   q = sat16(rsr(sat27(rsr(acc, pre)) * M, sh)), M < 2^17
-  add              q = sat16(rsr(qa * Ma + qb * Mb, sh)), optional ReLU
+  requantization   q = satA(rsr(sat27(rsr(acc, pre)) * M, sh)), M < 2^17
+  add              q = satA(rsr(qa * Ma + qb * Mb, sh)), optional ReLU
   LeakyReLU(1/128) on the accumulator: acc < 0 -> rsr(acc, 7)
   rsr(v, k)        round-half-up arithmetic right shift: floor((v + 2^(k-1)) / 2^k)
   GDN / IGDN       D = (beta_q + sum_j gamma_q * rsr(x_j^2, 4)) * 2^L,

@@ -107,7 +107,7 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 
 ### 平缓退化 vs. 悬崖效应
 
-<p align="center"><img src="data/measurements/psnr_snr/k0802_v3_psnr_snr.png" alt="PSNR-SNR" width="520"></p>
+<p align="center"><img src="report/figures/results/psnr_snr.png" alt="PSNR-SNR" width="520"></p>
 
 同一物理层、每幅图同样 32,768 个符号：DeepJSCC-Q 从 SNR 32 dB 到 5.5 dB 只下降 5.5 dB；SSCC 在 SNR 约 20 → 17 dB 的 3 dB 区间内
 从 27.8 dB 跌到无法解码。高 SNR 时 DeepJSCC-Q 也比 SSCC 高 3.8 dB。横轴为由接收星座与已知参考计算的数据辅助 SNR。
@@ -118,7 +118,7 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 
 ### 时延与帧率
 
-<p align="center"><img src="data/measurements/latency/latency_3seg_cdf.png" alt="分段时延 CDF" width="820"></p>
+<p align="center"><img src="report/figures/results/latency_cdf.png" alt="分段时延 CDF" width="820"></p>
 
 两块板的 PS 轮询 PL 帧计数器、按数据流逐帧配对得到的分段时延（中位数）：编码 38.20 ms、传输 2.87 ms（下限 2.748 ms 即一帧的空中时间）、
 解码 30.39 ms。连续 600 s 收到 18000 帧，平均 30.0 fps。
@@ -202,7 +202,7 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 
 见 `board/tests/` 各脚本开头的说明：`measure_link.py`（PSNR / SNR / EVM 扫描，先到最大衰减再逐点降低）、
 `analyze_const.py`（固定图像下以参考星座计算数据辅助 SNR）、`pl_events.py` + `seg_latency.py`（两板 PS 轮询 PL
-帧计数器，按数据流配对计算分段时延）、`plot_*.m`（MATLAB 出图）。
+帧计数器，按数据流配对计算分段时延）、出图脚本在 `report/figures/sim/`（`meas_plots.py`：PSNR–SNR、帧率、分段时延）。
 
 ## 参考文献
 

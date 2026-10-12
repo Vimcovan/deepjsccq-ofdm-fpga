@@ -23,7 +23,8 @@ import matplotlib.pyplot as plt
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "..", "hw", "sfo_loop_response.png")
-plt.rcParams.update({"font.family": ["Times New Roman", "SimSun"], "font.size": 9, "axes.unicode_minus": False})
+import plotstyle as S
+S.apply()
 
 NSYM = 683
 KP = np.array([-21, -7, 7, 21])                  # pilot subcarriers
@@ -67,9 +68,9 @@ fig, ax = plt.subplots(1, 3, figsize=(7.2, 2.5), dpi=300)
 c = np.where(n >= N0, np.deg2rad(60), 0.0)
 rc, rs, P = run(c, np.zeros(NSYM))
 m = n < 150
-ax[0].plot(n[m], np.rad2deg(c[m]), color="#999999", lw=1.0, ls="--", label="输入公共相位")
-ax[0].plot(n[m], np.rad2deg(rc[m]), color="#c8602a", lw=1.2, label="补偿后残余公共相位")
-ax[0].plot(n[m], np.rad2deg(K_EDGE * P[m]), color="#2f5d8a", lw=1.0, ls=":", label="斜率环输出（×26）")
+ax[0].plot(n[m], np.rad2deg(c[m]), color=S.GRAY, lw=1.0, ls="--", label="输入公共相位")
+ax[0].plot(n[m], np.rad2deg(rc[m]), color=S.ORANGE, lw=1.2, label="补偿后残余公共相位")
+ax[0].plot(n[m], np.rad2deg(K_EDGE * P[m]), color=S.BLUE, lw=1.0, ls=":", label="斜率环输出（×26）")
 ax[0].set_ylim(-10, 70)
 ax[0].set_xlabel("OFDM 符号序号")
 ax[0].set_ylabel("相位 / °")
@@ -79,7 +80,7 @@ print(f"(a) max residual CPE {np.rad2deg(np.abs(rc).max()):.2e} deg, max slope-l
 
 # (b) slope step
 m = n < 150
-for d, col in ((0.25, "#b9c7d8"), (0.5, "#2f5d8a"), (1.0, "#c8602a")):
+for d, col in ((0.25, S.LBLUE), (0.5, S.BLUE), (1.0, S.ORANGE)):
     th0 = 2 * np.pi * d / 64
     theta = np.where(n >= N0, th0, 0.0)
     _, rs, P = run(np.zeros(NSYM), theta)
@@ -87,7 +88,7 @@ for d, col in ((0.25, "#b9c7d8"), (0.5, "#2f5d8a"), (1.0, "#c8602a")):
     t5, t2 = settle(y[N0:], 1.0, 0.05), settle(y[N0:], 1.0, 0.02)
     print(f"(b) step {d} sample: overshoot {100 * (y.max() - 1):.1f} %, 5 % settling {t5} sym, 2 % {t2} sym")
     ax[1].plot(n[m], y[m], color=col, lw=1.2, label=f"定时阶跃 {d:g} 采样")
-ax[1].axhline(1.0, color="#999999", lw=0.6, ls="--")
+ax[1].axhline(1.0, color=S.GRAY, lw=0.6, ls="--")
 ax[1].set_xlabel("OFDM 符号序号")
 ax[1].set_ylabel("预测斜率 / 实际斜率")
 ax[1].set_title("(b) 相位斜率阶跃", fontsize=9)
@@ -99,14 +100,14 @@ tau = eps * 80 * (n + 1)                          # timing drift since the LTF r
 theta = 2 * np.pi * tau / 64
 _, rs, P = run(np.zeros(NSYM), theta)
 err = np.rad2deg(K_EDGE * rs)
-ax[2].plot(n, err, color="#c8602a", lw=1.2, label="跟踪误差（左轴）")
+ax[2].plot(n, err, color=S.ORANGE, lw=1.2, label="跟踪误差（左轴）")
 ax[2].set_xlabel("OFDM 符号序号")
 ax[2].set_ylabel("k = 26 子载波相位误差 / °")
 ax[2].set_title("(c) SFO 斜坡 40 ppm", fontsize=9)
 ax2 = ax[2].twinx()
-ax2.plot(n, np.rad2deg(K_EDGE * theta), color="#999999", lw=1.0, ls="--", label="无跟踪时的相位（右轴）")
-ax2.set_ylabel("无跟踪时 k = 26 相位 / °", color="#777777")
-ax2.tick_params(axis="y", colors="#777777")
+ax2.plot(n, np.rad2deg(K_EDGE * theta), color=S.GRAY, lw=1.0, ls="--", label="无跟踪时的相位（右轴）")
+ax2.set_ylabel("无跟踪时 k = 26 相位 / °", color=S.GRAY)
+ax2.tick_params(axis="y", colors=S.GRAY)
 ax2.spines["top"].set_visible(False)
 h1, l1 = ax[2].get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
 ax[2].legend(h1 + h2, l1 + l2, frameon=False, fontsize=7, loc="center right")
