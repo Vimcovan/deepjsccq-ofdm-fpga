@@ -50,11 +50,11 @@ $fy = @(12, 22, 32)
 $ft = @('FIR（系数 c），输入 I', 'FIR（系数 d），输入 Q', 'FIR（系数 c+d），输入 I+Q')
 for ($k = 0; $k -lt 3; $k++) {
   [void](Line 17 $fy[$k] 22 $fy[$k])
-  [void](Box 22 ($fy[$k] - 3.5) 32 7 $ST.STORE $ft[$k] $false 6.5)
+  [void](Box 22 ($fy[$k] - 3.5) 32 7 $ST.COMPUTE $ft[$k] $false 6.5)
   [void](Line 54 $fy[$k] 60 $fy[$k])
   Tag 54 ($fy[$k] - 5) 6 ('k' + [char](0x2081 + $k))
 }
-[void](Box 60 6 24 32 $ST.STORE ("Gauss 复数乘法`nRe = k₁ − k₂`nIm = k₃ − k₁ − k₂") $false 6.5)
+[void](Box 60 6 24 32 $ST.COMPUTE ("Gauss 复数乘法`nRe = k₁ − k₂`nIm = k₃ − k₁ − k₂") $false 6.5)
 
 # |X(n)|^2 = X(n) X*(n)
 [void](Line 84 22 96 22)
@@ -98,7 +98,7 @@ Tag 99 45 8 'E'
 [void](Line 90 72 129 72)
 
 # ---------------------------------------------------------------- decision and output
-[void](Box 116 12 36 30 $ST.STORE ("判决`n|X|² > E/4 + E/8，E > 2500`n`n状态机：空闲 / 放行`n放行 2×64 + 683×80 个采样") $false 6.5)
+[void](Box 116 12 36 30 $ST.COMPUTE ("判决`n|X|² > E/4 + E/8，E > 2500`n`n状态机：空闲 / 放行`n放行 2×64 + 683×80 个采样") $false 6.5)
 Demux 129 10 72 10 18 'DEMUX'
 [void](Line 134 42 134 65)
 [void](Line 139 67.5 152 67.5); Tag 139 62.5 13 '放行'
