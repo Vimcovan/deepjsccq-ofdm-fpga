@@ -12,7 +12,7 @@ For each conv engine in manifest.json (memory_plan section) writes to
 Merged engines (upsample block main + skip conv) concatenate output channels
 [main | skip]; the skip channels use ACT2.
 
-  python gen_rtl_init.py --export runs/fpga_export_w8a12
+  python gen_rtl_init.py [--export data/model]
 """
 from __future__ import annotations
 
@@ -35,7 +35,7 @@ def read_mem(path: Path, bits: int, signed: bool) -> np.ndarray:
 
 def write_words(path: Path, words: list[int], bits: int):
     digits = (bits + 3) // 4
-    path.write_text(''.join(f'{w:0{digits}X}\n' for w in words), encoding='ascii')
+    path.write_text(''.join(f'{w:0{digits}X}\n' for w in words), encoding='ascii', newline='\n')
 
 
 def act_name(a):
@@ -44,7 +44,7 @@ def act_name(a):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--export', default='runs/fpga_export_w8a12')
+    ap.add_argument('--export', default=str(Path(__file__).resolve().parents[2] / 'data' / 'model'))
     a = ap.parse_args()
     root = Path(a.export)
     m = json.loads((root / 'manifest.json').read_text(encoding='utf-8'))
@@ -140,7 +140,7 @@ def main():
                 'out_shape_hwc': [tensors[op['out']]['shape_hwc'] for op in members],
                 'note': e['note'],
             }
-            (d / 'engine.json').write_text(json.dumps(info, indent=1), encoding='utf-8')
+            (d / 'engine.json').write_text(json.dumps(info, indent=1), encoding='utf-8', newline='\n')
             count += 1
     print(f'wrote {count} conv engines to {out_root}')
     ng = gen_gdn(root, m, ops, tensors, out_root)
@@ -198,7 +198,7 @@ def gen_gdn(root, m, ops, tensors, out_root):
                 'in': op['in'], 'out': op['out'], 'shape_hwc': [h, w_, c],
                 'mac_cycles_per_frame': passes * c * h * w_, 'budget_cycles': budget,
             }
-            (d / 'gdn.json').write_text(json.dumps(info, indent=1), encoding='utf-8')
+            (d / 'gdn.json').write_text(json.dumps(info, indent=1), encoding='utf-8', newline='\n')
             n += 1
     return n
 
@@ -212,7 +212,7 @@ def gen_add(m, out_root):
         d.mkdir(parents=True, exist_ok=True)
         info = {'name': op['out'], 'MA': op['Ma'], 'MB': op['Mb'], 'SH': op['sh'],
                 'RELU': int(bool(op['relu'])), 'in': op['in'], 'out': op['out']}
-        (d / 'add.json').write_text(json.dumps(info, indent=1), encoding='utf-8')
+        (d / 'add.json').write_text(json.dumps(info, indent=1), encoding='utf-8', newline='\n')
         n += 1
     return n
 

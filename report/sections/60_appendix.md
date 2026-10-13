@@ -95,6 +95,8 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 
 脚本按`src/hw/<tx|rx>/files.txt`新建工程、加入IP、生成PS块设计，用默认策略完成综合与实现。在干净目录中重建的资源与时序报告与部署版一致（表3-1）。
 
-从模型重新生成神经网络：按`src/model/README.md`准备数据、训练、W8A12导出，再用`src/network/`生成各层RTL与权重初始化文件；RTL与整数参考模型的逐比特比对见`sim/network/`。
+从模型重新生成神经网络：仓库中带有部署模型的检查点与W8A12量化导出（`data/model/`），`python src/network/regen_hw.py`由它重新生成两端的神经网络RTL与权重初始化文件并写入`src/hw/`，`git diff`为空即与入库文件一致。重新训练与导出见`src/model/README.md`，需要CUDA与训练数据。
+
+仿真：`python sim/network/make_golden.py`用NumPy整数参考模型生成各层参考数据，再运行`sim/network/`中的脚本做单层、块级与整网的逐比特比对；SSCC基线的仿真见`sim/sscc/`。各脚本的命令与期望结果见`sim/README.md`。
 
 复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本，实测数据图为`meas_plots.py`）生成。

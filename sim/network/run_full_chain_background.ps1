@@ -1,8 +1,10 @@
 # Detached batch: keep both full-chain results, even if the first chain fails.
 param([Parameter(Mandatory=$true)][string]$RunDir)
 $ErrorActionPreference = 'Stop'
-$root = Split-Path -Parent $PSScriptRoot
-Set-Location $root
+$repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# network library RTL: src/hw/{tx,rx}/rtl/network/rtl (each side holds the modules it uses)
+function Rtl([string]$n) { foreach ($s in 'tx', 'rx') { $p = "$repo\src\hw\$s\rtl\network\rtl\$n.sv"; if (Test-Path $p) { return $p } }; throw "$n.sv not found" }
+Set-Location $repo
 New-Item -ItemType Directory -Force $RunDir | Out-Null
 $batch = [ordered]@{
     started = (Get-Date).ToString('o'); pid = $PID; state = 'running'

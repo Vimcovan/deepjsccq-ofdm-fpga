@@ -20,6 +20,8 @@ foreach p $plus { append opts " -testplusarg $p" }
 set_property -name {xsim.simulate.xsim.more_options} -value $opts -objects [get_filesets sim_1]
 # HARD:1 -> compile with SSCC_HARD (hard-decision Viterbi input, to see what the soft information gains)
 set_property -name {xsim.compile.xvlog.more_options} -value [expr {[string match *HARD=1* $plus] ? "-d SSCC_HARD" : ""}] -objects [get_filesets sim_1]
+# always recompile: an incremental run would keep the snapshot of the previous HARD setting
+reset_simulation -simset sim_1 -mode behavioral -quiet
 launch_simulation
 close_sim
 close_project

@@ -4,13 +4,15 @@ param([string]$Layers = 'enc.0.gdn,enc.7.gdn,dec.7.igdn,dec.9.igdn',
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 100, [int]$ReadyPct = 100)
 $ErrorActionPreference = 'Stop'
 $viv    = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
-$root   = Split-Path -Parent $PSScriptRoot
-$export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
+$repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# network library RTL: src/hw/{tx,rx}/rtl/network/rtl (each side holds the modules it uses)
+function Rtl([string]$n) { foreach ($s in 'tx', 'rx') { $p = "$repo\src\hw\$s\rtl\network\rtl\$n.sv"; if (Test-Path $p) { return $p } }; throw "$n.sv not found" }
+$export = (Join-Path $repo 'data\model') -replace '\\', '/'
 $work   = Join-Path $PSScriptRoot 'work_gdn'
 New-Item -ItemType Directory -Force $work | Out-Null
 Push-Location $work
 try {
-    & "$viv\xvlog.bat" -sv "$root\rtl\gdn_unit.sv" "$root\rtl\axis_gdn.sv" "$root\sim\tb_gdn.sv" | Out-File out_xvlog.txt
+    & "$viv\xvlog.bat" -sv (Rtl gdn_unit) (Rtl axis_gdn) "$PSScriptRoot\tb_gdn.sv" | Out-File out_xvlog.txt
     if ($LASTEXITCODE -ne 0) { Get-Content out_xvlog.txt; throw 'xvlog failed' }
     foreach ($name in ($Layers -split ',')) {
         $e = Get-Content "$export/rtl_init/$name/gdn.json" -Raw | ConvertFrom-Json

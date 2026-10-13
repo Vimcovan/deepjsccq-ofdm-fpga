@@ -116,9 +116,9 @@ class Planner:
         E, B = [], []          # engines, buffers
         net = getattr(self.model, part).net
 
-        # join FIFO depths measured in block simulation (rtl/gen/fifo_sizes.json, peak + margin)
+        # join FIFO depths measured in block simulation (fifo_sizes.json next to this script, peak + margin)
         # replace the row-count estimates where available
-        sizes_f = Path(__file__).resolve().parent / 'rtl' / 'gen' / 'fifo_sizes.json'
+        sizes_f = Path(__file__).resolve().parent / 'fifo_sizes.json'
         sizes = json.loads(sizes_f.read_text(encoding='utf-8')) if sizes_f.exists() else {}
 
         def buf(name, kind, elems, bits, fifo=None):

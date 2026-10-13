@@ -4,14 +4,16 @@ param([string]$Engines = 'enc.3.ab0.c0,enc.3.a0.c1,enc.2.skip,enc.2.conv1,enc.0.
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 90, [int]$ReadyPct = 80)
 $ErrorActionPreference = 'Stop'
 $viv    = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
-$root   = Split-Path -Parent $PSScriptRoot
-$export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
+$repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# network library RTL: src/hw/{tx,rx}/rtl/network/rtl (each side holds the modules it uses)
+function Rtl([string]$n) { foreach ($s in 'tx', 'rx') { $p = "$repo\src\hw\$s\rtl\network\rtl\$n.sv"; if (Test-Path $p) { return $p } }; throw "$n.sv not found" }
+$export = (Join-Path $repo 'data\model') -replace '\\', '/'
 $work   = Join-Path $PSScriptRoot 'work_conv'
 New-Item -ItemType Directory -Force $work | Out-Null
 Push-Location $work
 try {
-    & "$viv\xvlog.bat" -sv "$root\rtl\sdp_ram.sv" "$root\rtl\rom.sv" "$root\rtl\rom_banked.sv" "$root\rtl\axis_line_buffer.sv" `
-        "$root\rtl\mul_serial.sv" "$root\rtl\weight_stream.sv" "$root\rtl\conv_engine.sv" "$root\sim\tb_conv_layer.sv" | Out-File out_xvlog.txt
+    & "$viv\xvlog.bat" -sv (Rtl sdp_ram) (Rtl rom) (Rtl rom_banked) (Rtl axis_line_buffer) `
+        (Rtl mul_serial) (Rtl weight_stream) (Rtl conv_engine) "$PSScriptRoot\tb_conv_layer.sv" | Out-File out_xvlog.txt
     if ($LASTEXITCODE -ne 0) { Get-Content out_xvlog.txt; throw 'xvlog failed' }
     foreach ($name in ($Engines -split ',')) {
         $e = Get-Content "$export/rtl_init/$name/engine.json" -Raw | ConvertFrom-Json

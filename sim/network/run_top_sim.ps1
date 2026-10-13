@@ -1,33 +1,35 @@
 # Generate, simulate and (optionally) size the join FIFOs of a block range.
 #   powershell -ExecutionPolicy Bypass -File sim\run_top_sim.ps1 -First enc.3 [-Last enc.3] [-Measure]
 # -Measure: generate with large join FIFOs, simulate, record the peak occupancy of every
-#           join FIFO into rtl/gen/fifo_sizes.json (peak + margin), then regenerate sized.
+#           join FIFO into src/network/fifo_sizes.json (peak + margin), then regenerate sized.
 param([string]$First = 'enc.3', [string]$Last = '', [switch]$Measure,
       [string]$Image = 'div2k_val_00', [int]$ValidPct = 90, [int]$ReadyPct = 80, [int]$Frames = 1,
       [string]$WorkDir = '')
 $ErrorActionPreference = 'Stop'
 $viv  = $(if ($env:XILINX_VIVADO) { Join-Path $env:XILINX_VIVADO 'bin' } else { 'D:\AMDDesignTools\2025.2\Vivado\bin' })
 $py   = $(if ($env:PYTHON) { $env:PYTHON } else { 'python' })
-$root = Split-Path -Parent $PSScriptRoot
-$export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
+$repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# network library RTL: src/hw/{tx,rx}/rtl/network/rtl (each side holds the modules it uses)
+function Rtl([string]$n) { foreach ($s in 'tx', 'rx') { $p = "$repo\src\hw\$s\rtl\network\rtl\$n.sv"; if (Test-Path $p) { return $p } }; throw "$n.sv not found" }
+$export = (Join-Path $repo 'data\model') -replace '\\', '/'
 if ($Last -eq '') { $Last = $First }
 $work = if ($WorkDir) { $WorkDir } else { Join-Path $PSScriptRoot ('work_top_' + ($First -replace '[.]', '_')) }
 New-Item -ItemType Directory -Force $work | Out-Null
 
 function Run-Sim([string]$tag) {
-    $genArgs = @("$root\gen_rtl_top.py", $First, $Last)
+    $genArgs = @("$repo\src\network\gen_rtl_top.py", $First, $Last)
     if ($tag -eq 'measure') { $genArgs += '--measure' }
     $msg = & $py @genArgs
     if ($LASTEXITCODE -ne 0) { throw 'gen_rtl_top failed' }
     $mod = ($msg -split ':')[0]
-    $info = Get-Content "$root\rtl\gen\$mod.json" -Raw | ConvertFrom-Json
+    $info = Get-Content "$repo\src\network\gen\$mod.json" -Raw | ConvertFrom-Json
     Push-Location $work
     try {
         $src = @('sdp_ram', 'rom', 'rom_banked', 'axis_line_buffer', 'axis_pixel_buffer', 'mul_serial', 'weight_stream',
                  'conv_engine', 'axis_fork', 'axis_tag', 'axis_split', 'centre_tap', 'axis_fifo_packed', 'gdn_unit',
-                 'axis_gdn', 'axis_add', 'axis_sigmoid', 'axis_gate', 'axis_pixel_shuffle', 'qam_tx', 'rx_frame') | ForEach-Object { "$root\rtl\$_.sv" }
+                 'axis_gdn', 'axis_add', 'axis_sigmoid', 'axis_gate', 'axis_pixel_shuffle', 'qam_tx', 'rx_frame') | ForEach-Object { Rtl $_ }
         $vl = @('-sv') + ($src | ForEach-Object { '"' + $_ + '"' }) +
-              @(('"' + "$root\rtl\gen\$mod.sv" + '"'), ('"' + "$root\sim\tb_top.sv" + '"'), '-d', "BLK=$mod")
+              @(('"' + "$repo\src\network\gen\$mod.sv" + '"'), ('"' + "$PSScriptRoot\tb_top.sv" + '"'), '-d', "BLK=$mod")
         Set-Content -Path 'args_xvlog.txt' -Value ($vl -join ' ') -Encoding ascii
         & "$viv\xvlog.bat" -f args_xvlog.txt | Out-File out_xvlog.txt
         if ($LASTEXITCODE -ne 0) { Get-Content out_xvlog.txt | Select-String 'ERROR'; throw 'xvlog failed' }
@@ -62,7 +64,7 @@ if ($Measure) {
     $log = $log[-1]
     $peaks = Select-String -Path $log -Pattern 'FIFO_PEAK \S*u_fifo_([^.\s]+)\S* (\d+) of' | ForEach-Object {
         @{ inst = $_.Matches[0].Groups[1].Value; peak = [int]$_.Matches[0].Groups[2].Value } }
-    & $py "$root\sim\fifo_sizes.py" $First $Last ($peaks | ForEach-Object { "$($_.inst)=$($_.peak)" })
+    & $py "$PSScriptRoot\fifo_sizes.py" $First $Last ($peaks | ForEach-Object { "$($_.inst)=$($_.peak)" })
     if ($LASTEXITCODE -ne 0) { throw 'fifo_sizes failed' }
 }
 Run-Sim 'sized' | Select-Object -First 1

@@ -112,8 +112,10 @@ python train_v2.py --cache data/cache --output-dir runs/deploy --paper-arch --kl
        --plateau --plateau-patience 20 --channels-last --resume runs/deploy/latest.pt
 # 3. 量化导出（W8A12），输出即 data/model/ 中的 manifest.json 与 params/
 python export_fpga.py --checkpoint runs/deploy/best.pt --out-dir runs/fpga_export --wbits 8 --abits 12
-# 4. 生成 RTL：src/network/gen_rtl_init.py（-> rtl_init/）、gen_rtl_top.py、tools_create_vivado_projects.py
+# 4. 生成 RTL：把第 3 步的输出复制到 data/model，再运行 src/network/regen_hw.py（见根目录 README）
 ```
+
+不重新训练时，直接从仓库中的 `data/model/`（部署检查点与它的量化导出）开始：`src/network/regen_hw.py` 重新生成 RTL，`sim/network/make_golden.py` 生成仿真参考数据，只需要 NumPy 与 Pillow。第 3 步需要 CUDA 和第 1 步的校准图像。
 
 `--paper-arch` 选用论文的模块定义（GDN 参数化方式、注意力块内的残差连接、残差块的激活位置）。
 

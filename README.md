@@ -155,7 +155,7 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 | 目录 | 内容 |
 |---|---|
 | `src/hw/tx`、`src/hw/rx` | 两块板的 PL 设计：`rtl/`（`network/` 编解码器、`phy/` OFDM 与 AD9361 接口、`ps/` 寄存器与 DMA 接口、`top/`）、`constr/`、`ip/*.xci`、`bd/`（PS 块设计脚本）、`files.txt`（部署版工程的源文件清单） |
-| `src/network` | 网络 RTL 生成器：从量化参数生成各层顶层与权重初始化文件（`gen_rtl_top.py`、`gen_rtl_init.py`、`memory_plan.py`、`tools_create_vivado_projects.py`），`syn/` 卷积引擎 OOC 综合 |
+| `src/network` | 网络 RTL 生成器：`regen_hw.py` 从量化导出重新生成两端网络 RTL 并写入 `src/hw`（调用 `gen_rtl_init.py`、`gen_rtl_top.py`）；`memory_plan.py` 并行度与存储规划；`fifo_sizes.json` 汇合 FIFO 深度（仿真测得）；`tools_create_vivado_projects.py` 生成网络核的独立 Vivado 工程；`syn/` 卷积引擎 OOC 综合 |
 | `src/model` | DeepJSCC-Q 模型、训练、训练后量化（W8A12）与整数参考模型、导出、OFDM 链路评估（见 `src/model/README.md`） |
 | `src/sw` | 板上软件：`tx/`（取图、编码器驱动、衰减控制）、`rx/`（接收服务、AD9361 初始化与 AGC 看门狗、GUI）、`common/`（UDP 协议、SSCC 包格式）、`systemd/`、`tools/`、`board_setup/`（可选：GUI 的 PyQt5 与 Mali-400 lima 驱动） |
 | `sim` | `network/` 编解码器 RTL 与整数参考模型比特精确比对；`phy/` OFDM 基带；`sscc/` SSCC 基线（见 `sim/README.md`） |
@@ -192,12 +192,27 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 第一个参数选择 TX / RX 板，第二个参数为并行作业数（可省略，默认 8）。
 在 `build/work/<tx|rx>` 新建工程、按 `src/hw/<side>/files.txt` 加入源文件与 IP、用 `bd/` 脚本生成 PS 块设计，
 默认策略综合 / 实现，输出 `build/out/jscc_<side>.{bit,hwh}` 与资源 / 时序 / 功耗报告。工具：Vivado 2025.2。
+综合阶段 `fpga_pin.xdc` 中的 `set_clock_groups` 会报一条 critical warning（两个时钟由 `clk_gen` 在实现阶段才存在），
+属预期，实现后的时序报告中约束生效。若并行的 IP 综合子进程因本机 Vivado 环境失败，用第二个参数 `1` 重跑即可。
 
 ## 从模型重新生成网络 RTL
 
-`src/model/export_fpga.py` 导出量化参数（`data/model/params`、`rtl_init`、`manifest.json`）→ `src/network/gen_rtl_init.py`、
-`gen_rtl_top.py` 生成各层 RTL 与初始化文件 → `tools_create_vivado_projects.py` 把各层的权重初始化文件改为不带目录的唯一文件名
-（Vivado 工程中 `$readmemh` 只写文件名）→ 即 `src/hw/{tx,rx}/rtl/network/` 中的文件。训练与量化流程见 `src/model/README.md`。
+仓库里带有部署模型的检查点（`data/model/checkpoint/best.pt`）和它的 W8A12 量化导出（`data/model/manifest.json`、
+`params/`、`rtl_init/`）。从量化导出重新生成两端的网络 RTL 并覆盖 `src/hw/{tx,rx}/rtl/network/`：
+
+```
+python src/network/regen_hw.py
+git diff --stat
+```
+
+`regen_hw.py` 依次运行 `gen_rtl_init.py`（权重、偏置、重定标参数 → `data/model/rtl_init/`）和 `gen_rtl_top.py`
+（按 manifest 与 `src/network/fifo_sizes.json` 生成编码器顶层 `blk_enc_0_latent_idx` 与解码器顶层 `blk_rx_in_output`），
+再把顶层中的 `$readmemh` 路径改为不带目录的唯一文件名（Vivado 工程中只写文件名），并把引用的 `.mem` 拷到
+`src/hw/<side>/rtl/network/mem/`。所有文件以 LF 换行写出，`git diff --stat` 为空即说明入库的 RTL 由入库的模型生成（Windows 上 `git status` 可能把内容相同、只是时间戳变化的文件列为已修改，以 `git diff` 为准）。
+只需要 Python 3 与 NumPy。
+
+从检查点重新做量化导出（`src/model/export_fpga.py`）需要 CUDA 和校准用的 DIV2K / Kodak 图像，训练与导出流程见
+`src/model/README.md`。RTL 与整数参考模型的逐比特比对见 `sim/README.md`。
 
 ## 实测方法
 

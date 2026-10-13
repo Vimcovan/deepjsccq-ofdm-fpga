@@ -20,3 +20,10 @@ dfx_runtime.txt
 
 # report build outputs (report/tools/build_docx.ps1)
 report/build/
+src/network/gen/
+data/model/golden/
+# Vivado IP output of the SSCC simulation (the Viterbi xci keeps the output path of the original project)
+sim/*.gen/
+src/network/vivado_projects/
+sim/network/work*/
+hs_err_pid*

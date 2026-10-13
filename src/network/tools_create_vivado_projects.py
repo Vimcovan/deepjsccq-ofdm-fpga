@@ -5,9 +5,11 @@ import re
 import shutil
 import argparse
 
-# network workspace root (rtl/, rtl/gen/, runs/fpga_export_w8a12/, syn/); set DEEPJSCCQ_WS, default: current dir
-ROOT = Path(os.environ.get("DEEPJSCCQ_WS", ".")).resolve()
-EXPORT = ROOT / "runs" / "fpga_export_w8a12"
+# stand-alone Vivado projects of the two network cores (out-of-context synthesis); tops from gen_rtl_top.py (gen/),
+# library RTL from src/hw/{tx,rx}/rtl/network/rtl, export from data/model
+ROOT = Path(__file__).resolve().parent
+REPO = ROOT.parents[1]
+EXPORT = REPO / "data" / "model"
 OUT_ROOT = ROOT / "vivado_projects"
 PART = "xczu5eg-sfvc784-1-e"
 
@@ -161,7 +163,9 @@ def main():
     parser.add_argument('--refresh-assets', action='store_true', help='Update copied assets without deleting projects or run results')
     args = parser.parse_args()
     OUT_ROOT.mkdir(parents=True, exist_ok=True)
-    common_rtl = sorted((ROOT / "rtl").glob("*.sv"))
+    lib = {p.name: p for side in ("rx", "tx") for p in (REPO / "src" / "hw" / side / "rtl" / "network" / "rtl").glob("*.sv")
+           if not p.name.startswith("blk_")}
+    common_rtl = sorted(lib.values(), key=lambda p: p.name)
     for key, (project_name, top) in PROJECTS.items():
         out = OUT_ROOT / key
         if out.exists() and not args.refresh_assets:
@@ -174,10 +178,10 @@ def main():
                 shutil.rmtree(legacy_mem)
         for src in common_rtl:
             shutil.copy2(src, out / "rtl" / src.name)
-        source_top = ROOT / "rtl" / "gen" / f"{top}.sv"
+        source_top = ROOT / "gen" / f"{top}.sv"
         top_text, copied, refs = copy_mem_assets(source_top.read_text(encoding="utf-8"), out)
         (out / "rtl" / f"{top}.sv").write_text(top_text, encoding="utf-8")
-        shutil.copy2(ROOT / "rtl" / "gen" / f"{top}.json", out / "rtl" / f"{top}.json")
+        shutil.copy2(ROOT / "gen" / f"{top}.json", out / "rtl" / f"{top}.json")
         shutil.copy2(ROOT / "syn" / "clk_250.xdc", out / "constr" / "clk_250.xdc")
         manifest = {
             "project": project_name,

@@ -7,15 +7,17 @@ param(
     [long]$MaxCycles = 60000000
 )
 $ErrorActionPreference = 'Stop'
-$root = Split-Path -Parent $PSScriptRoot
+$repo = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
+# network library RTL: src/hw/{tx,rx}/rtl/network/rtl (each side holds the modules it uses)
+function Rtl([string]$n) { foreach ($s in 'tx', 'rx') { $p = "$repo\src\hw\$s\rtl\network\rtl\$n.sv"; if (Test-Path $p) { return $p } }; throw "$n.sv not found" }
 $py = $(if ($env:PYTHON) { $env:PYTHON } else { 'python' })
 $questa = $(if ($env:QUESTA_BIN) { $env:QUESTA_BIN } else { 'D:\questasim64_2024.1\win64' })
-$export = (Join-Path $root 'runs\fpga_export_w8a12') -replace '\\', '/'
+$export = (Join-Path $repo 'data\model') -replace '\\', '/'
 if ($Last -eq '') { $Last = $First }
-$msg = & $py (Join-Path $root 'gen_rtl_top.py') $First $Last
+$msg = & $py "$repo\src\network\gen_rtl_top.py" $First $Last
 if ($LASTEXITCODE -ne 0) { throw 'gen_rtl_top failed' }
 $mod = ($msg -split ':')[0]
-$info = Get-Content (Join-Path $root "rtl\gen\$mod.json") -Raw | ConvertFrom-Json
+$info = Get-Content "$repo\src\network\gen\$mod.json" -Raw | ConvertFrom-Json
 $work = Join-Path $PSScriptRoot ('work_questa_' + ($mod -replace '[.]', '_'))
 New-Item -ItemType Directory -Force $work | Out-Null
 Push-Location $work
@@ -25,9 +27,9 @@ try {
              'mul_serial','weight_stream','conv_engine','axis_fork','axis_tag',
              'axis_split','centre_tap','axis_fifo_packed','gdn_unit','axis_gdn',
              'axis_add','axis_sigmoid','axis_gate','axis_pixel_shuffle','qam_tx','rx_frame') |
-             ForEach-Object { Join-Path $root "rtl\$_.sv" }
-    $src += Join-Path $root "rtl\gen\$mod.sv"
-    $src += Join-Path $root 'sim\tb_top.sv'
+             ForEach-Object { Rtl $_ }
+    $src += "$repo\src\network\gen\$mod.sv"
+    $src += "$PSScriptRoot\tb_top.sv"
     & (Join-Path $questa 'vlog.exe') -sv "+define+BLK=$mod" '+define+QUESTA_SIM' @src | Out-File vlog.log
     if ($LASTEXITCODE -ne 0) { Get-Content vlog.log -Tail 40; throw 'vlog failed' }
     $inFile = if ([int]$info.IN_W -eq 24) { "$export/golden/$Image/rx_iq24.mem" } else { "$export/golden/$Image/$($info.in).mem" }
