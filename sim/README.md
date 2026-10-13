@@ -68,13 +68,14 @@ vivado -mode batch -source run_sim.tcl -tclargs "FRAMES:1 SNR:13"
 
 参数：`FRAMES` 帧数，`SNR` 信噪比（dB，省略为无噪声），`HARD:1` 改为硬判决 Viterbi 输入，`DUMP:1` 导出发射符号供 `sscc_ref.py` 比对。
 第一次运行在 `sim/sscc/prj/` 建工程并生成 Viterbi IP；每次运行都会重新编译（`HARD` 通过编译宏切换）。
+Viterbi IP 的 xci 沿用原工程的输出路径，运行后 `sim/` 下会出现 `OFDM_RX_JSCC.gen/`（已在 `.gitignore` 中），属预期。
 
 | 命令参数 | 结果（每帧 12 272 字节） | 记录 |
 |---|---|---|
 | `"FRAMES:1 SNR:16"` | 0 字节错误 | `results.txt` |
 | `"FRAMES:1 SNR:13"` | 7 | `results.txt` |
 | `"FRAMES:1 SNR:11"` | 559 | `results.txt` |
-| `"FRAMES:1 DUMP:1"`，再运行 `python sscc_ref.py` | 0 字节错误；32 768 个符号与 Python 参考逐个相同 | `results2.txt` |
+| `"FRAMES:1 DUMP:1"`，再运行 `python sscc_ref.py`（默认读取仿真目录 `prj/sscc_sim.sim/sim_1/behav/xsim/` 中导出的文件） | 0 字节错误；32 768 个符号与 Python 参考逐个相同 | `results2.txt` |
 | `"FRAMES:1 SNR:13 HARD:1"` | 2100 | `results2.txt` |
 
 上板后的端到端验证（空口 PSNR–SNR、帧率、分段时延）见 `board/tests/` 与 `data/measurements/`。

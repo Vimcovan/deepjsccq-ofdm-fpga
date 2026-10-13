@@ -5,7 +5,7 @@
 #   everything on the external aclk (= clk_100M of the PL MMCM), external aresetn
 # PS (PYNQ-ZU) configuration: src/hw/ps_config_list.txt unless the caller set ps_cfg_file
 if {![info exists ps_cfg_file]} { set ps_cfg_file [file normalize [file join [file dirname [info script]] .. .. ps_config_list.txt]] }
-catch {delete_bd_objs [get_bd_cells *]}
+foreach c [get_bd_cells -quiet *] { delete_bd_objs $c }   ;# empty unless re-run inside an open design
 create_bd_design ps_rx
 
 #---- PS

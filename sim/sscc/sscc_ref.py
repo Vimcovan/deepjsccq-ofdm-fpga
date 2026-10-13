@@ -3,8 +3,9 @@
     -> 802.11a interleaver N_CBPS = 384, s = 3 -> Gray 64-QAM 158 * {+-1..+-7}
 Used to check tx_syms.txt / tx_bytes.txt dumped by tb_sscc (+DUMP=1), and by the PS side (pack / unpack).
 
-    python sscc_ref.py <sim dir>
+    python sscc_ref.py [sim dir]      (default: the xsim run directory of run_sim.tcl, prj/sscc_sim.sim/sim_1/behav/xsim)
 """
+import os
 import sys
 import numpy as np
 
@@ -70,7 +71,7 @@ def tx(payload):
 
 
 if __name__ == "__main__":
-    d = sys.argv[1] if len(sys.argv) > 1 else "."
+    d = sys.argv[1] if len(sys.argv) > 1 else f"{os.path.dirname(os.path.abspath(__file__))}/prj/sscc_sim.sim/sim_1/behav/xsim"
     pay = bytes(int(l, 16) for l in open(f"{d}/tx_bytes.txt"))
     rtl = np.loadtxt(f"{d}/tx_syms.txt", dtype=int)
     ref = tx(pay)
