@@ -8,8 +8,9 @@
 
 <p align="center"><a href="https://www.bilibili.com/video/BV1UDHy6aEp8/"><img src="report/figures/demo_video_thumb.jpg" alt="演示视频" width="720"></a></p>
 
-**演示视频**（4 分钟，点击图片或[此处](https://www.bilibili.com/video/BV1UDHy6aEp8/)在 B 站观看）：AI 代理按脚本控制两块板卡完成全部演示，包括系统介绍、
-SSCC 与 DeepJSCC-Q 的衰减对比实验、物理层与硬件架构讲解；画面为相机实拍与触摸屏、代理显示器的同步录屏。
+**演示视频**（2.5 分钟，点击图片或[此处](https://www.bilibili.com/video/BV1UDHy6aEp8/)在 B 站观看）：作品概述；SSCC 与 DeepJSCC-Q
+逐步加大衰减的实物对比；两个实现难点（把神经网络放进一片 FPGA、长帧的软符号接收）；与已发表 FPGA 实现的对比。演示由 AI 代理按脚本控制两块板卡完成，
+画面为相机实拍与触摸屏、代理显示器的同步录屏。
 
 ---
 
