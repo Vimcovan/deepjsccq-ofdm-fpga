@@ -6,7 +6,7 @@ from pathlib import Path
 root = Path(__file__).resolve().parents[1]
 init = root / 'runs' / 'fpga_export_w8a12' / 'rtl_init'
 engines = sys.argv[1:] or ['enc.0.conv1', 'enc.0.conv2', 'enc.2.conv1', 'enc.3.ab0.c0', 'enc.3.a0.c1',
-                           'dec.2.conv+skip', 'dec.7.conv+skip']
+                           'dec.2.conv_plus_skip', 'dec.7.conv_plus_skip']
 man = json.loads((root / 'runs' / 'fpga_export_w8a12' / 'manifest.json').read_text(encoding='utf-8'))
 plan_eng = {e['name']: e for part in ('encoder', 'decoder') for e in man['memory_plan'][part]['engines']}
 lines = ['set configs {']

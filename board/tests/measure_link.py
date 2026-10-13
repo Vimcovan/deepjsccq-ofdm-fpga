@@ -376,7 +376,7 @@ def save_img(w, mode, att, ps):
     os.makedirs(args.save_img, exist_ok=True)
     m = float(np.mean([p for p, _ in w.imgs]))
     p, img = min(w.imgs, key=lambda x: abs(x[0] - m))
-    fn = f"{mode}_{att:05.2f}dB_p{ps}.png"
+    fn = f"{mode}_{att:05.2f}db_p{ps}.png"
     cv2.imwrite(os.path.join(args.save_img, fn), np.ascontiguousarray(img[:, :, ::-1]))
     if txbuf and not os.path.exists(os.path.join(args.save_img, "tx_reference.png")):
         cv2.imwrite(os.path.join(args.save_img, "tx_reference.png"), np.ascontiguousarray(txbuf[-1][1][:, :, ::-1]))
@@ -423,7 +423,7 @@ try:
                 if args.save_const and win.const:
                     import os
                     os.makedirs(args.save_const, exist_ok=True)
-                    r["const"] = f"{mode}_{att:05.2f}dB_p{ps}.npz"
+                    r["const"] = f"{mode}_{att:05.2f}db_p{ps}.npz"
                     np.savez_compressed(os.path.join(args.save_const, r["const"]),
                                         start_sym=np.array([s for s, _ in win.const]),
                                         cpe=np.stack([c for _, c in win.const]))

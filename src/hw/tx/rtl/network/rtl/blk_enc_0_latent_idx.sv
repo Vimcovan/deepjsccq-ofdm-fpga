@@ -597,7 +597,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.0.conv1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(23), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.0.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.0.conv1__pre.mem"), .M_FILE("rtl_init__enc.0.conv1__M.mem"), .SH_FILE("rtl_init__enc.0.conv1__sh.mem")) u_enc_0_conv1 (
+        .BIAS_FILE("rtl_init__enc.0.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.0.conv1__pre.mem"), .M_FILE("rtl_init__enc.0.conv1__m.mem"), .SH_FILE("rtl_init__enc.0.conv1__sh.mem")) u_enc_0_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_0_conv1__eng_enc_0_conv1_d), .s_in_tvalid(_win_enc_0_conv1__eng_enc_0_conv1_v), .s_in_tready(_win_enc_0_conv1__eng_enc_0_conv1_r), .s_in_tlast(_win_enc_0_conv1__eng_enc_0_conv1_l), .s_in_tuser(_win_enc_0_conv1__eng_enc_0_conv1_u),
         .m_out_tdata(enc_0_conv1_d), .m_out_tvalid(enc_0_conv1_v), .m_out_tready(enc_0_conv1_r), .m_out_tlast(enc_0_conv1_l), .m_out_tuser(enc_0_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(128), .H(128), .K(3), .STRIDE(1), .PAD(1), .ROWS(4),
@@ -608,7 +608,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.0.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(26), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.0.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.0.conv2__pre.mem"), .M_FILE("rtl_init__enc.0.conv2__M.mem"), .SH_FILE("rtl_init__enc.0.conv2__sh.mem")) u_enc_0_conv2 (
+        .BIAS_FILE("rtl_init__enc.0.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.0.conv2__pre.mem"), .M_FILE("rtl_init__enc.0.conv2__m.mem"), .SH_FILE("rtl_init__enc.0.conv2__sh.mem")) u_enc_0_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_0_conv2__eng_enc_0_conv2_d), .s_in_tvalid(_win_enc_0_conv2__eng_enc_0_conv2_v), .s_in_tready(_win_enc_0_conv2__eng_enc_0_conv2_r), .s_in_tlast(_win_enc_0_conv2__eng_enc_0_conv2_l), .s_in_tuser(_win_enc_0_conv2__eng_enc_0_conv2_u),
         .m_out_tdata(enc_0_conv2_d), .m_out_tvalid(enc_0_conv2_v), .m_out_tready(enc_0_conv2_r), .m_out_tlast(enc_0_conv2_l), .m_out_tuser(enc_0_conv2_u));
     axis_gdn #(.C(32), .LANES(3), .INVERSE(0), .X2_SHIFT(0), .LSH(14), .F(32),
@@ -623,7 +623,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.0.skip__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.0.skip__bias.mem"), .PRE_FILE("rtl_init__enc.0.skip__pre.mem"), .M_FILE("rtl_init__enc.0.skip__M.mem"), .SH_FILE("rtl_init__enc.0.skip__sh.mem")) u_enc_0_skip (
+        .BIAS_FILE("rtl_init__enc.0.skip__bias.mem"), .PRE_FILE("rtl_init__enc.0.skip__pre.mem"), .M_FILE("rtl_init__enc.0.skip__m.mem"), .SH_FILE("rtl_init__enc.0.skip__sh.mem")) u_enc_0_skip (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_0_skip__eng_enc_0_skip_d), .s_in_tvalid(_win_enc_0_skip__eng_enc_0_skip_v), .s_in_tready(_win_enc_0_skip__eng_enc_0_skip_r), .s_in_tlast(_win_enc_0_skip__eng_enc_0_skip_l), .s_in_tuser(_win_enc_0_skip__eng_enc_0_skip_u),
         .m_out_tdata(enc_0_skip_d), .m_out_tvalid(enc_0_skip_v), .m_out_tready(enc_0_skip_r), .m_out_tlast(enc_0_skip_l), .m_out_tuser(enc_0_skip_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(2048), .RAM_STYLE("block")) u_fifo_enc_0_out_b (
@@ -642,7 +642,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.1.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(25), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.1.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.1.conv1__pre.mem"), .M_FILE("rtl_init__enc.1.conv1__M.mem"), .SH_FILE("rtl_init__enc.1.conv1__sh.mem")) u_enc_1_conv1 (
+        .BIAS_FILE("rtl_init__enc.1.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.1.conv1__pre.mem"), .M_FILE("rtl_init__enc.1.conv1__m.mem"), .SH_FILE("rtl_init__enc.1.conv1__sh.mem")) u_enc_1_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_1_conv1__eng_enc_1_conv1_d), .s_in_tvalid(_win_enc_1_conv1__eng_enc_1_conv1_v), .s_in_tready(_win_enc_1_conv1__eng_enc_1_conv1_r), .s_in_tlast(_win_enc_1_conv1__eng_enc_1_conv1_l), .s_in_tuser(_win_enc_1_conv1__eng_enc_1_conv1_u),
         .m_out_tdata(enc_1_conv1_d), .m_out_tvalid(enc_1_conv1_v), .m_out_tready(enc_1_conv1_r), .m_out_tlast(enc_1_conv1_l), .m_out_tuser(enc_1_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(128), .H(128), .K(3), .STRIDE(1), .PAD(1), .ROWS(4),
@@ -653,7 +653,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.1.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(25), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.1.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.1.conv2__pre.mem"), .M_FILE("rtl_init__enc.1.conv2__M.mem"), .SH_FILE("rtl_init__enc.1.conv2__sh.mem")) u_enc_1_conv2 (
+        .BIAS_FILE("rtl_init__enc.1.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.1.conv2__pre.mem"), .M_FILE("rtl_init__enc.1.conv2__m.mem"), .SH_FILE("rtl_init__enc.1.conv2__sh.mem")) u_enc_1_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_1_conv2__eng_enc_1_conv2_d), .s_in_tvalid(_win_enc_1_conv2__eng_enc_1_conv2_v), .s_in_tready(_win_enc_1_conv2__eng_enc_1_conv2_r), .s_in_tlast(_win_enc_1_conv2__eng_enc_1_conv2_l), .s_in_tuser(_win_enc_1_conv2__eng_enc_1_conv2_u),
         .m_out_tdata(enc_1_conv2_d), .m_out_tvalid(enc_1_conv2_v), .m_out_tready(enc_1_conv2_r), .m_out_tlast(enc_1_conv2_l), .m_out_tuser(enc_1_conv2_u));
     axis_fifo_packed #(.DATA_W(14), .PACK(1), .DEPTH_W(128), .RAM_STYLE("distributed")) u_fifo_enc_1_out_a (
@@ -675,7 +675,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.2.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(26), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.2.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.2.conv1__pre.mem"), .M_FILE("rtl_init__enc.2.conv1__M.mem"), .SH_FILE("rtl_init__enc.2.conv1__sh.mem")) u_enc_2_conv1 (
+        .BIAS_FILE("rtl_init__enc.2.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.2.conv1__pre.mem"), .M_FILE("rtl_init__enc.2.conv1__m.mem"), .SH_FILE("rtl_init__enc.2.conv1__sh.mem")) u_enc_2_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_2_conv1__eng_enc_2_conv1_d), .s_in_tvalid(_win_enc_2_conv1__eng_enc_2_conv1_v), .s_in_tready(_win_enc_2_conv1__eng_enc_2_conv1_r), .s_in_tlast(_win_enc_2_conv1__eng_enc_2_conv1_l), .s_in_tuser(_win_enc_2_conv1__eng_enc_2_conv1_u),
         .m_out_tdata(enc_2_conv1_d), .m_out_tvalid(enc_2_conv1_v), .m_out_tready(enc_2_conv1_r), .m_out_tlast(enc_2_conv1_l), .m_out_tuser(enc_2_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -686,7 +686,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.2.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.2.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.2.conv2__pre.mem"), .M_FILE("rtl_init__enc.2.conv2__M.mem"), .SH_FILE("rtl_init__enc.2.conv2__sh.mem")) u_enc_2_conv2 (
+        .BIAS_FILE("rtl_init__enc.2.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.2.conv2__pre.mem"), .M_FILE("rtl_init__enc.2.conv2__m.mem"), .SH_FILE("rtl_init__enc.2.conv2__sh.mem")) u_enc_2_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_2_conv2__eng_enc_2_conv2_d), .s_in_tvalid(_win_enc_2_conv2__eng_enc_2_conv2_v), .s_in_tready(_win_enc_2_conv2__eng_enc_2_conv2_r), .s_in_tlast(_win_enc_2_conv2__eng_enc_2_conv2_l), .s_in_tuser(_win_enc_2_conv2__eng_enc_2_conv2_u),
         .m_out_tdata(enc_2_conv2_d), .m_out_tvalid(enc_2_conv2_v), .m_out_tready(enc_2_conv2_r), .m_out_tlast(enc_2_conv2_l), .m_out_tuser(enc_2_conv2_u));
     axis_gdn #(.C(32), .LANES(1), .INVERSE(0), .X2_SHIFT(0), .LSH(14), .F(32),
@@ -701,7 +701,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.2.skip__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.2.skip__bias.mem"), .PRE_FILE("rtl_init__enc.2.skip__pre.mem"), .M_FILE("rtl_init__enc.2.skip__M.mem"), .SH_FILE("rtl_init__enc.2.skip__sh.mem")) u_enc_2_skip (
+        .BIAS_FILE("rtl_init__enc.2.skip__bias.mem"), .PRE_FILE("rtl_init__enc.2.skip__pre.mem"), .M_FILE("rtl_init__enc.2.skip__m.mem"), .SH_FILE("rtl_init__enc.2.skip__sh.mem")) u_enc_2_skip (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_2_skip__eng_enc_2_skip_d), .s_in_tvalid(_win_enc_2_skip__eng_enc_2_skip_v), .s_in_tready(_win_enc_2_skip__eng_enc_2_skip_r), .s_in_tlast(_win_enc_2_skip__eng_enc_2_skip_l), .s_in_tuser(_win_enc_2_skip__eng_enc_2_skip_u),
         .m_out_tdata(enc_2_skip_d), .m_out_tvalid(enc_2_skip_v), .m_out_tready(enc_2_skip_r), .m_out_tlast(enc_2_skip_l), .m_out_tuser(enc_2_skip_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_2_out_b (
@@ -719,7 +719,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.ab0.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.ab0.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.ab0.c0__pre.mem"), .M_FILE("rtl_init__enc.3.ab0.c0__M.mem"), .SH_FILE("rtl_init__enc.3.ab0.c0__sh.mem")) u_enc_3_ab0_c0 (
+        .BIAS_FILE("rtl_init__enc.3.ab0.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.ab0.c0__pre.mem"), .M_FILE("rtl_init__enc.3.ab0.c0__m.mem"), .SH_FILE("rtl_init__enc.3.ab0.c0__sh.mem")) u_enc_3_ab0_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_ab0_c0__eng_enc_3_ab0_c0_d), .s_in_tvalid(_win_enc_3_ab0_c0__eng_enc_3_ab0_c0_v), .s_in_tready(_win_enc_3_ab0_c0__eng_enc_3_ab0_c0_r), .s_in_tlast(_win_enc_3_ab0_c0__eng_enc_3_ab0_c0_l), .s_in_tuser(_win_enc_3_ab0_c0__eng_enc_3_ab0_c0_u),
         .m_out_tdata(o_enc_3_ab0_c0_d), .m_out_tvalid(o_enc_3_ab0_c0_v), .m_out_tready(o_enc_3_ab0_c0_r), .m_out_tlast(o_enc_3_ab0_c0_l), .m_out_tuser(o_enc_3_ab0_c0_u));
     axis_split #(.DATA_W(12), .C(32), .SPLIT(16), .NPIX(4096)) u_split_enc_3_ab0_c0 (
@@ -734,7 +734,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a0.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.a0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a0.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a0.c1__M.mem"), .SH_FILE("rtl_init__enc.3.a0.c1__sh.mem")) u_enc_3_a0_c1 (
+        .BIAS_FILE("rtl_init__enc.3.a0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a0.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a0.c1__m.mem"), .SH_FILE("rtl_init__enc.3.a0.c1__sh.mem")) u_enc_3_a0_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a0_c1__eng_enc_3_a0_c1_d), .s_in_tvalid(_win_enc_3_a0_c1__eng_enc_3_a0_c1_v), .s_in_tready(_win_enc_3_a0_c1__eng_enc_3_a0_c1_r), .s_in_tlast(_win_enc_3_a0_c1__eng_enc_3_a0_c1_l), .s_in_tuser(_win_enc_3_a0_c1__eng_enc_3_a0_c1_u),
         .m_out_tdata(enc_3_a0_c1_d), .m_out_tvalid(enc_3_a0_c1_v), .m_out_tready(enc_3_a0_c1_r), .m_out_tlast(enc_3_a0_c1_l), .m_out_tuser(enc_3_a0_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_a0_c2 (
@@ -744,7 +744,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a0.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.a0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a0.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a0.c2__M.mem"), .SH_FILE("rtl_init__enc.3.a0.c2__sh.mem")) u_enc_3_a0_c2 (
+        .BIAS_FILE("rtl_init__enc.3.a0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a0.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a0.c2__m.mem"), .SH_FILE("rtl_init__enc.3.a0.c2__sh.mem")) u_enc_3_a0_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a0_c2__eng_enc_3_a0_c2_d), .s_in_tvalid(_win_enc_3_a0_c2__eng_enc_3_a0_c2_v), .s_in_tready(_win_enc_3_a0_c2__eng_enc_3_a0_c2_r), .s_in_tlast(_win_enc_3_a0_c2__eng_enc_3_a0_c2_l), .s_in_tuser(_win_enc_3_a0_c2__eng_enc_3_a0_c2_u),
         .m_out_tdata(enc_3_a0_c2_d), .m_out_tvalid(enc_3_a0_c2_v), .m_out_tready(enc_3_a0_c2_r), .m_out_tlast(enc_3_a0_c2_l), .m_out_tuser(enc_3_a0_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_a0_out_b (
@@ -762,7 +762,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a1.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.a1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c0__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c0__M.mem"), .SH_FILE("rtl_init__enc.3.a1.c0__sh.mem")) u_enc_3_a1_c0 (
+        .BIAS_FILE("rtl_init__enc.3.a1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c0__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c0__m.mem"), .SH_FILE("rtl_init__enc.3.a1.c0__sh.mem")) u_enc_3_a1_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a1_c0__eng_enc_3_a1_c0_d), .s_in_tvalid(_win_enc_3_a1_c0__eng_enc_3_a1_c0_v), .s_in_tready(_win_enc_3_a1_c0__eng_enc_3_a1_c0_r), .s_in_tlast(_win_enc_3_a1_c0__eng_enc_3_a1_c0_l), .s_in_tuser(_win_enc_3_a1_c0__eng_enc_3_a1_c0_u),
         .m_out_tdata(enc_3_a1_c0_d), .m_out_tvalid(enc_3_a1_c0_v), .m_out_tready(enc_3_a1_c0_r), .m_out_tlast(enc_3_a1_c0_l), .m_out_tuser(enc_3_a1_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(16), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -773,7 +773,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a1.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.a1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c1__M.mem"), .SH_FILE("rtl_init__enc.3.a1.c1__sh.mem")) u_enc_3_a1_c1 (
+        .BIAS_FILE("rtl_init__enc.3.a1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c1__m.mem"), .SH_FILE("rtl_init__enc.3.a1.c1__sh.mem")) u_enc_3_a1_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a1_c1__eng_enc_3_a1_c1_d), .s_in_tvalid(_win_enc_3_a1_c1__eng_enc_3_a1_c1_v), .s_in_tready(_win_enc_3_a1_c1__eng_enc_3_a1_c1_r), .s_in_tlast(_win_enc_3_a1_c1__eng_enc_3_a1_c1_l), .s_in_tuser(_win_enc_3_a1_c1__eng_enc_3_a1_c1_u),
         .m_out_tdata(enc_3_a1_c1_d), .m_out_tvalid(enc_3_a1_c1_v), .m_out_tready(enc_3_a1_c1_r), .m_out_tlast(enc_3_a1_c1_l), .m_out_tuser(enc_3_a1_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_a1_c2 (
@@ -783,7 +783,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a1.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.a1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c2__M.mem"), .SH_FILE("rtl_init__enc.3.a1.c2__sh.mem")) u_enc_3_a1_c2 (
+        .BIAS_FILE("rtl_init__enc.3.a1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a1.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a1.c2__m.mem"), .SH_FILE("rtl_init__enc.3.a1.c2__sh.mem")) u_enc_3_a1_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a1_c2__eng_enc_3_a1_c2_d), .s_in_tvalid(_win_enc_3_a1_c2__eng_enc_3_a1_c2_v), .s_in_tready(_win_enc_3_a1_c2__eng_enc_3_a1_c2_r), .s_in_tlast(_win_enc_3_a1_c2__eng_enc_3_a1_c2_l), .s_in_tuser(_win_enc_3_a1_c2__eng_enc_3_a1_c2_u),
         .m_out_tdata(enc_3_a1_c2_d), .m_out_tvalid(enc_3_a1_c2_v), .m_out_tready(enc_3_a1_c2_r), .m_out_tlast(enc_3_a1_c2_l), .m_out_tuser(enc_3_a1_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_a1_out_b (
@@ -801,7 +801,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a2.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(22), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.a2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c0__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c0__M.mem"), .SH_FILE("rtl_init__enc.3.a2.c0__sh.mem")) u_enc_3_a2_c0 (
+        .BIAS_FILE("rtl_init__enc.3.a2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c0__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c0__m.mem"), .SH_FILE("rtl_init__enc.3.a2.c0__sh.mem")) u_enc_3_a2_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a2_c0__eng_enc_3_a2_c0_d), .s_in_tvalid(_win_enc_3_a2_c0__eng_enc_3_a2_c0_v), .s_in_tready(_win_enc_3_a2_c0__eng_enc_3_a2_c0_r), .s_in_tlast(_win_enc_3_a2_c0__eng_enc_3_a2_c0_l), .s_in_tuser(_win_enc_3_a2_c0__eng_enc_3_a2_c0_u),
         .m_out_tdata(enc_3_a2_c0_d), .m_out_tvalid(enc_3_a2_c0_v), .m_out_tready(enc_3_a2_c0_r), .m_out_tlast(enc_3_a2_c0_l), .m_out_tuser(enc_3_a2_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(16), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -812,7 +812,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a2.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.a2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c1__M.mem"), .SH_FILE("rtl_init__enc.3.a2.c1__sh.mem")) u_enc_3_a2_c1 (
+        .BIAS_FILE("rtl_init__enc.3.a2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c1__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c1__m.mem"), .SH_FILE("rtl_init__enc.3.a2.c1__sh.mem")) u_enc_3_a2_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a2_c1__eng_enc_3_a2_c1_d), .s_in_tvalid(_win_enc_3_a2_c1__eng_enc_3_a2_c1_v), .s_in_tready(_win_enc_3_a2_c1__eng_enc_3_a2_c1_r), .s_in_tlast(_win_enc_3_a2_c1__eng_enc_3_a2_c1_l), .s_in_tuser(_win_enc_3_a2_c1__eng_enc_3_a2_c1_u),
         .m_out_tdata(enc_3_a2_c1_d), .m_out_tvalid(enc_3_a2_c1_v), .m_out_tready(enc_3_a2_c1_r), .m_out_tlast(enc_3_a2_c1_l), .m_out_tuser(enc_3_a2_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_a2_c2 (
@@ -822,7 +822,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.a2.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.a2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c2__M.mem"), .SH_FILE("rtl_init__enc.3.a2.c2__sh.mem")) u_enc_3_a2_c2 (
+        .BIAS_FILE("rtl_init__enc.3.a2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.a2.c2__pre.mem"), .M_FILE("rtl_init__enc.3.a2.c2__m.mem"), .SH_FILE("rtl_init__enc.3.a2.c2__sh.mem")) u_enc_3_a2_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_a2_c2__eng_enc_3_a2_c2_d), .s_in_tvalid(_win_enc_3_a2_c2__eng_enc_3_a2_c2_v), .s_in_tready(_win_enc_3_a2_c2__eng_enc_3_a2_c2_r), .s_in_tlast(_win_enc_3_a2_c2__eng_enc_3_a2_c2_l), .s_in_tuser(_win_enc_3_a2_c2__eng_enc_3_a2_c2_u),
         .m_out_tdata(enc_3_a2_c2_d), .m_out_tvalid(enc_3_a2_c2_v), .m_out_tready(enc_3_a2_c2_r), .m_out_tlast(enc_3_a2_c2_l), .m_out_tuser(enc_3_a2_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_a2_out_b (
@@ -841,7 +841,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b0.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b0.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b0.c1__M.mem"), .SH_FILE("rtl_init__enc.3.b0.c1__sh.mem")) u_enc_3_b0_c1 (
+        .BIAS_FILE("rtl_init__enc.3.b0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b0.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b0.c1__m.mem"), .SH_FILE("rtl_init__enc.3.b0.c1__sh.mem")) u_enc_3_b0_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b0_c1__eng_enc_3_b0_c1_d), .s_in_tvalid(_win_enc_3_b0_c1__eng_enc_3_b0_c1_v), .s_in_tready(_win_enc_3_b0_c1__eng_enc_3_b0_c1_r), .s_in_tlast(_win_enc_3_b0_c1__eng_enc_3_b0_c1_l), .s_in_tuser(_win_enc_3_b0_c1__eng_enc_3_b0_c1_u),
         .m_out_tdata(enc_3_b0_c1_d), .m_out_tvalid(enc_3_b0_c1_v), .m_out_tready(enc_3_b0_c1_r), .m_out_tlast(enc_3_b0_c1_l), .m_out_tuser(enc_3_b0_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_b0_c2 (
@@ -851,7 +851,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b0.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b0.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b0.c2__M.mem"), .SH_FILE("rtl_init__enc.3.b0.c2__sh.mem")) u_enc_3_b0_c2 (
+        .BIAS_FILE("rtl_init__enc.3.b0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b0.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b0.c2__m.mem"), .SH_FILE("rtl_init__enc.3.b0.c2__sh.mem")) u_enc_3_b0_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b0_c2__eng_enc_3_b0_c2_d), .s_in_tvalid(_win_enc_3_b0_c2__eng_enc_3_b0_c2_v), .s_in_tready(_win_enc_3_b0_c2__eng_enc_3_b0_c2_r), .s_in_tlast(_win_enc_3_b0_c2__eng_enc_3_b0_c2_l), .s_in_tuser(_win_enc_3_b0_c2__eng_enc_3_b0_c2_u),
         .m_out_tdata(enc_3_b0_c2_d), .m_out_tvalid(enc_3_b0_c2_v), .m_out_tready(enc_3_b0_c2_r), .m_out_tlast(enc_3_b0_c2_l), .m_out_tuser(enc_3_b0_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_b0_out_b (
@@ -869,7 +869,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b1.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.b1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c0__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c0__M.mem"), .SH_FILE("rtl_init__enc.3.b1.c0__sh.mem")) u_enc_3_b1_c0 (
+        .BIAS_FILE("rtl_init__enc.3.b1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c0__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c0__m.mem"), .SH_FILE("rtl_init__enc.3.b1.c0__sh.mem")) u_enc_3_b1_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b1_c0__eng_enc_3_b1_c0_d), .s_in_tvalid(_win_enc_3_b1_c0__eng_enc_3_b1_c0_v), .s_in_tready(_win_enc_3_b1_c0__eng_enc_3_b1_c0_r), .s_in_tlast(_win_enc_3_b1_c0__eng_enc_3_b1_c0_l), .s_in_tuser(_win_enc_3_b1_c0__eng_enc_3_b1_c0_u),
         .m_out_tdata(enc_3_b1_c0_d), .m_out_tvalid(enc_3_b1_c0_v), .m_out_tready(enc_3_b1_c0_r), .m_out_tlast(enc_3_b1_c0_l), .m_out_tuser(enc_3_b1_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(16), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -880,7 +880,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b1.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(26), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c1__M.mem"), .SH_FILE("rtl_init__enc.3.b1.c1__sh.mem")) u_enc_3_b1_c1 (
+        .BIAS_FILE("rtl_init__enc.3.b1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c1__m.mem"), .SH_FILE("rtl_init__enc.3.b1.c1__sh.mem")) u_enc_3_b1_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b1_c1__eng_enc_3_b1_c1_d), .s_in_tvalid(_win_enc_3_b1_c1__eng_enc_3_b1_c1_v), .s_in_tready(_win_enc_3_b1_c1__eng_enc_3_b1_c1_r), .s_in_tlast(_win_enc_3_b1_c1__eng_enc_3_b1_c1_l), .s_in_tuser(_win_enc_3_b1_c1__eng_enc_3_b1_c1_u),
         .m_out_tdata(enc_3_b1_c1_d), .m_out_tvalid(enc_3_b1_c1_v), .m_out_tready(enc_3_b1_c1_r), .m_out_tlast(enc_3_b1_c1_l), .m_out_tuser(enc_3_b1_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_b1_c2 (
@@ -890,7 +890,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b1.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.b1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c2__M.mem"), .SH_FILE("rtl_init__enc.3.b1.c2__sh.mem")) u_enc_3_b1_c2 (
+        .BIAS_FILE("rtl_init__enc.3.b1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b1.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b1.c2__m.mem"), .SH_FILE("rtl_init__enc.3.b1.c2__sh.mem")) u_enc_3_b1_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b1_c2__eng_enc_3_b1_c2_d), .s_in_tvalid(_win_enc_3_b1_c2__eng_enc_3_b1_c2_v), .s_in_tready(_win_enc_3_b1_c2__eng_enc_3_b1_c2_r), .s_in_tlast(_win_enc_3_b1_c2__eng_enc_3_b1_c2_l), .s_in_tuser(_win_enc_3_b1_c2__eng_enc_3_b1_c2_u),
         .m_out_tdata(enc_3_b1_c2_d), .m_out_tvalid(enc_3_b1_c2_v), .m_out_tready(enc_3_b1_c2_r), .m_out_tlast(enc_3_b1_c2_l), .m_out_tuser(enc_3_b1_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_b1_out_b (
@@ -908,7 +908,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b2.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c0__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c0__M.mem"), .SH_FILE("rtl_init__enc.3.b2.c0__sh.mem")) u_enc_3_b2_c0 (
+        .BIAS_FILE("rtl_init__enc.3.b2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c0__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c0__m.mem"), .SH_FILE("rtl_init__enc.3.b2.c0__sh.mem")) u_enc_3_b2_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b2_c0__eng_enc_3_b2_c0_d), .s_in_tvalid(_win_enc_3_b2_c0__eng_enc_3_b2_c0_v), .s_in_tready(_win_enc_3_b2_c0__eng_enc_3_b2_c0_r), .s_in_tlast(_win_enc_3_b2_c0__eng_enc_3_b2_c0_l), .s_in_tuser(_win_enc_3_b2_c0__eng_enc_3_b2_c0_u),
         .m_out_tdata(enc_3_b2_c0_d), .m_out_tvalid(enc_3_b2_c0_v), .m_out_tready(enc_3_b2_c0_r), .m_out_tlast(enc_3_b2_c0_l), .m_out_tuser(enc_3_b2_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(16), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -919,7 +919,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b2.c1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(26), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c1__M.mem"), .SH_FILE("rtl_init__enc.3.b2.c1__sh.mem")) u_enc_3_b2_c1 (
+        .BIAS_FILE("rtl_init__enc.3.b2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c1__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c1__m.mem"), .SH_FILE("rtl_init__enc.3.b2.c1__sh.mem")) u_enc_3_b2_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b2_c1__eng_enc_3_b2_c1_d), .s_in_tvalid(_win_enc_3_b2_c1__eng_enc_3_b2_c1_v), .s_in_tready(_win_enc_3_b2_c1__eng_enc_3_b2_c1_r), .s_in_tlast(_win_enc_3_b2_c1__eng_enc_3_b2_c1_l), .s_in_tuser(_win_enc_3_b2_c1__eng_enc_3_b2_c1_u),
         .m_out_tdata(enc_3_b2_c1_d), .m_out_tvalid(enc_3_b2_c1_v), .m_out_tready(enc_3_b2_c1_r), .m_out_tlast(enc_3_b2_c1_l), .m_out_tuser(enc_3_b2_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(16), .NPIX(4096), .GROUPS(32)) u_pb_enc_3_b2_c2 (
@@ -929,7 +929,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b2.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.3.b2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c2__M.mem"), .SH_FILE("rtl_init__enc.3.b2.c2__sh.mem")) u_enc_3_b2_c2 (
+        .BIAS_FILE("rtl_init__enc.3.b2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.3.b2.c2__pre.mem"), .M_FILE("rtl_init__enc.3.b2.c2__m.mem"), .SH_FILE("rtl_init__enc.3.b2.c2__sh.mem")) u_enc_3_b2_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b2_c2__eng_enc_3_b2_c2_d), .s_in_tvalid(_win_enc_3_b2_c2__eng_enc_3_b2_c2_v), .s_in_tready(_win_enc_3_b2_c2__eng_enc_3_b2_c2_r), .s_in_tlast(_win_enc_3_b2_c2__eng_enc_3_b2_c2_l), .s_in_tuser(_win_enc_3_b2_c2__eng_enc_3_b2_c2_u),
         .m_out_tdata(enc_3_b2_c2_d), .m_out_tvalid(enc_3_b2_c2_v), .m_out_tready(enc_3_b2_c2_r), .m_out_tlast(enc_3_b2_c2_l), .m_out_tuser(enc_3_b2_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_3_b2_out_b (
@@ -947,7 +947,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.3.b3__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.3.b3__bias.mem"), .PRE_FILE("rtl_init__enc.3.b3__pre.mem"), .M_FILE("rtl_init__enc.3.b3__M.mem"), .SH_FILE("rtl_init__enc.3.b3__sh.mem")) u_enc_3_b3 (
+        .BIAS_FILE("rtl_init__enc.3.b3__bias.mem"), .PRE_FILE("rtl_init__enc.3.b3__pre.mem"), .M_FILE("rtl_init__enc.3.b3__m.mem"), .SH_FILE("rtl_init__enc.3.b3__sh.mem")) u_enc_3_b3 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_3_b3__eng_enc_3_b3_d), .s_in_tvalid(_win_enc_3_b3__eng_enc_3_b3_v), .s_in_tready(_win_enc_3_b3__eng_enc_3_b3_r), .s_in_tlast(_win_enc_3_b3__eng_enc_3_b3_l), .s_in_tuser(_win_enc_3_b3__eng_enc_3_b3_u),
         .m_out_tdata(enc_3_b3_d), .m_out_tvalid(enc_3_b3_v), .m_out_tready(enc_3_b3_r), .m_out_tlast(enc_3_b3_l), .m_out_tuser(enc_3_b3_u));
     axis_sigmoid #(.X_W(12), .M312(97053), .SH312(11), .NSEG(32), .OB(10),
@@ -975,7 +975,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.4.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.4.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.4.conv1__pre.mem"), .M_FILE("rtl_init__enc.4.conv1__M.mem"), .SH_FILE("rtl_init__enc.4.conv1__sh.mem")) u_enc_4_conv1 (
+        .BIAS_FILE("rtl_init__enc.4.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.4.conv1__pre.mem"), .M_FILE("rtl_init__enc.4.conv1__m.mem"), .SH_FILE("rtl_init__enc.4.conv1__sh.mem")) u_enc_4_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_4_conv1__eng_enc_4_conv1_d), .s_in_tvalid(_win_enc_4_conv1__eng_enc_4_conv1_v), .s_in_tready(_win_enc_4_conv1__eng_enc_4_conv1_r), .s_in_tlast(_win_enc_4_conv1__eng_enc_4_conv1_l), .s_in_tuser(_win_enc_4_conv1__eng_enc_4_conv1_u),
         .m_out_tdata(enc_4_conv1_d), .m_out_tvalid(enc_4_conv1_v), .m_out_tready(enc_4_conv1_r), .m_out_tlast(enc_4_conv1_l), .m_out_tuser(enc_4_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -986,7 +986,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.4.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.4.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.4.conv2__pre.mem"), .M_FILE("rtl_init__enc.4.conv2__M.mem"), .SH_FILE("rtl_init__enc.4.conv2__sh.mem")) u_enc_4_conv2 (
+        .BIAS_FILE("rtl_init__enc.4.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.4.conv2__pre.mem"), .M_FILE("rtl_init__enc.4.conv2__m.mem"), .SH_FILE("rtl_init__enc.4.conv2__sh.mem")) u_enc_4_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_4_conv2__eng_enc_4_conv2_d), .s_in_tvalid(_win_enc_4_conv2__eng_enc_4_conv2_v), .s_in_tready(_win_enc_4_conv2__eng_enc_4_conv2_r), .s_in_tlast(_win_enc_4_conv2__eng_enc_4_conv2_l), .s_in_tuser(_win_enc_4_conv2__eng_enc_4_conv2_u),
         .m_out_tdata(enc_4_conv2_d), .m_out_tvalid(enc_4_conv2_v), .m_out_tready(enc_4_conv2_r), .m_out_tlast(enc_4_conv2_l), .m_out_tuser(enc_4_conv2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(2560), .RAM_STYLE("block")) u_fifo_enc_4_out_b (
@@ -1005,7 +1005,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.5.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.5.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.5.conv1__pre.mem"), .M_FILE("rtl_init__enc.5.conv1__M.mem"), .SH_FILE("rtl_init__enc.5.conv1__sh.mem")) u_enc_5_conv1 (
+        .BIAS_FILE("rtl_init__enc.5.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.5.conv1__pre.mem"), .M_FILE("rtl_init__enc.5.conv1__m.mem"), .SH_FILE("rtl_init__enc.5.conv1__sh.mem")) u_enc_5_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_5_conv1__eng_enc_5_conv1_d), .s_in_tvalid(_win_enc_5_conv1__eng_enc_5_conv1_v), .s_in_tready(_win_enc_5_conv1__eng_enc_5_conv1_r), .s_in_tlast(_win_enc_5_conv1__eng_enc_5_conv1_l), .s_in_tuser(_win_enc_5_conv1__eng_enc_5_conv1_u),
         .m_out_tdata(enc_5_conv1_d), .m_out_tvalid(enc_5_conv1_v), .m_out_tready(enc_5_conv1_r), .m_out_tlast(enc_5_conv1_l), .m_out_tuser(enc_5_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1016,7 +1016,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.5.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.5.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.5.conv2__pre.mem"), .M_FILE("rtl_init__enc.5.conv2__M.mem"), .SH_FILE("rtl_init__enc.5.conv2__sh.mem")) u_enc_5_conv2 (
+        .BIAS_FILE("rtl_init__enc.5.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.5.conv2__pre.mem"), .M_FILE("rtl_init__enc.5.conv2__m.mem"), .SH_FILE("rtl_init__enc.5.conv2__sh.mem")) u_enc_5_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_5_conv2__eng_enc_5_conv2_d), .s_in_tvalid(_win_enc_5_conv2__eng_enc_5_conv2_v), .s_in_tready(_win_enc_5_conv2__eng_enc_5_conv2_r), .s_in_tlast(_win_enc_5_conv2__eng_enc_5_conv2_l), .s_in_tuser(_win_enc_5_conv2__eng_enc_5_conv2_u),
         .m_out_tdata(enc_5_conv2_d), .m_out_tvalid(enc_5_conv2_v), .m_out_tready(enc_5_conv2_r), .m_out_tlast(enc_5_conv2_l), .m_out_tuser(enc_5_conv2_u));
     axis_gdn #(.C(32), .LANES(1), .INVERSE(0), .X2_SHIFT(0), .LSH(14), .F(33),
@@ -1040,7 +1040,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.6.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.6.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.6.conv1__pre.mem"), .M_FILE("rtl_init__enc.6.conv1__M.mem"), .SH_FILE("rtl_init__enc.6.conv1__sh.mem")) u_enc_6_conv1 (
+        .BIAS_FILE("rtl_init__enc.6.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.6.conv1__pre.mem"), .M_FILE("rtl_init__enc.6.conv1__m.mem"), .SH_FILE("rtl_init__enc.6.conv1__sh.mem")) u_enc_6_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_6_conv1__eng_enc_6_conv1_d), .s_in_tvalid(_win_enc_6_conv1__eng_enc_6_conv1_v), .s_in_tready(_win_enc_6_conv1__eng_enc_6_conv1_r), .s_in_tlast(_win_enc_6_conv1__eng_enc_6_conv1_l), .s_in_tuser(_win_enc_6_conv1__eng_enc_6_conv1_u),
         .m_out_tdata(enc_6_conv1_d), .m_out_tvalid(enc_6_conv1_v), .m_out_tready(enc_6_conv1_r), .m_out_tlast(enc_6_conv1_l), .m_out_tuser(enc_6_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(32), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1051,7 +1051,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.6.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(5), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.6.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.6.conv2__pre.mem"), .M_FILE("rtl_init__enc.6.conv2__M.mem"), .SH_FILE("rtl_init__enc.6.conv2__sh.mem")) u_enc_6_conv2 (
+        .BIAS_FILE("rtl_init__enc.6.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.6.conv2__pre.mem"), .M_FILE("rtl_init__enc.6.conv2__m.mem"), .SH_FILE("rtl_init__enc.6.conv2__sh.mem")) u_enc_6_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_6_conv2__eng_enc_6_conv2_d), .s_in_tvalid(_win_enc_6_conv2__eng_enc_6_conv2_v), .s_in_tready(_win_enc_6_conv2__eng_enc_6_conv2_r), .s_in_tlast(_win_enc_6_conv2__eng_enc_6_conv2_l), .s_in_tuser(_win_enc_6_conv2__eng_enc_6_conv2_u),
         .m_out_tdata(enc_6_conv2_d), .m_out_tvalid(enc_6_conv2_v), .m_out_tready(enc_6_conv2_r), .m_out_tlast(enc_6_conv2_l), .m_out_tuser(enc_6_conv2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(2560), .RAM_STYLE("block")) u_fifo_enc_6_out_b (
@@ -1070,7 +1070,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.7.conv1__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(512),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.7.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.7.conv1__pre.mem"), .M_FILE("rtl_init__enc.7.conv1__M.mem"), .SH_FILE("rtl_init__enc.7.conv1__sh.mem")) u_enc_7_conv1 (
+        .BIAS_FILE("rtl_init__enc.7.conv1__bias.mem"), .PRE_FILE("rtl_init__enc.7.conv1__pre.mem"), .M_FILE("rtl_init__enc.7.conv1__m.mem"), .SH_FILE("rtl_init__enc.7.conv1__sh.mem")) u_enc_7_conv1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_7_conv1__eng_enc_7_conv1_d), .s_in_tvalid(_win_enc_7_conv1__eng_enc_7_conv1_v), .s_in_tready(_win_enc_7_conv1__eng_enc_7_conv1_r), .s_in_tlast(_win_enc_7_conv1__eng_enc_7_conv1_l), .s_in_tuser(_win_enc_7_conv1__eng_enc_7_conv1_u),
         .m_out_tdata(enc_7_conv1_d), .m_out_tvalid(enc_7_conv1_v), .m_out_tready(enc_7_conv1_r), .m_out_tlast(enc_7_conv1_l), .m_out_tuser(enc_7_conv1_u));
     axis_line_buffer #(.DATA_W(12), .C(16), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1081,7 +1081,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.7.conv2__wrom"), .WROM_STYLE("block"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("gear"), .WG_NCOL(2), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.7.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.7.conv2__pre.mem"), .M_FILE("rtl_init__enc.7.conv2__M.mem"), .SH_FILE("rtl_init__enc.7.conv2__sh.mem")) u_enc_7_conv2 (
+        .BIAS_FILE("rtl_init__enc.7.conv2__bias.mem"), .PRE_FILE("rtl_init__enc.7.conv2__pre.mem"), .M_FILE("rtl_init__enc.7.conv2__m.mem"), .SH_FILE("rtl_init__enc.7.conv2__sh.mem")) u_enc_7_conv2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_7_conv2__eng_enc_7_conv2_d), .s_in_tvalid(_win_enc_7_conv2__eng_enc_7_conv2_v), .s_in_tready(_win_enc_7_conv2__eng_enc_7_conv2_r), .s_in_tlast(_win_enc_7_conv2__eng_enc_7_conv2_l), .s_in_tuser(_win_enc_7_conv2__eng_enc_7_conv2_u),
         .m_out_tdata(enc_7_conv2_d), .m_out_tvalid(enc_7_conv2_v), .m_out_tready(enc_7_conv2_r), .m_out_tlast(enc_7_conv2_l), .m_out_tuser(enc_7_conv2_u));
     axis_gdn #(.C(16), .LANES(1), .INVERSE(0), .X2_SHIFT(0), .LSH(14), .F(33),
@@ -1096,7 +1096,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.7.skip__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.7.skip__bias.mem"), .PRE_FILE("rtl_init__enc.7.skip__pre.mem"), .M_FILE("rtl_init__enc.7.skip__M.mem"), .SH_FILE("rtl_init__enc.7.skip__sh.mem")) u_enc_7_skip (
+        .BIAS_FILE("rtl_init__enc.7.skip__bias.mem"), .PRE_FILE("rtl_init__enc.7.skip__pre.mem"), .M_FILE("rtl_init__enc.7.skip__m.mem"), .SH_FILE("rtl_init__enc.7.skip__sh.mem")) u_enc_7_skip (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_7_skip__eng_enc_7_skip_d), .s_in_tvalid(_win_enc_7_skip__eng_enc_7_skip_v), .s_in_tready(_win_enc_7_skip__eng_enc_7_skip_r), .s_in_tlast(_win_enc_7_skip__eng_enc_7_skip_l), .s_in_tuser(_win_enc_7_skip__eng_enc_7_skip_u),
         .m_out_tdata(enc_7_skip_d), .m_out_tvalid(enc_7_skip_v), .m_out_tready(enc_7_skip_r), .m_out_tlast(enc_7_skip_l), .m_out_tuser(enc_7_skip_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(512), .RAM_STYLE("block")) u_fifo_enc_7_out_b (
@@ -1114,7 +1114,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.ab0.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.ab0.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.ab0.c0__pre.mem"), .M_FILE("rtl_init__enc.8.ab0.c0__M.mem"), .SH_FILE("rtl_init__enc.8.ab0.c0__sh.mem")) u_enc_8_ab0_c0 (
+        .BIAS_FILE("rtl_init__enc.8.ab0.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.ab0.c0__pre.mem"), .M_FILE("rtl_init__enc.8.ab0.c0__m.mem"), .SH_FILE("rtl_init__enc.8.ab0.c0__sh.mem")) u_enc_8_ab0_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_ab0_c0__eng_enc_8_ab0_c0_d), .s_in_tvalid(_win_enc_8_ab0_c0__eng_enc_8_ab0_c0_v), .s_in_tready(_win_enc_8_ab0_c0__eng_enc_8_ab0_c0_r), .s_in_tlast(_win_enc_8_ab0_c0__eng_enc_8_ab0_c0_l), .s_in_tuser(_win_enc_8_ab0_c0__eng_enc_8_ab0_c0_u),
         .m_out_tdata(o_enc_8_ab0_c0_d), .m_out_tvalid(o_enc_8_ab0_c0_v), .m_out_tready(o_enc_8_ab0_c0_r), .m_out_tlast(o_enc_8_ab0_c0_l), .m_out_tuser(o_enc_8_ab0_c0_u));
     axis_split #(.DATA_W(12), .C(16), .SPLIT(8), .NPIX(4096)) u_split_enc_8_ab0_c0 (
@@ -1129,7 +1129,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a0.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.a0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a0.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a0.c1__M.mem"), .SH_FILE("rtl_init__enc.8.a0.c1__sh.mem")) u_enc_8_a0_c1 (
+        .BIAS_FILE("rtl_init__enc.8.a0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a0.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a0.c1__m.mem"), .SH_FILE("rtl_init__enc.8.a0.c1__sh.mem")) u_enc_8_a0_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a0_c1__eng_enc_8_a0_c1_d), .s_in_tvalid(_win_enc_8_a0_c1__eng_enc_8_a0_c1_v), .s_in_tready(_win_enc_8_a0_c1__eng_enc_8_a0_c1_r), .s_in_tlast(_win_enc_8_a0_c1__eng_enc_8_a0_c1_l), .s_in_tuser(_win_enc_8_a0_c1__eng_enc_8_a0_c1_u),
         .m_out_tdata(enc_8_a0_c1_d), .m_out_tvalid(enc_8_a0_c1_v), .m_out_tready(enc_8_a0_c1_r), .m_out_tlast(enc_8_a0_c1_l), .m_out_tuser(enc_8_a0_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_a0_c2 (
@@ -1139,7 +1139,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a0.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.a0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a0.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a0.c2__M.mem"), .SH_FILE("rtl_init__enc.8.a0.c2__sh.mem")) u_enc_8_a0_c2 (
+        .BIAS_FILE("rtl_init__enc.8.a0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a0.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a0.c2__m.mem"), .SH_FILE("rtl_init__enc.8.a0.c2__sh.mem")) u_enc_8_a0_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a0_c2__eng_enc_8_a0_c2_d), .s_in_tvalid(_win_enc_8_a0_c2__eng_enc_8_a0_c2_v), .s_in_tready(_win_enc_8_a0_c2__eng_enc_8_a0_c2_r), .s_in_tlast(_win_enc_8_a0_c2__eng_enc_8_a0_c2_l), .s_in_tuser(_win_enc_8_a0_c2__eng_enc_8_a0_c2_u),
         .m_out_tdata(enc_8_a0_c2_d), .m_out_tvalid(enc_8_a0_c2_v), .m_out_tready(enc_8_a0_c2_r), .m_out_tlast(enc_8_a0_c2_l), .m_out_tuser(enc_8_a0_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_8_a0_out_b (
@@ -1157,7 +1157,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a1.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.a1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c0__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c0__M.mem"), .SH_FILE("rtl_init__enc.8.a1.c0__sh.mem")) u_enc_8_a1_c0 (
+        .BIAS_FILE("rtl_init__enc.8.a1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c0__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c0__m.mem"), .SH_FILE("rtl_init__enc.8.a1.c0__sh.mem")) u_enc_8_a1_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a1_c0__eng_enc_8_a1_c0_d), .s_in_tvalid(_win_enc_8_a1_c0__eng_enc_8_a1_c0_v), .s_in_tready(_win_enc_8_a1_c0__eng_enc_8_a1_c0_r), .s_in_tlast(_win_enc_8_a1_c0__eng_enc_8_a1_c0_l), .s_in_tuser(_win_enc_8_a1_c0__eng_enc_8_a1_c0_u),
         .m_out_tdata(enc_8_a1_c0_d), .m_out_tvalid(enc_8_a1_c0_v), .m_out_tready(enc_8_a1_c0_r), .m_out_tlast(enc_8_a1_c0_l), .m_out_tuser(enc_8_a1_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(8), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1168,7 +1168,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a1.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.a1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c1__M.mem"), .SH_FILE("rtl_init__enc.8.a1.c1__sh.mem")) u_enc_8_a1_c1 (
+        .BIAS_FILE("rtl_init__enc.8.a1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c1__m.mem"), .SH_FILE("rtl_init__enc.8.a1.c1__sh.mem")) u_enc_8_a1_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a1_c1__eng_enc_8_a1_c1_d), .s_in_tvalid(_win_enc_8_a1_c1__eng_enc_8_a1_c1_v), .s_in_tready(_win_enc_8_a1_c1__eng_enc_8_a1_c1_r), .s_in_tlast(_win_enc_8_a1_c1__eng_enc_8_a1_c1_l), .s_in_tuser(_win_enc_8_a1_c1__eng_enc_8_a1_c1_u),
         .m_out_tdata(enc_8_a1_c1_d), .m_out_tvalid(enc_8_a1_c1_v), .m_out_tready(enc_8_a1_c1_r), .m_out_tlast(enc_8_a1_c1_l), .m_out_tuser(enc_8_a1_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_a1_c2 (
@@ -1178,7 +1178,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a1.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.a1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c2__M.mem"), .SH_FILE("rtl_init__enc.8.a1.c2__sh.mem")) u_enc_8_a1_c2 (
+        .BIAS_FILE("rtl_init__enc.8.a1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a1.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a1.c2__m.mem"), .SH_FILE("rtl_init__enc.8.a1.c2__sh.mem")) u_enc_8_a1_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a1_c2__eng_enc_8_a1_c2_d), .s_in_tvalid(_win_enc_8_a1_c2__eng_enc_8_a1_c2_v), .s_in_tready(_win_enc_8_a1_c2__eng_enc_8_a1_c2_r), .s_in_tlast(_win_enc_8_a1_c2__eng_enc_8_a1_c2_l), .s_in_tuser(_win_enc_8_a1_c2__eng_enc_8_a1_c2_u),
         .m_out_tdata(enc_8_a1_c2_d), .m_out_tvalid(enc_8_a1_c2_v), .m_out_tready(enc_8_a1_c2_r), .m_out_tlast(enc_8_a1_c2_l), .m_out_tuser(enc_8_a1_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(512), .RAM_STYLE("block")) u_fifo_enc_8_a1_out_b (
@@ -1196,7 +1196,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a2.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.a2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c0__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c0__M.mem"), .SH_FILE("rtl_init__enc.8.a2.c0__sh.mem")) u_enc_8_a2_c0 (
+        .BIAS_FILE("rtl_init__enc.8.a2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c0__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c0__m.mem"), .SH_FILE("rtl_init__enc.8.a2.c0__sh.mem")) u_enc_8_a2_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a2_c0__eng_enc_8_a2_c0_d), .s_in_tvalid(_win_enc_8_a2_c0__eng_enc_8_a2_c0_v), .s_in_tready(_win_enc_8_a2_c0__eng_enc_8_a2_c0_r), .s_in_tlast(_win_enc_8_a2_c0__eng_enc_8_a2_c0_l), .s_in_tuser(_win_enc_8_a2_c0__eng_enc_8_a2_c0_u),
         .m_out_tdata(enc_8_a2_c0_d), .m_out_tvalid(enc_8_a2_c0_v), .m_out_tready(enc_8_a2_c0_r), .m_out_tlast(enc_8_a2_c0_l), .m_out_tuser(enc_8_a2_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(8), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1207,7 +1207,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a2.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.a2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c1__M.mem"), .SH_FILE("rtl_init__enc.8.a2.c1__sh.mem")) u_enc_8_a2_c1 (
+        .BIAS_FILE("rtl_init__enc.8.a2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c1__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c1__m.mem"), .SH_FILE("rtl_init__enc.8.a2.c1__sh.mem")) u_enc_8_a2_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a2_c1__eng_enc_8_a2_c1_d), .s_in_tvalid(_win_enc_8_a2_c1__eng_enc_8_a2_c1_v), .s_in_tready(_win_enc_8_a2_c1__eng_enc_8_a2_c1_r), .s_in_tlast(_win_enc_8_a2_c1__eng_enc_8_a2_c1_l), .s_in_tuser(_win_enc_8_a2_c1__eng_enc_8_a2_c1_u),
         .m_out_tdata(enc_8_a2_c1_d), .m_out_tvalid(enc_8_a2_c1_v), .m_out_tready(enc_8_a2_c1_r), .m_out_tlast(enc_8_a2_c1_l), .m_out_tuser(enc_8_a2_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_a2_c2 (
@@ -1217,7 +1217,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.a2.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.a2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c2__M.mem"), .SH_FILE("rtl_init__enc.8.a2.c2__sh.mem")) u_enc_8_a2_c2 (
+        .BIAS_FILE("rtl_init__enc.8.a2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.a2.c2__pre.mem"), .M_FILE("rtl_init__enc.8.a2.c2__m.mem"), .SH_FILE("rtl_init__enc.8.a2.c2__sh.mem")) u_enc_8_a2_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_a2_c2__eng_enc_8_a2_c2_d), .s_in_tvalid(_win_enc_8_a2_c2__eng_enc_8_a2_c2_v), .s_in_tready(_win_enc_8_a2_c2__eng_enc_8_a2_c2_r), .s_in_tlast(_win_enc_8_a2_c2__eng_enc_8_a2_c2_l), .s_in_tuser(_win_enc_8_a2_c2__eng_enc_8_a2_c2_u),
         .m_out_tdata(enc_8_a2_c2_d), .m_out_tvalid(enc_8_a2_c2_v), .m_out_tready(enc_8_a2_c2_r), .m_out_tlast(enc_8_a2_c2_l), .m_out_tuser(enc_8_a2_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(512), .RAM_STYLE("block")) u_fifo_enc_8_a2_out_b (
@@ -1236,7 +1236,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b0.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b0.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b0.c1__M.mem"), .SH_FILE("rtl_init__enc.8.b0.c1__sh.mem")) u_enc_8_b0_c1 (
+        .BIAS_FILE("rtl_init__enc.8.b0.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b0.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b0.c1__m.mem"), .SH_FILE("rtl_init__enc.8.b0.c1__sh.mem")) u_enc_8_b0_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b0_c1__eng_enc_8_b0_c1_d), .s_in_tvalid(_win_enc_8_b0_c1__eng_enc_8_b0_c1_v), .s_in_tready(_win_enc_8_b0_c1__eng_enc_8_b0_c1_r), .s_in_tlast(_win_enc_8_b0_c1__eng_enc_8_b0_c1_l), .s_in_tuser(_win_enc_8_b0_c1__eng_enc_8_b0_c1_u),
         .m_out_tdata(enc_8_b0_c1_d), .m_out_tvalid(enc_8_b0_c1_v), .m_out_tready(enc_8_b0_c1_r), .m_out_tlast(enc_8_b0_c1_l), .m_out_tuser(enc_8_b0_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_b0_c2 (
@@ -1246,7 +1246,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b0.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b0.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b0.c2__M.mem"), .SH_FILE("rtl_init__enc.8.b0.c2__sh.mem")) u_enc_8_b0_c2 (
+        .BIAS_FILE("rtl_init__enc.8.b0.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b0.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b0.c2__m.mem"), .SH_FILE("rtl_init__enc.8.b0.c2__sh.mem")) u_enc_8_b0_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b0_c2__eng_enc_8_b0_c2_d), .s_in_tvalid(_win_enc_8_b0_c2__eng_enc_8_b0_c2_v), .s_in_tready(_win_enc_8_b0_c2__eng_enc_8_b0_c2_r), .s_in_tlast(_win_enc_8_b0_c2__eng_enc_8_b0_c2_l), .s_in_tuser(_win_enc_8_b0_c2__eng_enc_8_b0_c2_u),
         .m_out_tdata(enc_8_b0_c2_d), .m_out_tvalid(enc_8_b0_c2_v), .m_out_tready(enc_8_b0_c2_r), .m_out_tlast(enc_8_b0_c2_l), .m_out_tuser(enc_8_b0_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(1024), .RAM_STYLE("block")) u_fifo_enc_8_b0_out_b (
@@ -1264,7 +1264,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b1.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(22), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.b1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c0__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c0__M.mem"), .SH_FILE("rtl_init__enc.8.b1.c0__sh.mem")) u_enc_8_b1_c0 (
+        .BIAS_FILE("rtl_init__enc.8.b1.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c0__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c0__m.mem"), .SH_FILE("rtl_init__enc.8.b1.c0__sh.mem")) u_enc_8_b1_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b1_c0__eng_enc_8_b1_c0_d), .s_in_tvalid(_win_enc_8_b1_c0__eng_enc_8_b1_c0_v), .s_in_tready(_win_enc_8_b1_c0__eng_enc_8_b1_c0_r), .s_in_tlast(_win_enc_8_b1_c0__eng_enc_8_b1_c0_l), .s_in_tuser(_win_enc_8_b1_c0__eng_enc_8_b1_c0_u),
         .m_out_tdata(enc_8_b1_c0_d), .m_out_tvalid(enc_8_b1_c0_v), .m_out_tready(enc_8_b1_c0_r), .m_out_tlast(enc_8_b1_c0_l), .m_out_tuser(enc_8_b1_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(8), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1275,7 +1275,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b1.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(24), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c1__M.mem"), .SH_FILE("rtl_init__enc.8.b1.c1__sh.mem")) u_enc_8_b1_c1 (
+        .BIAS_FILE("rtl_init__enc.8.b1.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c1__m.mem"), .SH_FILE("rtl_init__enc.8.b1.c1__sh.mem")) u_enc_8_b1_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b1_c1__eng_enc_8_b1_c1_d), .s_in_tvalid(_win_enc_8_b1_c1__eng_enc_8_b1_c1_v), .s_in_tready(_win_enc_8_b1_c1__eng_enc_8_b1_c1_r), .s_in_tlast(_win_enc_8_b1_c1__eng_enc_8_b1_c1_l), .s_in_tuser(_win_enc_8_b1_c1__eng_enc_8_b1_c1_u),
         .m_out_tdata(enc_8_b1_c1_d), .m_out_tvalid(enc_8_b1_c1_v), .m_out_tready(enc_8_b1_c1_r), .m_out_tlast(enc_8_b1_c1_l), .m_out_tuser(enc_8_b1_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_b1_c2 (
@@ -1285,7 +1285,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b1.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c2__M.mem"), .SH_FILE("rtl_init__enc.8.b1.c2__sh.mem")) u_enc_8_b1_c2 (
+        .BIAS_FILE("rtl_init__enc.8.b1.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b1.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b1.c2__m.mem"), .SH_FILE("rtl_init__enc.8.b1.c2__sh.mem")) u_enc_8_b1_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b1_c2__eng_enc_8_b1_c2_d), .s_in_tvalid(_win_enc_8_b1_c2__eng_enc_8_b1_c2_v), .s_in_tready(_win_enc_8_b1_c2__eng_enc_8_b1_c2_r), .s_in_tlast(_win_enc_8_b1_c2__eng_enc_8_b1_c2_l), .s_in_tuser(_win_enc_8_b1_c2__eng_enc_8_b1_c2_u),
         .m_out_tdata(enc_8_b1_c2_d), .m_out_tvalid(enc_8_b1_c2_v), .m_out_tready(enc_8_b1_c2_r), .m_out_tlast(enc_8_b1_c2_l), .m_out_tuser(enc_8_b1_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(512), .RAM_STYLE("block")) u_fifo_enc_8_b1_out_b (
@@ -1303,7 +1303,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b2.c0__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c0__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c0__M.mem"), .SH_FILE("rtl_init__enc.8.b2.c0__sh.mem")) u_enc_8_b2_c0 (
+        .BIAS_FILE("rtl_init__enc.8.b2.c0__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c0__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c0__m.mem"), .SH_FILE("rtl_init__enc.8.b2.c0__sh.mem")) u_enc_8_b2_c0 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b2_c0__eng_enc_8_b2_c0_d), .s_in_tvalid(_win_enc_8_b2_c0__eng_enc_8_b2_c0_v), .s_in_tready(_win_enc_8_b2_c0__eng_enc_8_b2_c0_r), .s_in_tlast(_win_enc_8_b2_c0__eng_enc_8_b2_c0_l), .s_in_tuser(_win_enc_8_b2_c0__eng_enc_8_b2_c0_u),
         .m_out_tdata(enc_8_b2_c0_d), .m_out_tvalid(enc_8_b2_c0_v), .m_out_tready(enc_8_b2_c0_r), .m_out_tlast(enc_8_b2_c0_l), .m_out_tuser(enc_8_b2_c0_u));
     axis_line_buffer #(.DATA_W(12), .C(8), .W(64), .H(64), .K(3), .STRIDE(1), .PAD(1), .ROWS(3),
@@ -1314,7 +1314,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b2.c1__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(25), .SH_BITS(1),
-        .BIAS_FILE("rtl_init__enc.8.b2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c1__M.mem"), .SH_FILE("rtl_init__enc.8.b2.c1__sh.mem")) u_enc_8_b2_c1 (
+        .BIAS_FILE("rtl_init__enc.8.b2.c1__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c1__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c1__m.mem"), .SH_FILE("rtl_init__enc.8.b2.c1__sh.mem")) u_enc_8_b2_c1 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b2_c1__eng_enc_8_b2_c1_d), .s_in_tvalid(_win_enc_8_b2_c1__eng_enc_8_b2_c1_v), .s_in_tready(_win_enc_8_b2_c1__eng_enc_8_b2_c1_r), .s_in_tlast(_win_enc_8_b2_c1__eng_enc_8_b2_c1_l), .s_in_tuser(_win_enc_8_b2_c1__eng_enc_8_b2_c1_u),
         .m_out_tdata(enc_8_b2_c1_d), .m_out_tvalid(enc_8_b2_c1_v), .m_out_tready(enc_8_b2_c1_r), .m_out_tlast(enc_8_b2_c1_l), .m_out_tuser(enc_8_b2_c1_u));
     axis_pixel_buffer #(.DATA_W(12), .C(8), .NPIX(4096), .GROUPS(16)) u_pb_enc_8_b2_c2 (
@@ -1324,7 +1324,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b2.c2__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("dsp"),
         .PRE(0), .SH_MIN(24), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.b2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c2__M.mem"), .SH_FILE("rtl_init__enc.8.b2.c2__sh.mem")) u_enc_8_b2_c2 (
+        .BIAS_FILE("rtl_init__enc.8.b2.c2__bias.mem"), .PRE_FILE("rtl_init__enc.8.b2.c2__pre.mem"), .M_FILE("rtl_init__enc.8.b2.c2__m.mem"), .SH_FILE("rtl_init__enc.8.b2.c2__sh.mem")) u_enc_8_b2_c2 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b2_c2__eng_enc_8_b2_c2_d), .s_in_tvalid(_win_enc_8_b2_c2__eng_enc_8_b2_c2_v), .s_in_tready(_win_enc_8_b2_c2__eng_enc_8_b2_c2_r), .s_in_tlast(_win_enc_8_b2_c2__eng_enc_8_b2_c2_l), .s_in_tuser(_win_enc_8_b2_c2__eng_enc_8_b2_c2_u),
         .m_out_tdata(enc_8_b2_c2_d), .m_out_tvalid(enc_8_b2_c2_v), .m_out_tready(enc_8_b2_c2_r), .m_out_tlast(enc_8_b2_c2_l), .m_out_tuser(enc_8_b2_c2_u));
     axis_fifo_packed #(.DATA_W(12), .PACK(3), .DEPTH_W(512), .RAM_STYLE("block")) u_fifo_enc_8_b2_out_b (
@@ -1342,7 +1342,7 @@ module blk_enc_0_latent_idx (
         .WROM_PREFIX("rtl_init__enc.8.b3__wrom"), .WROM_STYLE("distributed"), .WROM_BANK_DEPTH(0),
         .WROM_MODE("direct"), .WG_NCOL(1), .RQ_MUL("lut"),
         .PRE(0), .SH_MIN(23), .SH_BITS(2),
-        .BIAS_FILE("rtl_init__enc.8.b3__bias.mem"), .PRE_FILE("rtl_init__enc.8.b3__pre.mem"), .M_FILE("rtl_init__enc.8.b3__M.mem"), .SH_FILE("rtl_init__enc.8.b3__sh.mem")) u_enc_8_b3 (
+        .BIAS_FILE("rtl_init__enc.8.b3__bias.mem"), .PRE_FILE("rtl_init__enc.8.b3__pre.mem"), .M_FILE("rtl_init__enc.8.b3__m.mem"), .SH_FILE("rtl_init__enc.8.b3__sh.mem")) u_enc_8_b3 (
         .clk(clk), .rst_n(rst_n), .s_in_tdata(_win_enc_8_b3__eng_enc_8_b3_d), .s_in_tvalid(_win_enc_8_b3__eng_enc_8_b3_v), .s_in_tready(_win_enc_8_b3__eng_enc_8_b3_r), .s_in_tlast(_win_enc_8_b3__eng_enc_8_b3_l), .s_in_tuser(_win_enc_8_b3__eng_enc_8_b3_u),
         .m_out_tdata(enc_8_b3_d), .m_out_tvalid(enc_8_b3_v), .m_out_tready(enc_8_b3_r), .m_out_tlast(enc_8_b3_l), .m_out_tuser(enc_8_b3_u));
     axis_sigmoid #(.X_W(12), .M312(74220), .SH312(12), .NSEG(32), .OB(10),

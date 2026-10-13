@@ -75,7 +75,7 @@ module tb_conv_layer;
         .CIN(CIN), .COUT(COUT), .K(K), .P(P), .ACT(ACT), .ACT2(ACT2), .ACT_SPLIT(ACT_SPLIT),
         .WROM_PREFIX({INIT_DIR, "/wrom"}), .WROM_STYLE(WROM_STYLE), .WROM_BANK_DEPTH(WROM_BANK_DEPTH), .RQ_MUL(RQ_MUL), .WROM_MODE(WROM_MODE), .WG_NCOL(WG_NCOL), .PRE(PRE), .SH_MIN(SH_MIN), .SH_BITS(SH_BITS),
         .BIAS_FILE({INIT_DIR, "/bias.mem"}), .PRE_FILE({INIT_DIR, "/pre.mem"}),
-        .M_FILE({INIT_DIR, "/M.mem"}), .SH_FILE({INIT_DIR, "/sh.mem"})
+        .M_FILE({INIT_DIR, "/m.mem"}), .SH_FILE({INIT_DIR, "/sh.mem"})
     ) u_conv (
         .clk(clk), .rst_n(rst_n),
         .s_in_tdata(w_tdata), .s_in_tvalid(w_tvalid), .s_in_tready(w_tready),

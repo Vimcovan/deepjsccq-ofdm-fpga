@@ -34,7 +34,7 @@ S.finish(ax)
 S.save(fig, os.path.join(OUT, "psnr_snr.png"))
 
 # ---------------------------------------------------------------- frame rate over 10 minutes + PDF
-d = np.genfromtxt(os.path.join(MEAS, "fps", "lat_video_10min_jscc2_jscc_0dB.csv"), delimiter=",", names=True)
+d = np.genfromtxt(os.path.join(MEAS, "fps", "lat_video_10min_jscc2_jscc_0db.csv"), delimiter=",", names=True)
 t, f = d["t_min"], d["fps"]
 ok = ~np.isnan(f); t, f = t[ok], f[ok]
 fig, (a1, a2) = plt.subplots(1, 2, figsize=(6.3, 2.0), gridspec_kw=dict(width_ratios=[5, 1], wspace=0.06), sharey=True)

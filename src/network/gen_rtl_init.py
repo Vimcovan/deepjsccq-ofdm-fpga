@@ -7,7 +7,7 @@ For each conv engine in manifest.json (memory_plan section) writes to
                channel g*P + p (0 beyond COUT)
   wrom_s<i>.mem  the same ROM cut into column slices of 9 lanes (72 bit); conv_engine
                instantiates one ROM per slice
-  bias.mem, pre.mem, M.mem, sh.mem   per output channel, same formats as params/
+  bias.mem, pre.mem, m.mem, sh.mem   per output channel, same formats as params/
   engine.json  RTL parameters of the engine (CIN, COUT, K, STRIDE, PAD, P, ACT, ...)
 Merged engines (upsample block main + skip conv) concatenate output channels
 [main | skip]; the skip channels use ACT2.
@@ -115,7 +115,7 @@ def main():
                     write_words(d / f'wrom_s{s}.mem', sl, 8 * nl)
             assert len(set(np.concatenate(fields['rq_pre']).tolist())) == 1, f'{e["name"]}: pre differs per channel'
             bits = {'bias': 48, 'rq_pre': 8, 'rq_M': 17, 'rq_sh': 8}
-            names = {'bias': 'bias.mem', 'rq_pre': 'pre.mem', 'rq_M': 'M.mem', 'rq_sh': 'sh.mem'}
+            names = {'bias': 'bias.mem', 'rq_pre': 'pre.mem', 'rq_M': 'm.mem', 'rq_sh': 'sh.mem'}
             for key, vals in fields.items():
                 v = np.concatenate(vals)
                 write_words(d / names[key], [int(x) & ((1 << bits[key]) - 1) for x in v], bits[key])

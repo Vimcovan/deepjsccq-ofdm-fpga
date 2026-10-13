@@ -153,7 +153,7 @@ class Top:
         .WROM_PREFIX({q(d + "/wrom")}), .WROM_STYLE({q(j["WROM_STYLE"])}), .WROM_BANK_DEPTH({j["WROM_BANK_DEPTH"]}),
         .WROM_MODE({q(j["WROM_MODE"])}), .WG_NCOL({j["WG_NCOL"]}), .RQ_MUL({q(j["RQ_MUL"])}),
         .PRE({j["PRE"]}), .SH_MIN({j["SH_MIN"]}), .SH_BITS({j["SH_BITS"]}),
-        .BIAS_FILE({q(d + "/bias.mem")}), .PRE_FILE({q(d + "/pre.mem")}), .M_FILE({q(d + "/M.mem")}), .SH_FILE({q(d + "/sh.mem")})) u_{ident(name)} (
+        .BIAS_FILE({q(d + "/bias.mem")}), .PRE_FILE({q(d + "/pre.mem")}), .M_FILE({q(d + "/m.mem")}), .SH_FILE({q(d + "/sh.mem")})) u_{ident(name)} (
         .clk(clk), .rst_n(rst_n), .s_in_tdata({ein}_d), .s_in_tvalid({ein}_v), .s_in_tready({ein}_r), .s_in_tlast({ein}_l), .s_in_tuser({ein}_u),
         .m_out_tdata({on}_d), .m_out_tvalid({on}_v), .m_out_tready({on}_r), .m_out_tlast({on}_l), .m_out_tuser({on}_u));''')
         if len(j['out']) > 1:

@@ -45,11 +45,23 @@ AI反复出现的问题有四类：没有证据就下结论；把自己定的经
 | `pynq-local-display-gui` | 在板载DP / HDMI屏和USB触摸屏上运行全屏PyQt界面：显示栈探测、在真实X服务器上用不显示的窗口截图并检测文字溢出与窗口超出可用区域、CPU预算、触摸长按与拖动 | 探测、截图、触摸脚本 |
 | `pynq-dma-stale-transfer` | AXI DMA接收在超时或进程被杀后遗留传输，导致下一次接收卡死；PYNQ的`stop()`无法撤销，改用DMACR软复位 | — |
 
+每个技能都从本作品开发中的一次真实失败或观察提炼而来，适用边界写在各`SKILL.md`的不适用场景一节（表B-2）。
+
+表B-2　技能的来源与失效条件
+
+| 技能 | 从哪些失败或观察中总结 | 失效条件 |
+|---|---|---|
+| `mali400-offscreen-gles` | RX触摸屏GUI的信道三维曲面用CPU软件渲染太慢；改用Mali-400时，曾把属于`zocl`的渲染节点`renderD128`误认作GPU，lima发生GP MMU页错误后不报错、每帧只有清屏色 | 使用Xilinx专有`libmali`驱动的PetaLinux；没有Mali-400的器件（Zynq-7000、ZU CG、Versal）；CPU已足够快的二维界面 |
+| `pynq-out-of-tree-kernel-module` | 补编lima模块时在系统构建树中运行`make modules_prepare`：内核由gcc 12编译而板上为gcc 11，板上时钟落后，kconfig重新运行，改写了`.config`并删除`autoconf.h` | 选项只能编进内核、不能编为模块；强制模块签名；已有对应当前内核的发行版软件包 |
+| `pynq-systemd-autostart` | 两板改为开机自启后断电重启，链路不通：PYNQ自带的`bootpy.service`晚十几秒执行，加载`base.bit`覆盖了已加载的overlay | 一次性实验；Jupyter notebook（应先转为脚本） |
+| `pynq-local-display-gui` | 在板上用Qt的`offscreen`平台检查排版，所用字体与X会话不同，文字宽约40 %，报出不存在的截断；固定尺寸的离屏渲染也看不出600像素高的窗口超出578像素的可用区域 | 界面运行在PC上；视频输出完全在PL中、不经过X；三维OpenGL绘制（配合`mali400-offscreen-gles`） |
+| `pynq-dma-stale-transfer` | RX服务停止时ADC采集DMA仍在等待下一帧，之后每个采集进程的第一次传输都卡在`wait()`；PYNQ的`stop()`撤不掉等待中的传输，改用DMACR软复位 | 只用MM2S发送且PL总能接收；scatter-gather模式；PL从不产生TLAST（应修改PL） |
+
 每个技能都在全新会话、全新工作区中由另外的代理和模型执行测试，共两套环境：Cursor CLI + Grok 4.7，CodeBuddy CLI + DeepSeek V4.1 Flash。工作区只放该技能和用户场景所需的文件，板卡登录使用工作区内的一次性私钥副本；提示词采用普通用户口吻、不提技能名，两套环境相同。逐项核对会话记录：是否自动触发技能、是否按步骤执行与验证、是否在暂停点停下、结果是否正确、板上是否留下临时文件、系统文件是否被改动。5个技能在两套环境中均通过，其中内核模块技能换用另一个驱动（hid-multitouch）测试通用性。
 
-对照实验采用同样的场景和提示词，工作区中不提供技能；每次运行前后对板子做状态快照，运行后恢复到基线再进行下一次（表B-2）。
+对照实验采用同样的场景和提示词，工作区中不提供技能；每次运行前后对板子做状态快照，运行后恢复到基线再进行下一次（表B-3）。
 
-表B-2　有无技能的完成时间（秒）
+表B-3　有无技能的完成时间（秒）
 
 | 场景 | Grok无技能 | Grok有技能 | 加速 | DeepSeek无技能 | DeepSeek有技能 | 加速 |
 |---|---:|---:|---:|---:|---:|---:|

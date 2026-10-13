@@ -2571,7 +2571,7 @@
      "note": "centre tap of dec.1.conv1"
     },
     {
-     "name": "dec.2.conv+skip",
+     "name": "dec.2.conv_plus_skip",
      "ops": [
       "dec.2.conv",
       "dec.2.skip"
@@ -2689,7 +2689,7 @@
      "note": ""
     },
     {
-     "name": "dec.4.conv+skip",
+     "name": "dec.4.conv_plus_skip",
      "ops": [
       "dec.4.conv",
       "dec.4.skip"
@@ -3216,7 +3216,7 @@
      "note": ""
     },
     {
-     "name": "dec.7.conv+skip",
+     "name": "dec.7.conv_plus_skip",
      "ops": [
       "dec.7.conv",
       "dec.7.skip"
@@ -3331,7 +3331,7 @@
      "note": ""
     },
     {
-     "name": "dec.9.conv+skip",
+     "name": "dec.9.conv_plus_skip",
      "ops": [
       "dec.9.conv",
       "dec.9.skip"
@@ -6221,7 +6221,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.0.conv1.rq_M.mem",
+     "file": "params/enc.0.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6278,7 +6278,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.0.conv2.rq_M.mem",
+     "file": "params/enc.0.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6367,7 +6367,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.0.skip.rq_M.mem",
+     "file": "params/enc.0.skip.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6438,7 +6438,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.1.conv1.rq_M.mem",
+     "file": "params/enc.1.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6495,7 +6495,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.1.conv2.rq_M.mem",
+     "file": "params/enc.1.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6566,7 +6566,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.2.conv1.rq_M.mem",
+     "file": "params/enc.2.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6623,7 +6623,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.2.conv2.rq_M.mem",
+     "file": "params/enc.2.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6712,7 +6712,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.2.skip.rq_M.mem",
+     "file": "params/enc.2.skip.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6783,7 +6783,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a0.c0.rq_M.mem",
+     "file": "params/enc.3.a0.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -6840,7 +6840,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a0.c1.rq_M.mem",
+     "file": "params/enc.3.a0.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -6897,7 +6897,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a0.c2.rq_M.mem",
+     "file": "params/enc.3.a0.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -6968,7 +6968,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a1.c0.rq_M.mem",
+     "file": "params/enc.3.a1.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7025,7 +7025,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a1.c1.rq_M.mem",
+     "file": "params/enc.3.a1.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7082,7 +7082,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a1.c2.rq_M.mem",
+     "file": "params/enc.3.a1.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7153,7 +7153,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a2.c0.rq_M.mem",
+     "file": "params/enc.3.a2.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7210,7 +7210,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a2.c1.rq_M.mem",
+     "file": "params/enc.3.a2.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7267,7 +7267,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.a2.c2.rq_M.mem",
+     "file": "params/enc.3.a2.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7338,7 +7338,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b0.c0.rq_M.mem",
+     "file": "params/enc.3.b0.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7395,7 +7395,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b0.c1.rq_M.mem",
+     "file": "params/enc.3.b0.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7452,7 +7452,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b0.c2.rq_M.mem",
+     "file": "params/enc.3.b0.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7523,7 +7523,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b1.c0.rq_M.mem",
+     "file": "params/enc.3.b1.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7580,7 +7580,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b1.c1.rq_M.mem",
+     "file": "params/enc.3.b1.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7637,7 +7637,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b1.c2.rq_M.mem",
+     "file": "params/enc.3.b1.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7708,7 +7708,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b2.c0.rq_M.mem",
+     "file": "params/enc.3.b2.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7765,7 +7765,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b2.c1.rq_M.mem",
+     "file": "params/enc.3.b2.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -7822,7 +7822,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b2.c2.rq_M.mem",
+     "file": "params/enc.3.b2.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7893,7 +7893,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.3.b3.rq_M.mem",
+     "file": "params/enc.3.b3.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -7976,7 +7976,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.4.conv1.rq_M.mem",
+     "file": "params/enc.4.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8033,7 +8033,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.4.conv2.rq_M.mem",
+     "file": "params/enc.4.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8104,7 +8104,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.5.conv1.rq_M.mem",
+     "file": "params/enc.5.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8161,7 +8161,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.5.conv2.rq_M.mem",
+     "file": "params/enc.5.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8264,7 +8264,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.6.conv1.rq_M.mem",
+     "file": "params/enc.6.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8321,7 +8321,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.6.conv2.rq_M.mem",
+     "file": "params/enc.6.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -8392,7 +8392,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.7.conv1.rq_M.mem",
+     "file": "params/enc.7.conv1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -8449,7 +8449,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.7.conv2.rq_M.mem",
+     "file": "params/enc.7.conv2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -8538,7 +8538,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.7.skip.rq_M.mem",
+     "file": "params/enc.7.skip.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -8609,7 +8609,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a0.c0.rq_M.mem",
+     "file": "params/enc.8.a0.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -8666,7 +8666,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a0.c1.rq_M.mem",
+     "file": "params/enc.8.a0.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -8723,7 +8723,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a0.c2.rq_M.mem",
+     "file": "params/enc.8.a0.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -8794,7 +8794,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a1.c0.rq_M.mem",
+     "file": "params/enc.8.a1.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -8851,7 +8851,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a1.c1.rq_M.mem",
+     "file": "params/enc.8.a1.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -8908,7 +8908,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a1.c2.rq_M.mem",
+     "file": "params/enc.8.a1.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -8979,7 +8979,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a2.c0.rq_M.mem",
+     "file": "params/enc.8.a2.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9036,7 +9036,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a2.c1.rq_M.mem",
+     "file": "params/enc.8.a2.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9093,7 +9093,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.a2.c2.rq_M.mem",
+     "file": "params/enc.8.a2.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -9164,7 +9164,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b0.c0.rq_M.mem",
+     "file": "params/enc.8.b0.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9221,7 +9221,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b0.c1.rq_M.mem",
+     "file": "params/enc.8.b0.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9278,7 +9278,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b0.c2.rq_M.mem",
+     "file": "params/enc.8.b0.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -9349,7 +9349,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b1.c0.rq_M.mem",
+     "file": "params/enc.8.b1.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9406,7 +9406,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b1.c1.rq_M.mem",
+     "file": "params/enc.8.b1.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9463,7 +9463,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b1.c2.rq_M.mem",
+     "file": "params/enc.8.b1.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -9534,7 +9534,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b2.c0.rq_M.mem",
+     "file": "params/enc.8.b2.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9591,7 +9591,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b2.c1.rq_M.mem",
+     "file": "params/enc.8.b2.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9648,7 +9648,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b2.c2.rq_M.mem",
+     "file": "params/enc.8.b2.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -9719,7 +9719,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/enc.8.b3.rq_M.mem",
+     "file": "params/enc.8.b3.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -9825,7 +9825,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a0.c0.rq_M.mem",
+     "file": "params/dec.0.a0.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9882,7 +9882,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a0.c1.rq_M.mem",
+     "file": "params/dec.0.a0.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -9939,7 +9939,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a0.c2.rq_M.mem",
+     "file": "params/dec.0.a0.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10010,7 +10010,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a1.c0.rq_M.mem",
+     "file": "params/dec.0.a1.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10067,7 +10067,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a1.c1.rq_M.mem",
+     "file": "params/dec.0.a1.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10124,7 +10124,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a1.c2.rq_M.mem",
+     "file": "params/dec.0.a1.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10195,7 +10195,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a2.c0.rq_M.mem",
+     "file": "params/dec.0.a2.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10252,7 +10252,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a2.c1.rq_M.mem",
+     "file": "params/dec.0.a2.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10309,7 +10309,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.a2.c2.rq_M.mem",
+     "file": "params/dec.0.a2.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10380,7 +10380,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b0.c0.rq_M.mem",
+     "file": "params/dec.0.b0.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10437,7 +10437,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b0.c1.rq_M.mem",
+     "file": "params/dec.0.b0.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10494,7 +10494,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b0.c2.rq_M.mem",
+     "file": "params/dec.0.b0.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10565,7 +10565,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b1.c0.rq_M.mem",
+     "file": "params/dec.0.b1.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10622,7 +10622,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b1.c1.rq_M.mem",
+     "file": "params/dec.0.b1.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10679,7 +10679,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b1.c2.rq_M.mem",
+     "file": "params/dec.0.b1.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10750,7 +10750,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b2.c0.rq_M.mem",
+     "file": "params/dec.0.b2.c0.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10807,7 +10807,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b2.c1.rq_M.mem",
+     "file": "params/dec.0.b2.c1.rq_m.mem",
      "bits": 17,
      "count": 8,
      "signed": false
@@ -10864,7 +10864,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b2.c2.rq_M.mem",
+     "file": "params/dec.0.b2.c2.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -10935,7 +10935,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.0.b3.rq_M.mem",
+     "file": "params/dec.0.b3.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -11018,7 +11018,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.1.conv1.rq_M.mem",
+     "file": "params/dec.1.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11075,7 +11075,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.1.conv2.rq_M.mem",
+     "file": "params/dec.1.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11132,7 +11132,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.1.skip.rq_M.mem",
+     "file": "params/dec.1.skip.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11203,7 +11203,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.2.conv.rq_M.mem",
+     "file": "params/dec.2.conv.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11266,7 +11266,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.2.conv2.rq_M.mem",
+     "file": "params/dec.2.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11355,7 +11355,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.2.skip.rq_M.mem",
+     "file": "params/dec.2.skip.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11432,7 +11432,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.3.conv1.rq_M.mem",
+     "file": "params/dec.3.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11489,7 +11489,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.3.conv2.rq_M.mem",
+     "file": "params/dec.3.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11560,7 +11560,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.4.conv.rq_M.mem",
+     "file": "params/dec.4.conv.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11623,7 +11623,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.4.conv2.rq_M.mem",
+     "file": "params/dec.4.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11712,7 +11712,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.4.skip.rq_M.mem",
+     "file": "params/dec.4.skip.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11789,7 +11789,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a0.c0.rq_M.mem",
+     "file": "params/dec.5.a0.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -11846,7 +11846,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a0.c1.rq_M.mem",
+     "file": "params/dec.5.a0.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -11903,7 +11903,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a0.c2.rq_M.mem",
+     "file": "params/dec.5.a0.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -11974,7 +11974,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a1.c0.rq_M.mem",
+     "file": "params/dec.5.a1.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12031,7 +12031,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a1.c1.rq_M.mem",
+     "file": "params/dec.5.a1.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12088,7 +12088,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a1.c2.rq_M.mem",
+     "file": "params/dec.5.a1.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12159,7 +12159,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a2.c0.rq_M.mem",
+     "file": "params/dec.5.a2.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12216,7 +12216,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a2.c1.rq_M.mem",
+     "file": "params/dec.5.a2.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12273,7 +12273,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.a2.c2.rq_M.mem",
+     "file": "params/dec.5.a2.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12344,7 +12344,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b0.c0.rq_M.mem",
+     "file": "params/dec.5.b0.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12401,7 +12401,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b0.c1.rq_M.mem",
+     "file": "params/dec.5.b0.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12458,7 +12458,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b0.c2.rq_M.mem",
+     "file": "params/dec.5.b0.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12529,7 +12529,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b1.c0.rq_M.mem",
+     "file": "params/dec.5.b1.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12586,7 +12586,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b1.c1.rq_M.mem",
+     "file": "params/dec.5.b1.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12643,7 +12643,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b1.c2.rq_M.mem",
+     "file": "params/dec.5.b1.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12714,7 +12714,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b2.c0.rq_M.mem",
+     "file": "params/dec.5.b2.c0.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12771,7 +12771,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b2.c1.rq_M.mem",
+     "file": "params/dec.5.b2.c1.rq_m.mem",
      "bits": 17,
      "count": 16,
      "signed": false
@@ -12828,7 +12828,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b2.c2.rq_M.mem",
+     "file": "params/dec.5.b2.c2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12899,7 +12899,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.5.b3.rq_M.mem",
+     "file": "params/dec.5.b3.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -12982,7 +12982,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.6.conv1.rq_M.mem",
+     "file": "params/dec.6.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -13039,7 +13039,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.6.conv2.rq_M.mem",
+     "file": "params/dec.6.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -13110,7 +13110,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.7.conv.rq_M.mem",
+     "file": "params/dec.7.conv.rq_m.mem",
      "bits": 17,
      "count": 128,
      "signed": false
@@ -13173,7 +13173,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.7.conv2.rq_M.mem",
+     "file": "params/dec.7.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -13262,7 +13262,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.7.skip.rq_M.mem",
+     "file": "params/dec.7.skip.rq_m.mem",
      "bits": 17,
      "count": 128,
      "signed": false
@@ -13339,7 +13339,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.8.conv1.rq_M.mem",
+     "file": "params/dec.8.conv1.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -13396,7 +13396,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.8.conv2.rq_M.mem",
+     "file": "params/dec.8.conv2.rq_m.mem",
      "bits": 17,
      "count": 32,
      "signed": false
@@ -13467,7 +13467,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.9.conv.rq_M.mem",
+     "file": "params/dec.9.conv.rq_m.mem",
      "bits": 17,
      "count": 12,
      "signed": false
@@ -13530,7 +13530,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.9.conv2.rq_M.mem",
+     "file": "params/dec.9.conv2.rq_m.mem",
      "bits": 17,
      "count": 3,
      "signed": false
@@ -13619,7 +13619,7 @@
      "signed": false
     },
     "rq_M": {
-     "file": "params/dec.9.skip.rq_M.mem",
+     "file": "params/dec.9.skip.rq_m.mem",
      "bits": 17,
      "count": 12,
      "signed": false

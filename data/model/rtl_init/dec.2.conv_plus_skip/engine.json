@@ -1,5 +1,5 @@
 {
- "name": "dec.2.conv+skip",
+ "name": "dec.2.conv_plus_skip",
  "ops": [
   "dec.2.conv",
   "dec.2.skip"

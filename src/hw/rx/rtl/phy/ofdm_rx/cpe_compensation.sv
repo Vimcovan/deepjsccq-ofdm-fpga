@@ -5,7 +5,7 @@
 // 
 // Create Date: 2026/09/12 18:55:29
 // Design Name: 
-// Module Name: CPE_compensation
+// Module Name: cpe_compensation
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module CPE_compensation(
+module cpe_compensation(
     input logic clk,
     input logic rst_n,
     input logic[23:0] s_in_tdata,

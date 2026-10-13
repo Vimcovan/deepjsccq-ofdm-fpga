@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// sfo_residual: tracking SFO compensation, measurement part (sits AFTER CPE_compensation).
+// sfo_residual: tracking SFO compensation, measurement part (sits AFTER cpe_compensation).
 //   Data passes straight through (no buffering). On the pilots of every symbol it forms the LS slope
 //     L = -21*Im(p11) - 7*Im(p25) + 7*Im(p39) - 21*Im(p53)
 //   (pilot sequence [1 1 1 -1] folded into the signs; 21 = 16+4+1, 7 = 8-1 -> shift-add only)

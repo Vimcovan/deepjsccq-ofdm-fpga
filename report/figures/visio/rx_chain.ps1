@@ -34,7 +34,7 @@ $y = 56; $h = 28; $m = $y + $h / 2
 Sig 40 $m 46 '24 b'
 [void](Box 46 $y 22 $h $ST.COMPUTE ("sfo_rotator`n× exp(−j·k·A_pred)`nCORDIC + 复乘") $false 7)
 Sig 68 $m 74 '24 b'
-[void](Box 74 $y 24 $h $ST.COMPUTE ("CPE_`ncompensation`n4 导频求和 → G`n× 1/G（保持 64 点）") $false 7)
+[void](Box 74 $y 24 $h $ST.COMPUTE ("cpe_`ncompensation`n4 导频求和 → G`n× 1/G（保持 64 点）") $false 7)
 Sig 98 $m 104 '24 b'
 [void](Box 104 $y 22 $h $ST.COMPUTE ("sfo_residual`n导频 LS 斜率 L`n（移位相加）") $false 7)
 [void](Path @(115, ($y + $h), 115, ($y + $h + 6), 57, ($y + $h + 6), 57, ($y + $h)))

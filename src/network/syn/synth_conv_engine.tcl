@@ -22,7 +22,7 @@ foreach {name generics expect} $configs {
     set d [file join $init $name]
     set gargs {}
     foreach g $generics { lappend gargs -generic $g }
-    foreach {k f} {WROM_PREFIX wrom BIAS_FILE bias.mem PRE_FILE pre.mem M_FILE M.mem SH_FILE sh.mem} {
+    foreach {k f} {WROM_PREFIX wrom BIAS_FILE bias.mem PRE_FILE pre.mem M_FILE m.mem SH_FILE sh.mem} {
         lappend gargs -generic "$k=\"[file join $d $f]\""
     }
     synth_design -top conv_engine -part $part -mode out_of_context {*}$gargs

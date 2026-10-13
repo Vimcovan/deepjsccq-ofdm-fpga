@@ -68,7 +68,7 @@ def export_params(ib: IR.IntBackend, root: Path, rel: Path):
                 'weight': write_mem(pdir / f'{name}.weight.mem', w, ib.wbits) | {'layout': 'OHWI', 'signed': True},
                 'bias': write_mem(pdir / f'{name}.bias.mem', b, 48) | {'signed': True, 'scale': 'accumulator'},
                 'rq_pre': write_mem(pdir / f'{name}.rq_pre.mem', op['rq_pre'], 8) | {'signed': False},
-                'rq_M': write_mem(pdir / f'{name}.rq_M.mem', op['rq_M'], 17) | {'signed': False},
+                'rq_M': write_mem(pdir / f'{name}.rq_m.mem', op['rq_M'], 17) | {'signed': False},
                 'rq_sh': write_mem(pdir / f'{name}.rq_sh.mem', op['rq_sh'], 8) | {'signed': True},
             }
         elif op['op'] in ('gdn', 'igdn'):

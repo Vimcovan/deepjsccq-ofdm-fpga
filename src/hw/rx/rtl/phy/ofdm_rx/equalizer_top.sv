@@ -37,7 +37,7 @@ module equalizer_top#(
     output logic       dbg_pre_fire,
     output logic[23:0] dbg_ce_data,     // channel_equalization output (NSYM sym x 64)
     output logic       dbg_ce_fire,
-    output logic[23:0] dbg_cpe_data,    // CPE_compensation output = final equalizer output (NSYM sym x 64)
+    output logic[23:0] dbg_cpe_data,    // cpe_compensation output = final equalizer output (NSYM sym x 64)
     output logic       dbg_cpe_fire,
     output logic[23:0] dbg_sfo_data,    // sfo_rotator output (after SFO rotation, before CPE; NSYM sym x 64)
     output logic       dbg_sfo_fire
@@ -110,7 +110,7 @@ module equalizer_top#(
     logic[23:0] cpe_data_o;
     logic cpe_valid_o;
     logic cpe_ready_o;
-    CPE_compensation  u_cpe (
+    cpe_compensation  u_cpe (
         .clk(clk),
         .rst_n(rst_n),
         .s_in_tdata(rot_data_o),

@@ -17,7 +17,7 @@ for i in range(int(d["n"])):
     t = d[f"t_{i}"]; order = np.argsort(t)
     t, lat, ps, dec = t[order], d[f"lat_{i}"][order], d[f"psnr_{i}"][order], d[f"decoded_{i}"][order]
     fps = np.r_[np.nan, 1.0 / np.maximum(np.diff(t), 1e-6)]
-    fn = f"{base}_{mode}_{att:g}dB.csv"
+    fn = f"{base}_{mode}_{att:g}db.csv"
     with open(fn, "w") as f:
         f.write("t_min,fps,lat_ms,psnr,decoded\n")
         for a, b, c, p, q in zip((t - t[0]) / 60, fps, lat, ps, dec):

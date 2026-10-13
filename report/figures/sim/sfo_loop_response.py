@@ -1,9 +1,9 @@
-"""Step / ramp response of the RX CPE compensation + SFO tracking loop (sfo_rotator, CPE_compensation, sfo_residual),
+"""Step / ramp response of the RX CPE compensation + SFO tracking loop (sfo_rotator, cpe_compensation, sfo_residual),
 simulated symbol by symbol with the same arithmetic as the RTL (floating point, no noise):
 
   per data symbol n, subcarrier k:  phase = c_n + theta_n * k        (c: common phase, theta: slope, rad/subcarrier)
   sfo_rotator      : multiply by exp(-j k P_n), P_n = A + R          (P_n: predicted slope of this symbol)
-  CPE_compensation : G = mean of the 4 pilots (k = -21, -7, 7, 21), every subcarrier * 1024 / G
+  cpe_compensation : G = mean of the 4 pilots (k = -21, -7, 7, 21), every subcarrier * 1024 / G
   sfo_residual     : L = -21 Im p(-21) - 7 Im p(-7) + 7 Im p(7) + 21 Im p(21),  e = L * 170 (pi-scaled, 2^29 = pi)
   update (after the symbol, effective from symbol n + 1):  R <- R + e/256,  A <- P_n + e/8
   A = R = 0 at the first data symbol of a frame.
@@ -42,7 +42,7 @@ def run(c, theta):
         P = 0.0 if n == 0 else (A + R) / PI_UNIT
         p = np.exp(1j * (c[n] + (theta[n] - P) * KP))            # pilots after sfo_rotator
         G = p.mean()
-        q = p / G * 1024                                         # after CPE_compensation
+        q = p / G * 1024                                         # after cpe_compensation
         L = float(np.sum(W * q.imag))
         e = L * 170                                              # pi-scaled units
         if n == 0:

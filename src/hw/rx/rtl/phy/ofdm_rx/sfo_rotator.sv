@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// sfo_rotator: tracking SFO compensation, rotation part (sits BEFORE CPE_compensation).
+// sfo_rotator: tracking SFO compensation, rotation part (sits BEFORE cpe_compensation).
 //
 //   Each data symbol is rotated by exp(-j*k*A_pred), k = -32..31 (fftshift order), where
 //     A_pred = A + R                       predicted phase slope (rad/subcarrier) of this symbol

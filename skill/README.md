@@ -19,6 +19,18 @@
 | [`pynq-local-display-gui`](pynq-local-display-gui/SKILL.md) | 在板子自带的 DP/HDMI 屏（含 USB 触摸屏）上跑全屏 PyQt 界面：显示栈探测、在真实 X 上用隐藏窗口截图并检测文字溢出与窗口超出可用区域、A53 上的 CPU 预算、触摸长按 / 拖动 | `display_probe.sh`、`offscreen_shots.py`、`evdev_touch.py` |
 | [`pynq-dma-stale-transfer`](pynq-dma-stale-transfer/SKILL.md) | AXI DMA 接收在超时、进程被杀后遗留传输，下一次 / 下一个进程卡在 `wait()`；pynq 的 `stop()` 撤不掉，用 DMACR 软复位 | — |
 
+## 来源与失效条件
+
+每个技能都是从本作品开发中的真实失败或观察提炼的，适用边界写在各 `SKILL.md` 的 When NOT to Use 一节。
+
+| 技能 | 从哪些失败或观察中总结 | 失效条件（不适用的情形） |
+|---|---|---|
+| `mali400-offscreen-gles` | RX 触摸屏 GUI 的信道三维曲面用 CPU 软件渲染太慢，改用 Mali-400 时：把 `/dev/dri` 下属于 `zocl` 的 `renderD128` 误认作 GPU 渲染节点；lima 出现 GP MMU 页错误后不报任何错误，之后每帧都只有清屏色 | 使用 Xilinx 专有 `libmali` 驱动的 PetaLinux（自带 EGL / GLES，不能混用 lima）；没有 Mali-400 的器件（Zynq-7000、ZU CG、Versal）；CPU 已足够快的纯二维界面 |
+| `pynq-out-of-tree-kernel-module` | 为 Mali-400 补编 lima 模块时在系统构建树中运行了 `make modules_prepare`：内核用 gcc 12 编译而板上是 gcc 11，板上时钟又落后，kconfig 重新运行，改写了 `.config` 并删除 `autoconf.h` | 选项只能编进内核（bool，不能为 `=m`），需要重编内核；强制模块签名（`CONFIG_MODULE_SIG_FORCE=y`）；当前内核已有对应的发行版软件包时直接安装 |
+| `pynq-systemd-autostart` | 两块板改为开机自启后断电重启，链路不通：PYNQ 自带的 `bootpy.service` 比本作品的服务晚十几秒执行，加载 `base.bit` 覆盖了已加载的 overlay，寄存器全部读出无效值 | 一次性实验（手动运行即可）；Jupyter notebook（先转成脚本，不要让 notebook 自启） |
+| `pynq-local-display-gui` | 在板上用 Qt 的 `offscreen` 平台（`QT_QPA_PLATFORM=offscreen`）检查板载屏排版，它选用的字体与 X 会话不同，文字普遍宽约 40 %，报出不存在的截断；固定尺寸的离屏渲染也看不出 600 px 高的窗口超出了 578 px 的可用区域 | 界面运行在 PC 上、只从板卡收数据；视频输出完全在 PL 中、不经过 X；三维 OpenGL 绘制（配合 `mali400-offscreen-gles`） |
+| `pynq-dma-stale-transfer` | RX 服务被 `systemctl stop` 停止时，ADC 采集 DMA 还在等待下一帧，此时发射机已关闭，之后每个采集进程的第一次传输都卡在 `wait()`；pynq 的 `stop()` 只清运行位，撤不掉等待中的传输，改用 DMACR 软复位 | 只用 MM2S 发送且 PL 总能接收（卡住是 PL 反压问题）；scatter-gather 模式；PL 从不产生 TLAST（应修 PL，复位只会掩盖问题） |
+
 只适用于本系统的经验（AD9361 配置、杂散排查、时延测量等）和踩坑清单见 [`report/notes/project_skills/`](../report/notes/project_skills/)。
 
 ## 测试方法

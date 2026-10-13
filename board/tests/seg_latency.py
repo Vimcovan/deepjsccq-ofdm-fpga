@@ -122,7 +122,7 @@ for k, d in three.items():
     d = d[d == d] * 1e3
     res3[k] = dict(median=round(float(np.median(d)), 3), min=round(float(d.min()), 3), max=round(float(d.max()), 3),
                    p1=round(float(np.percentile(d, 1)), 3), p99=round(float(np.percentile(d, 99)), 3), n=int(len(d)))
-    np.savetxt(f"{out}_3seg_{k}.csv", d, fmt="%.4f")
+    np.savetxt(f"{out}_3seg_{k.lower()}.csv", d, fmt="%.4f")
 json.dump(res3, open(out + "_3seg.json", "w"), indent=1)
 print("\nthree segments (ms):")
 for k, r in res3.items():

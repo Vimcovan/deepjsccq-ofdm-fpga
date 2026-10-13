@@ -160,7 +160,7 @@ def main():
     if sys.argv[1] == "claude-batch":
         files = sorted(sys.argv[3:], key=first_ts)
         for fn in files:
-            export("claude", fn, os.path.join(sys.argv[2], prefix(fn) + os.path.basename(fn)[:8] + ".md"))
+            export("claude", fn, os.path.join(sys.argv[2], (prefix(fn) + os.path.basename(fn)[:8]).lower() + ".md"))
         return
     if sys.argv[1] == "codex-batch":                       # codex-batch <out_dir> <sessions_root> <tag>=<cwd> ...
         tags = dict(a.split("=", 1)[::-1] for a in sys.argv[4:])
@@ -170,7 +170,7 @@ def main():
             if tag:
                 b = os.path.basename(fn)[:-6]
                 stamp = b[8:27].replace(":", "").replace("T", "_") + "_" + b[-36:-28]
-                export("codex", fn, os.path.join(sys.argv[2], f"{tag}_{stamp}.md"))
+                export("codex", fn, os.path.join(sys.argv[2], f"{tag}_{stamp}".lower() + ".md"))
         return
     export(*sys.argv[1:4])
 

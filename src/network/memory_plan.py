@@ -153,7 +153,7 @@ class Planner:
                 buf(f'{nm}.skip delay', 'skip delay FIFO (2 rows)', 2 * W * min(C, Co), self.ab, f'{nm}.out.b')
             elif isinstance(blk, ResidualBlockUpsample):
                 r = blk.scale
-                E.append(self.engine(f'{nm}.conv+skip', C, 2 * Co * r * r, 3, H, W,
+                E.append(self.engine(f'{nm}.conv_plus_skip', C, 2 * Co * r * r, 3, H, W,
                                      'main and skip 3x3 merged (same input)', [f'{nm}.conv', f'{nm}.skip']))
                 E.append(self.engine(f'{nm}.conv2', Co, Co, 3, Ho, Wo))
                 E.append(self.gdn(f'{nm}.igdn', Co, Ho, Wo))
