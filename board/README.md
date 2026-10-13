@@ -42,5 +42,6 @@
 
 - **AGC 卡在低增益、衰减加大后失步**：快速 AGC 在 20 MSPS 下偶发不解锁；`rx_server` 的看门狗在同步率 < 5 帧/s 持续 0.5 s 且增益未到最大时复位 AGC（约 1–3 s 恢复）。
 - **SSCC 在高 SNR 下也偶发整帧失败**：已通过 AGC 锁定电平 −14 dBFS 解决（见 `THIRD_PARTY.md` 末节）；若改动初始化脚本后复现，用 `tests/agc_trace.py --adc` 检查帧内增益台阶。
+- **启动时的告警**：服务启动后的十几秒内 `rx_server.log` 中的 `spectrum: ADC capture did not complete` 与 0 帧/s 属正常，AGC 锁定后消失；`gui.log` 中的 `libGL error: failed to load driver: xlnx` 为 Mesa 找不到 Xilinx 专用驱动后的正常回退，随后出现 `h3d_render: Mali400` 即三维渲染正常。
 - **抓取 ADC / 测频谱前**先 `systemctl stop jscc-rx`（与频谱线程共用抓取 DMA）；`rx_server` 停止时会复位两个 DMA，防止遗留传输卡住下一个进程。
 - **带内杂散**：显示像素时钟谐波（51.2 MHz × 18 = 921.6 MHz）落入 RX 带内，已改用 52.01 MHz；40 MHz 参考时钟的 23 次谐波（920 MHz，子载波 +16）为 RX 板侧固有杂散。

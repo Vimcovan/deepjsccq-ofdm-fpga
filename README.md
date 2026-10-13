@@ -174,15 +174,22 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 
 ## 快速上手（使用部署版比特流）
 
-两块板运行 PYNQ 镜像（PynqLinux 3.0，pynq 3.1.1），以 root 登录。PC 只连 RX 板（`192.168.3.1`）时，经 RX 跳转登录 TX：
-`ssh -o ProxyCommand="ssh -W %h:%p root@192.168.3.1" root@192.168.4.1`。
+两块板运行 PYNQ 镜像（PynqLinux 3.0，pynq 3.1.1），以 root 用 SSH 密钥登录。PC 只连 RX 板（`192.168.3.1`）时，
+经 RX 跳转登录 TX 或向 TX 拷文件（`<key>` 为私钥路径，内外两层都要指定）：
+
+```
+ssh -i <key> -o "ProxyCommand=ssh -i <key> -W %h:%p root@192.168.3.1" root@192.168.4.1
+scp -i <key> -o "ProxyCommand=ssh -i <key> -W %h:%p root@192.168.3.1" <文件> root@192.168.4.1:/home/xilinx/claude/tx/
+```
 
 1. 拷贝文件。比特流、`.hwh` 与 Python 程序放在同一目录；`src/sw/common/` 中的两个文件直接放进该目录，不保留 `common/` 这一层：
    - TX 板 `/home/xilinx/claude/tx/`：`board/bitstreams/jscc_tx.{bit,hwh}`、`src/sw/tx/` 的全部内容（含 `media/colorful_256.mp4`）、`src/sw/common/*`；
    - RX 板 `/home/xilinx/claude/rx/`：`board/bitstreams/jscc_rx.{bit,hwh}`、`src/sw/rx/` 的全部内容（含 `assets/`）、`src/sw/common/*`，
      `display_mode.sh` 设为可执行（`chmod 755`）。
 
-   拷完在板上用 `board/bitstreams/SHA256SUMS` 核对比特流（新旧比特流大小相同，只能靠哈希区分）。放到其他目录时需同步修改 `src/sw/systemd/*.service`。
+   拷完核对比特流：在板上运行 `sha256sum jscc_*.bit jscc_*.hwh`，与 PC 上的 `board/bitstreams/SHA256SUMS` 比对（新旧比特流大小相同，
+   只能靠哈希区分）。覆盖已有目录时，先删除 TX 板上的 `tx_source.txt`（保存着上次选择的信源，见第 3 步）。
+   放到其他目录时需同步修改 `src/sw/systemd/*.service`。
 2. 安装并启动服务：TX 板只装 `jscc-tx.service`，RX 板只装 `jscc-rx.service` 与 `jscc-gui.service`，拷到 `/etc/systemd/system/` 后：
 
    ```
