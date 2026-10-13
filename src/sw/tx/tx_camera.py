@@ -4,11 +4,12 @@ exact frames handed to the encoder to the PC (UDP, see jscc_udp.py).
   camera  MJPG 640x480 @30, manual exposure/gain (defaults tuned on the bench: exposure 300 = 30 ms, gain 63)
   frame   centre crop 480x480 -> INTER_AREA 256x256 -> RGB uint8 (H, W, C) = encoder NHWC order
   send    only NEW camera frames are sent (no repeats); the encoder back-pressures the DMA (~30 fps max)
+  source  camera, demo video (--video, looped) or preset images (--presets), chosen in the RX GUI and kept in
+          tx_source.txt; the camera is optional (without one, or without a saved choice, the demo video is sent)
 Run as root:  bash -lc 'source /etc/profile.d/pynq_venv.sh && python3 tx_camera.py [--exposure 300 --gain 63]'
 """
 import argparse
 import os
-import sys
 import socket
 import threading
 import time
@@ -48,8 +49,11 @@ if os.path.isdir(args.presets):
 CYCLE = ["video"] + [f"preset:{k}" for k in PRESETS]
 
 
+CAM_OK = {"now": True}                        # cleared while no USB camera is connected (the camera is optional)
+
+
 def src_ok(v):
-    return v == "camera" or (v == "video" and os.path.exists(args.video)) or \
+    return (v == "camera" and CAM_OK["now"]) or (v == "video" and os.path.exists(args.video)) or \
         (v.startswith("preset:") and v[len("preset:"):] in PRESETS)
 
 
@@ -59,7 +63,7 @@ def src_next(cur):
 
 
 SRC_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tx_source.txt")   # last choice (kept over reboots)
-src = {"now": "camera"}
+src = {"now": "video" if src_ok("video") else "camera"}                  # without a saved choice: the demo video
 try:
     v = open(SRC_FILE).read().strip()
     if src_ok(v):
@@ -72,13 +76,25 @@ except OSError:
 class Camera(threading.Thread):
     def __init__(self):
         super().__init__(daemon=True)
-        for _ in range(30):                  # at boot the USB camera can show up late: retry, then let systemd restart us
-            cap = cv2.VideoCapture(args.device, cv2.CAP_V4L2)
-            if cap.isOpened():
+        self.lock = threading.Condition()
+        self.frame, self.seq, self.n = None, 0, 0
+        self.cap = None
+        for _ in range(3):                   # at boot the USB camera can show up late (the service waits up to 20 s)
+            if self.open():
                 break
-            cap.release(); time.sleep(1.0)
+            time.sleep(1.0)
         else:
-            sys.exit("camera: cannot open /dev/video%d" % args.device)
+            print("camera: no camera at /dev/video%d, demo video / presets only (retried every 5 s)" % args.device,
+                  flush=True)
+        CAM_OK["now"] = self.cap is not None
+
+    def open(self):
+        if not os.path.exists(f"/dev/video{args.device}"):
+            return False
+        cap = cv2.VideoCapture(args.device, cv2.CAP_V4L2)
+        if not cap.isOpened():
+            cap.release()
+            return False
         cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*"MJPG"))
         cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640); cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480); cap.set(cv2.CAP_PROP_FPS, 30)
         if args.auto:
@@ -99,16 +115,23 @@ class Camera(threading.Thread):
         except (OSError, KeyError, ImportError) as e:
             print("camera colour controls not set:", e, flush=True)
         self.cap = cap
-        self.lock = threading.Condition()
-        self.frame, self.seq, self.n = None, 0, 0
+        return True
 
     def run(self):
         while True:
+            if self.cap is None:                     # no camera: look for one now and then (plugged in later)
+                time.sleep(5.0)
+                if self.open():
+                    CAM_OK["now"] = True
+                    print("camera: connected", flush=True)
+                continue
             if src["now"] != "camera":               # demo video selected: keep the driver queue drained, no decode
-                self.cap.grab(); continue
+                if not self.cap.grab():
+                    self.lost(); time.sleep(0.01)
+                continue
             ok, f = self.cap.read()
             if not ok:
-                time.sleep(0.01); continue
+                self.lost(); time.sleep(0.01); continue
             h, w = f.shape[:2]; s = min(h, w)
             y0, x0 = (h - s) // 2, (w - s) // 2
             img = cv2.resize(f[y0:y0 + s, x0:x0 + s], (256, 256), interpolation=cv2.INTER_AREA)
@@ -116,6 +139,15 @@ class Camera(threading.Thread):
             with self.lock:
                 self.frame = img; self.seq += 1; self.n += 1
                 self.lock.notify_all()
+
+    def lost(self):
+        """a failed read: if the device node is gone, the camera was unplugged"""
+        if os.path.exists(f"/dev/video{args.device}"):
+            return
+        self.cap.release(); self.cap = None; CAM_OK["now"] = False
+        print("camera: disconnected", flush=True)
+        if src["now"] == "camera" and src_ok("video"):
+            src["now"] = "video"
 
     def wait_new(self, last_seq, timeout=1.0):
         with self.lock:
@@ -336,6 +368,8 @@ print(f"SSCC baseline {'available' if mode['ok'] else 'not in this bitstream'}",
 jfit = sscc_pkt.JpegFit()
 
 cam = Camera(); cam.start()
+if not src_ok(src["now"]) and src_ok("video"):     # saved choice "camera" but no camera connected
+    src["now"] = "video"
 vid = Video(args.video) if os.path.exists(args.video) else None
 if vid is not None:
     vid.start()
@@ -344,7 +378,7 @@ print(f"input {src['now']}" + ("" if vid else f" (no demo video at {args.video})
       flush=True)
 seq, sent, t_rep = 0, 0, time.time()
 cur_src = None
-print("streaming camera frames", flush=True)
+print("streaming", flush=True)
 while True:
     s_obj = vid if (src["now"] == "video" and vid is not None) else still if src["now"].startswith("preset:") else cam
     if s_obj is not cur_src:                       # switched: the sequence numbers of the other source do not apply

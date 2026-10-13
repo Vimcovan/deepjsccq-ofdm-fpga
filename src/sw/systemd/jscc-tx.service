@@ -1,5 +1,5 @@
 [Unit]
-Description=DeepJSCC-Q TX: USB camera -> encoder overlay (tx_camera.py)
+Description=DeepJSCC-Q TX: camera / demo video / presets -> encoder overlay (tx_camera.py)
 # bootpy.service runs PYNQ's /boot/boot.py, which loads base.bit: load our overlay only after it
 After=network.target systemd-modules-load.service bootpy.service
 Wants=network.target
@@ -8,9 +8,9 @@ Wants=network.target
 Type=simple
 WorkingDirectory=/home/xilinx/claude/tx
 ExecStartPre=/bin/sleep 5
-# USB camera: wait (up to 60 s) for /dev/video0
-ExecStartPre=/bin/bash -c 'for i in $(seq 60); do [ -e /dev/video0 ] && exit 0; sleep 1; done; exit 1'
-# optional camera arguments, written by start_jscc_link.py (e.g. TX_ARGS=--exposure 300 --gain 63)
+# USB camera (optional): give it up to 20 s to appear; tx_camera.py also picks it up later
+ExecStartPre=/bin/bash -c 'for i in $(seq 20); do [ -e /dev/video0 ] && break; sleep 1; done; exit 0'
+# optional arguments of tx_camera.py, one line TX_ARGS=... (e.g. TX_ARGS=--exposure 300 --gain 63)
 EnvironmentFile=-/home/xilinx/claude/tx/tx_args.env
 ExecStart=/bin/bash -lc 'source /etc/profile.d/pynq_venv.sh && exec python3 tx_camera.py ${TX_ARGS}'
 StandardOutput=append:/home/xilinx/claude/tx/tx_camera.log

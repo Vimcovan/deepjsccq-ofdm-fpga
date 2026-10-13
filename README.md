@@ -174,13 +174,34 @@ TX、RX 板上的程序由 systemd 自启动，上电约 1 分钟建立链路，
 
 ## 快速上手（使用部署版比特流）
 
-1. 把 `board/bitstreams/jscc_tx.{bit,hwh}` 和 `src/sw/tx/*`、`src/sw/common/*` 拷到 TX 板 `/home/xilinx/claude/tx/`；
-   `board/bitstreams/jscc_rx.{bit,hwh}` 和 `src/sw/rx/*`、`src/sw/common/*` 拷到 RX 板 `/home/xilinx/claude/rx/`。
-   （比特流、`.hwh` 与 Python 程序放在同一目录；其他路径需同步修改 `src/sw/systemd/*.service`。）
-2. TX 板 `media/`：演示视频 `src/sw/tx/media/colorful_256.mp4`（默认 `--video`）；预设图由 `src/sw/tools/make_presets.py` 从 DIV2K 生成到 `media/presets/`。
-3. 安装服务：`src/sw/systemd/*.service` 拷到 `/etc/systemd/system/`，`systemctl enable --now jscc-tx`（TX）、
-   `jscc-rx jscc-gui`（RX）。上电约 1 分钟后触摸屏显示 GUI。
-4. 板上程序以 root 运行；`rx_server.py` 启动时下载比特流并由 PS 初始化 AD9361（约 25 s）。
+两块板运行 PYNQ 镜像（PynqLinux 3.0，pynq 3.1.1），以 root 登录。PC 只连 RX 板（`192.168.3.1`）时，经 RX 跳转登录 TX：
+`ssh -o ProxyCommand="ssh -W %h:%p root@192.168.3.1" root@192.168.4.1`。
+
+1. 拷贝文件。比特流、`.hwh` 与 Python 程序放在同一目录；`src/sw/common/` 中的两个文件直接放进该目录，不保留 `common/` 这一层：
+   - TX 板 `/home/xilinx/claude/tx/`：`board/bitstreams/jscc_tx.{bit,hwh}`、`src/sw/tx/` 的全部内容（含 `media/colorful_256.mp4`）、`src/sw/common/*`；
+   - RX 板 `/home/xilinx/claude/rx/`：`board/bitstreams/jscc_rx.{bit,hwh}`、`src/sw/rx/` 的全部内容（含 `assets/`）、`src/sw/common/*`，
+     `display_mode.sh` 设为可执行（`chmod 755`）。
+
+   拷完在板上用 `board/bitstreams/SHA256SUMS` 核对比特流（新旧比特流大小相同，只能靠哈希区分）。放到其他目录时需同步修改 `src/sw/systemd/*.service`。
+2. 安装并启动服务：TX 板只装 `jscc-tx.service`，RX 板只装 `jscc-rx.service` 与 `jscc-gui.service`，拷到 `/etc/systemd/system/` 后：
+
+   ```
+   systemctl daemon-reload
+   systemctl enable jscc-tx && systemctl restart jscc-tx                      # TX 板
+   systemctl enable jscc-rx jscc-gui && systemctl restart jscc-rx jscc-gui    # RX 板
+   ```
+
+   用 `restart` 而不用 `enable --now`：重新部署时服务已在运行，`enable --now` 不会重启进程，新文件不会生效。
+3. 信源：TX 默认发送演示视频。USB 摄像头可选，插上后在 GUI 中切换（运行中插拔也可以，拔下时自动回到演示视频）。
+   GUI 的选择保存在 TX 板的 `tx_source.txt` 中，重启后沿用；要回到演示视频，删除该文件（或写入 `video`）后重启 `jscc-tx`。
+   预设图可选，由 `src/sw/tools/make_presets.py` 从 DIV2K 生成到 TX 板的 `media/presets/`，GUI 的"预设"键在演示视频与预设图之间循环。
+4. 启动过程：
+   - TX：加载比特流后先用 PRBS 自测，DAC 侧未就绪时重新加载（最多 5 次），然后开始发送；没有摄像头时服务先等它最多 20 s。
+   - RX：`rx_server.py` 下载比特流，由 PS 初始化 AD9361（初始化本身约 0.3 s），AGC 锁定后开始收图。
+   - 服务启动后的前十几秒接收帧率为 0、日志中出现 `spectrum: ADC capture did not complete` 属正常：AGC 看门狗会复位 AGC，
+     通常 1 分钟内稳定在 30 fps。上电约 1 分钟后触摸屏显示 GUI。
+5. 检查：RX 的 `rx_server.log` 每 5 s 一行，出现 `images 30.0/s` 即链路正常；TX 的 `tx_camera.log` 中为 `sent 30.0 fps`、`tlast err 0`。
+   TX 板没有网络授时，系统时间可能与 RX 相差很多，两板日志的时间不能直接对照，帧率按同一份日志中的计数差计算。
 
 ## 从源码重新构建比特流
 
