@@ -1,4 +1,4 @@
-# deepjsccq-ofdm-fpga：基于 FPGA 的 DeepJSCC-Q 实时无线图像传输
+# GlideLink：基于 FPGA 的 DeepJSCC-Q 实时无线图像传输
 
 两块 PYNQ-ZU（Zynq UltraScale+ xczu5eg）+ 两块 AD9361 射频卡，**深度联合信源信道编码器 / 解码器（DeepJSCC-Q）与类 802.11a OFDM
 物理层全部在 PL 中实现**，经 915 MHz 空口以 **30 fps** 实时传输 256×256 彩色图像。信道变差时画质平缓下降，而不是像
