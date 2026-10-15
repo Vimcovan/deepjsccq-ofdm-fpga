@@ -30,7 +30,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--tx", default="192.168.4.1")
 ap.add_argument("--rx", default="192.168.3.1")
 ap.add_argument("--shot", nargs=2, metavar=("PNG", "SECONDS"))
-ap.add_argument("--page", default=None, help="page shown at start (0 image link, 1 PHY detail, 2 style, 3 about)")
+ap.add_argument("--page", default=None, help="page shown at start (0 image link, 1 PHY detail, 2 style, 3 about, 4 phone (lite))")
 ap.add_argument("--lite", action="store_true", help="board display: no TX preview / PSNR / latency, 2-D |H| waterfall")
 ap.add_argument("--compact", action="store_true", help="lite: small-screen layout (default when the screen is < 800 px high)")
 ap.add_argument("--no-compact", action="store_true")
@@ -38,6 +38,8 @@ ap.add_argument("--no-gpu3d", action="store_true", help="lite: 2-D waterfall eve
 ap.add_argument("--theme", default=None, help="colour theme (default: the last one picked on the style page, else 'tech')")
 ap.add_argument("--remote-port", type=int, default=0, help="UDP remote control for the demo-video director (e.g. 5010); default off")
 ap.add_argument("--bench", type=float, default=0, metavar="SECONDS", help="run, print load statistics, quit")
+ap.add_argument("--web-port", type=int, default=8080, help="lite: port of the phone control page (web_server.py), "
+                "shown with a QR code on the phone page")
 ap.add_argument("--touch-dev", default="auto", help="lite: touch screen evdev node for press-and-hold / drag "
                 "('auto': the multi-touch CTP panel, 'off')")
 args, _ = ap.parse_known_args()
@@ -1179,6 +1181,83 @@ class TouchHold(QtCore.QThread):
                         self.move.emit(gx, gy)
 
 
+def wifi_link(dev="wlan0"):
+    """(IPv4 address, SSID) of the board's WiFi, None where not connected"""
+    import subprocess
+    def run(*c):
+        try:
+            return subprocess.run(c, capture_output=True, text=True, timeout=2).stdout
+        except (OSError, subprocess.SubprocessError):
+            return ""
+    f = run("ip", "-4", "-o", "addr", "show", dev).split()
+    ip = f[f.index("inet") + 1].split("/")[0] if "inet" in f else None
+    ssid = next((l.split(":", 1)[1].strip() for l in run("iw", "dev", dev, "link").splitlines()
+                 if l.strip().startswith("SSID:")), None)
+    return ip, ssid
+
+
+class QrView(QtWidgets.QWidget):
+    """QR code, black on white with the 4-module quiet zone, whole-pixel modules (crisp for phone cameras)"""
+    def __init__(self):
+        super().__init__(); self.qr = None
+        self.setMinimumSize(200, 200)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+
+    def set_text(self, text):
+        import qrcodegen
+        self.qr = qrcodegen.QrCode.encode_text(text, qrcodegen.QrCode.Ecc.MEDIUM) if text else None
+        self.update()
+
+    def paintEvent(self, e):
+        p = QtGui.QPainter(self)
+        if self.qr is None:
+            return
+        n = self.qr.get_size(); m = min(self.width(), self.height()) // (n + 8)
+        side = m * (n + 8); x0 = (self.width() - side) // 2; y0 = (self.height() - side) // 2
+        p.fillRect(x0, y0, side, side, QtGui.QColor("#FFFFFF"))
+        black = QtGui.QColor("#000000")
+        for y in range(n):
+            for x in range(n):
+                if self.qr.get_module(x, y):
+                    p.fillRect(x0 + (x + 4) * m, y0 + (y + 4) * m, m, m, black)
+
+
+class PhonePage(QtWidgets.QWidget):
+    """address + QR code of the phone control page (web_server.py on this board, over the board's WiFi): the hotspot
+    decides the address, so the phone gets it from the screen"""
+    def __init__(self, fam, compact, port):
+        super().__init__(); self.port = port; self.key = ()
+        h = QtWidgets.QHBoxLayout(self); h.setContentsMargins(24, 12, 24, 12); h.setSpacing(28)
+        self.code = QrView(); h.addWidget(self.code, 5)
+        col = QtWidgets.QVBoxLayout(); col.setSpacing(14); h.addLayout(col, 6)
+        hdr = QtWidgets.QLabel("手机控制"); hdr.setObjectName("hdr"); col.addWidget(hdr, 0)
+        col.addStretch(1)
+        self.addr = QtWidgets.QLabel(); self.addr.setWordWrap(True)
+        f = self.addr.font(); f.setFamily(mono_family()); f.setPointSize(20 if compact else 26); f.setBold(True)
+        self.addr.setFont(f); self.addr.setStyleSheet(f"color: {C_CLAY};"); col.addWidget(self.addr, 0)
+        self.ssid = QtWidgets.QLabel(); col.addWidget(self.ssid, 0)
+        self.hint = QtWidgets.QLabel(); self.hint.setWordWrap(True); self.hint.setStyleSheet(f"color: {C_MUTED};")
+        col.addWidget(self.hint, 0)
+        col.addStretch(2)
+        for w in (self.ssid, self.hint):
+            f = w.font(); f.setFamily(fam); f.setPointSize(13 if compact else 15); w.setFont(f)
+        self.tm = QtCore.QTimer(self); self.tm.timeout.connect(self.refresh); self.tm.start(5000)
+        self.refresh()
+
+    def refresh(self):
+        ip, ssid = wifi_link()
+        if (ip, ssid) == self.key:
+            return
+        self.key = (ip, ssid)
+        url = f"http://{ip}:{self.port}" if ip else None
+        self.code.set_text(url)
+        self.addr.setText(url or "WiFi 未连接")
+        self.ssid.setText(f"WiFi 热点：{ssid}" if ssid else "")
+        self.hint.setText("手机连上同一个热点后扫码，或在浏览器中输入上面的地址：两路实时画面、物理层指标，"
+                          "以及 TX 衰减、模式和信源控制。" if url else
+                          "板子开机后会自动连接已配置的热点（src/sw/board_setup/wifi），连上后这里显示地址和二维码。")
+
+
 class Gui(QtWidgets.QMainWindow):
     T_WIN, T_SPAN, Z_SCALE, XE = 5.0, 50.0, 5.0, 28.0
     STAGES = [("pre", "Pre-EQ (FFT out)"), ("ce", "After CE"), ("sfo", "After SFO rotation"), ("cpe", "After CPE (final)")]
@@ -1339,6 +1418,8 @@ class Gui(QtWidgets.QMainWindow):
 
         # ======================= page 4: about (structure diagram + topics) =======================
         self.tabs.addTab(AboutPage(fam, self.compact), "介绍" if self.compact else "About")
+        if args.lite:                        # page 5: phone control page address (board WiFi)
+            self.tabs.addTab(PhonePage(fam, self.compact, args.web_port), "手机")
 
         global MONO
         MONO = mono_family()
@@ -1350,7 +1431,7 @@ class Gui(QtWidgets.QMainWindow):
             self.card2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             self.card1.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)    # KPI column
         self.h_title.setObjectName("hdr")
-        tab_css = "padding: 10px 20px; min-width: 112px; font-size: 14pt;" if self.compact else "padding: 8px 22px; min-width: 150px; font-size: 13pt;"
+        tab_css = "padding: 10px 14px; min-width: 88px; font-size: 14pt;" if self.compact else "padding: 8px 22px; min-width: 150px; font-size: 13pt;"
         # attenuation bar: finger-sized on the touch screen (>= ~46 px targets)
         btn_h, btn_w, pm_w, pm_pt, pre_w, mode_w, small_pt = ((46, 46, 66, 22, 60, 78, 13) if self.compact else
                                                               (30, 34, 34, 13, 40, 54, 11))
@@ -1358,6 +1439,7 @@ class Gui(QtWidgets.QMainWindow):
         self.setStyleSheet(f"""
             QMainWindow, QWidget {{ background: {C_BG}; color: {C_INK}; }}
             QTabWidget::pane {{ border: none; }}
+            QTabBar {{ font-family: '{fam}'; font-size: {14 if self.compact else 13}pt; }}  /* tab widths are measured with this font */
             QTabBar::tab {{ background: {TH["TAB"]}; color: {C_MUTED}; {tab_css} margin-right: 4px; border-radius: 6px;
                             border: 1px solid {C_LINE}; font-family: '{fam}'; }}
             QTabBar::tab:selected {{ background: {TH["TAB_SEL"]}; color: {TH["TAB_SEL_FG"]}; border: 1px solid {C_CLAY}; }}

@@ -207,8 +207,8 @@ scp -i <key> -o "ProxyCommand=ssh -i <key> -W %h:%p root@192.168.3.1" <文件> r
    - RX：`rx_server.py` 下载比特流，由 PS 初始化 AD9361（初始化本身约 0.3 s），AGC 锁定后开始收图。
    - 服务启动后的前十几秒接收帧率为 0、日志中出现 `spectrum: ADC capture did not complete` 属正常：AGC 看门狗会复位 AGC，
      通常 1 分钟内稳定在 30 fps。上电约 1 分钟后触摸屏显示 GUI。
-5. 手机控制（可选）：两块板按 `src/sw/board_setup/README.md` 配置开机自动连 WiFi 后，同一 WiFi 下的手机或电脑用浏览器打开
-   `http://<RX 板 WiFi 地址>:8080`，可看两路实时画面与指标、调 TX 衰减、切换模式和信源。两块板各自把画面直接发给手机
+5. 手机控制（可选）：两块板按 `src/sw/board_setup/README.md` 配置开机自动连 WiFi 后，同一 WiFi 下的手机扫触摸屏“手机”页上的二维码
+   （或在浏览器中输入该页显示的 `http://<RX 板 WiFi 地址>:8080`），可看两路实时画面与指标、调 TX 衰减、切换模式和信源。两块板各自把画面直接发给手机
    （TX 原图来自 TX 板的 8081 端口），不需要板间网线；连着网线时另显示 PSNR 与时延，命令经触摸屏 GUI 转发，两边同步。
 6. 检查：RX 的 `rx_server.log` 每 5 s 一行，出现 `images 30.0/s` 即链路正常；TX 的 `tx_camera.log` 中为 `sent 30.0 fps`、`tlast err 0`。
    TX 板没有网络授时，系统时间可能与 RX 相差很多，两板日志的时间不能直接对照，帧率按同一份日志中的计数差计算。

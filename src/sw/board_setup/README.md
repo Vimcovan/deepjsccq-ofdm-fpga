@@ -48,7 +48,8 @@ bash install.sh "<热点名>" "<密码>"
 `wlan0-dhcp`：在两个同名热点之间切换时 `dhclient` 会沿用旧租约，板子在新热点上没有地址），并去掉
 `/etc/network/interfaces.d/wlan0` 中的 `auto` / `allow-hotplug`：PYNQ 的 ifupdown 钩子与设备热插拔同时启用 `wlan0` 时会
 互相关掉对方。线下演示可用手机开 2.4 GHz 热点（与安装时同名同密码），两块板开机后自动连上，手机浏览器打开
-`http://<RX 板地址>:8080` 即为控制页（`src/sw/rx/web_server.py`），RX 板地址可在手机热点的已连接设备中查看。两块板各自
+`http://<RX 板地址>:8080` 即为控制页（`src/sw/rx/web_server.py`）；地址由热点分配，RX 触摸屏的“手机”页显示当前地址和二维码，
+手机扫码即可打开。两块板各自
 把画面发给手机，不经板间网线转发；WILC 的上行约 2.5 Mbit/s，每路画面限为 15 fps、JPEG 质量 65（约 0.9 Mbit/s），
 WiFi 来不及发送时跳帧而不排队，画面始终是最新的。
 

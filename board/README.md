@@ -23,7 +23,7 @@
 | TX | `jscc-tx` | `tx_camera.py`：取图（摄像头 / 演示视频 / 预设图）→ 编码器；UDP 5006 接收模式、信源、衰减命令，发送预览；HTTP 8081 为手机提供原图 MJPEG 流（`/tx.mjpg`） |
 | RX | `jscc-rx` | `rx_server.py`：下载比特流、PS 初始化 AD9361、AGC 看门狗；UDP 5005 发送解码图、遥测、频谱、SSCC 包 |
 | RX | `jscc-web` | `web_server.py`：手机 / 浏览器控制页（端口 8080，经 WiFi 访问）：RX 重建图（`/rx.mjpg`，TX 原图由页面直接从 TX 板 8081 端口取）、帧率 / EVM、TX 衰减 / 模式 / 信源控制、星座 / 逐子载波 SNR / 频谱；在 WiFi 子网广播 `JSCC-STAT` 找到 TX 板，命令直接发给它；连着板间网线时 PSNR、时延与命令经 GUI 的远程端口（5010），与触摸屏同步 |
-| RX | `jscc-gui` | `jscc_gui.py --lite --remote-port 5010`：触摸屏 GUI，`--lite` 为板载小屏模式（紧凑排版、降低刷新率、用 Mali-400 渲染 \|H\| 三维图；TX 预览、PSNR 与时延只在两板连网线时显示）（启动前 `display_mode.sh` 把显示像素时钟设为 52.01 MHz，避开 921.6 MHz 带内杂散） |
+| RX | `jscc-gui` | `jscc_gui.py --lite --remote-port 5010`：触摸屏 GUI，`--lite` 为板载小屏模式（紧凑排版、降低刷新率、用 Mali-400 渲染 \|H\| 三维图；TX 预览、PSNR 与时延只在两板连网线时显示）；“手机”页显示手机控制页的地址和二维码（`--web-port`，默认 8080）（启动前 `display_mode.sh` 把显示像素时钟设为 52.01 MHz，避开 921.6 MHz 带内杂散） |
 
 日志：TX `tx_camera.log`；RX `rx_server.log`（每 5 s 一行：帧率、PHY 计数、AGC 增益）、`agc_events.jsonl`（每次失步时的 AGC 状态快照，每行一条 JSON）、`gui.log`。
 

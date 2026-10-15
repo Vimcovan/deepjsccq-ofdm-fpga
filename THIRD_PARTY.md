@@ -12,6 +12,7 @@
 | DeepJSCC-Q 方法 | `src/model/` | Tung, Kurka, Jankowski, Gündüz, "DeepJSCC-Q: Constellation constrained deep joint source-channel coding", IEEE JSAIT 2022 | 论文方法的复现与 FPGA 化实现 |
 | Vivado IP 配置 | `src/hw/{tx,rx}/ip/*/*.xci` | AMD / Xilinx Vivado IP（FFT、FIFO、DDS、CORDIC、除法器、Viterbi、Clocking Wizard、VIO 等） | 仅为 IP 配置文件，IP 本身随 Vivado 提供，受 AMD 许可约束 |
 | PYNQ-ZU PS 配置 | `src/hw/ps_config_list.txt` | PYNQ-ZU 板卡的 Zynq UltraScale+ PS 预设 | 板卡厂商 / PYNQ 项目提供 |
+| 二维码生成 | `src/sw/rx/qrcodegen.py` | Project Nayuki QR Code generator library（Python 版 1.8.0，PyPI `qrcodegen`），未修改；RX 触摸屏“手机”页用它显示控制页地址 | MIT（Copyright Project Nayuki），文件头保留原声明 |
 | TX 演示视频 | `src/sw/tx/media/colorful_256.mp4` | 本项目提供 | 经确认可随本仓库（MIT）分发 |
 | 测试图像 | 不包含 | DIV2K（`src/sw/tools/make_presets.py` 从 DIV2K valid 生成 256×256 预设图）、Kodak（kodim23） | 数据集不再分发，请从官方地址下载 |
 | 训练数据 | 不包含 | Flickr2K / DIV2K（`src/model/download_flickr2k.ps1`） | 同上 |
