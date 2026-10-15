@@ -6,6 +6,7 @@
 |---|---|---|
 | `pyqt5/` | GUI 依赖：PyQt5 5.15、pyqtgraph、PyOpenGL | GUI 无法启动（链路照常工作，可在 PC 上运行 `jscc_gui.py`） |
 | `gpu_lima/` | Mali-400 GPU 的 lima 内核驱动 | PHY 页 \|H\| 三维图改为二维瀑布图，其余功能不受影响 |
+| `wifi/` | 两块板开机自动连接 WiFi（手机网页控制、远程登录） | 只能经 USB 网线访问板子 |
 
 ## PyQt5（`pyqt5/`）
 
@@ -32,3 +33,22 @@ PYNQ-ZU 镜像的内核（6.6.10-xilinx-v2024.1）没有打开 `CONFIG_DRM_LIMA`
 
 GUI 的三维图由 `src/sw/rx/h3d_render.py` 在 lima 的 render 节点上用 GBM + EGL 离屏渲染（不经过 X），显示仍由
 PYNQ 默认的 X 服务完成。
+
+## WiFi（`wifi/`）
+
+PYNQ-ZU 板载 Microchip WILC WiFi 模块（SDIO，驱动 `wilc_sdio`，网口 `wlan0`，只支持 2.4 GHz）。两块板都以 root 运行：
+
+```
+bash install.sh "<热点名>" "<密码>"
+```
+
+脚本用 `wpa_passphrase` 生成 `/etc/wpa_supplicant/wpa_supplicant-wlan0.conf`（只保存哈希后的密钥），启用 systemd 的
+`wpa_supplicant@wlan0`（掉线 5 s 后重启）和 `wlan0-dhcp.service`（常驻 `dhclient`，拿不到地址就一直重试；启动前关闭 WILC 的
+省电模式，否则往返时延约 170 ms，手机页面的视频流会卡顿）、`wlan0-event.service`（`wpa_cli` 事件脚本，每次连上热点都重启
+`wlan0-dhcp`：在两个同名热点之间切换时 `dhclient` 会沿用旧租约，板子在新热点上没有地址），并去掉
+`/etc/network/interfaces.d/wlan0` 中的 `auto` / `allow-hotplug`：PYNQ 的 ifupdown 钩子与设备热插拔同时启用 `wlan0` 时会
+互相关掉对方。线下演示可用手机开 2.4 GHz 热点（与安装时同名同密码），两块板开机后自动连上，手机浏览器打开
+`http://<RX 板地址>:8080` 即为控制页（`src/sw/rx/web_server.py`），RX 板地址可在手机热点的已连接设备中查看。两块板各自
+把画面发给手机，不经板间网线转发；WILC 的上行约 2.5 Mbit/s，每路画面限为 15 fps、JPEG 质量 65（约 0.9 Mbit/s），
+WiFi 来不及发送时跳帧而不排队，画面始终是最新的。
+

@@ -11,11 +11,17 @@ Every datagram: 20-byte header + payload (<= CHUNK bytes, no IP fragmentation on
     total  I   total message length (bytes)
 A message is complete when all nchunk chunks with the same (mtype, msg_id) arrived; incomplete ones are dropped.
 Subscription: the PC sends b"JSCC-HELLO" to the board's control port about once a second; the board streams to the
-address/port the last HELLO came from (no PC address is configured on the boards).
+address/port the last HELLO came from (no PC address is configured on the boards). b"JSCC-HELLO <n>": only every n-th
+image (rx_server) / preview (tx_camera) to this subscriber; b"JSCC-HELLO <n> jpg": rx_server sends the decoded images
+as JPEG (MT_RX_JPG) instead of raw (web_server.py for phones).
 """
 import struct
 import json
 import numpy as np
+try:
+    import fcntl                          # boards (Linux); the GUI also runs on Windows PCs
+except ImportError:
+    fcntl = None
 
 MAGIC = b"JSCC"
 HDR = struct.Struct("<4sBBHHHII")
@@ -50,6 +56,41 @@ ATTS = b"JSCC-ATTS"
 MODE = b"JSCC-MODE"
 SRC = b"JSCC-SRC"
 MT_SSCC = 4               # SSCC packet decoded by the RX PL (12272 bytes, sscc_pkt.py), RX board -> GUI
+MT_RX_JPG = 5             # decoded image as JPEG (HELLO ... jpg subscribers)
+#   any -> TX port   STAT                       -> TX answers ATTS as for ATTN, without subscribing (also as UDP
+#                                                broadcast: web_server.py finds the TX board's WiFi address this way)
+STAT = b"JSCC-STAT"
+
+
+# MJPEG streams to phones (WiFi): at most STREAM_FPS, JPEG quality STREAM_Q (~6 KB / frame, ~0.7 Mbit/s: well below
+# the WILC's ~2.5 Mbit/s, so the rate stays steady); frames are skipped while more than STREAM_BACKLOG bytes are still
+# unsent (newest frame, no queueing), and a stream stuck for STREAM_STALL s (phone gone) is closed
+STREAM_FPS, STREAM_Q, STREAM_BACKLOG, STREAM_STALL = 15, 65, 16384, 5.0
+
+
+def unsent(sock):
+    """bytes of a TCP socket not yet sent (SIOCOUTQNSD): MJPEG over WiFi drops frames instead of queueing seconds of
+    video in the kernel"""
+    if fcntl is None:
+        return 0
+    try:
+        return struct.unpack("i", fcntl.ioctl(sock.fileno(), 0x894B, bytes(4)))[0]
+    except OSError:
+        return 0
+
+
+def hello_opts(data):
+    """(decimation, JPEG wanted) of a HELLO datagram: b"JSCC-HELLO" = (1, False), b"JSCC-HELLO 2 jpg" = (2, True)"""
+    f = data[len(HELLO):].split()
+    try:
+        n = max(1, min(30, int(f[0]))) if f else 1
+    except ValueError:
+        n = 1
+    return n, b"jpg" in f
+
+
+def hello_decim(data):
+    return hello_opts(data)[0]
 
 
 def chunks(mtype, msg_id, payload):

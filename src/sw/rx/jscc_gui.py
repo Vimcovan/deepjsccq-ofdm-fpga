@@ -1988,6 +1988,7 @@ class Gui(QtWidgets.QMainWindow):
             ok=ok, cmd=line, page=self.tabs.currentIndex(), mode=self.cur_mode(), mode_tx=self.mode_tx, src=self.src_tx,
             tx_link=time.time() - self.t_att < 3.0, att_target=self.att_extra, att_shown=round(self.att_disp, 2),
             att_tx=None if self.att_rep is None else round(self.att_rep - TX_ATT0, 2),
+            lat=None if self.lat_now != self.lat_now else round(self.lat_now, 0),
             rx_fps=round(self.fps("rx"), 1), sync=round(self.rates.get("SYNC_CNT", 0), 1) if tel_age < 2.0 else 0.0,
             psnr=None if self.psnr_now != self.psnr_now else round(self.psnr_now, 2),
             evm=None if self.evm_now != self.evm_now else round(self.evm_now, 1),

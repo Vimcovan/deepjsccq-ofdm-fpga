@@ -1,0 +1,12 @@
+[Unit]
+Description=Renew the wlan0 DHCP lease on every WiFi (re)connection (wpa_cli action script)
+After=wpa_supplicant@wlan0.service
+Wants=wpa_supplicant@wlan0.service
+
+[Service]
+ExecStart=/sbin/wpa_cli -i wlan0 -p /run/wpa_supplicant -a /usr/local/sbin/wlan0-event.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

@@ -43,6 +43,8 @@ try:                                          # root: past net.core.wmem_max (~2
 except OSError:
     pass
 peers = {}                                    # subscriber address -> time of its last HELLO (several GUIs at once)
+decim = {}                                    # subscriber address -> image decimation (HELLO <n>: every n-th image)
+jpgp = {}                                     # subscriber address -> wants JPEG images (HELLO <n> jpg)
 
 
 def ctrl_loop():
@@ -50,7 +52,7 @@ def ctrl_loop():
         try:
             data, addr = sock.recvfrom(256)
             if data.startswith(U.HELLO):
-                peers[addr] = time.time()
+                peers[addr] = time.time(); decim[addr], jpgp[addr] = U.hello_opts(data)
         except socket.timeout:
             pass
 
@@ -62,6 +64,8 @@ def live_peers():
 
 def send(mtype, mid, payload):
     for a in live_peers():
+        if mtype in (U.MT_RX_IMG, U.MT_RX_JPG) and (mid % decim.get(a, 1) or jpgp.get(a, False) != (mtype == U.MT_RX_JPG)):
+            continue
         for pkt in U.chunks(mtype, mid, payload):
             try:
                 sock.sendto(pkt, a)
@@ -101,6 +105,12 @@ def sender_loop():
     while True:
         fid, img = txq.get()
         send(U.MT_RX_IMG, fid, img)
+        if any(jpgp.get(a) for a in live_peers()):          # phones (web_server.py): JPEG, ~1/10 of the bytes
+            import cv2
+            ok, b = cv2.imencode(".jpg", np.frombuffer(img, np.uint8).reshape(256, 256, 3)[:, :, ::-1],
+                                 [cv2.IMWRITE_JPEG_QUALITY, U.STREAM_Q])
+            if ok:
+                send(U.MT_RX_JPG, fid, b.tobytes())
         stats["img_sent"] += 1
 
 

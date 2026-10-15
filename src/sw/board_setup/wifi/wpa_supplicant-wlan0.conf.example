@@ -1,0 +1,8 @@
+# /etc/wpa_supplicant/wpa_supplicant-wlan0.conf (mode 600). psk: the 64-hex-digit key printed by
+#   wpa_passphrase "<SSID>" "<password>"
+ctrl_interface=/run/wpa_supplicant
+network={
+    ssid="DeepJSCC-Q"
+    psk=<64 hex digits from wpa_passphrase>
+    scan_ssid=1
+}

@@ -190,12 +190,12 @@ scp -i <key> -o "ProxyCommand=ssh -i <key> -W %h:%p root@192.168.3.1" <文件> r
    拷完核对比特流：在板上运行 `sha256sum jscc_*.bit jscc_*.hwh`，与 PC 上的 `board/bitstreams/SHA256SUMS` 比对（新旧比特流大小相同，
    只能靠哈希区分）。覆盖已有目录时，先删除 TX 板上的 `tx_source.txt`（保存着上次选择的信源，见第 3 步）。
    放到其他目录时需同步修改 `src/sw/systemd/*.service`。
-2. 安装并启动服务：TX 板只装 `jscc-tx.service`，RX 板只装 `jscc-rx.service` 与 `jscc-gui.service`，拷到 `/etc/systemd/system/` 后：
+2. 安装并启动服务：TX 板只装 `jscc-tx.service`，RX 板装 `jscc-rx.service`、`jscc-gui.service` 与 `jscc-web.service`，拷到 `/etc/systemd/system/` 后：
 
    ```
    systemctl daemon-reload
    systemctl enable jscc-tx && systemctl restart jscc-tx                      # TX 板
-   systemctl enable jscc-rx jscc-gui && systemctl restart jscc-rx jscc-gui    # RX 板
+   systemctl enable jscc-rx jscc-gui jscc-web && systemctl restart jscc-rx jscc-gui jscc-web    # RX 板
    ```
 
    用 `restart` 而不用 `enable --now`：重新部署时服务已在运行，`enable --now` 不会重启进程，新文件不会生效。
@@ -207,7 +207,10 @@ scp -i <key> -o "ProxyCommand=ssh -i <key> -W %h:%p root@192.168.3.1" <文件> r
    - RX：`rx_server.py` 下载比特流，由 PS 初始化 AD9361（初始化本身约 0.3 s），AGC 锁定后开始收图。
    - 服务启动后的前十几秒接收帧率为 0、日志中出现 `spectrum: ADC capture did not complete` 属正常：AGC 看门狗会复位 AGC，
      通常 1 分钟内稳定在 30 fps。上电约 1 分钟后触摸屏显示 GUI。
-5. 检查：RX 的 `rx_server.log` 每 5 s 一行，出现 `images 30.0/s` 即链路正常；TX 的 `tx_camera.log` 中为 `sent 30.0 fps`、`tlast err 0`。
+5. 手机控制（可选）：两块板按 `src/sw/board_setup/README.md` 配置开机自动连 WiFi 后，同一 WiFi 下的手机或电脑用浏览器打开
+   `http://<RX 板 WiFi 地址>:8080`，可看两路实时画面与指标、调 TX 衰减、切换模式和信源。两块板各自把画面直接发给手机
+   （TX 原图来自 TX 板的 8081 端口），不需要板间网线；连着网线时另显示 PSNR 与时延，命令经触摸屏 GUI 转发，两边同步。
+6. 检查：RX 的 `rx_server.log` 每 5 s 一行，出现 `images 30.0/s` 即链路正常；TX 的 `tx_camera.log` 中为 `sent 30.0 fps`、`tlast err 0`。
    TX 板没有网络授时，系统时间可能与 RX 相差很多，两板日志的时间不能直接对照，帧率按同一份日志中的计数差计算。
 
 ## 从源码重新构建比特流

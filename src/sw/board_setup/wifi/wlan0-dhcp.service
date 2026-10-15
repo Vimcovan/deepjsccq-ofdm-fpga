@@ -1,0 +1,14 @@
+[Unit]
+Description=DHCP client on wlan0 (WiFi for remote access)
+After=wpa_supplicant@wlan0.service
+Wants=wpa_supplicant@wlan0.service
+
+[Service]
+# WILC power save: ~170 ms round trips and stalled TCP streams (phone page); off: ~10 ms
+ExecStartPre=-/sbin/iw dev wlan0 set power_save off
+ExecStart=/sbin/dhclient -4 -d wlan0
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

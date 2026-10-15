@@ -35,6 +35,7 @@ ap.add_argument("--presets", default=os.path.join(os.path.dirname(os.path.abspat
                 help="still test images (256 x 256 PNG, sorted by name), cycled after the demo video by the GUI")
 ap.add_argument("--att", type=float, default=0.0,             # TX1 attenuation at start (the config LUT sets 4 dB;
                 help="TX attenuation at start, dB")             # EVM measured unchanged at 0 dB)
+ap.add_argument("--http-port", type=int, default=8081, help="MJPEG preview for phones (/tx.mjpg); 0 = off")
 ap.add_argument("--att-up-dbs", type=float, default=10.0,      # bench, AGC guard on: 10 dB/s 0 s sync loss in 8 ramps
                 help="TX attenuation increase rate in dB/s (0 = step at once); decreases always step at once")
 args = ap.parse_args()
@@ -231,6 +232,7 @@ try:                                          # root: past net.core.wmem_max (~2
 except OSError:
     pass
 peers = {}                                    # subscriber address -> time of its last HELLO (several GUIs at once)
+decim = {}                                    # subscriber address -> preview decimation (HELLO <n>: every n-th frame)
 
 
 tx = None                                     # JsccTx once the overlay is up (below)
@@ -273,7 +275,7 @@ def ctrl_loop():
                 sock.sendto(U.TIME_R + b" %.6f" % time.time(), addr)
                 continue
             if data.startswith(U.HELLO):
-                peers[addr] = time.time()
+                peers[addr] = time.time(); decim[addr] = U.hello_decim(data)
             elif data.startswith(U.SRC):
                 v = data[len(U.SRC):].strip().decode()
                 if v == "preset":
@@ -285,6 +287,8 @@ def ctrl_loop():
                     except OSError:
                         pass
                     print(f"input {v} (from {addr[0]})", flush=True)
+            elif data.startswith(U.STAT):                # state query (also broadcast): answer, no subscription
+                pass
             elif data.startswith(U.MODE):
                 m = data[len(U.MODE):].strip().decode()
                 if m in ("jscc", "sscc") and (m == "jscc" or mode["ok"]):
@@ -306,6 +310,62 @@ def ctrl_loop():
 
 threading.Thread(target=ctrl_loop, daemon=True).start()
 threading.Thread(target=att_loop, daemon=True).start()
+
+
+# ------------------------------------------------------------------ MJPEG preview for phones on the same WiFi
+class Mjpeg:
+    """newest frame handed to the encoder; JPEG-encoded per HTTP client, only while one is connected"""
+    def __init__(self):
+        self.cv = threading.Condition(); self.img = None; self.seq = 0; self.clients = 0
+
+    def offer(self, img):
+        if self.clients:
+            with self.cv:
+                self.img = img; self.seq += 1; self.cv.notify_all()
+
+
+mjpeg = Mjpeg()
+if args.http_port:
+    from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+    class MjpegHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            if self.path.split("?")[0] != "/tx.mjpg":
+                self.send_error(404); return
+            self.send_response(200)
+            self.send_header("Content-Type", "multipart/x-mixed-replace; boundary=frame")
+            self.send_header("Cache-Control", "no-cache"); self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.connection.settimeout(U.STREAM_STALL)
+            mjpeg.clients += 1; last = -1; t_sent = time.time()
+            try:
+                while True:
+                    with mjpeg.cv:
+                        mjpeg.cv.wait_for(lambda: mjpeg.seq != last, 2.0)
+                        img, seq = mjpeg.img, mjpeg.seq
+                    if img is None or seq == last:
+                        continue
+                    last = seq; now = time.time()
+                    if now - t_sent < 0.8 / U.STREAM_FPS:
+                        continue
+                    if U.unsent(self.connection) > U.STREAM_BACKLOG:   # WiFi behind: skip frames; phone gone: close
+                        if now - t_sent > U.STREAM_STALL:
+                            break
+                        continue
+                    t_sent = now
+                    ok, b = cv2.imencode(".jpg", img[:, :, ::-1], [cv2.IMWRITE_JPEG_QUALITY, U.STREAM_Q])
+                    self.wfile.write(b"--frame\r\nContent-Type: image/jpeg\r\nContent-Length: %d\r\n\r\n" % len(b)
+                                     + b.tobytes() + b"\r\n")
+            except OSError:
+                pass
+            finally:
+                mjpeg.clients -= 1
+
+        def log_message(self, *a):
+            pass
+
+    srv = ThreadingHTTPServer(("0.0.0.0", args.http_port), MjpegHandler); srv.daemon_threads = True
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
 
 
 def live_peers():
@@ -342,6 +402,8 @@ def send_preview(fid, img, t_src=None):
 def _send_preview(fid, img):
     data = img.tobytes()
     for a in live_peers():
+        if fid % decim.get(a, 1):
+            continue
         for pkt in U.chunks(U.MT_TX_IMG, fid, data):
             try:
                 sock.sendto(pkt, a)
@@ -401,6 +463,7 @@ while True:
         tx.send_image(img, timeout=2.0)             # returns when the encoder has taken the frame
     sent += 1
     send_preview(seq, img, t_src)
+    mjpeg.offer(img)
     if time.time() - t_rep > 5.0:
         st = tx.status()
         print(f"{time.strftime('%H:%M:%S')} {src['now']} {s_obj.n / (time.time() - t_rep):.1f} fps, sent {sent / (time.time() - t_rep):.1f} fps, "

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070B16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>DeepJSCC-Q 链路</title>
+<style>
+:root {
+  --bg: #070B16; --card: #0D1628; --line: #1C2A44; --ink: #E2E8F0; --muted: #7C8BA5;
+  --acc: #22D3EE; --acc-dk: #0E7490; --sec: #F59E0B; --bad: #F87171; --good: #34D399;
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; background: var(--bg); color: var(--ink);
+  font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", Roboto, sans-serif; }
+body { padding: env(safe-area-inset-top) 12px calc(16px + env(safe-area-inset-bottom)); max-width: 760px; margin: 0 auto; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 12px 2px 8px; }
+h1 { font-size: 17px; margin: 0; font-weight: 600; letter-spacing: .5px; }
+h1 span { color: var(--acc); }
+.dot { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.dot i { width: 8px; height: 8px; border-radius: 50%; background: var(--bad); display: inline-block; }
+.dot.on i { background: var(--good); box-shadow: 0 0 8px var(--good); }
+.tabs { display: flex; gap: 6px; margin: 4px 0 12px; }
+.tabs button { flex: 1; padding: 9px 0; border-radius: 10px; border: 1px solid var(--line); background: var(--card);
+  color: var(--muted); font-size: 14px; }
+.tabs button.sel { color: var(--acc); border-color: var(--acc-dk); background: #0C2A3A; }
+.page { display: none; } .page.sel { display: block; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 12px; margin-bottom: 12px; }
+.imgs { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.imgs figure { margin: 0; }
+.imgs img { width: 100%; aspect-ratio: 1; display: block; border-radius: 8px; background: #050913; object-fit: cover;
+  image-rendering: auto; }
+.imgs figcaption { font-size: 12px; color: var(--muted); margin-top: 5px; text-align: center; }
+.kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+.kpi div { background: #0A1222; border: 1px solid var(--line); border-radius: 10px; padding: 8px 4px; text-align: center; }
+.kpi b { display: block; font-size: 19px; font-weight: 600; color: var(--acc); font-variant-numeric: tabular-nums; }
+.kpi small { font-size: 11px; color: var(--muted); }
+.row { display: flex; align-items: center; justify-content: space-between; margin: 2px 0 8px; font-size: 14px; }
+.row .val { color: var(--sec); font-weight: 600; font-variant-numeric: tabular-nums; }
+input[type=range] { width: 100%; accent-color: var(--acc); height: 28px; margin: 0 0 10px; }
+.seg { display: flex; gap: 6px; margin-bottom: 10px; }
+.seg button { flex: 1; padding: 10px 0; border-radius: 10px; border: 1px solid var(--line); background: #0A1222;
+  color: var(--ink); font-size: 14px; }
+.seg button.sel { background: var(--acc-dk); border-color: var(--acc); color: #fff; }
+.note { font-size: 12px; color: var(--muted); margin: 4px 0 0; line-height: 1.5; }
+.disabled { opacity: .45; pointer-events: none; }
+canvas { width: 100%; display: block; }
+.stat { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px; font-size: 14px; }
+.stat span { color: var(--muted); } .stat b { float: right; font-weight: 600; font-variant-numeric: tabular-nums; }
+.title { font-size: 13px; color: var(--muted); margin: 0 0 6px; }
+</style>
+</head>
+<body>
+<header>
+  <h1><span>DeepJSCC-Q</span> 实时无线图像传输</h1>
+  <div class="dot" id="conn"><i></i><span>未连接</span></div>
+</header>
+<div class="tabs">
+  <button class="sel" data-p="img">图像链路</button>
+  <button data-p="phy">物理层</button>
+</div>
+
+<section class="page sel" id="p-img">
+  <div class="card">
+    <div class="imgs">
+      <figure><img id="im-tx" alt=""><figcaption id="cap-tx">TX 发送原图</figcaption></figure>
+      <figure><img id="im-rx" alt=""><figcaption id="cap-rx">RX 接收重建</figcaption></figure>
+    </div>
+    <div class="kpi">
+      <div><b id="k-psnr">–</b><small>PSNR dB</small></div>
+      <div><b id="k-fps">–</b><small>帧率 fps</small></div>
+      <div><b id="k-lat">–</b><small>时延 ms</small></div>
+      <div><b id="k-evm">–</b><small>EVM dB</small></div>
+    </div>
+  </div>
+  <div class="card" id="ctl">
+    <div class="row"><span>TX 额外衰减</span><span class="val" id="att-v">–</span></div>
+    <input type="range" id="att" min="0" max="36" step="0.5" value="0">
+    <div class="seg" id="mode">
+      <button data-v="jscc">DeepJSCC-Q</button><button data-v="sscc">SSCC 基线</button>
+    </div>
+    <div class="seg" id="src">
+      <button data-v="camera">摄像头</button><button data-v="video">演示视频</button><button data-v="preset">预设图</button>
+    </div>
+    <p class="note" id="ctl-note"></p>
+  </div>
+</section>
+
+<section class="page" id="p-phy">
+  <div class="card">
+    <p class="title">均衡后星座（解码器输入）</p>
+    <canvas id="cv-const"></canvas>
+  </div>
+  <div class="card">
+    <p class="title">逐子载波 SNR（两 LTF 估计）</p>
+    <canvas id="cv-snr"></canvas>
+  </div>
+  <div class="card">
+    <p class="title">接收频谱</p>
+    <canvas id="cv-spec"></canvas>
+  </div>
+  <div class="card stat">
+    <div><span>SNR</span><b id="s-snr">–</b></div>
+    <div><span>EVM</span><b id="s-evm">–</b></div>
+    <div><span>AGC 增益</span><b id="s-agc">–</b></div>
+    <div><span>同步</span><b id="s-sync">–</b></div>
+    <div><span>接收帧率</span><b id="s-fps">–</b></div>
+    <div><span>SSCC CRC 正确率</span><b id="s-crc">–</b></div>
+  </div>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+let ws = null, st = {}, tab = "img", attDrag = false, attSent = 0, attTimer = null;
+
+document.querySelectorAll(".tabs button").forEach(b => b.onclick = () => {
+  document.querySelectorAll(".tabs button").forEach(x => x.classList.toggle("sel", x === b));
+  tab = b.dataset.p;
+  document.querySelectorAll(".page").forEach(p => p.classList.toggle("sel", p.id === "p-" + tab));
+  streams(); send({cmd: "tab", tab});
+});
+
+let txUrl = null;                         // TX picture straight from the TX board (tx_camera.py --http-port)
+function streams() {                      // MJPEG streams only while the image page is visible
+  const on = tab === "img" && document.visibilityState === "visible";
+  for (const [k, base] of [["tx", txUrl], ["rx", "/rx.mjpg"]]) {
+    const im = $("im-" + k), want = on && base ? base + "?t=" + Date.now() : "";
+    const cur = im.getAttribute("src") || "";
+    if (!want) { if (cur) im.removeAttribute("src"); }
+    else if (!cur || cur.split("?")[0] !== base) im.src = want;
+  }
+}
+document.addEventListener("visibilitychange", streams);
+
+function send(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+
+const att = $("att");
+att.addEventListener("input", () => {
+  attDrag = true; $("att-v").textContent = "+" + (+att.value).toFixed(1) + " dB";
+  if (!attTimer) attTimer = setTimeout(() => { attTimer = null; send({cmd: "att", extra: +att.value}); attSent = Date.now(); }, 120);
+});
+att.addEventListener("change", () => { send({cmd: "att", extra: +att.value}); attSent = Date.now(); attDrag = false; });
+$("mode").querySelectorAll("button").forEach(b => b.onclick = () => send({cmd: "mode", mode: b.dataset.v}));
+$("src").querySelectorAll("button").forEach(b => b.onclick = () => send({cmd: "src", src: b.dataset.v}));
+
+const f1 = (v, d = 1) => v === null || v === undefined ? "–" : (+v).toFixed(d);
+
+function render() {
+  const s = st, live = ws && ws.readyState === 1;
+  $("conn").classList.toggle("on", live && s.tel);
+  $("conn").querySelector("span").textContent = !live ? "未连接" : (s.tel ? "链路运行中" : "等待遥测");
+  $("k-psnr").textContent = f1(s.psnr); $("k-fps").textContent = f1(s.fps ?? s.sync);
+  $("k-lat").textContent = f1(s.lat, 0); $("k-evm").textContent = f1(s.evm);
+  $("cap-rx").textContent = "RX 接收重建 · " + (s.mode === "sscc" ? "SSCC" : "DeepJSCC-Q");
+  if (live && (s.tx_url || null) !== txUrl) { txUrl = s.tx_url || null; streams(); }
+  $("cap-tx").textContent = txUrl ? "TX 发送原图" : "TX 发送原图 · 搜索 TX 板";
+  $("ctl").classList.toggle("disabled", !s.tx_link);
+  $("ctl-note").textContent = !s.tx_link ? "TX 板未应答：请确认 TX 板已连上同一 WiFi。"
+    : (s.cabled ? "" : "两板未连线：PSNR 与时延需要板间连线，其余指标为 RX 板实测。");
+  if (!attDrag && Date.now() - attSent > 800 && s.att_target !== null && s.att_target !== undefined) {
+    att.value = s.att_target; $("att-v").textContent = "+" + f1(s.att_target) + " dB";
+  }
+  $("mode").querySelectorAll("button").forEach(b => b.classList.toggle("sel", b.dataset.v === s.mode));
+  const src = (s.source || "").startsWith("preset") ? "preset" : s.source;
+  $("src").querySelectorAll("button").forEach(b => b.classList.toggle("sel", b.dataset.v === src));
+  $("s-snr").textContent = f1(s.snr) + " dB"; $("s-evm").textContent = f1(s.evm) + " dB";
+  $("s-agc").textContent = (s.agc ?? "–") + (s.agc_lock ? " · 锁定" : "");
+  $("s-sync").textContent = f1(s.sync) + " /s"; $("s-fps").textContent = f1(s.fps ?? s.sync) + " fps";
+  $("s-crc").textContent = s.mode !== "sscc" || s.sscc_ok === null || s.sscc_ok === undefined ? "–" : (100 * s.sscc_ok).toFixed(0) + " %";
+  if (tab === "phy") { drawConst(); drawSnr(); drawSpec(); }
+}
+
+function ctx2d(cv, h) {                   // HiDPI canvas of the card width and the given height (CSS px)
+  const w = cv.clientWidth, r = window.devicePixelRatio || 1;
+  if (cv.width !== Math.round(w * r) || cv.height !== Math.round(h * r)) { cv.width = Math.round(w * r); cv.height = Math.round(h * r); }
+  cv.style.height = h + "px";
+  const c = cv.getContext("2d"); c.setTransform(r, 0, 0, r, 0, 0); c.clearRect(0, 0, w, h);
+  return [c, w, h];
+}
+
+function drawConst() {
+  const cv = $("cv-const"), [c, w] = ctx2d(cv, Math.min(cv.clientWidth, 340)), h = Math.min(w, 340);
+  const x0 = (w - h) / 2, lim = 1.3, sc = v => (v / lim + 1) * h / 2;
+  c.strokeStyle = css("--line"); c.lineWidth = 1;
+  for (const l of [-6, -4, -2, 0, 2, 4, 6]) {
+    const p = sc(l / 7);
+    c.beginPath(); c.moveTo(x0 + p, 0); c.lineTo(x0 + p, h); c.moveTo(x0, p); c.lineTo(x0 + h, p); c.stroke();
+  }
+  const d = st.const || []; c.fillStyle = css("--acc");
+  for (let i = 0; i < d.length; i += 2) c.fillRect(x0 + sc(d[i]) - 1, h - sc(d[i + 1]) - 1, 2, 2);
+}
+
+function axes(c, w, h, lo, hi, unit) {
+  c.fillStyle = css("--muted"); c.font = "11px sans-serif"; c.strokeStyle = css("--line");
+  for (const v of [lo, (lo + hi) / 2, hi]) {
+    const y = h - 16 - (v - lo) / (hi - lo) * (h - 36);
+    c.beginPath(); c.moveTo(32, y); c.lineTo(w, y); c.stroke(); c.fillText(v.toFixed(0), 2, y + 4);
+  }
+  c.fillText(unit, 2, 10);
+}
+
+function drawSnr() {
+  const [c, w, h] = ctx2d($("cv-snr"), 170), v = st.snr_sc, k = st.sc;
+  if (!v) return;
+  const lo = 0, hi = Math.max(40, Math.ceil(Math.max(...v) / 10) * 10);
+  axes(c, w, h, lo, hi, "dB");
+  const n = v.length, bw = (w - 36) / n;
+  v.forEach((s, i) => {
+    const y = h - 16 - (Math.max(s, lo) - lo) / (hi - lo) * (h - 36);
+    c.fillStyle = s < (st.snr ?? 0) - 6 ? css("--sec") : css("--acc");
+    c.fillRect(34 + i * bw, y, Math.max(1, bw - 1), h - 16 - y);
+  });
+  c.fillStyle = css("--muted"); c.fillText(k[0], 34, h - 2); c.fillText(k[n - 1], w - 18, h - 2); c.fillText("子载波", w / 2 - 16, h - 2);
+}
+
+function drawSpec() {
+  const [c, w, h] = ctx2d($("cv-spec"), 150), sp = st.spec;
+  if (!sp) return;
+  const all = sp.sig.concat(sp.noi), lo = Math.floor(Math.min(...all) / 10) * 10, hi = Math.ceil(Math.max(...all) / 10) * 10;
+  axes(c, w, h, lo, hi, "dB");
+  const f0 = sp.f[0], f1v = sp.f[sp.f.length - 1];
+  for (const [arr, col] of [[sp.noi, css("--muted")], [sp.sig, css("--acc")]]) {
+    c.strokeStyle = col; c.lineWidth = 1.5; c.beginPath();
+    arr.forEach((v, i) => {
+      const x = 34 + (sp.f[i] - f0) / (f1v - f0) * (w - 36), y = h - 16 - (v - lo) / (hi - lo) * (h - 36);
+      i ? c.lineTo(x, y) : c.moveTo(x, y);
+    });
+    c.stroke();
+  }
+  c.fillStyle = css("--muted"); c.fillText(f0.toFixed(0) + " MHz", 34, h - 2); c.fillText(f1v.toFixed(0), w - 20, h - 2);
+}
+
+function connect() {
+  ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/ws");
+  ws.onopen = () => send({cmd: "tab", tab});
+  ws.onmessage = e => { st = JSON.parse(e.data); render(); };
+  ws.onclose = () => { render(); setTimeout(connect, 1500); };
+  ws.onerror = () => ws.close();
+}
+connect(); streams(); window.addEventListener("resize", render);
+</script>
+</body>
+</html>

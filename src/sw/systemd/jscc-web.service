@@ -1,0 +1,16 @@
+[Unit]
+Description=DeepJSCC-Q RX: web control page for phones / browsers on port 8080 (web_server.py)
+After=network.target jscc-rx.service
+Wants=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/xilinx/claude/rx
+ExecStart=/bin/bash -lc 'source /etc/profile.d/pynq_venv.sh && exec python3 web_server.py --port 8080'
+StandardOutput=append:/home/xilinx/claude/rx/web.log
+StandardError=inherit
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
