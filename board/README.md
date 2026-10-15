@@ -35,6 +35,7 @@
 | `plot_link.py`（PC）、`plot_visual_compare.py`（PC）、`plot_psnr_snr.m`（MATLAB，英文版，用于海报） | 出图（`plot_visual_compare.py`：原图 / DeepJSCC-Q / SSCC 视觉对比，PSNR / SSIM） |
 | `pl_events.py`（两板）+ `seg_latency.py`（PC）+ `plot_seg_cdf.m`（英文版，用于海报） | 两板 PS 轮询 PL 帧计数器打时间戳，按数据流配对：编码 / 传输 / 解码三段时延 |
 | `frames_to_csv.py` | 逐帧帧率 |
+| `power_rails.py` | 板载 PMBus 遥测（三片 IRPS5401）读各电源轨电压、电流、功率，按时间平均；PL / PS / DDR 分组 |
 | `agc_guard_test.py` | AGC 看门狗验收：静置误复位、衰减跳变恢复、无信号恢复 |
 | `agc_trace.py`、`adc_frames.py`、`pl_counters.py` | 诊断：原始 ADC 抓取与 AD9361 `CTRL_OUT`（状态输出引脚，此处为 AGC 状态）同步记录、帧间隔、PL 计数器 |
 

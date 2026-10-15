@@ -99,7 +99,7 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 
 仿真：`python sim/network/make_golden.py`用NumPy整数参考模型生成各层参考数据，再运行`sim/network/`中的脚本做单层、块级与整网的逐比特比对；SSCC基线的仿真见`sim/sscc/`。各脚本的命令与期望结果见`sim/README.md`。
 
-复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本，实测数据图为`meas_plots.py`）生成。
+复现测量：`board/tests/`中各脚本开头有用法说明。PSNR–SNR：RX板上运行`measure_link.py`，PC上运行`analyze_const.py`计算数据辅助SNR；帧率：`measure_link.py --src video --dwell 600`；分段时延：两板同时运行`pl_events.py`，PC上用`seg_latency.py`配对；功耗：两板在各工作状态下运行`power_rails.py`（PMBus遥测，60 s平均）。报告中的图由`report/figures/visio/`（Visio脚本）与`report/figures/sim/`（Python脚本，实测数据图为`meas_plots.py`）生成。
 
 复现验证：用与技能测试相同的方法（附录B），由与开发无关的代理和模型在全新工作区中执行。工作区中只有从GitHub克隆的仓库，提示词要求完全按仓库文档操作、不修改仓库，最后提交复现报告。PC部分（重新生成神经网络RTL、仿真、比特流构建）由CodeBuddy CLI + DeepSeek V4.1 Flash执行；板上部分（把部署版比特流与程序部署到两块已装有旧版本的板卡，运行链路）由Cursor CLI + Grok 4.7与CodeBuddy CLI + DeepSeek V4.1 Flash分别执行，每次部署前板卡还原到同一旧版本，触摸屏画面由参赛者在现场确认。结果见表C-1。
 

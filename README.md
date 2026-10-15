@@ -38,7 +38,7 @@
 | 帧率 | 30 fps：连续 600 s 收到 18000 帧 | `data/measurements/fps/` |
 | 时延（PL 计数器，中位数） | 编码 38.20 ms / 传输 2.87 ms / 解码 30.39 ms，合计 71.47 ms | `data/measurements/latency/` |
 | 资源 / 时序（xczu5eg，布局布线后） | TX：LUT 52,679（45 %）、BRAM36 104.5（73 %）、URAM 10、DSP 243，WNS +0.261 ns；RX：LUT 70,768（60 %）、BRAM36 123.5（86 %）、URAM 25、DSP 394，WNS +0.234 ns | `build/reports/` |
-| 功耗（Vivado 估算） | 片上合计 TX 4.51 W / RX 4.94 W，其中 PS 各 2.73 W | `build/reports/*_power.rpt` |
+| 功耗（实测，板载 PMBus 遥测） | TX 3.06 W / RX 3.71 W（PL、PS 与 DDR 电源轨，30 fps）；Vivado 估算 4.51 / 4.94 W | `data/measurements/power/`、`build/reports/*_power.rpt` |
 | 网络精度 | W8A12 比浮点低 0.05 dB（DIV2K）/ 0.06 dB（Kodak）；RTL 与整数参考模型逐比特一致 | `data/model/`、`sim/network/` |
 
 ---

@@ -124,7 +124,7 @@ $stats = @(
   @('71.5 ms',    'PL latency: encode 38.2 + air 2.9 + decode 30.4 ms'),
   @('+3.8 dB',    'PSNR over JPEG + convolutional code, with no cliff'),
   @('2.33 GMAC',  'per frame, 114 convolutions, W8A12 fixed point'),
-  @('4.5 / 4.9 W','TX / RX on-chip power (Vivado estimate)')
+  @('3.1 / 3.7 W','TX / RX measured power (PL + PS + DDR rails)')
 )
 $sw = ($W - 2*$M - 4*36) / 5
 for ($k = 0; $k -lt 5; $k++) {
