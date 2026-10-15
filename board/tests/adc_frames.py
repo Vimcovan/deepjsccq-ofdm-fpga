@@ -15,7 +15,7 @@ import jscc_udp as U
 ap = argparse.ArgumentParser()
 ap.add_argument("--att", type=float, default=14.0, help="extra TX attenuation (GUI scale)")
 ap.add_argument("--top", type=float, default=32.0, help="extra dB to go to first (then step down to --att)")
-ap.add_argument("--att0", type=float, default=4.0)
+ap.add_argument("--att0", type=float, default=0.0)
 ap.add_argument("--src", default="preset:div2k_0802")
 ap.add_argument("--modes", default="sscc,jscc")
 ap.add_argument("--n", type=int, default=20, help="captures per mode")

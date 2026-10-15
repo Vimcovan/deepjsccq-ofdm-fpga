@@ -33,6 +33,8 @@ ap.add_argument("--video", default=os.path.join(os.path.dirname(os.path.abspath(
                 help="demo video (selectable from the GUI instead of the camera, looped)")
 ap.add_argument("--presets", default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "media", "presets"),
                 help="still test images (256 x 256 PNG, sorted by name), cycled after the demo video by the GUI")
+ap.add_argument("--att", type=float, default=0.0,             # TX1 attenuation at start (the config LUT sets 4 dB;
+                help="TX attenuation at start, dB")             # EVM measured unchanged at 0 dB)
 ap.add_argument("--att-up-dbs", type=float, default=10.0,      # bench, AGC guard on: 10 dB/s 0 s sync loss in 8 ramps
                 help="TX attenuation increase rate in dB/s (0 = step at once); decreases always step at once")
 args = ap.parse_args()
@@ -358,8 +360,8 @@ tx.set_source("encoder"); time.sleep(0.2); tx.clear_counters()
 if tx.has_spi():                              # demo control: TX attenuation from the GUI (U.ATTN)
     try:
         with att_lock:
-            att["db"] = att["target"] = tx.tx_atten()
-        print(f"TX attenuation {att['db']:.2f} dB (config LUT), remote control enabled", flush=True)
+            att["db"] = att["target"] = tx.set_tx_atten(round(min(max(args.att, 0.0), 89.75) * 4) / 4)
+        print(f"TX attenuation {att['db']:.2f} dB, remote control enabled", flush=True)
     except (RuntimeError, TimeoutError) as e:
         print("TX attenuation control off:", e, flush=True)
 

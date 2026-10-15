@@ -604,13 +604,13 @@ class ThemeCard(QtWidgets.QWidget):
         p.end()
 
 
-TX_ATT0 = 4.0                                 # TX1 attenuation of the TX config LUT (0x073 = 0x10): the "0 dB" point
+TX_ATT0 = 0.0                                 # TX1 attenuation set by tx_camera.py at start (--att): the "0 dB" point
 
 
 class AttenBar(QtWidgets.QFrame):
     """touch control of the TX attenuation (extra dB on top of the config LUT value); shown only while the TX board
     answers (boards cabled, demo step 2). Several bars (one per page) stay in step through Gui.set_atten."""
-    MAX = 32                                    # sync is lost at about +31 dB (the RX AGC tops out near +24 dB)
+    MAX = 36                                    # slider range, dB (at the bench distance sync is lost near +35 dB)
     STEP = 4                                    # slider units per dB (smooth animation)
 
     def __init__(self, gui, presets, two_rows=False, modes=True, sources=False, side=False):
@@ -926,8 +926,8 @@ ABOUT_TOPICS = [
 <b>对照条件</b>：两者每幅图像都占 32768 个 64QAM 符号、683 个 OFDM 符号，发射功率相同，
 使用同一个 OFDM 发射链和同一组板卡。<br><br>
 <b>结果</b>：增加 TX 衰减后，SSCC 的误码一旦超出纠错能力，图像整体失效，即<b>悬崖效应</b>
-（分离定理的最优性依赖无限码长与已知信道）。DeepJSCC-Q 在 +20 dB 时质量基本不变，
-+24 dB 时平滑下降，<b>没有悬崖</b>。可在「图像链路」页用衰减滑条亲自对比。""", ["fairness.png"]),
+（分离定理的最优性依赖无限码长与已知信道）。DeepJSCC-Q 在 SSCC 已经失效的衰减下
+质量基本不变，继续加大衰减时平滑下降，<b>没有悬崖</b>。可在「图像链路」页用衰减滑条亲自对比。""", ["fairness.png"]),
     ("星座约束", "DeepJSCC-Q · 星座约束", """
 原始 DeepJSCC 的编码器输出<b>任意复数值</b>，现有通信硬件无法直接发送。
 作为对照，GLOBECOM 2025 的 FPGA 实现为此<b>改造了商用 5G 基站与终端的 I/Q 接口</b>。<br><br>

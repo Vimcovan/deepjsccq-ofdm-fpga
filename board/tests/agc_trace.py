@@ -15,7 +15,7 @@ import jscc_udp as U
 ap = argparse.ArgumentParser()
 ap.add_argument("--att", type=float, default=14.0)
 ap.add_argument("--top", type=float, default=32.0)
-ap.add_argument("--att0", type=float, default=4.0)
+ap.add_argument("--att0", type=float, default=0.0)
 ap.add_argument("--src", default="preset:div2k_0802")
 ap.add_argument("--modes", default="sscc,jscc")
 ap.add_argument("--dur", type=float, default=0.3, help="s of polling per mode")
