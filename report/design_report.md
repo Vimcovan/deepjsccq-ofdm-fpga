@@ -561,7 +561,7 @@ SSCC基线在同一物理层、同一星座电平与TX衰减、每幅图同样32
 软件分为两部分：
 
 - 板上软件：运行在两块板的PS上（PYNQ 3.1，Ubuntu 22.04，Python 3），负责取图、送图、收图、射频控制和显示，结构见图2-17；
-- PC端工具链：负责模型训练、整数量化与导出、神经网络RTL生成、比特流构建和测量数据分析，结构见图2-22。
+- PC端工具链：负责模型训练、整数量化与导出、神经网络RTL生成、比特流构建和测量数据分析，结构见图2-23。
 
 板上程序全部由systemd服务管理，上电约1分钟后链路自动建立，触摸屏显示GUI，演示时不需要PC。
 
@@ -573,11 +573,12 @@ SSCC基线在同一物理层、同一星座电平与TX衰减、每幅图同样32
 
 | 板 | 服务 / 进程 | 文件 | 功能 |
 |---|---|---|---|
-| TX | `jscc-tx.service` | `tx_camera.py` | 取图（摄像头 / 演示视频 / 预设图）、送图、模式与衰减控制、预览转发 |
+| TX | `jscc-tx.service` | `tx_camera.py` | 取图（摄像头 / 演示视频 / 预设图）、送图、模式与衰减控制、预览转发、手机预览（HTTP MJPEG） |
 | TX | （库） | `jscc_tx.py`、`sscc_pkt.py`、`v4l2ctl.py` | PL驱动（Overlay、寄存器、DMA、AD9361 SPI）、SSCC包格式与JPEG质量自适应、UVC控制 |
 | RX | `jscc-rx.service` | `rx_server.py` | 收图、遥测、频谱、SSCC包、AGC看门狗，经UDP转发给GUI |
 | RX | （库） | `jscc_rx.py`、`ad9361_ps.py` | PL驱动、AD9361的PS初始化与AGC看门狗 |
 | RX | `jscc-gui.service` | `jscc_gui.py` | 触摸屏GUI（PyQt5 + pyqtgraph） |
+| RX | `jscc-web.service` | `web_server.py` | 手机控制页：两路画面、物理层指标与链路控制（2.3.2.5节） |
 | RX | GUI的子进程 | `h3d_render.py` | 在Mali-400 GPU上离屏渲染信道 \|H\| 三维曲面 |
 | 两板 | （库） | `jscc_udp.py` | UDP协议：20字节包头，消息分片与重组 |
 
@@ -647,12 +648,13 @@ AGC看门狗（`AgcGuard.check`，图2-19右）：AD9361的快速AGC（fast atta
 
 #### 2.3.2.4 触摸屏GUI `jscc_gui.py`
 
-GUI用PyQt5 + pyqtgraph编写，在RX板上全屏运行，有四个页面：
+GUI用PyQt5 + pyqtgraph编写，在RX板上全屏运行，有五个页面：
 
 - 图像链路页：并排显示TX原图与RX重建图，给出PSNR、端到端时延和链路统计；页面上有TX衰减调节条和JSCC / SSCC、信源切换按钮；
 - 物理层页（图2-20）：均衡各级的星座图与EVM、信道 |H| 随时间变化的三维曲面、逐子载波SNR、EVM历史、AGC与同步状态；
 - 主题页：切换配色主题；
-- 介绍页：系统框图与原理说明。
+- 介绍页：系统框图与原理说明；
+- 手机页：手机控制页的地址与二维码（2.3.2.5节）。
 
 ![接收端 GUI · PHY 页](poster/assets/gui_phy_page.png "w=80%")
 
@@ -660,13 +662,27 @@ GUI用PyQt5 + pyqtgraph编写，在RX板上全屏运行，有四个页面：
 
 RX解码图没有帧号，PSNR的计算方法是：在最近350 ms收到的TX预览帧中，按1/4降采样后的均方误差找出最匹配的一帧，再算全分辨率PSNR；SSCC帧有帧号，直接配对。UDP分片的接收与重组放在独立进程中完成，只把完整消息交给GUI进程，界面绘制不受网络收包影响。
 
-#### 2.3.2.5 Mali-400 GPU离屏三维渲染`h3d_render.py`
+#### 2.3.2.5 手机控制页`web_server.py`
+
+线下演示时两块板之间不一定连网线，观众也不便操作板载触摸屏，因此RX板上另运行一个网页服务（tornado，端口8080），用手机浏览器即可查看两路实时画面和物理层指标，并控制链路（图2-21）。两块板和手机连接同一个手机热点（板载Microchip WILC模块，2.4 GHz）：
+
+- 画面：每块板把自己的画面直接发给手机，不经另一块板转发。TX主程序在8081端口提供交给编码器的原图，RX服务把解码图编码为JPEG推送给网页服务，两路都以MJPEG流（`multipart/x-mixed-replace`）发送，由浏览器的`<img>`直接显示。
+- 地址：热点分配的地址不固定。GUI的手机页读取RX板WiFi网口的地址，显示控制页地址和二维码，手机扫码进入；网页服务在WiFi子网内广播状态查询，由TX的应答得到TX板地址，页面再从该地址取TX原图。
+- 状态与控制：页面经WebSocket每秒接收4次状态，星座、逐子载波SNR和频谱只在物理层页打开时发送。衰减、模式和信源命令以UDP直接发给TX板；两板连着网线时改由GUI转发，触摸屏与手机上的控件保持一致。PSNR与端到端时延需要把原图和重建图放在一处比较，只在两板连网线时由GUI给出，未连线时手机上显示“–”。
+
+WILC模块的上行吞吐只有约2.5 Mbit/s，一路30 fps的JPEG流就要占满。若每帧都写入TCP连接，来不及发送的数据会在内核缓冲区中排队，画面滞后可达数秒，并随拥塞控制时快时慢。因此每路MJPEG限为15 fps、JPEG质量65（每帧约8 KB，约1 Mbit/s）；每帧写入前读取套接字中尚未发出的字节数（`SIOCOUTQNSD`），超过16 KB时跳过该帧，始终只发最新的一帧；连续5 s无法发送则关闭连接。经手机热点实测，一路画面稳定在约14 fps。WILC的省电模式会使往返时延升至约170 ms，开机时将其关闭。
+
+![手机控制](figures/sw/phone_control.png)
+
+图2-21　手机控制：RX板触摸屏的手机页显示控制页地址与二维码（左）；两板未连网线时手机上的控制页（右），PSNR与时延显示“–”。
+
+#### 2.3.2.6 Mali-400 GPU离屏三维渲染`h3d_render.py`
 
 信道 |H| 三维曲面（52个子载波 × 最近5秒）是物理层页上最直观的一张图，由ZU5EG片上的Mali-400 MP2 GPU（1个几何处理器、2个像素处理器，500 MHz）渲染。
 
 驱动：PYNQ-ZU镜像的内核（6.6.10-xilinx-v2024.1）没有打开开源Mali驱动lima（`CONFIG_DRM_LIMA`）及其依赖`DRM_SCHED`、`DRM_GEM_SHMEM_HELPER`，而设备树中已有符合lima要求的GPU节点（`gpu@fd4b0000`），用户态Mesa 22也带有`lima_dri.so`。因此取Xilinx linux-xlnx对应标签的`drivers/gpu/drm/{lima,scheduler}`与`drm_gem_shmem_helper.c`，在板上以外部内核模块方式编译（`src/sw/board_setup/gpu_lima/`），开机自动加载。板上内核由gcc 12编译而板上只有gcc 11，所以在一份私有的内核构建树中单独生成arm64头文件和`modpost`（不经过会重跑kconfig的顶层Makefile），并用一个编译器包装脚本去掉gcc 11不支持的编译选项。
 
-渲染方式：板上X服务的显示驱动（armsoc）不支持GPU加速，经X的OpenGL程序只能得到软件渲染。因此三维曲面由一个独立的渲染进程绕过X、直接在lima的render节点上离屏绘制，再把像素读回交给GUI当作图片显示，界面其余部分仍由X显示（图2-21）：
+渲染方式：板上X服务的显示驱动（armsoc）不支持GPU加速，经X的OpenGL程序只能得到软件渲染。因此三维曲面由一个独立的渲染进程绕过X、直接在lima的render节点上离屏绘制，再把像素读回交给GUI当作图片显示，界面其余部分仍由X显示（图2-22）：
 
 1. 初始化GPU：按驱动名在`/sys/class/drm/renderD*`中找到lima的render节点，经`libgbm`创建GBM设备，用`eglGetPlatformDisplay(EGL_PLATFORM_GBM_KHR)`初始化EGL，建立OpenGL ES 2.0的无表面上下文；渲染目标是一个帧缓冲对象，RGBA纹理作颜色附件，16位深度渲染缓冲作深度附件。
 2. 生成几何（NumPy，约7 ms）：T×N的 |H| 历史（N = 52，T为最近5 s的快照）构成三角网格；法向量由有限差分得到，按Lambert模型着色，颜色按 |H| 在三段色图中插值；另有曲面网格线、地面网格和坐标轴的线段。
@@ -678,15 +694,15 @@ RX解码图没有帧号，PSNR的计算方法是：在最近350 ms收到的TX预
 
 ![Mali-400 离屏渲染流程](figures/sw/gpu_pipeline.png)
 
-图2-21　Mali-400离屏渲染：GUI进程、渲染进程与GPU之间的数据流。
+图2-22　Mali-400离屏渲染：GUI进程、渲染进程与GPU之间的数据流。
 
-#### 2.3.2.6 PC端工具链
+#### 2.3.2.7 PC端工具链
 
-PC端工具链从训练一直延伸到上板测量（图2-22），各环节之间都以文件交接。
+PC端工具链从训练一直延伸到上板测量（图2-23），各环节之间都以文件交接。
 
 ![PC 端工具链](figures/sw/pc_toolchain.png)
 
-图2-22　PC端工具链：模型训练 → 整数量化 → RTL生成 → 比特流 → 测量。
+图2-23　PC端工具链：模型训练 → 整数量化 → RTL生成 → 比特流 → 测量。
 
 模型与训练（`src/model/`）：
 

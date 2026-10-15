@@ -62,7 +62,7 @@ MT_RX_JPG = 5             # decoded image as JPEG (HELLO ... jpg subscribers)
 STAT = b"JSCC-STAT"
 
 
-# MJPEG streams to phones (WiFi): at most STREAM_FPS, JPEG quality STREAM_Q (~6 KB / frame, ~0.7 Mbit/s: well below
+# MJPEG streams to phones (WiFi): at most STREAM_FPS, JPEG quality STREAM_Q (~8 KB / frame, ~1 Mbit/s: well below
 # the WILC's ~2.5 Mbit/s, so the rate stays steady); frames are skipped while more than STREAM_BACKLOG bytes are still
 # unsent (newest frame, no queueing), and a stream stuck for STREAM_STALL s (phone gone) is closed
 STREAM_FPS, STREAM_Q, STREAM_BACKLOG, STREAM_STALL = 15, 65, 16384, 5.0
