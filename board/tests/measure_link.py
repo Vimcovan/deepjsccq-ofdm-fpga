@@ -18,6 +18,8 @@ Results: <out>.json (all points, all passes) and <out>.csv (one row per point an
 --src preset:<name>   TX input for the run (default: the demo video)
 --top <dB>            before each sweep the attenuation goes to att0 + top first and the link settles there (the AGC
                       only has to follow rising levels); the points are then measured in the given order (descending)
+--tx-decim <n>        only every n-th TX preview (WiFi instead of the board cable; use a still preset image)
+--ref <png>           PSNR reference instead of the previews: the still preset image the TX sends (WiFi)
 --save-img <dir>      per point the decoded image whose PSNR is closest to the point mean (PNG, + the TX reference)
 """
 import argparse
@@ -39,6 +41,10 @@ ap.add_argument("--settle", type=float, default=3.0, help="s after the attenuati
 ap.add_argument("--dwell", type=float, default=8.0, help="measurement time per point, s")
 ap.add_argument("--att0", type=float, default=0.0, help="TX attenuation at extra = 0 (tx_camera.py --att)")
 ap.add_argument("--tx", default="192.168.4.1")
+ap.add_argument("--ref", default=None, help="PNG reference for PSNR instead of the TX previews (the still preset "
+                "image the TX sends, --src preset:<name>): over WiFi whole 196 kB previews rarely arrive")
+ap.add_argument("--tx-decim", type=int, default=1, help="TX previews: every n-th only (over WiFi, with a still preset "
+                "image: --tx <TX WiFi address> --tx-decim 30 --src preset:<name>)")
 ap.add_argument("--rx", default="127.0.0.1")
 ap.add_argument("--out", default="meas_link")
 ap.add_argument("--diag", action="store_true", help="SSCC: PSNR against frame numbers -2..+2 (pairing check)")
@@ -85,7 +91,7 @@ def net_proc(peer, msg_q, cmd_q, mode_flag):
     while True:
         now = time.time()
         if now - t_h > 1.0:
-            sk.sendto(U.HELLO, peer); t_h = now
+            sk.sendto(U.HELLO + (b" %d" % args.tx_decim if cmd_q is not None else b""), peer); t_h = now
         if cmd_q is not None:
             try:
                 while True:
@@ -109,7 +115,11 @@ def net_proc(peer, msg_q, cmd_q, mode_flag):
             msg_q.put((m[0], m[1], m[2], time.time()))
 
 
+LAST_CMD = {}                                         # command word -> last message (resent while waiting: UDP over WiFi)
+
+
 def ctrl(msg):
+    LAST_CMD[msg.split()[0]] = msg
     CMD_Q.put(msg)
 
 
@@ -133,6 +143,9 @@ class Window:
 
 
 txbuf = collections.deque(maxlen=120)                 # (t, img, small, frame id): 4 s of previews
+REF = None
+if args.ref:                                           # still image: the reference stands in for every preview
+    REF = np.ascontiguousarray(cv2.imread(args.ref)[:, :, ::-1]); assert REF.shape == (256, 256, 3), REF.shape
 pending = []                                          # SSCC frames waiting for their preview (t, img, frame, decoded)
 pending_ok = False                                    # True while flushing: no further deferral
 last_shown = None
@@ -242,6 +255,9 @@ def restore_shown(img, decoded):
 def pump(until):
     """process received messages until time `until`"""
     while time.time() < until:
+        if REF is not None and (not txbuf or time.time() - txbuf[-1][0] > 1 / 30):
+            txbuf.append((time.time(), REF, REF[::4, ::4].astype(np.float32), -1))
+            flush_pending(time.time())
         try:
             mtype, mid, payload, t = MSG_Q.get(timeout=0.05)
         except queue.Empty:
@@ -309,11 +325,15 @@ def pump(until):
 
 
 def wait_for(cond, timeout, what):
-    t_end = time.time() + timeout
+    t_end = time.time() + timeout; t_send = time.time()
     while time.time() < t_end:
         pump(time.time() + 0.2)
         if cond():
             return True
+        if time.time() - t_send > 1.0:                # commands are idempotent: resend (lost datagram)
+            t_send = time.time()
+            for m in LAST_CMD.values():
+                CMD_Q.put(m)
     print(f"  ! timeout waiting for {what} (TX state {tx_state})", flush=True)
     return False
 

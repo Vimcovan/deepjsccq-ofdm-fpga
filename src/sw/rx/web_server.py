@@ -216,8 +216,10 @@ class Link:
             src = self.source if tx_ok else None
         tx_url = (f"http://{self.tx_ip}:{args.tx_http_port}/tx.mjpg"
                   if self.tx_ip and now - self.t_tx_ip < 10.0 else None)
+        img_rate = r(self.rates.get("IMG_FRAMES", 0.0)) if now - self.t_tel < 2.0 else 0.0   # RX telemetry, any GUI page
         s = dict(t=now, gui=bool(g), cabled=cabled, tx_link=tx_ok, tx_url=tx_url, mode=self.cur_mode(), source=src,
-                 att_target=r(att_t, 2), fps=r(g["rx_fps"]) if g else r(self.fps()), img_fps=r(self.fps()),
+                 att_target=r(att_t, 2), fps=img_rate,
+                 img_fps=r(self.fps()),
                  psnr=g.get("psnr") if cabled else None, lat=g.get("lat") if cabled else None,
                  evm=r(self.evm), snr=r(self.snr), sync=r(self.rates.get("SYNC_CNT"), 1),
                  agc=self.status.get("AGC_GAIN_IDX"), agc_lock=self.status.get("AGC_LOCK"),
