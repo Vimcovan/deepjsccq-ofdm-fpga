@@ -48,3 +48,31 @@ function Table(tbl)
   end
   return tbl
 end
+
+-- Greek letters (U+0370..U+03FF) in plain text -> character style "Greek" (Times New Roman), since Word renders these
+-- ambiguous-width characters with the East Asian font in a Chinese paragraph
+local function is_greek(cp) return cp >= 0x370 and cp <= 0x3FF end
+
+function Str(el)
+  local parts, buf, greek = {}, {}, nil
+  local function flush()
+    if #buf == 0 then return end
+    local txt = table.concat(buf)
+    if greek then
+      table.insert(parts, pandoc.Span({pandoc.Str(txt)}, {["custom-style"] = "Greek"}))
+    else
+      table.insert(parts, pandoc.Str(txt))
+    end
+    buf = {}
+  end
+  local found = false
+  for _, cp in utf8.codes(el.text) do
+    local g = is_greek(cp)
+    if g then found = true end
+    if g ~= greek then flush(); greek = g end
+    table.insert(buf, utf8.char(cp))
+  end
+  if not found then return nil end
+  flush()
+  return parts
+end

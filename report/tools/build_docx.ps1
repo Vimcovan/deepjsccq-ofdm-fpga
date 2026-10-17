@@ -41,4 +41,7 @@ if ($MathType) {
   & (Join-Path $tools 'mathtype_convert.ps1') -In $pout -Out $out
   Remove-Item $pout
 }
+# Word re-assigns the East Asian font to Greek letters on save; put them back to Times New Roman
+& $Python -I (Join-Path $tools 'fix_greek_fonts.py') $out
+if ($LASTEXITCODE -ne 0) { throw 'fix_greek_fonts.py failed' }
 "written $out"

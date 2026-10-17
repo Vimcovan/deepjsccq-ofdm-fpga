@@ -46,7 +46,7 @@ TX主程序的流程见图2-19，它由一个主循环和若干后台线程组�
 | `JsccTx.send_image(img)` | (256, 256, 3) uint8 | MM2S DMA送入196,608字节；DMA受编码器反压，返回时编码器已收下整幅图 |
 | `JsccTx.send_packet(pkt)` | 12,272字节SSCC包 | 同一DMA送入SSCC发射链 |
 | `JsccTx.set_mode(m)` / `set_source(s)` | 工作模式（DeepJSCC-Q / SSCC）；数据源（编码器 / PRBS自测） | 写控制寄存器中的模式位或数据源位，PL在帧边界切换 |
-| `JsccTx.set_tx_atten(db)` | 0~89.75 dB | 经SPI写AD9361的TX衰减寄存器，立即生效 |
+| `JsccTx.set_tx_atten(db)` | 0\~89.75 dB | 经SPI写AD9361的TX衰减寄存器，立即生效 |
 | `JpegFit.encode(img)` | RGB图像 | 不超过12,260字节的JPEG、质量因子q |
 
 ![TX 主程序流程](figures/sw/tx_flow.png)

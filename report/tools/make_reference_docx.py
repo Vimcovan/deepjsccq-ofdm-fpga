@@ -65,6 +65,9 @@ def build_styles():
         pstyle("SourceCode", "Source Code", '<w:spacing w:before="60" w:after="60" w:line="240" w:lineRule="auto"/>'
                '<w:ind w:firstLine="0" w:firstLineChars="0" w:left="420"/><w:jc w:val="left"/>',
                rfonts(CJK, "Consolas") + '<w:sz w:val="18"/><w:szCs w:val="18"/>'),
+        # Greek letters in body text: Word would otherwise draw them with the East Asian font (SimSun)
+        '<w:style w:type="character" w:styleId="Greek"><w:name w:val="Greek"/>'
+        f'<w:rPr>{rfonts(LATIN, LATIN)}</w:rPr></w:style>',
         '<w:style w:type="character" w:styleId="VerbatimChar"><w:name w:val="Verbatim Char"/>'
         f'<w:rPr>{rfonts(CJK, "Consolas")}<w:sz w:val="21"/></w:rPr></w:style>',
         pstyle("header", "header", '<w:jc w:val="center"/>', '<w:sz w:val="18"/>'),
