@@ -10,7 +10,8 @@ simulated symbol by symbol with the same arithmetic as the RTL (floating point, 
 
 (a) CPE only: common phase step of 60 deg at symbol 50, no slope.
 (b) slope step: timing offset step of 0.25 / 0.5 / 1 sample at symbol 50 (slope 2 pi d / 64), no CPE.
-(c) ramp (SFO only): 40 ppm, timing drift 40e-6 * 80 samples per OFDM symbol, over one frame (683 symbols).
+(c) ramp (SFO only): 40 ppm, timing drift 40e-6 * 80 samples per OFDM symbol, over one frame (683 symbols);
+    actual phase of the edge subcarrier vs the phase removed by sfo_rotator, with a zoom on the start.
 
     python sfo_loop_response.py      -> ../hw/sfo_loop_response.png
 """
@@ -94,24 +95,28 @@ ax[1].set_ylabel("预测斜率 / 实际斜率")
 ax[1].set_title("(b) 相位斜率阶跃", fontsize=9)
 ax[1].legend(frameon=False, fontsize=7, loc="center right", bbox_to_anchor=(1.0, 0.45))
 
-# (c) SFO ramp
+# (c) SFO ramp: actual phase ramp at the edge subcarrier vs the phase the loop removes (k * predicted slope)
 eps = 40e-6
 tau = eps * 80 * (n + 1)                          # timing drift since the LTF reference, samples
 theta = 2 * np.pi * tau / 64
 _, rs, P = run(np.zeros(NSYM), theta)
-err = np.rad2deg(K_EDGE * rs)
-ax[2].plot(n, err, color=S.ORANGE, lw=1.2, label="跟踪误差（左轴）")
+true_ph, trk_ph = np.rad2deg(K_EDGE * theta), np.rad2deg(K_EDGE * P)
+err = true_ph - trk_ph
+ax[2].plot(n, true_ph, color=S.GRAY, lw=1.0, ls="--", label="实际相位斜坡")
+ax[2].plot(n, trk_ph, color=S.ORANGE, lw=1.2, label="跟踪环补偿的相位")
 ax[2].set_xlabel("OFDM 符号序号")
-ax[2].set_ylabel("k = 26 子载波相位误差 / °")
+ax[2].set_ylabel("k = 26 子载波相位 / °")
 ax[2].set_title("(c) SFO 斜坡 40 ppm", fontsize=9)
-ax2 = ax[2].twinx()
-ax2.plot(n, np.rad2deg(K_EDGE * theta), color=S.GRAY, lw=1.0, ls="--", label="无跟踪时的相位（右轴）")
-ax2.set_ylabel("无跟踪时 k = 26 相位 / °", color=S.GRAY)
-ax2.tick_params(axis="y", colors=S.GRAY)
-ax2.spines["top"].set_visible(False)
-h1, l1 = ax[2].get_legend_handles_labels(); h2, l2 = ax2.get_legend_handles_labels()
-ax[2].legend(h1 + h2, l1 + l2, frameon=False, fontsize=7, loc="center right")
-print(f"(c) drift at frame end {tau[-1]:.2f} samples, edge phase {np.rad2deg(K_EDGE * theta[-1]):.0f} deg; "
+ax[2].legend(frameon=False, fontsize=7, loc="upper left")
+ins = ax[2].inset_axes([0.50, 0.08, 0.46, 0.42])
+z = n < 40
+ins.plot(n[z], true_ph[z], color=S.GRAY, lw=1.0, ls="--")
+ins.plot(n[z], trk_ph[z], color=S.ORANGE, lw=1.2)
+ins.set_xlim(0, 39); ins.set_ylim(0, true_ph[39] * 1.05)
+ins.tick_params(labelsize=6, length=2)
+ins.grid(color="#dddddd", lw=0.4); ins.set_axisbelow(True)
+ax[2].indicate_inset_zoom(ins, edgecolor="#555555", lw=0.6)
+print(f"(c) drift at frame end {tau[-1]:.2f} samples, edge phase {true_ph[-1]:.0f} deg; "
       f"tracking error peak {np.abs(err).max():.2f} deg at symbol {np.abs(err).argmax()}, "
       f"after symbol 100 max {np.abs(err[100:]).max():.3f} deg, at frame end {err[-1]:.4f} deg")
 

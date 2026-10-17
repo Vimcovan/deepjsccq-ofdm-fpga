@@ -6,6 +6,7 @@
 |---|---|---|
 | —（手绘） | `fig02_network.vsdx`、`../network/fig02_network.png` | 编码器 / 解码器模块结构，各块输出尺寸与 `data/model/manifest.json` 一致 |
 | `fig07_memory.ps1` | `fig07_memory.vsdx`、`../network/fig07_memory.png` | 按层并行度、权重 ROM 映射、激活缓存迁入 URAM（数据取自 manifest） |
+| `design_flow.ps1` | `design_flow.vsdx`、`../design_flow.png` | 设计流程（报告1.6节） |
 | —（手绘） | `sys_overview.vsdx`、`../hw/sys_overview.png` | 系统整体框图 |
 | —（手绘） | `block_rtl.vsdx`、`../hw/block_rtl.png` | RG / RU / ATT 块的 RTL 组成 |
 | `gdn_unit.ps1` | `../hw/gdn_unit.png` | GDN / IGDN 模块 |

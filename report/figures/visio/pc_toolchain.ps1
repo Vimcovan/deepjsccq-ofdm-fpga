@@ -25,13 +25,13 @@ File 128 7 50 'manifest.json（结构、张量、量化参数）'
 File 128 18 50 'params/*.mem、golden/ 黄金张量'
 
 # row 2: RTL
-[void](Label 2 29.5 80 5 'src/network（RTL 生成）' 8 0 $ST.INK $true)
+[void](Label 2 29.5 80 5 'src/network（顶层例化与参数文件）' 8 0 $ST.INK $true)
 [void](Path @(153, 27, 153, 35.5, 14, 35.5, 14, 38))
 Step 2 38 26 'memory_plan.py' ("并行度 P、ROM 方式`n缓存原语、URAM 迁移")
 [void](Line 28 46 32 46)
 Step 32 38 30 'gen_rtl_init.py' ("权重 / 偏置 / M / sh`n→ rtl_init/*.mem")
 [void](Line 62 46 66 46)
-Step 66 38 30 'gen_rtl_top.py' ("模块库 + 拓扑`n→ blk_enc_*.sv`n   blk_rx_*.sv")
+Step 66 38 30 'gen_rtl_top.py' ("例化手写模块、传参、连线`n→ blk_enc_*.sv`n   blk_rx_*.sv")
 [void](Line 96 46 100 46)
 File 100 41.5 40 'blk_*.sv + rtl_init/*.mem → src/hw'
 

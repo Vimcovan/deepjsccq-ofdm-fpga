@@ -8,13 +8,13 @@
 
 | 时间 | 工作 | 代理 |
 |---|---|---|
-| 09-01 – 09-26 | DeepJSCC原型；DeepJSCC-Q按期刊版重写、训练；类802.11a OFDM发射机 | Codex |
-| 09-25 – 09-28 | AD9361配置调试；OFDM自环到两板空口；AGC、定时门限、长帧SFO跟踪、遥测GUI | Claude Code |
-| 09-28 – 09-29 | 1200轮训练；定点方案；存储规划；行缓存与卷积引擎RTL | Claude Code |
-| 09-29 – 09-30 | 神经网络RTL生成器、FIFO定尺寸、逐比特验证、编 / 解码器工程 | Codex |
-| 09-30 – 10-05 | 物理层与神经网络对接；PYNQ上板；摄像头、GUI、Mali-400 GPU；SSCC基线 | Claude Code |
-| 10-05 – 10-07 | 演示视频（代理控制两块板卡、配音、剪辑）；AGC看门狗；实测；开源仓库 | Claude Code |
-| 10-07 – 10-11 | 设计报告：Codex起草神经网络部分初稿并交叉审查；Claude Code撰写、绘图，参赛者逐条批注修改 | 两者 |
+| 09-01~09-26 | DeepJSCC原型；DeepJSCC-Q按期刊版重写、训练；类802.11a OFDM发射机 | Codex |
+| 09-25~09-28 | AD9361配置调试；OFDM自环到两板空口；AGC、定时门限、长帧SFO跟踪、遥测GUI | Claude Code |
+| 09-28~09-29 | 1200轮训练；定点方案；存储规划；行缓存与卷积引擎RTL | Claude Code |
+| 09-29~09-30 | 神经网络顶层例化脚本、FIFO定尺寸、逐比特验证、编 / 解码器工程 | Codex |
+| 09-30~10-05 | 物理层与神经网络对接；PYNQ上板；摄像头、GUI、Mali-400 GPU；SSCC基线 | Claude Code |
+| 10-05~10-07 | 演示视频（代理控制两块板卡、配音、剪辑）；AGC看门狗；实测；开源仓库 | Claude Code |
+| 10-07~10-11 | 设计报告：Codex起草神经网络部分初稿并交叉审查；Claude Code撰写、绘图，参赛者逐条批注修改 | 两者 |
 
 与本项目相关的会话共40个，用户消息766条。`report/llm_collab/cases.md`整理了17个典型案例，每个案例写明背景、模型做了什么、用户做了什么和结果，代表性的几类见表A-2。
 
@@ -82,7 +82,7 @@ AI反复出现的问题有四类：没有证据就下结论；把自己定的经
 
 ## 附录C复现说明
 
-硬件：2块PYNQ-ZU、2块AD-FMCOMMS3-EBZ、2根915 MHz天线；TX可选USB UVC摄像头，RX接1024×600 DisplayPort触摸屏；两板之间一根网线。
+硬件：2块PYNQ-ZU、2块AD-FMCOMMS3-EBZ、2根胶棒天线；TX可选USB UVC摄像头，RX接1024×600 DisplayPort触摸屏；两板之间一根网线。
 
 使用部署版比特流：见仓库根目录`README.md`。把`board/bitstreams/`与`src/sw/`拷到两块板上，安装`src/sw/systemd/`中的服务，上电约1分钟后触摸屏显示GUI。比特流的SHA-256见`board/bitstreams/SHA256SUMS`。Mali-400驱动与PyQt5的安装见`src/sw/board_setup/`。
 
@@ -112,4 +112,4 @@ vivado -mode batch -source build/build_hw.tcl -tclargs rx 8
 | 整网仿真（2帧，输入valid 90 %、输出ready 80 %） | 编码器17,717,420周期、解码器14,803,719周期，逐比特一致，周期数与`sim/network/results/`中的记录相同 |
 | SSCC基线仿真 | 5组用例的字节错误数与记录相同；导出的32,768个符号与Python参考逐个相同 |
 | 比特流构建 | TX、RX的资源、时序与功耗与表3-1相同 |
-| 板上部署 | 两套环境均按`README.md`部署成功，三个服务正常运行；RX在60 s内收到1801帧（30.0 fps），无丢帧；GUI显示演示视频 |
+| 板上部署 | 两套环境均按`README.md`部署成功，三个服务正常运行；RX在60 s内收到1801帧（30.0 fps），无丢帧；GUI显示预设视频 |
