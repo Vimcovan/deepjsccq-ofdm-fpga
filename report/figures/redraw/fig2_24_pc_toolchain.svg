@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2020" height="1590" viewBox="0 0 2020 1590" role="img">
+<title>PC 端工具链：训练、整数导出、RTL 生成与上板测量</title>
+<rect width="2020" height="1590" fill="white"/>
+<text x="40" y="54" xml:space="preserve" text-anchor="start" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(a) </tspan><tspan font-family="SimSun">模型训练与整数导出</tspan></text>
+<text x="1980" y="54" xml:space="preserve" text-anchor="end" font-size="29" fill="#595959"><tspan font-family="Times New Roman">src/model</tspan></text>
+<rect x="40" y="215" width="320" height="210" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="200.0" y="258" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">数据准备</tspan></text>
+<text x="200.0" y="303" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">prepare_cache.py</tspan></text>
+<text x="200.0" y="345" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">DIV2K + Flickr2K</tspan></text>
+<text x="200.0" y="387" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">uint8 .npy </tspan><tspan font-family="SimSun">缓存</tspan></text>
+<rect x="430" y="190" width="390" height="260" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="625.0" y="233" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">模型训练</tspan></text>
+<text x="625.0" y="280" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">train_v2.py</tspan></text>
+<text x="625.0" y="323" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">AWGN 10 dB · 1200 </tspan><tspan font-family="SimSun">轮</tspan></text>
+<text x="625.0" y="366" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">MSE + 0.05 KL</tspan></text>
+<text x="625.0" y="409" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">硬量化前向</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">软量化反向</tspan></text>
+<rect x="845" y="285" width="130" height="70" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="910.0" y="330" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">best.pt</tspan></text>
+<rect x="1040" y="150" width="470" height="340" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1275" y="194" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">整数量化与导出</tspan></text>
+<text x="1275" y="244" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">export_fpga.py + int_ref.py</tspan></text>
+<text x="1275" y="288" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">W8A12 </tspan><tspan font-family="SimSun">训练后量化</tspan></text>
+<text x="1275" y="330" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">rsr</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">sat</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">GDN</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">sigmoid</tspan></text>
+<polyline points="1060,354 1490,354" fill="none" stroke="#7F6000" stroke-width="1" stroke-linejoin="round"/>
+<text x="1275" y="397" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">存储规划：</tspan><tspan font-family="Times New Roman">memory_plan.py</tspan></text>
+<text x="1275" y="436" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">并行度</tspan><tspan font-family="Times New Roman"> P</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">ROM </tspan><tspan font-family="SimSun">方式、缓存原语</tspan></text>
+<text x="1275" y="472" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">URAM </tspan><tspan font-family="SimSun">迁移</tspan></text>
+<rect x="1600" y="210" width="350" height="220" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1775.0" y="253" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">manifest.json</tspan></text>
+<text x="1775.0" y="297" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">结构、张量、量化参数</tspan></text>
+<text x="1775.0" y="339" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">含存储规划</tspan><tspan font-family="Times New Roman"> memory_plan</tspan></text>
+<text x="1775.0" y="381" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">params/*.mem</tspan></text>
+<polyline points="360,320 430,320" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="430,320 418.0,315.0 418.0,325.0" fill="#000000"/>
+<polyline points="820,320 845,320" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="845,320 833.0,315.0 833.0,325.0" fill="#000000"/>
+<polyline points="975,320 1040,320" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1040,320 1028.0,315.0 1028.0,325.0" fill="#000000"/>
+<polyline points="1510,320 1600,320" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1600,320 1588.0,315.0 1588.0,325.0" fill="#000000"/>
+<rect x="1080" y="520" width="390" height="80" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1275.0" y="551" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">golden/ </tspan><tspan font-family="SimSun">黄金张量</tspan></text>
+<text x="1275.0" y="585" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">逐比特仿真参考</tspan></text>
+<polyline points="1275,490 1275,520" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1275,520 1280.0,508.0 1270.0,508.0" fill="#000000"/>
+<polyline points="1775,430 1775,745" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1775,745 1780.0,733.0 1770.0,733.0" fill="#000000"/>
+<polyline points="40,635 1510,635" fill="none" stroke="#D9D9D9" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="40" y="683" xml:space="preserve" text-anchor="start" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(b) </tspan><tspan font-family="SimSun">顶层</tspan><tspan font-family="Times New Roman"> RTL </tspan><tspan font-family="SimSun">与参数文件生成</tspan></text>
+<text x="1980" y="683" xml:space="preserve" text-anchor="end" font-size="29" fill="#595959"><tspan font-family="Times New Roman">src/network</tspan></text>
+<rect x="1560" y="745" width="430" height="220" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1775.0" y="788" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">参数文件生成</tspan></text>
+<text x="1775.0" y="834" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">gen_rtl_init.py</tspan></text>
+<text x="1775.0" y="878" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">权重</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">偏置</tspan><tspan font-family="Times New Roman"> / M / sh</tspan></text>
+<text x="1775.0" y="922" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">整数参数</tspan><tspan font-family="Times New Roman"> → ROM </tspan><tspan font-family="SimSun">初始化</tspan></text>
+<rect x="1150" y="785" width="280" height="140" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1290.0" y="833" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">rtl_init/</tspan></text>
+<text x="1290.0" y="884" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">*.mem + engine.json</tspan></text>
+<rect x="610" y="730" width="440" height="250" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="830.0" y="773" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">顶层</tspan><tspan font-family="Times New Roman"> RTL </tspan><tspan font-family="SimSun">例化</tspan></text>
+<text x="830.0" y="817" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">gen_rtl_top.py</tspan></text>
+<text x="830.0" y="860" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">读取</tspan><tspan font-family="Times New Roman"> manifest + </tspan><tspan font-family="SimSun">初始化参数</tspan></text>
+<text x="830.0" y="903" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">手写模块例化、传参、连线</tspan></text>
+<text x="830.0" y="946" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">blk_enc_*.sv / blk_rx_*.sv</tspan></text>
+<rect x="40" y="770" width="430" height="170" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="255.0" y="813" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">src/hw</tspan></text>
+<text x="255.0" y="861" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">blk_*.sv + rtl_init/*.mem</tspan></text>
+<text x="255.0" y="905" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">工程中的</tspan><tspan font-family="Times New Roman"> RTL </tspan><tspan font-family="SimSun">与参数</tspan></text>
+<polyline points="1560,855 1430,855" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1430,855 1442.0,860.0 1442.0,850.0" fill="#000000"/>
+<polyline points="1150,855 1050,855" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1050,855 1062.0,860.0 1062.0,850.0" fill="#000000"/>
+<polyline points="610,855 470,855" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="470,855 482.0,860.0 482.0,850.0" fill="#000000"/>
+<polyline points="40,855 20,855 20,1290 40,1290" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="40,1290 28.0,1285.0 28.0,1295.0" fill="#000000"/>
+<polyline points="40,1025 1980,1025" fill="none" stroke="#D9D9D9" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="40" y="1082" xml:space="preserve" text-anchor="start" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(c) </tspan><tspan font-family="SimSun">比特流构建、测量与分析</tspan></text>
+<text x="1980" y="1082" xml:space="preserve" text-anchor="end" font-size="29" fill="#595959"><tspan font-family="Times New Roman">build + board/tests</tspan></text>
+<rect x="40" y="1170" width="430" height="240" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="255.0" y="1214" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">比特流构建</tspan></text>
+<text x="255.0" y="1268" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">build/build_hw.tcl</tspan></text>
+<text x="255.0" y="1314" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">Vivado 2025.2</tspan><tspan font-family="SimSun">，默认策略</tspan></text>
+<text x="255.0" y="1360" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">files.txt → </tspan><tspan font-family="SimSun">工程、</tspan><tspan font-family="Times New Roman">IP</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">PS BD</tspan></text>
+<rect x="540" y="1225" width="260" height="130" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="670.0" y="1273" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">jscc_tx/rx.bit</tspan></text>
+<text x="670.0" y="1319" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">+ .hwh</tspan></text>
+<rect x="880" y="1160" width="360" height="260" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1060.0" y="1204" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">板上测量</tspan></text>
+<text x="1060.0" y="1260" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">measure_link.py</tspan><tspan font-family="SimSun">：衰减扫描</tspan></text>
+<text x="1060.0" y="1309" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">pl_events.py</tspan><tspan font-family="SimSun">：</tspan></text>
+<text x="1060.0" y="1358" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">帧计数器</tspan></text>
+<rect x="1310" y="1220" width="180" height="140" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1400.0" y="1259" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">测量数据</tspan></text>
+<text x="1400.0" y="1300" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">JSON / CSV</tspan></text>
+<text x="1400.0" y="1337" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">NPZ</tspan></text>
+<rect x="1570" y="1180" width="410" height="220" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1775.0" y="1224" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="Times New Roman">PC </tspan><tspan font-family="SimSun">分析</tspan></text>
+<text x="1775.0" y="1276" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">analyze_const.py</tspan><tspan font-family="SimSun">：数据辅助</tspan><tspan font-family="Times New Roman"> SNR</tspan></text>
+<text x="1775.0" y="1320" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">seg_latency.py</tspan><tspan font-family="SimSun">：分段时延</tspan></text>
+<text x="1775.0" y="1364" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">plot_*.m</tspan><tspan font-family="SimSun">：出图</tspan></text>
+<polyline points="470,1290 540,1290" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="540,1290 528.0,1285.0 528.0,1295.0" fill="#000000"/>
+<polyline points="800,1290 880,1290" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="880,1290 868.0,1285.0 868.0,1295.0" fill="#000000"/>
+<polyline points="1240,1290 1310,1290" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1310,1290 1298.0,1285.0 1298.0,1295.0" fill="#000000"/>
+<polyline points="1490,1290 1570,1290" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1570,1290 1558.0,1285.0 1558.0,1295.0" fill="#000000"/>
+<polyline points="1775,1400 1775,1460" fill="none" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+<polygon points="1775,1460 1780.0,1448.0 1770.0,1448.0" fill="#000000"/>
+<rect x="1570" y="1460" width="410" height="90" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1775.0" y="1497" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">data/measurements/</tspan></text>
+<text x="1775.0" y="1532" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">结果归档</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">第三部分</tspan></text>
+</svg>

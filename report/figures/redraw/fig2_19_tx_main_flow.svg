@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2300" height="1870" viewBox="0 0 2300 1870" role="img">
+<title>TX 主程序与 JPEG 质量自适应</title>
+<rect width="2300" height="1870" fill="white"/>
+<text x="650" y="55" xml:space="preserve" text-anchor="middle" font-size="38" fill="#000000"><tspan font-family="Times New Roman">(a) TX </tspan><tspan font-family="SimSun">主程序</tspan></text>
+<text x="650" y="101" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">tx_camera.py</tspan></text>
+<text x="1825" y="55" xml:space="preserve" text-anchor="middle" font-size="38" fill="#000000"><tspan font-family="Times New Roman">(b) JPEG </tspan><tspan font-family="SimSun">质量自适应</tspan></text>
+<text x="1825" y="101" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">JpegFit.encode()</tspan></text>
+<polyline points="1330,25 1330,1830" fill="none" stroke="#D9D9D9" stroke-width="1.2" stroke-linejoin="round"/>
+<rect x="390.0" y="140" width="460" height="76" rx="38" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="620" y="189" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">systemd </tspan><tspan font-family="SimSun">启动</tspan><tspan font-family="Times New Roman"> jscc-tx.service</tspan></text>
+<rect x="370.0" y="255" width="500" height="110" rx="12" fill="#EBE7F2" stroke="#574781" stroke-width="2"/>
+<text x="620" y="299.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">加载比特流，切到</tspan><tspan font-family="Times New Roman"> PRBS </tspan><tspan font-family="SimSun">源</tspan></text>
+<text x="620" y="341.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">统计</tspan><tspan font-family="Times New Roman"> 1 s </tspan><tspan font-family="SimSun">内发往</tspan><tspan font-family="Times New Roman"> DAC </tspan><tspan font-family="SimSun">的帧数</tspan><tspan font-family="Times New Roman"> ΔN</tspan></text>
+<polyline points="620,216 620,255" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,255 625.0,243.0 615.0,243.0" fill="#000000"/>
+<polygon points="620,400.0 865.0,470 620,540.0 375.0,470" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="620" y="460.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">ΔN &gt; 300 </tspan><tspan font-family="SimSun">或</tspan></text>
+<text x="620" y="500.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">已尝试</tspan><tspan font-family="Times New Roman"> 5 </tspan><tspan font-family="SimSun">次？</tspan></text>
+<polyline points="620,365 620,400.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,400.0 625.0,388.0 615.0,388.0" fill="#000000"/>
+<polyline points="375.0,470 155,470 155,310.0 370.0,310.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="370.0,310.0 358.0,305.0 358.0,315.0" fill="#000000"/>
+<text x="250" y="451" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">否，重新加载</tspan></text>
+<rect x="400.0" y="580" width="440" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="620" y="624.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">切回编码器，设置</tspan><tspan font-family="Times New Roman"> TX </tspan><tspan font-family="SimSun">衰减</tspan></text>
+<text x="620" y="666.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">启动三个数据源线程</tspan></text>
+<polyline points="620,540.0 620,580" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,580 625.0,568.0 615.0,568.0" fill="#000000"/>
+<text x="647" y="568" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<rect x="385.0" y="760" width="470" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="620" y="804.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">从当前信源取序号更新的一帧</tspan></text>
+<text x="620" y="846.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">RGB </tspan><tspan font-family="SimSun">图像</tspan><tspan font-family="Times New Roman"> img</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">256 × 256 × 3</tspan></text>
+<polyline points="620,690 620,760" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,760 625.0,748.0 615.0,748.0" fill="#000000"/>
+<polygon points="620,905.0 895.0,975 620,1045.0 345.0,975" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="620" y="985.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">GUI </tspan><tspan font-family="SimSun">要求切换模式？</tspan></text>
+<polyline points="620,870 620,905.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,905.0 625.0,893.0 615.0,893.0" fill="#000000"/>
+<rect x="895.0" y="1050" width="380" height="150" rx="12" fill="#F2DEDA" stroke="#843C35" stroke-width="2"/>
+<text x="1085" y="1092.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">仅切入</tspan><tspan font-family="Times New Roman"> SSCC </tspan><tspan font-family="SimSun">前等</tspan><tspan font-family="Times New Roman"> 60 ms</tspan></text>
+<text x="1085" y="1134.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">写控制寄存器的模式位</tspan></text>
+<text x="1085" y="1176.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">在帧边界切换</tspan></text>
+<polyline points="895.0,975 1085,975 1085,1050" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1085,1050 1090.0,1038.0 1080.0,1038.0" fill="#000000"/>
+<text x="982" y="956" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<polyline points="620,1045.0 620,1235" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="648" y="1090" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1085,1200 1085,1235 620,1235" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="620" cy="1235" r="3" fill="#000000"/>
+<polygon points="620,1257.5 825.0,1320 620,1382.5 415.0,1320" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="620" y="1330.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">SSCC </tspan><tspan font-family="SimSun">模式？</tspan></text>
+<polyline points="620,1235 620,1257.5" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,1257.5 625.0,1245.5 615.0,1245.5" fill="#000000"/>
+<rect x="125.0" y="1440" width="450" height="150" rx="12" fill="#F2DEDA" stroke="#843C35" stroke-width="2"/>
+<text x="350" y="1482.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">JPEG </tspan><tspan font-family="SimSun">自适应压缩（见右图）</tspan></text>
+<text x="350" y="1524.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">打包：</tspan><tspan font-family="Times New Roman">12272 B</tspan></text>
+<text x="350" y="1566.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">send_packet(pkt) → </tspan><tspan font-family="SimSun">图像</tspan><tspan font-family="Times New Roman"> DMA</tspan></text>
+<rect x="700.0" y="1440" width="470" height="150" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="935" y="1482.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">send_image(img)</tspan></text>
+<text x="935" y="1524.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">MM2S DMA</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">196608 B</tspan></text>
+<text x="935" y="1566.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">受编码器反压，整帧收完才返回</tspan></text>
+<polyline points="415.0,1320 350,1320 350,1440" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="350,1440 355.0,1428.0 345.0,1428.0" fill="#000000"/>
+<polyline points="825.0,1320 935,1320 935,1440" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="935,1440 940.0,1428.0 930.0,1428.0" fill="#000000"/>
+<text x="353" y="1300" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<text x="921" y="1300" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="350,1590 350,1620 620,1620" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polyline points="935,1590 935,1620 620,1620" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="620" cy="1620" r="3" fill="#000000"/>
+<rect x="330.0" y="1660" width="580" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="620" y="1704.2" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">转发预览：立即发送帧号与取帧时间戳</tspan></text>
+<text x="620" y="1746.2" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">原图交给预览线程，只保留最新一帧</tspan></text>
+<polyline points="620,1620 620,1660" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="620,1660 625.0,1648.0 615.0,1648.0" fill="#000000"/>
+<polyline points="330.0,1715.0 65,1715.0 65,815.0 385.0,815.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="385.0,815.0 373.0,810.0 373.0,820.0" fill="#000000"/>
+<text x="147" y="1690" xml:space="preserve" text-anchor="middle" font-size="29" fill="#595959"><tspan font-family="SimSun">下一帧</tspan></text>
+<text x="650" y="1830" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">后台线程：三个数据源、控制、衰减、预览</tspan></text>
+<rect x="1620.0" y="140" width="410" height="76" rx="38" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1825" y="189" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">q ← </tspan><tspan font-family="SimSun">上一帧的质量因子</tspan></text>
+<rect x="1635.0" y="255" width="380" height="88" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1825" y="310.22" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="Times New Roman">buf = imencode(img, q)</tspan></text>
+<polyline points="1825,216 1825,255" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1825,255 1830.0,243.0 1820.0,243.0" fill="#000000"/>
+<polygon points="1825,392.5 2150.0,470 1825,547.5 1500.0,470" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1825" y="460.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">len(buf) ≤ 12260 B</tspan></text>
+<text x="1825" y="500.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">或</tspan><tspan font-family="Times New Roman"> q ≤ 5</tspan><tspan font-family="SimSun">？</tspan></text>
+<polyline points="1825,343 1825,392.5" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1825,392.5 1830.0,380.5 1820.0,380.5" fill="#000000"/>
+<polyline points="2150.0,470 2260,470 2260,299.0 2015.0,299.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="2015.0,299.0 2027.0,304.0 2027.0,294.0" fill="#000000"/>
+<text x="2200" y="451" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<text x="2184" y="371" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">q ← q − 5</tspan></text>
+<polygon points="1825,645.0 2125.0,720 1825,795.0 1525.0,720" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1825" y="710.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">本帧</tspan><tspan font-family="Times New Roman"> q </tspan><tspan font-family="SimSun">未下调过</tspan></text>
+<text x="1825" y="750.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">且</tspan><tspan font-family="Times New Roman"> q &lt; 95</tspan><tspan font-family="SimSun">？</tspan></text>
+<polyline points="1825,547.5 1825,645.0" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1825,645.0 1830.0,633.0 1820.0,633.0" fill="#000000"/>
+<text x="1853" y="607" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<rect x="1575.0" y="865" width="500" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1825" y="909.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">试一次</tspan><tspan font-family="Times New Roman"> q + 5 </tspan><tspan font-family="SimSun">重新编码</tspan></text>
+<text x="1825" y="951.54" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">放得下就采用，否则保留原结果</tspan></text>
+<polyline points="1825,795.0 1825,865" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1825,865 1830.0,853.0 1820.0,853.0" fill="#000000"/>
+<text x="1853" y="842" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<polyline points="1525.0,720 1425,720 1425,1020 1825,1020" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="1470" y="700" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1825,975 1825,1020" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<circle cx="1825" cy="1020" r="3" fill="#000000"/>
+<rect x="1620.0" y="1065" width="410" height="76" rx="38" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1825" y="1114" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">记下</tspan><tspan font-family="Times New Roman"> q</tspan><tspan font-family="SimSun">，返回</tspan><tspan font-family="Times New Roman"> (JPEG, q)</tspan></text>
+<polyline points="1825,1020 1825,1065" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1825,1065 1830.0,1053.0 1820.0,1053.0" fill="#000000"/>
+<polyline points="1410,1210 2240,1210" fill="none" stroke="#BFBFBF" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="1410" y="1255" xml:space="preserve" text-anchor="start" font-size="32" fill="#000000"><tspan font-family="SimSun">质量调整规则</tspan></text>
+<text x="1410" y="1304" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="SimSun">下调：步长为</tspan><tspan font-family="Times New Roman"> 5</tspan><tspan font-family="SimSun">，可连续降低多档。</tspan></text>
+<text x="1410" y="1350" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="SimSun">上调：每帧最多试一档，放得下才采用。</tspan></text>
+<text x="1410" y="1452" xml:space="preserve" text-anchor="start" font-size="32" fill="#000000"><tspan font-family="Times New Roman">SSCC </tspan><tspan font-family="SimSun">包格式</tspan></text>
+<rect x="1410" y="1490" width="180" height="106" rx="0" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1500.0" y="1530" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">包头</tspan></text>
+<text x="1500.0" y="1573" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">12 B</tspan></text>
+<rect x="1590" y="1490" width="420" height="106" rx="0" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1800.0" y="1530" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">JPEG </tspan><tspan font-family="SimSun">数据</tspan></text>
+<text x="1800.0" y="1573" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">≤ 12260 B</tspan></text>
+<rect x="2010" y="1490" width="230" height="106" rx="0" fill="#F2F2F2" stroke="#595959" stroke-width="2"/>
+<text x="2125.0" y="1530" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">零填充</tspan></text>
+<text x="2125.0" y="1573" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">补满一包</tspan></text>
+<polyline points="1410,1610 1410,1626 2240,1626 2240,1610" fill="none" stroke="#595959" stroke-width="1.4" stroke-linejoin="round"/>
+<text x="1825" y="1670" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">合计</tspan><tspan font-family="Times New Roman"> 12272 B</tspan></text>
+<text x="1410" y="1735" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="SimSun">包头：</tspan><tspan font-family="Times New Roman">SC</tspan><tspan font-family="SimSun">、帧号、</tspan><tspan font-family="Times New Roman">JPEG </tspan><tspan font-family="SimSun">长度、</tspan><tspan font-family="Times New Roman">q</tspan><tspan font-family="SimSun">、保留字节、</tspan><tspan font-family="Times New Roman">CRC32</tspan><tspan font-family="SimSun">。</tspan></text>
+<text x="1410" y="1780" xml:space="preserve" text-anchor="start" font-size="28" fill="#595959"><tspan font-family="SimSun">字段宽度依次为</tspan><tspan font-family="Times New Roman"> 2</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">2</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">2</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">1</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">1</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">4 B</tspan><tspan font-family="SimSun">。</tspan></text>
+</svg>

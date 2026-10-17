@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1315" viewBox="0 0 1400 1315" role="img">
+<title>OFDM接收链</title>
+<rect width="1400" height="1315" fill="white"/>
+<rect x="30" y="75" width="1340" height="280" rx="16" fill="white" stroke="#595959" stroke-width="1.7" stroke-dasharray="10 7"/>
+<rect x="30" y="390" width="1340" height="620" rx="16" fill="white" stroke="#595959" stroke-width="1.7" stroke-dasharray="10 7"/>
+<text x="1325" y="115" xml:space="preserve" text-anchor="end" font-size="28" fill="#000000"><tspan font-family="Times New Roman">synchronizer_top  ·  </tspan><tspan font-family="SimSun">同步与定时</tspan></text>
+<text x="75" y="432" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">equalizer_top  ·  </tspan><tspan font-family="SimSun">频域均衡与跟踪</tspan></text>
+<rect x="60" y="140" width="370" height="190" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="245" y="179" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">帧检测与</tspan><tspan font-family="Times New Roman">CFO</tspan><tspan font-family="SimSun">纠正</tspan></text>
+<text x="245" y="216" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">frame_detection</tspan></text>
+<polyline points="80,231 410,231" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="245" y="268" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">STF</tspan><tspan font-family="SimSun">延迟自相关，滞后</tspan><tspan font-family="Times New Roman">16</tspan></text>
+<text x="245" y="301" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">DDS</tspan><tspan font-family="SimSun">纠正载波频偏</tspan></text>
+<rect x="515" y="140" width="370" height="190" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="700" y="179" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">LTF</tspan><tspan font-family="SimSun">精定时</tspan></text>
+<text x="700" y="216" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">time_sync</tspan></text>
+<polyline points="535,231 865,231" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="700" y="268" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">LTF</tspan><tspan font-family="SimSun">匹配滤波定位窗口</tspan></text>
+<text x="700" y="301" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">FFT</tspan><tspan font-family="SimSun">窗口提前</tspan><tspan font-family="Times New Roman">8</tspan><tspan font-family="SimSun">个采样</tspan></text>
+<rect x="970" y="140" width="370" height="190" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1155" y="179" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">循环前缀去除</tspan></text>
+<text x="1155" y="216" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">cp_remover</tspan></text>
+<polyline points="990,231 1320,231" fill="none" stroke="#205867" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="1155" y="268" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">先放行两个</tspan><tspan font-family="Times New Roman">64</tspan><tspan font-family="SimSun">点</tspan><tspan font-family="Times New Roman">LTF</tspan></text>
+<text x="1155" y="301" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">数据符号</tspan><tspan font-family="Times New Roman">80</tspan><tspan font-family="SimSun">点保留</tspan><tspan font-family="Times New Roman">64</tspan><tspan font-family="SimSun">点</tspan></text>
+<rect x="970" y="460" width="370" height="225" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1155" y="499" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">FFT</tspan><tspan font-family="SimSun">与频谱重排</tspan></text>
+<text x="1155" y="536" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">FFT IP + fft_ifft_shift</tspan></text>
+<polyline points="990,551 1320,551" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="1155" y="588" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">64</tspan><tspan font-family="SimSun">点</tspan><tspan font-family="Times New Roman">FFT</tspan><tspan font-family="SimSun">，不缩放</tspan></text>
+<text x="1155" y="621" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">物理子载波顺序</tspan><tspan font-family="Times New Roman">−32…31</tspan></text>
+<text x="1155" y="654" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">级间输出仍为</tspan><tspan font-family="Times New Roman">24 b</tspan></text>
+<rect x="515" y="460" width="370" height="225" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="700" y="499" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">信道估计与均衡</tspan></text>
+<text x="700" y="536" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">channel_equalization</tspan></text>
+<polyline points="535,551 865,551" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="700" y="588" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">两段</tspan><tspan font-family="Times New Roman">LTF</tspan><tspan font-family="SimSun">平均估计信道</tspan></text>
+<text x="700" y="621" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">取倒数后逐子载波复乘</tspan></text>
+<text x="700" y="654" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">683</tspan><tspan font-family="SimSun">个符号复用均衡系数</tspan></text>
+<rect x="60" y="460" width="370" height="225" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="245" y="499" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">SFO</tspan><tspan font-family="SimSun">预测旋转</tspan></text>
+<text x="245" y="536" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">sfo_rotator</tspan></text>
+<polyline points="80,551 410,551" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="245" y="588" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">按预测斜率逐子载波旋转</tspan></text>
+<text x="245" y="621" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">CORDIC + </tspan><tspan font-family="SimSun">复乘</tspan></text>
+<text x="245" y="654" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">二阶跟踪环更新预测斜率</tspan></text>
+<rect x="60" y="790" width="370" height="190" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="245" y="829" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">CPE</tspan><tspan font-family="SimSun">补偿</tspan></text>
+<text x="245" y="866" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">CPE_compensation</tspan></text>
+<polyline points="80,881 410,881" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="245" y="918" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">4</tspan><tspan font-family="SimSun">导频估计公共增益</tspan><tspan font-family="Times New Roman">G</tspan></text>
+<text x="245" y="951" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">64</tspan><tspan font-family="SimSun">点乘以</tspan><tspan font-family="Times New Roman">1/G</tspan><tspan font-family="SimSun">，输出</tspan><tspan font-family="Times New Roman">Q10</tspan></text>
+<rect x="515" y="790" width="370" height="190" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="700" y="829" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">SFO</tspan><tspan font-family="SimSun">残差估计</tspan></text>
+<text x="700" y="866" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">sfo_residual</tspan></text>
+<polyline points="535,881 865,881" fill="none" stroke="#7F6000" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="700" y="918" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">导频最小二乘估计斜率</tspan></text>
+<text x="700" y="951" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">数据直通，输出残差</tspan><tspan font-family="Times New Roman">e</tspan></text>
+<rect x="970" y="790" width="370" height="190" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1155" y="829" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">有效子载波提取</tspan></text>
+<text x="1155" y="866" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">equalizer_top </tspan><tspan font-family="SimSun">输出逻辑</tspan></text>
+<polyline points="990,881 1320,881" fill="none" stroke="#205867" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="1155" y="918" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">去空子载波与导频</tspan></text>
+<text x="1155" y="951" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">每符号保留</tspan><tspan font-family="Times New Roman">48</tspan><tspan font-family="SimSun">个数据载波</tspan></text>
+<rect x="970" y="1080" width="370" height="190" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1155" y="1119" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">帧整理与解扰</tspan></text>
+<text x="1155" y="1156" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">rx_jscc_framer</tspan></text>
+<polyline points="990,1171 1320,1171" fill="none" stroke="#205867" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="1155" y="1208" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">去</tspan><tspan font-family="Times New Roman">16</tspan><tspan font-family="SimSun">个补零，</tspan><tspan font-family="Times New Roman">PN</tspan><tspan font-family="SimSun">解扰</tspan></text>
+<text x="1155" y="1241" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">帧尾置</tspan><tspan font-family="Times New Roman">tlast</tspan><tspan font-family="SimSun">与</tspan><tspan font-family="Times New Roman">tuser</tspan></text>
+<rect x="515" y="1080" width="370" height="190" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="700" y="1119" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">URAM</tspan><tspan font-family="SimSun">帧缓存</tspan></text>
+<text x="700" y="1156" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="Times New Roman">uram_frame_fifo</tspan></text>
+<polyline points="535,1171 865,1171" fill="none" stroke="#205867" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="700" y="1208" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">32,768</tspan><tspan font-family="SimSun">个软符号</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">帧</tspan></text>
+<text x="700" y="1241" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">空间不足时整帧丢弃</tspan></text>
+<text x="245" y="36" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">ADC FIFO · {Q,I} 24 b</tspan></text>
+<polyline points="245,52 245,140" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="245,140 250.0,128.0 240.0,128.0" fill="#000000"/>
+<polyline points="430,235 515,235" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="515,235 503.0,230.0 503.0,240.0" fill="#000000"/>
+<polyline points="885,235 970,235" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="970,235 958.0,230.0 958.0,240.0" fill="#000000"/>
+<polyline points="1155,330 1155,460" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1155,460 1160.0,448.0 1150.0,448.0" fill="#000000"/>
+<polyline points="970,572 885,572" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="885,572 897.0,577.0 897.0,567.0" fill="#000000"/>
+<polyline points="515,572 430,572" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="430,572 442.0,577.0 442.0,567.0" fill="#000000"/>
+<polyline points="245,685 245,790" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="245,790 250.0,778.0 240.0,778.0" fill="#000000"/>
+<polyline points="430,885 515,885" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="515,885 503.0,880.0 503.0,890.0" fill="#000000"/>
+<polyline points="885,885 970,885" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="970,885 958.0,880.0 958.0,890.0" fill="#000000"/>
+<polyline points="1155,980 1155,1080" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1155,1080 1160.0,1068.0 1150.0,1068.0" fill="#000000"/>
+<polyline points="970,1175 885,1175" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="885,1175 897.0,1180.0 897.0,1170.0" fill="#000000"/>
+<polyline points="515,1175 370,1175" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="370,1175 382.0,1180.0 382.0,1170.0" fill="#000000"/>
+<polyline points="700,790 700,740 350,740 350,685" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="350,685 345.0,697.0 355.0,697.0" fill="#000000"/>
+<text x="720" y="728" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="SimSun">残差</tspan><tspan font-family="Times New Roman">e</tspan><tspan font-family="SimSun">：每符号一次</tspan></text>
+<text x="720" y="764" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="SimSun">用于下一符号的二阶环更新</tspan></text>
+<text x="220" y="1138" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">连续</tspan><tspan font-family="Times New Roman">I/Q</tspan><tspan font-family="SimSun">软符号</tspan></text>
+<text x="220" y="1175" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">{Q,I} 24 b · Q10</tspan></text>
+<text x="220" y="1212" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">送入</tspan><tspan font-family="Times New Roman">DeepJSCC-Q</tspan><tspan font-family="SimSun">解码器</tspan></text>
+<text x="700" y="1301" xml:space="preserve" text-anchor="middle" font-size="25" fill="#000000"><tspan font-family="SimSun">实线：</tspan><tspan font-family="Times New Roman">24 b I/Q</tspan><tspan font-family="SimSun">数据流</tspan><tspan font-family="Times New Roman">    </tspan><tspan font-family="SimSun">虚线：</tspan><tspan font-family="Times New Roman">SFO</tspan><tspan font-family="SimSun">残差反馈</tspan></text>
+</svg>

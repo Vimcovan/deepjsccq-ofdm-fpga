@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1660" viewBox="0 0 1900 1660" role="img">
+<title>AD9361 控制：SPI 总线归属与 TX 正交校准</title>
+<rect width="1900" height="1660" fill="white"/>
+<text x="435" y="52" xml:space="preserve" text-anchor="middle" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(a) SPI </tspan><tspan font-family="SimSun">总线归属</tspan></text>
+<text x="435" y="96" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">结构</tspan><tspan font-family="Times New Roman"> · 20 MHz </tspan><tspan font-family="SimSun">控制时钟域</tspan></text>
+<text x="1370" y="52" xml:space="preserve" text-anchor="middle" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(b) TX </tspan><tspan font-family="SimSun">正交校准相位扫描</tspan></text>
+<text x="1370" y="96" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">中实现</tspan></text>
+<rect x="20.0" y="180" width="240" height="110" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="140.0" y="222" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">①</tspan><tspan font-family="Times New Roman"> LUT </tspan><tspan font-family="SimSun">初始化</tspan></text>
+<text x="140.0" y="264" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">ad9361_config</tspan></text>
+<rect x="305.0" y="180" width="260" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="435.0" y="222" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">②</tspan><tspan font-family="Times New Roman"> TX </tspan><tspan font-family="SimSun">相位扫描</tspan></text>
+<text x="435.0" y="264" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">ad9361_txq_search</tspan></text>
+<rect x="610.0" y="180" width="240" height="110" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="730.0" y="222" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">③</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">单次读写</tspan></text>
+<text x="730.0" y="264" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">SPI </tspan><tspan font-family="SimSun">命令寄存器</tspan></text>
+<polygon points="300,360 570,360 525,445 345,445" fill="#EBE7F2" stroke="#574781" stroke-width="2"/>
+<text x="435" y="412" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">3:1 MUX</tspan></text>
+<polyline points="140,290 140,325 335,325 335,360" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="335,360 340.0,348.0 330.0,348.0" fill="#000000"/>
+<polyline points="435,290 435,360" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="435,360 440.0,348.0 430.0,348.0" fill="#000000"/>
+<polyline points="730,290 730,325 535,325 535,360" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="535,360 540.0,348.0 530.0,348.0" fill="#000000"/>
+<polyline points="435,445 435,520" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="435,520 440.0,508.0 430.0,508.0" fill="#000000"/>
+<rect x="305.0" y="520" width="260" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="435.0" y="563" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">ad9361_spi</tspan></text>
+<text x="435.0" y="604" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">24 </tspan><tspan font-family="SimSun">位</tspan><tspan font-family="Times New Roman"> · 20 MHz</tspan></text>
+<polyline points="435,630 435,735" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="463" y="673" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="Times New Roman">spi_clk / csn</tspan></text>
+<text x="463" y="708" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="Times New Roman">mosi / miso</tspan></text>
+<rect x="340.0" y="735" width="190" height="75" rx="12" fill="#F2DEDA" stroke="#843C35" stroke-width="2"/>
+<text x="435.0" y="783" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">AD9361</tspan></text>
+<text x="40" y="882" xml:space="preserve" text-anchor="start" font-size="31" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">归属条件</tspan></text>
+<text x="590" y="882" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="SimSun">选中的命令源</tspan></text>
+<polyline points="35,904 860,904" fill="none" stroke="#A6A6A6" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="40" y="953" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">初始化未完成</tspan></text>
+<text x="590" y="953" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">①</tspan><tspan font-family="Times New Roman"> LUT </tspan><tspan font-family="SimSun">初始化</tspan></text>
+<text x="40" y="1017" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">相位扫描进行中</tspan></text>
+<text x="590" y="1017" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">②</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="SimSun">相位扫描</tspan></text>
+<text x="40" y="1081" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="SimSun">其余阶段</tspan></text>
+<text x="590" y="1081" xml:space="preserve" text-anchor="start" font-size="29" fill="#000000"><tspan font-family="Segoe UI Symbol">③</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">单次读写</tspan></text>
+<polyline points="35,1110 860,1110" fill="none" stroke="#A6A6A6" stroke-width="1.2" stroke-linejoin="round"/>
+<text x="40" y="1160" xml:space="preserve" text-anchor="start" font-size="30" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">切换顺序</tspan></text>
+<text x="40" y="1204" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Segoe UI Symbol">①</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="SimSun">完成后自动启动</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="Segoe UI Symbol">②</tspan><tspan font-family="SimSun">；</tspan><tspan font-family="Segoe UI Symbol">②</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="SimSun">完成后射频就绪、</tspan></text>
+<text x="40" y="1242" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">LED </tspan><tspan font-family="SimSun">点亮，此后</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">才能发</tspan><tspan font-family="Times New Roman"> SPI </tspan><tspan font-family="SimSun">命令。</tspan></text>
+<text x="40" y="1310" xml:space="preserve" text-anchor="start" font-size="30" fill="#000000"><tspan font-family="Times New Roman">RX </tspan><tspan font-family="SimSun">板</tspan></text>
+<text x="40" y="1354" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="SimSun">从启动起选择</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="Segoe UI Symbol">③</tspan><tspan font-family="SimSun">，初始化由</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">执行，</tspan></text>
+<text x="40" y="1392" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="SimSun">跳过</tspan><tspan font-family="Times New Roman"> PL LUT </tspan><tspan font-family="SimSun">初始化与</tspan><tspan font-family="Times New Roman"> TX </tspan><tspan font-family="SimSun">相位扫描。</tspan></text>
+<polyline points="35,1430 860,1430" fill="none" stroke="#A6A6A6" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="40" y="1471" xml:space="preserve" text-anchor="start" font-size="29" fill="#595959"><tspan font-family="Times New Roman">PS </tspan><tspan font-family="SimSun">单次读写握手</tspan></text>
+<text x="40" y="1514" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">每次请求只触发一次传输。写入命令后，</tspan></text>
+<text x="40" y="1551" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">等待</tspan><tspan font-family="Times New Roman"> SPI </tspan><tspan font-family="SimSun">状态寄存器中的传输计数加一，再发下一条</tspan></text>
+<text x="40" y="1588" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">（跨</tspan><tspan font-family="Times New Roman"> 20 MHz </tspan><tspan font-family="SimSun">时钟域）。</tspan></text>
+<rect x="1170.0" y="135" width="400" height="75" rx="37.5" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1370" y="183" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Segoe UI Symbol">①</tspan><tspan font-family="Times New Roman"> </tspan><tspan font-family="SimSun">初始化序列执行完毕</tspan></text>
+<rect x="1115.0" y="250" width="510" height="125" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="288" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">进入</tspan><tspan font-family="Times New Roman"> ALERT</tspan><tspan font-family="SimSun">，关闭</tspan><tspan font-family="Times New Roman"> RX </tspan><tspan font-family="SimSun">正交跟踪</tspan></text>
+<text x="1370.0" y="326" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">0x014</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">ENSM </tspan><tspan font-family="SimSun">配置</tspan><tspan font-family="Times New Roman"> 1</tspan></text>
+<text x="1370.0" y="359" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">0x169</tspan><tspan font-family="SimSun">：校准配置</tspan><tspan font-family="Times New Roman"> 1</tspan><tspan font-family="SimSun">，</tspan><tspan font-family="Times New Roman">[1:0] </tspan><tspan font-family="SimSun">写</tspan><tspan font-family="Times New Roman"> 0</tspan></text>
+<rect x="1240.0" y="415" width="260" height="65" rx="12" fill="#EBE7F2" stroke="#574781" stroke-width="2"/>
+<text x="1370.0" y="458" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">候选相位</tspan><tspan font-family="Times New Roman"> p = 0</tspan></text>
+<rect x="1075.0" y="520" width="590" height="155" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="558" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">设置相位并启动</tspan><tspan font-family="Times New Roman"> TX </tspan><tspan font-family="SimSun">正交校准</tspan></text>
+<text x="1370.0" y="595" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">0x0A0</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">NCO </tspan><tspan font-family="SimSun">频率与相位）</tspan><tspan font-family="Times New Roman">= {NCO </tspan><tspan font-family="SimSun">频率</tspan><tspan font-family="Times New Roman">, p}</tspan></text>
+<text x="1370.0" y="627" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">0x0A1</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">正交校准控制）软复位后恢复</tspan></text>
+<text x="1370.0" y="659" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">0x016</tspan><tspan font-family="SimSun">（校准控制）</tspan><tspan font-family="Times New Roman">= 0x10</tspan></text>
+<rect x="1145.0" y="715" width="450" height="100" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="754" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">等待校准完成</tspan></text>
+<text x="1370.0" y="793" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">轮询</tspan><tspan font-family="Times New Roman"> 0x016[4] = 0</tspan><tspan font-family="SimSun">；超时则报错</tspan></text>
+<rect x="1140.0" y="855" width="460" height="120" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="891" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">记录相位</tspan><tspan font-family="Times New Roman"> p </tspan><tspan font-family="SimSun">的收敛结果</tspan></text>
+<text x="1370.0" y="928" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">读取</tspan><tspan font-family="Times New Roman"> 0x0A7</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">正交校准状态）</tspan></text>
+<text x="1370.0" y="960" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">[1:0] = 2&#x27;b11 </tspan><tspan font-family="SimSun">时，记录相位</tspan><tspan font-family="Times New Roman"> p </tspan><tspan font-family="SimSun">收敛</tspan></text>
+<polygon points="1370,995 1530,1045 1370,1095 1210,1045" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1370" y="1055" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">p = 31</tspan><tspan font-family="SimSun">？</tspan></text>
+<text x="1392" y="1123" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<rect x="1735.0" y="920" width="150" height="70" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1810.0" y="965" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">p ← p + 1</tspan></text>
+<polyline points="1530,1045 1810,1045 1810,990" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1810,990 1805.0,1002.0 1815.0,1002.0" fill="#000000"/>
+<text x="1628" y="1026" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1810,920 1810,597.5 1665.0,597.5" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1665.0,597.5 1677.0,602.5 1677.0,592.5" fill="#000000"/>
+<rect x="1120.0" y="1135" width="500" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="1177" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">选择最长循环连续收敛段的中点</tspan></text>
+<text x="1370.0" y="1219" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">全部不收敛：使用默认相位</tspan><tspan font-family="Times New Roman"> 4</tspan></text>
+<rect x="1140.0" y="1285" width="460" height="70" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="1331" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">在选定相位上做最后一次校准</tspan></text>
+<rect x="1035.0" y="1395" width="670" height="105" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1370.0" y="1435" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">恢复原配置并等待</tspan><tspan font-family="Times New Roman"> FDD</tspan></text>
+<text x="1370.0" y="1477" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">恢复</tspan><tspan font-family="Times New Roman"> 0x169 / 0x014 </tspan><tspan font-family="SimSun">原值，等待</tspan><tspan font-family="Times New Roman"> ENSM </tspan><tspan font-family="SimSun">进入</tspan><tspan font-family="Times New Roman"> FDD </tspan><tspan font-family="SimSun">态</tspan></text>
+<rect x="1170.0" y="1540" width="400" height="75" rx="37.5" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1370" y="1588" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">射频就绪（</tspan><tspan font-family="Times New Roman">LED </tspan><tspan font-family="SimSun">点亮）</tspan></text>
+<polyline points="1370,210 1370,250" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,250 1375.0,238.0 1365.0,238.0" fill="#000000"/>
+<polyline points="1370,375 1370,415" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,415 1375.0,403.0 1365.0,403.0" fill="#000000"/>
+<polyline points="1370,480 1370,520" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,520 1375.0,508.0 1365.0,508.0" fill="#000000"/>
+<polyline points="1370,675 1370,715" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,715 1375.0,703.0 1365.0,703.0" fill="#000000"/>
+<polyline points="1370,815 1370,855" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,855 1375.0,843.0 1365.0,843.0" fill="#000000"/>
+<polyline points="1370,975 1370,995" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,995 1375.0,983.0 1365.0,983.0" fill="#000000"/>
+<polyline points="1370,1095 1370,1135" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,1135 1375.0,1123.0 1365.0,1123.0" fill="#000000"/>
+<polyline points="1370,1245 1370,1285" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,1285 1375.0,1273.0 1365.0,1273.0" fill="#000000"/>
+<polyline points="1370,1355 1370,1395" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,1395 1375.0,1383.0 1365.0,1383.0" fill="#000000"/>
+<polyline points="1370,1500 1370,1540" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1370,1540 1375.0,1528.0 1365.0,1528.0" fill="#000000"/>
+</svg>

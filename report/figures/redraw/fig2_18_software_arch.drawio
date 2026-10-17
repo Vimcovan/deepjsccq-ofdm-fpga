@@ -1,0 +1,517 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device" version="24.7.17">
+  <diagram id="report-figure" name="板上软件架构：服务、进程、线程与硬件接口">
+    <mxGraphModel page="1" pageScale="1" pageWidth="2400" pageHeight="1850" grid="1" gridSize="10" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="cell1" value="" style="rounded=1;arcSize=10;html=1;fillColor=white;strokeColor=#333333;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="25" y="25" width="660" height="1510" as="geometry" />
+        </mxCell>
+        <mxCell id="cell2" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;TX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;板&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="47" y="31" width="99.0" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="cell3" value="" style="rounded=1;arcSize=10;html=1;fillColor=white;strokeColor=#333333;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="900" y="25" width="1475" height="1750" as="geometry" />
+        </mxCell>
+        <mxCell id="cell4" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;RX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;板&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=36;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="922" y="31" width="101.0" height="46" as="geometry" />
+        </mxCell>
+        <mxCell id="cell5" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;PS · PYNQ 3.1 · Python 3&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="370.0" y="43" width="293.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell6" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;PS · PYNQ 3.1 · Python 3&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="2055.0" y="43" width="293.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell7" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="150" width="590" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="cell8" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;tx_camera.py&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=33;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="262.1666666666667" y="159" width="185.66666666666666" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="cell9" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc-tx.service&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="271.8333333333333" y="205" width="166.33333333333334" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell10" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="90" y="290" width="315" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cell11" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;数据源线程&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; × 3&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="152.66666666666669" y="310.52" width="189.66666666666666" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell12" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;摄像头&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;预设视频&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="135.66666666666669" y="348.52" width="223.66666666666666" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell13" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;预设图&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="202.5" y="386.52" width="90.0" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell14" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="435" y="305" width="190" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="cell15" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;主循环&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="486.5" y="330.18" width="87.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell16" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;取帧&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; → &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;送图&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="452.8333333333333" y="368.18" width="154.33333333333334" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell17" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="405" y="370" as="sourcePoint" />
+            <mxPoint x="435" y="370" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell18" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="115" y="510" width="510" height="115" as="geometry" />
+        </mxCell>
+        <mxCell id="cell19" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;预览线程：只保留最新一帧&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="193.0" y="526.36" width="354.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell20" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;预览帧异步发送&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="265.5" y="564.36" width="209.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell21" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="530" y="435" as="sourcePoint" />
+            <mxPoint x="530" y="510" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell22" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="90" y="685" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cell23" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;衰减线程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="154.0" y="698.86" width="122.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell24" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;衰减斜坡&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="154.0" y="736.86" width="122.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell25" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="375" y="685" width="250" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cell26" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;控制线程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="443.0" y="700.18" width="114.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell27" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;信源&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;模式&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;衰减&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="395.0" y="738.18" width="210.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell28" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#50632A;strokeWidth=1;endArrow=none;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="830" as="sourcePoint" />
+            <mxPoint x="625" y="830" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell29" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;摄像头控制：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;v4l2ctl.py → V4L2 ioctl&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="136.50260416666666" y="836" width="436.9947916666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell30" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;USB &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;摄像头：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;/dev/video0&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="203.83333333333334" y="875" width="302.3333333333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell31" value="" style="rounded=1;arcSize=10;html=1;fillColor=#DBEEF3;strokeColor=#205867;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1010" width="590" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cell32" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc_tx.py&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Overlay / MMIO / DMA / SPI&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="101.1796875" y="1044.36" width="507.640625" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell33" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;sscc_pkt.py&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：包格式、&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;JpegFit&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="168.0" y="1091.36" width="374.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell34" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="355" y="930" as="sourcePoint" />
+            <mxPoint x="355" y="1010" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell35" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;访问的&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; PL &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;接口&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="255.34114583333331" y="1202" width="199.31770833333334" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell36" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1290" width="270" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="cell37" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;图像&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; DMA&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="125.5" y="1313.36" width="139.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell38" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;MM2S&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="151.0" y="1355.36" width="88.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell39" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;0x8000_0000&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="111.33333333333333" y="1397.36" width="167.33333333333334" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell40" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="370" y="1290" width="280" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="cell41" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;TX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;控制寄存器组&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="404.6666666666667" y="1314.68" width="210.66666666666666" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell42" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;AXI4-Lite / SPI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;命令&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="389.3333333333333" y="1356.68" width="241.33333333333334" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell43" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;0x8002_0000&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="431.8333333333333" y="1398.68" width="156.33333333333334" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell44" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="195" y="1170" as="sourcePoint" />
+            <mxPoint x="195" y="1290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell45" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="510" y="1170" as="sourcePoint" />
+            <mxPoint x="510" y="1290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell46" value="" style="rounded=1;arcSize=10;html=1;fillColor=white;strokeColor=#595959;strokeWidth=1.7;dashed=1;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="945" y="150" width="685" height="1160" as="geometry" />
+        </mxCell>
+        <mxCell id="cell47" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;触摸屏&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; GUI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;服务&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=34;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1160.5" y="163" width="254.0" height="44" as="geometry" />
+        </mxCell>
+        <mxCell id="cell48" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc-gui.service&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1197.3333333333333" y="213" width="180.33333333333334" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell49" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="980" y="300" width="615" height="235" as="geometry" />
+        </mxCell>
+        <mxCell id="cell50" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;网络接收子进程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=33;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1169.0" y="309" width="237.0" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="cell51" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;net_proc&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1235.6666666666667" y="355" width="103.66666666666667" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell52" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; · UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;分片重组&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; · TX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;命令收发&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1059.5130208333333" y="400" width="455.9739583333333" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell53" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;向&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; GUI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;交付完整消息&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1149.8333333333333" y="450" width="275.3333333333333" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell54" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="980" y="650" width="615" height="430" as="geometry" />
+        </mxCell>
+        <mxCell id="cell55" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;GUI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;主进程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=33;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1201.3333333333333" y="659" width="172.33333333333334" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="cell56" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc_gui.py&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1220.5" y="705" width="134.0" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell57" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="764" width="575" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cell58" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;接收线程：完整消息&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; → Qt &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;信号&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1098.8333333333333" y="773.18" width="377.3333333333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell59" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="837" width="575" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cell60" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Qt &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;主线程：页面、&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;PSNR &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;配对、控制&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1068.3333333333333" y="846.18" width="438.3333333333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell61" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1050" y="910" width="475" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cell62" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;触摸线程：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;evdev &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;长按&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;拖动&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1116.6666666666667" y="919.18" width="341.6666666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell63" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="983" width="395" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="cell64" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;三维渲染工作线程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1168.5" y="990.86" width="238.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell65" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1140" y="535" as="sourcePoint" />
+            <mxPoint x="1140" y="650" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell66" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Pipe&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1058.6666666666667" y="554" width="54.333333333333336" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell67" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;完整消息&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1003.0" y="591" width="110.0" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell68" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1480" y="650" as="sourcePoint" />
+            <mxPoint x="1480" y="535" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell69" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;TX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;命令&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1350.3333333333333" y="569" width="102.66666666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell70" value="" style="rounded=1;arcSize=10;html=1;fillColor=#F2DEDA;strokeColor=#843C35;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1015" y="1160" width="545" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cell71" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;h3d_render.py &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;子进程&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=30;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1148.5130208333333" y="1175.7" width="277.9739583333333" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cell72" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;GBM + EGL + GLES2&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;（离屏）&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=30;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1083.8411458333333" y="1218.7" width="407.3177083333333" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cell73" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1115" y="1080" as="sourcePoint" />
+            <mxPoint x="1115" y="1160" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell74" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;stdin&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：请求&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1137" y="1085" width="134.66666666666666" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell75" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1500" y="1160" as="sourcePoint" />
+            <mxPoint x="1500" y="1080" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell76" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;stdout&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;RGBA&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1310.3333333333333" y="1118" width="167.66666666666666" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell77" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1115" y="1390" width="345" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="cell78" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Mali-400 MP2&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1198.5" y="1395.36" width="178.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell79" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;lima &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;驱动&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1226.0" y="1430.36" width="123.0" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell80" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1287.5" y="1280" as="sourcePoint" />
+            <mxPoint x="1287.5" y="1390" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell81" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;离屏绘制&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1307" y="1327" width="110.0" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell82" value="" style="rounded=1;arcSize=10;html=1;fillColor=#F2F2F2;strokeColor=#595959;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="980" y="1570" width="615" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="cell83" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;X / armsoc → DisplayPort&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=30;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1124.1666666666667" y="1580.7" width="326.6666666666667" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cell84" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;触摸屏&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; 1024 × 600&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=30;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1167.0" y="1623.7" width="241.0" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="cell85" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="980" y="866" as="sourcePoint" />
+            <mxPoint x="980" y="1625" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="920" y="866" />
+              <mxPoint x="920" y="1625" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell86" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Qt &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;页面与返回的渲染图像&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1132.5" y="1510" width="310.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell87" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="150" width="520" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="cell88" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;rx_server.py&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=33;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="2003.5130208333333" y="159" width="172.97395833333334" height="43" as="geometry" />
+        </mxCell>
+        <mxCell id="cell89" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc-rx.service&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="2006.0" y="205" width="168.0" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell90" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="285" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell91" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;图像接收：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;S2MM DMA / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;双缓冲&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1895.1770833333333" y="296.68" width="389.6458333333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell92" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="363" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell93" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;图像发送：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;图像消息&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1935.0078125" y="374.68" width="309.984375" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell94" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="441" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell95" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;遥测：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;10 Hz&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="2013.6666666666667" y="452.68" width="152.66666666666666" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell96" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="519" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell97" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;频谱：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;ADC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;抓取&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / 2 Hz&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1951.0" y="530.68" width="278.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell98" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="597" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell99" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;SSCC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;包转发：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;250 Hz &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;轮询&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1926.6666666666667" y="608.68" width="326.6666666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell100" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="675" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell101" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;AGC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;记录：失步&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;恢复，只读&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1909.5" y="686.68" width="361.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell102" value="" style="rounded=1;arcSize=10;html=1;fillColor=#FFF2CC;strokeColor=#7F6000;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1850" y="753" width="480" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="cell103" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;AGC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;看门狗：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;2 Hz&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1975.0" y="764.68" width="230.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell104" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;共享锁保护&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; MMIO &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;写入与&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; DMA&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1906.1666666666667" y="849" width="367.6666666666667" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell105" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;另有订阅管理：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;ctrl_loop&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1948.8333333333333" y="885" width="282.3333333333333" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell106" value="" style="rounded=1;arcSize=10;html=1;fillColor=#DBEEF3;strokeColor=#205867;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="1010" width="520" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="cell107" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc_rx.py&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;Overlay / DMA / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;遥测&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1893.6770833333333" y="1029.18" width="392.6458333333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell108" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;ad9361_ps.py&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;PS &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;初始化&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1938.5" y="1069.18" width="303.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell109" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;与&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; AGC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;看门狗&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1997.6770833333333" y="1109.18" width="184.64583333333334" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell110" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2090" y="930" as="sourcePoint" />
+            <mxPoint x="2090" y="1010" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell111" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;访问的&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; PL &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;接口&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1990.3411458333333" y="1202" width="199.31770833333334" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell112" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="1290" width="245" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="cell113" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;图像&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; DMA&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1885.1666666666667" y="1314.02" width="134.66666666666666" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell114" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;ADC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;抓取&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; DMA&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1852.0" y="1356.02" width="201.0" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell115" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;S2MM&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1909.6666666666667" y="1398.02" width="85.66666666666667" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="cell116" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="2100" y="1290" width="250" height="175" as="geometry" />
+        </mxCell>
+        <mxCell id="cell117" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;RX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;控制寄存器组&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="2118.8333333333335" y="1335.68" width="212.33333333333334" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell118" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;遥测接口&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="2168.0" y="1377.68" width="114.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell119" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1952.5" y="1170" as="sourcePoint" />
+            <mxPoint x="1952.5" y="1290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell120" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2225" y="1170" as="sourcePoint" />
+            <mxPoint x="2225" y="1290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell121" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#333333;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="650" y="405" as="sourcePoint" />
+            <mxPoint x="980" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell122" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;预览帧&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;时间戳&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="703.6666666666666" y="313" width="182.66666666666666" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell123" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;TX &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;状态&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="745.3333333333334" y="347" width="99.33333333333333" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell124" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#333333;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=1;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="980" y="490" as="sourcePoint" />
+            <mxPoint x="650" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell125" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;命令&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;对时&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="693.3333333333334" y="437" width="203.33333333333334" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell126" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#333333;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1830" y="405" as="sourcePoint" />
+            <mxPoint x="1595" y="405" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell127" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;图像&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;遥测&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1666.6666666666667" y="313" width="130.66666666666669" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell128" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;频谱&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / SSCC &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;包&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=26;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1644.6666666666667" y="347" width="174.66666666666666" height="36" as="geometry" />
+        </mxCell>
+        <mxCell id="cell129" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#333333;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=1;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1595" y="490" as="sourcePoint" />
+            <mxPoint x="1830" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell130" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;HELLO &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1654.5" y="436" width="155.0" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell131" value="" style="rounded=1;arcSize=10;html=1;fillColor=#EBF1DF;strokeColor=#50632A;strokeWidth=2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="1830" y="1570" width="520" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="cell132" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;web_server.py · jscc-web.service&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1906.0104166666667" y="1585.18" width="367.9791666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell133" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;HTTP / WebSocket · &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;手机控制页&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1901.6927083333333" y="1624.18" width="376.6145833333333" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell134" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; RX · GUI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;控制联动（图&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;2-22&lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;）&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="1879.6666666666667" y="1663.18" width="420.6666666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell135" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2.2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1830" y="850" as="sourcePoint" />
+            <mxPoint x="1830" y="1645" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1720" y="850" />
+              <mxPoint x="1720" y="1645" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell136" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;数据&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=25;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="1737" y="1482" width="112.31770833333333" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="cell137" value="" style="rounded=1;arcSize=10;html=1;fillColor=white;strokeColor=#A6A6A6;strokeWidth=1.2;dashed=0;dashPattern=10 7;" vertex="1" parent="1">
+          <mxGeometry x="60" y="1605" width="750" height="165" as="geometry" />
+        </mxCell>
+        <mxCell id="cell138" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endSize=9;endFill=1;dashed=0;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="85" y="1645" as="sourcePoint" />
+            <mxPoint x="175" y="1645" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell139" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;数据&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="192" y="1624" width="120.984375" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell140" value="" style="noEdgeStyle=1;rounded=0;html=1;strokeColor=#000000;strokeWidth=2;endArrow=block;endSize=9;endFill=1;dashed=1;dashPattern=10 7;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="375" y="1645" as="sourcePoint" />
+            <mxPoint x="465" y="1645" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="cell141" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;命令&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; / &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="482" y="1624" width="195.984375" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell142" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;UDP &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;公共库：&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;jscc_udp.py&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=29;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="271.0078125" y="1670" width="327.984375" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="cell143" value="&lt;span style=&quot;font-family:Times New Roman&quot;&gt;20 B &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;包头&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; · &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;分片&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt; ≤ 1400 B · &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;订阅每秒续期&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=27;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="191.66666666666666" y="1714" width="486.6666666666667" height="37" as="geometry" />
+        </mxCell>
+        <mxCell id="cell144" value="&lt;span style=&quot;font-family:SimSun&quot;&gt;黄色框为线程或主循环，蓝色框为库；&lt;/span&gt;&lt;span style=&quot;font-family:Times New Roman&quot;&gt;GUI &lt;/span&gt;&lt;span style=&quot;font-family:SimSun&quot;&gt;服务内以独立边框区分三个进程。&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=nowrap;strokeColor=none;fillColor=none;spacing=0;fontFamily=SimSun;fontSize=28;fontColor=#595959;" vertex="1" parent="1">
+          <mxGeometry x="720.5" y="1794" width="959.0" height="38" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

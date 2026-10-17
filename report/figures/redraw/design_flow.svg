@@ -1,0 +1,254 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1480" viewBox="0 56 1280 1480" role="img" aria-labelledby="title desc">
+<title id="title">DeepJSCC-Q 系统设计流程</title>
+<desc id="desc">首先统一接口约定，神经网络与物理层及射频并行设计、分别验证，然后进行系统集成和整机空口实测。</desc>
+<rect x="0" y="56" width="1280" height="1480" fill="white"/>
+<rect x="210" y="76" width="860" height="150" rx="13" fill="#F2F2F2" stroke="#595959" stroke-width="2"/>
+<text x="681.0" y="110" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">统一接口约定</tspan></text>
+<text x="681.0" y="143" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">每帧</tspan><tspan font-family="Times New Roman"> 32,768 </tspan><tspan font-family="SimSun">个复符号</tspan><tspan font-family="Times New Roman"> · AXI-Stream</tspan></text>
+<text x="681.0" y="174" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">24 </tspan><tspan font-family="SimSun">位</tspan><tspan font-family="Times New Roman"> {Q[11:0], I[11:0]} · Q10 </tspan><tspan font-family="SimSun">定点格式</tspan></text>
+<text x="681.0" y="205" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">RX </tspan><tspan font-family="SimSun">输出连续</tspan><tspan font-family="Times New Roman"> I/Q </tspan><tspan font-family="SimSun">软符号，不做星座判决</tspan></text>
+<g id="icon_interface" fill="none" stroke="#595959" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="234.0" y="137.0" width="16.0" height="28.0" rx="2.4" fill="#F2F2F2"/>
+<rect x="270.0" y="137.0" width="16.0" height="28.0" rx="2.4" fill="#F2F2F2"/>
+<polyline points="250.000,143.000 270.000,143.000"/>
+<polyline points="250.000,151.000 270.000,151.000"/>
+<polyline points="250.000,159.000 270.000,159.000"/>
+<polyline points="230.000,151.000 234.000,151.000"/>
+<polyline points="286.000,151.000 290.000,151.000"/>
+</g>
+<line id="divider_interface" x1="300" y1="92" x2="300" y2="210" stroke="#595959" stroke-width="1.1"/>
+<text x="70" y="316" xml:space="preserve" text-anchor="start" font-size="30" font-weight="400" fill="#000000"><tspan font-family="SimSun">神经网络</tspan></text>
+<text x="690" y="316" xml:space="preserve" text-anchor="start" font-size="30" font-weight="400" fill="#000000"><tspan font-family="SimSun">物理层与射频</tspan></text>
+<polyline points="640,226 640,250" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="640,250 330,250 330,350" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,350 335.0,339.0 325.0,339.0" fill="#000000"/>
+<polyline points="640,250 950,250 950,350" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="950,350 955.0,339.0 945.0,339.0" fill="#000000"/>
+<rect x="60" y="350" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="383" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">模型适配与浮点训练</tspan></text>
+<text x="371.0" y="416" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">期刊版</tspan><tspan font-family="Times New Roman"> DeepJSCC-Q · C = 32</tspan></text>
+<text x="371.0" y="445" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">下采样</tspan><tspan font-family="Times New Roman"> 4 </tspan><tspan font-family="SimSun">倍</tspan><tspan font-family="Times New Roman"> · 10 dB AWGN </tspan><tspan font-family="SimSun">信道训练</tspan></text>
+<g id="icon_nn1" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="86.000,387.000 110.000,385.000"/>
+<polyline points="86.000,387.000 110.000,405.000"/>
+<polyline points="86.000,387.000 110.000,425.000"/>
+<polyline points="86.000,423.000 110.000,385.000"/>
+<polyline points="86.000,423.000 110.000,405.000"/>
+<polyline points="86.000,423.000 110.000,425.000"/>
+<polyline points="110.000,385.000 134.000,405.000"/>
+<polyline points="110.000,405.000 134.000,405.000"/>
+<polyline points="110.000,425.000 134.000,405.000"/>
+<ellipse cx="86.0" cy="387.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+<ellipse cx="86.0" cy="423.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+<ellipse cx="110.0" cy="385.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+<ellipse cx="110.0" cy="405.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+<ellipse cx="110.0" cy="425.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+<ellipse cx="134.0" cy="405.0" rx="5.0" ry="5.0" fill="#FFF2CC"/>
+</g>
+<line id="divider_nn1" x1="150" y1="366" x2="150" y2="444" stroke="#7F6000" stroke-width="1.1"/>
+<rect x="60" y="488" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="521" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">W8A12 </tspan><tspan font-family="SimSun">训练后量化</tspan></text>
+<text x="371.0" y="554" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">建立整数参考模型</tspan></text>
+<text x="371.0" y="583" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">明确舍入、饱和与非线性算法</tspan></text>
+<g id="icon_nn2" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="84.000,519.000 84.000,567.000 138.000,567.000"/>
+<polyline points="90.000,559.000 102.000,559.000 102.000,547.000 116.000,547.000 116.000,533.000 132.000,533.000 132.000,521.000"/>
+<ellipse cx="96.0" cy="559.0" rx="3.4" ry="3.4" fill="#FFF2CC"/>
+<ellipse cx="110.0" cy="547.0" rx="3.4" ry="3.4" fill="#FFF2CC"/>
+<ellipse cx="124.0" cy="533.0" rx="3.4" ry="3.4" fill="#FFF2CC"/>
+</g>
+<line id="divider_nn2" x1="150" y1="504" x2="150" y2="582" stroke="#7F6000" stroke-width="1.1"/>
+<polyline points="330,460 330,488" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,488 335.0,477.0 325.0,477.0" fill="#000000"/>
+<rect x="60" y="626" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="659" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">手写参数化</tspan><tspan font-family="Times New Roman"> RTL </tspan><tspan font-family="SimSun">模块</tspan></text>
+<text x="371.0" y="692" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">卷积、行缓存、</tspan><tspan font-family="Times New Roman">GDN </tspan><tspan font-family="SimSun">等模块</tspan></text>
+<text x="371.0" y="721" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">逐模块与整数参考模型逐比特比对</tspan></text>
+<g id="icon_nn3" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="92.0" y="663.0" width="36.0" height="36.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="84.000,671.000 92.000,671.000"/>
+<polyline points="128.000,671.000 136.000,671.000"/>
+<polyline points="100.000,655.000 100.000,663.000"/>
+<polyline points="100.000,699.000 100.000,707.000"/>
+<polyline points="84.000,681.000 92.000,681.000"/>
+<polyline points="128.000,681.000 136.000,681.000"/>
+<polyline points="110.000,655.000 110.000,663.000"/>
+<polyline points="110.000,699.000 110.000,707.000"/>
+<polyline points="84.000,691.000 92.000,691.000"/>
+<polyline points="128.000,691.000 136.000,691.000"/>
+<polyline points="120.000,655.000 120.000,663.000"/>
+<polyline points="120.000,699.000 120.000,707.000"/>
+<polyline points="106.000,673.000 98.000,681.000 106.000,689.000"/>
+<polyline points="114.000,673.000 122.000,681.000 114.000,689.000"/>
+</g>
+<line id="divider_nn3" x1="150" y1="642" x2="150" y2="720" stroke="#7F6000" stroke-width="1.1"/>
+<polyline points="330,598 330,626" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,626 335.0,615.0 325.0,615.0" fill="#000000"/>
+<rect x="60" y="764" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="797" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">并行度与片上存储规划</tspan></text>
+<text x="371.0" y="830" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">按</tspan><tspan font-family="Times New Roman"> 30 fps </tspan><tspan font-family="SimSun">预算选择各层最小并行度</tspan><tspan font-family="Times New Roman"> P</tspan></text>
+<text x="371.0" y="859" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">每个网络核</tspan><tspan font-family="Times New Roman"> BRAM36 </tspan><tspan font-family="SimSun">预算</tspan><tspan font-family="Times New Roman"> ≤ 100 </tspan><tspan font-family="SimSun">块</tspan></text>
+<g id="icon_nn4" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="84.0" y="793.0" width="12.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="90.000,805.000 90.000,815.000"/>
+<rect x="104.0" y="793.0" width="12.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="110.000,805.000 110.000,815.000"/>
+<rect x="124.0" y="793.0" width="12.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="130.000,805.000 130.000,815.000"/>
+<polyline points="90.000,815.000 130.000,815.000"/>
+<polyline points="110.000,815.000 110.000,825.000"/>
+<rect x="88.0" y="825.0" width="44.0" height="20.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="88.000,835.000 132.000,835.000"/>
+<ellipse cx="96.0" cy="830.0" rx="1.4" ry="1.4" fill="#FFF2CC"/>
+<ellipse cx="96.0" cy="840.0" rx="1.4" ry="1.4" fill="#FFF2CC"/>
+</g>
+<line id="divider_nn4" x1="150" y1="780" x2="150" y2="858" stroke="#7F6000" stroke-width="1.1"/>
+<polyline points="330,736 330,764" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,764 335.0,753.0 325.0,753.0" fill="#000000"/>
+<rect x="60" y="902" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="935" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">脚本生成顶层与初始化文件</tspan></text>
+<text x="371.0" y="968" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">模块例化、参数填写与</tspan><tspan font-family="Times New Roman"> AXI-Stream </tspan><tspan font-family="SimSun">连线</tspan></text>
+<text x="371.0" y="997" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">权重与重定标参数导出为</tspan><tspan font-family="Times New Roman"> .mem</tspan></text>
+<g id="icon_nn5" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="82.0" y="945.0" width="18.0" height="26.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="88.000,953.000 94.000,953.000"/>
+<polyline points="88.000,961.000 94.000,961.000"/>
+<polyline points="100.000,957.000 110.000,957.000 110.000,941.000 122.000,941.000"/>
+<polyline points="110.000,957.000 110.000,975.000 122.000,975.000"/>
+<rect x="122.0" y="929.0" width="16.0" height="22.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="126.000,937.000 134.000,937.000"/>
+<polyline points="126.000,943.000 132.000,943.000"/>
+<rect x="122.0" y="963.0" width="16.0" height="22.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="126.000,971.000 134.000,971.000"/>
+<polyline points="126.000,977.000 132.000,977.000"/>
+</g>
+<line id="divider_nn5" x1="150" y1="918" x2="150" y2="996" stroke="#7F6000" stroke-width="1.1"/>
+<polyline points="330,874 330,902" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,902 335.0,891.0 325.0,891.0" fill="#000000"/>
+<rect x="60" y="1040" width="540" height="110" rx="13" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="371.0" y="1073" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">整网验证与时序收敛</tspan></text>
+<text x="371.0" y="1106" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">整网与整数参考模型逐比特一致</tspan></text>
+<text x="371.0" y="1135" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">综合、实现与</tspan><tspan font-family="Times New Roman"> 250 MHz </tspan><tspan font-family="SimSun">时序收敛</tspan></text>
+<g id="icon_nn6" fill="none" stroke="#7F6000" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="86.000,1077.000 102.000,1077.000 102.000,1093.000 118.000,1093.000"/>
+<rect x="82.0" y="1071.0" width="10.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<rect x="96.0" y="1087.0" width="12.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<rect x="114.0" y="1087.0" width="12.0" height="12.0" rx="2.4" fill="#FFF2CC"/>
+<polyline points="114.000,1073.000 120.000,1079.000 134.000,1067.000"/>
+<ellipse cx="124.0" cy="1111.0" rx="12.0" ry="12.0" fill="#FFF2CC"/>
+<polyline points="124.000,1103.000 124.000,1111.000 130.000,1115.000"/>
+</g>
+<line id="divider_nn6" x1="150" y1="1056" x2="150" y2="1134" stroke="#7F6000" stroke-width="1.1"/>
+<polyline points="330,1012 330,1040" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="330,1040 335.0,1029.0 325.0,1029.0" fill="#000000"/>
+<rect x="680" y="350.0" width="540" height="126" rx="13" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="991.0" y="391.0" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">OFDM </tspan><tspan font-family="SimSun">收发算法仿真</tspan></text>
+<text x="991.0" y="425.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">帧检测、定时与</tspan><tspan font-family="Times New Roman"> SFO </tspan><tspan font-family="SimSun">跟踪</tspan></text>
+<text x="991.0" y="454.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">确定检测、定时门限与跟踪环参数</tspan></text>
+<g id="icon_rf1" fill="none" stroke="#205867" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="704.000,387.000 704.000,437.000 758.000,437.000"/>
+<polyline points="712.000,435.000 712.750,429.928 713.500,425.050 714.250,420.555 715.000,416.615 715.750,413.382 716.500,410.979 717.250,409.500 718.000,409.000 718.750,409.500 719.500,410.979 720.250,413.382 721.000,416.615 721.750,420.555 722.500,425.050 723.250,429.928 724.000,435.000"/>
+<polyline points="728.000,435.000 728.750,427.196 729.500,419.693 730.250,412.777 731.000,406.716 731.750,401.741 732.500,398.045 733.250,395.769 734.000,395.000 734.750,395.769 735.500,398.045 736.250,401.741 737.000,406.716 737.750,412.777 738.500,419.693 739.250,427.196 740.000,435.000"/>
+<polyline points="744.000,435.000 744.750,431.098 745.500,427.346 746.250,423.889 747.000,420.858 747.750,418.371 748.500,416.522 749.250,415.384 750.000,415.000 750.750,415.384 751.500,416.522 752.250,418.371 753.000,420.858 753.750,423.889 754.500,427.346 755.250,431.098 756.000,435.000"/>
+</g>
+<line id="divider_rf1" x1="770" y1="366.0" x2="770" y2="460.0" stroke="#205867" stroke-width="1.1"/>
+<rect x="680" y="518.5" width="540" height="126" rx="13" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="991.0" y="559.5" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">RTL </tspan><tspan font-family="SimSun">编写与仿真</tspan></text>
+<text x="991.0" y="593.5" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">按算法模型逐模块实现</tspan></text>
+<text x="991.0" y="622.5" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">通过</tspan><tspan font-family="Times New Roman"> testbench </tspan><tspan font-family="SimSun">验证</tspan></text>
+<g id="icon_rf2" fill="none" stroke="#205867" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="702.0" y="565.5" width="16.0" height="34.0" rx="2.4" fill="#DBEEF3"/>
+<polyline points="708.000,573.500 712.000,573.500"/>
+<polyline points="708.000,583.500 712.000,583.500"/>
+<polyline points="718.000,581.500 724.000,581.500"/>
+<polyline points="726.000,571.500 732.000,571.500 732.000,559.500 744.000,559.500 744.000,571.500 758.000,571.500"/>
+<polyline points="726.000,599.500 736.000,599.500 736.000,587.500 750.000,587.500 750.000,599.500 758.000,599.500"/>
+</g>
+<line id="divider_rf2" x1="770" y1="534.5" x2="770" y2="628.5" stroke="#205867" stroke-width="1.1"/>
+<polyline points="950,476.0 950,518.5" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="950,518.5 955.0,507.5 945.0,507.5" fill="#000000"/>
+<rect x="680" y="687.0" width="540" height="126" rx="13" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="991.0" y="728.0" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">AD9361 </tspan><tspan font-family="SimSun">接口与校准</tspan></text>
+<text x="991.0" y="762.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">LVDS </tspan><tspan font-family="SimSun">数据接口、</tspan><tspan font-family="Times New Roman">SPI </tspan><tspan font-family="SimSun">配置</tspan></text>
+<text x="991.0" y="791.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">正交校准与</tspan><tspan font-family="Times New Roman"> FIR </tspan><tspan font-family="SimSun">配置</tspan></text>
+<g id="icon_rf3" fill="none" stroke="#205867" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="706.0" y="726.0" width="40.0" height="40.0" rx="2.4" fill="#DBEEF3"/>
+<polyline points="700.000,736.000 706.000,736.000"/>
+<polyline points="700.000,748.000 706.000,748.000"/>
+<polyline points="700.000,760.000 706.000,760.000"/>
+<polyline points="716.000,720.000 716.000,726.000"/>
+<polyline points="728.000,720.000 728.000,726.000"/>
+<polyline points="740.000,720.000 740.000,726.000"/>
+<polyline points="712.000,746.000 713.167,743.929 714.333,742.000 715.500,740.343 716.667,739.072 717.833,738.273 719.000,738.000 720.167,738.273 721.333,739.072 722.500,740.343 723.667,742.000 724.833,743.929 726.000,746.000 727.167,748.071 728.333,750.000 729.500,751.657 730.667,752.928 731.833,753.727 733.000,754.000 734.167,753.727 735.333,752.928 736.500,751.657 737.667,750.000 738.833,748.071 740.000,746.000"/>
+<polyline points="712.000,774.000 756.000,774.000"/>
+<rect x="734.0" y="768.0" width="8.0" height="12.0" rx="2.4" fill="#DBEEF3"/>
+</g>
+<line id="divider_rf3" x1="770" y1="703.0" x2="770" y2="797.0" stroke="#205867" stroke-width="1.1"/>
+<polyline points="950,644.5 950,687.0" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="950,687.0 955.0,676.0 945.0,676.0" fill="#000000"/>
+<rect x="680" y="855.5" width="540" height="126" rx="13" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="991.0" y="896.5" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">单板环回测试</tspan></text>
+<text x="991.0" y="930.5" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">射频链路与基带联调</tspan></text>
+<text x="991.0" y="959.5" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">检查</tspan><tspan font-family="Times New Roman"> EVM </tspan><tspan font-family="SimSun">与镜像抑制</tspan></text>
+<g id="icon_rf4" fill="none" stroke="#205867" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="718.0" y="906.5" width="24.0" height="24.0" rx="2.4" fill="#DBEEF3"/>
+<rect x="724.0" y="912.5" width="12.0" height="12.0" rx="2.4" fill="#DBEEF3"/>
+<polyline points="749.917,935.212 744.602,940.013 738.178,943.180 731.134,944.475 724.004,943.799 717.329,941.203 711.615,936.885 707.297,931.171 704.701,924.496 704.025,917.366 705.320,910.322 708.487,903.898 713.288,898.583 719.356,894.779 726.232,892.775 733.394,892.722 740.298,894.626 746.421,898.342 751.298,903.587"/>
+<polyline points="746.000,892.500 752.000,904.500 740.000,904.500"/>
+</g>
+<line id="divider_rf4" x1="770" y1="871.5" x2="770" y2="965.5" stroke="#205867" stroke-width="1.1"/>
+<polyline points="950,813.0 950,855.5" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="950,855.5 955.0,844.5 945.0,844.5" fill="#000000"/>
+<rect x="680" y="1024.0" width="540" height="126" rx="13" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="991.0" y="1065.0" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">两板空口测试</tspan></text>
+<text x="991.0" y="1099.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">独立验证</tspan><tspan font-family="Times New Roman"> OFDM </tspan><tspan font-family="SimSun">与射频链路</tspan></text>
+<text x="991.0" y="1128.0" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">AGC</tspan><tspan font-family="SimSun">、长帧</tspan><tspan font-family="Times New Roman"> SFO </tspan><tspan font-family="SimSun">跟踪、逐子载波</tspan><tspan font-family="Times New Roman"> SNR</tspan></text>
+<g id="icon_rf5" fill="none" stroke="#205867" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="700.0" y="1089.0" width="14.0" height="24.0" rx="2.4" fill="#DBEEF3"/>
+<rect x="746.0" y="1089.0" width="14.0" height="24.0" rx="2.4" fill="#DBEEF3"/>
+<polyline points="707.000,1089.000 707.000,1077.000"/>
+<polyline points="753.000,1089.000 753.000,1077.000"/>
+<ellipse cx="707.0" cy="1075.0" rx="2.8" ry="2.8" fill="#DBEEF3"/>
+<ellipse cx="753.0" cy="1075.0" rx="2.8" ry="2.8" fill="#DBEEF3"/>
+<polyline points="715.030,1066.082 715.824,1066.867 716.541,1067.723 717.177,1068.641 717.724,1069.614 718.178,1070.634 718.535,1071.692 718.793,1072.779 718.948,1073.885 719.000,1075.000 718.948,1076.115 718.793,1077.221 718.535,1078.308 718.178,1079.366 717.724,1080.386 717.177,1081.359 716.541,1082.277 715.824,1083.133 715.030,1083.918"/>
+<polyline points="720.383,1060.137 721.706,1061.445 722.902,1062.871 723.961,1064.402 724.873,1066.024 725.630,1067.724 726.225,1069.487 726.654,1071.298 726.913,1073.141 727.000,1075.000 726.913,1076.859 726.654,1078.702 726.225,1080.513 725.630,1082.276 724.873,1083.976 723.961,1085.598 722.902,1087.129 721.706,1088.555 720.383,1089.863"/>
+<polyline points="744.970,1083.918 744.176,1083.133 743.459,1082.277 742.823,1081.359 742.276,1080.386 741.822,1079.366 741.465,1078.308 741.207,1077.221 741.052,1076.115 741.000,1075.000 741.052,1073.885 741.207,1072.779 741.465,1071.692 741.822,1070.634 742.276,1069.614 742.823,1068.641 743.459,1067.723 744.176,1066.867 744.970,1066.082"/>
+<polyline points="739.617,1089.863 738.294,1088.555 737.098,1087.129 736.039,1085.598 735.127,1083.976 734.370,1082.276 733.775,1080.513 733.346,1078.702 733.087,1076.859 733.000,1075.000 733.087,1073.141 733.346,1071.298 733.775,1069.487 734.370,1067.724 735.127,1066.024 736.039,1064.402 737.098,1062.871 738.294,1061.445 739.617,1060.137"/>
+</g>
+<line id="divider_rf5" x1="770" y1="1040.0" x2="770" y2="1134.0" stroke="#205867" stroke-width="1.1"/>
+<polyline points="950,981.5 950,1024.0" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="950,1024.0 955.0,1013.0 945.0,1013.0" fill="#000000"/>
+<polyline points="330,1150 330,1180 640,1180" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="950,1150 950,1180 640,1180" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polyline points="640,1180 640,1218" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="640,1218 645.0,1207.0 635.0,1207.0" fill="#000000"/>
+<rect x="210" y="1218" width="860" height="150" rx="13" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="681.0" y="1252" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">系统集成</tspan></text>
+<text x="681.0" y="1285" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">编解码器与</tspan><tspan font-family="Times New Roman"> PHY </tspan><tspan font-family="SimSun">按接口约定对接</tspan></text>
+<text x="681.0" y="1316" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="SimSun">加入</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">软件与</tspan><tspan font-family="Times New Roman"> GUI</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">SSCC </tspan><tspan font-family="SimSun">对比基线</tspan></text>
+<text x="681.0" y="1347" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">JPEG + </tspan><tspan font-family="SimSun">卷积码</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">同一</tspan><tspan font-family="Times New Roman"> PHY</tspan><tspan font-family="SimSun">、同样符号数</tspan></text>
+<g id="icon_integration" fill="none" stroke="#50632A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="238.000,1271.000 260.000,1291.000"/>
+<polyline points="282.000,1271.000 260.000,1291.000"/>
+<polyline points="260.000,1315.000 260.000,1291.000"/>
+<rect x="230.0" y="1263.0" width="16.0" height="16.0" rx="2.4" fill="#EBF1DF"/>
+<rect x="274.0" y="1263.0" width="16.0" height="16.0" rx="2.4" fill="#EBF1DF"/>
+<rect x="252.0" y="1307.0" width="16.0" height="16.0" rx="2.4" fill="#EBF1DF"/>
+<rect x="250.0" y="1281.0" width="20.0" height="20.0" rx="2.4" fill="#EBF1DF"/>
+</g>
+<line id="divider_integration" x1="300" y1="1234" x2="300" y2="1352" stroke="#50632A" stroke-width="1.1"/>
+<polyline points="640,1368 640,1404" fill="none" stroke="#000000" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+<polygon points="640,1404 645.0,1393.0 635.0,1393.0" fill="#000000"/>
+<rect x="210" y="1404" width="860" height="106" rx="13" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="681.0" y="1440" xml:space="preserve" text-anchor="middle" font-size="27" font-weight="400" fill="#000000"><tspan font-family="SimSun">整机空口实测</tspan></text>
+<text x="681.0" y="1480" xml:space="preserve" text-anchor="middle" font-size="24" font-weight="400" fill="#000000"><tspan font-family="Times New Roman">PSNR–SNR </tspan><tspan font-family="SimSun">曲线</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">帧率</tspan><tspan font-family="Times New Roman"> · PL </tspan><tspan font-family="SimSun">时延</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">功耗</tspan><tspan font-family="Times New Roman"> · SSCC </tspan><tspan font-family="SimSun">对比</tspan></text>
+<g id="icon_measurement" fill="none" stroke="#50632A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polyline points="234.000,1431.000 234.000,1481.000 288.000,1481.000"/>
+<polyline points="242.000,1473.000 256.000,1459.000 270.000,1453.000 284.000,1435.000"/>
+<ellipse cx="242.0" cy="1473.0" rx="3.6" ry="3.6" fill="#EBF1DF"/>
+<ellipse cx="256.0" cy="1459.0" rx="3.6" ry="3.6" fill="#EBF1DF"/>
+<ellipse cx="270.0" cy="1453.0" rx="3.6" ry="3.6" fill="#EBF1DF"/>
+<ellipse cx="284.0" cy="1435.0" rx="3.6" ry="3.6" fill="#EBF1DF"/>
+</g>
+<line id="divider_measurement" x1="300" y1="1420" x2="300" y2="1494" stroke="#50632A" stroke-width="1.1"/>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1160" viewBox="0 0 1800 1160" role="img">
+<title>Mali-400 离屏渲染：进程与数据流</title>
+<rect width="1800" height="1160" fill="white"/>
+<rect x="25" y="25" width="505" height="1055" rx="18" fill="white" stroke="#333333" stroke-width="1.8" stroke-dasharray="10 7"/>
+<rect x="740" y="25" width="650" height="1055" rx="18" fill="white" stroke="#333333" stroke-width="1.8" stroke-dasharray="10 7"/>
+<text x="277.5" y="72" xml:space="preserve" text-anchor="middle" font-size="34" fill="#000000"><tspan font-family="Times New Roman">GUI </tspan><tspan font-family="SimSun">进程</tspan></text>
+<text x="277.5" y="114" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">jscc_gui.py</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">Qt</tspan><tspan font-family="SimSun">）</tspan></text>
+<text x="1065" y="72" xml:space="preserve" text-anchor="middle" font-size="34" fill="#000000"><tspan font-family="SimSun">离屏渲染进程</tspan></text>
+<text x="1065" y="114" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">h3d_render.py</tspan><tspan font-family="SimSun">（不经过</tspan><tspan font-family="Times New Roman"> X</tspan><tspan font-family="SimSun">）</tspan></text>
+<rect x="65" y="155" width="425" height="165" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="277.5" y="198" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">收到遥测快照</tspan></text>
+<text x="277.5" y="249" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">LTF → |H|</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">52 </tspan><tspan font-family="SimSun">个子载波，</tspan><tspan font-family="Times New Roman">dB</tspan><tspan font-family="SimSun">）</tspan></text>
+<text x="277.5" y="287" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">追加到最近</tspan><tspan font-family="Times New Roman"> 5 s </tspan><tspan font-family="SimSun">的历史</tspan></text>
+<rect x="65" y="400" width="425" height="175" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="277.5" y="446" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">三维渲染工作线程</tspan></text>
+<text x="277.5" y="500" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">最多一个请求在途</tspan></text>
+<text x="277.5" y="538" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">新请求覆盖未发出的旧请求</tspan></text>
+<polyline points="277.5,320 277.5,400" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="277.5,400 282.5,388.0 272.5,388.0" fill="#000000"/>
+<rect x="65" y="805" width="425" height="175" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="277.5" y="851" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">三维视图重绘</tspan></text>
+<text x="277.5" y="905" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">贴图并绘制坐标轴刻度文字</tspan></text>
+<text x="277.5" y="943" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">使用同一套相机与投影参数</tspan></text>
+<polyline points="277.5,575 277.5,805" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="277.5,805 282.5,793.0 272.5,793.0" fill="#000000"/>
+<text x="301" y="681" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">收到图像后</tspan></text>
+<text x="301" y="717" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">触发重绘</tspan></text>
+<polyline points="277.5,980 277.5,1015" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="277.5,1015 282.5,1003.0 272.5,1003.0" fill="#000000"/>
+<text x="277.5" y="1050" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">触摸屏（</tspan><tspan font-family="Times New Roman">X </tspan><tspan font-family="SimSun">服务，</tspan><tspan font-family="Times New Roman">2D</tspan><tspan font-family="SimSun">）</tspan></text>
+<rect x="780" y="155" width="570" height="205" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1065.0" y="195" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">启动时初始化</tspan></text>
+<text x="1065.0" y="235" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">按驱动名选择</tspan><tspan font-family="Times New Roman"> lima </tspan><tspan font-family="SimSun">的</tspan><tspan font-family="Times New Roman"> renderD </tspan><tspan font-family="SimSun">节点</tspan></text>
+<text x="1065.0" y="270" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">GBM → EGL</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">PLATFORM_GBM</tspan><tspan font-family="SimSun">）</tspan></text>
+<text x="1065.0" y="305" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">GLES 2.0 </tspan><tspan font-family="SimSun">无表面上下文</tspan><tspan font-family="Times New Roman"> → FBO</tspan></text>
+<text x="1065.0" y="340" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">RGBA </tspan><tspan font-family="SimSun">纹理</tspan><tspan font-family="Times New Roman"> + 16 </tspan><tspan font-family="SimSun">位深度</tspan></text>
+<polyline points="1065,360 1065,400" fill="none" stroke="#595959" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="1065,400 1070.0,388.0 1060.0,388.0" fill="#595959"/>
+<rect x="780" y="400" width="570" height="180" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1065.0" y="443" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">几何生成（</tspan><tspan font-family="Times New Roman">NumPy</tspan><tspan font-family="SimSun">，约</tspan><tspan font-family="Times New Roman"> 7 ms</tspan><tspan font-family="SimSun">）</tspan></text>
+<text x="1065.0" y="485" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">T × N </tspan><tspan font-family="SimSun">三角网格</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">有限差分法向</tspan></text>
+<text x="1065.0" y="520" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">Lambert </tspan><tspan font-family="SimSun">着色</tspan></text>
+<text x="1065.0" y="555" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">曲面网格线</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">地面网格</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">坐标轴线段</tspan></text>
+<polyline points="1065,580 1065,640" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1065,640 1070.0,628.0 1060.0,628.0" fill="#000000"/>
+<rect x="780" y="640" width="570" height="180" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1065.0" y="683" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">提交绘制</tspan></text>
+<text x="1065.0" y="725" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">上传顶点缓冲（</tspan><tspan font-family="Times New Roman">VBO</tspan><tspan font-family="SimSun">）</tspan></text>
+<text x="1065.0" y="760" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">先画曲面（多边形偏移），再画线段</tspan></text>
+<text x="1065.0" y="795" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">投影矩阵</tspan><tspan font-family="Times New Roman"> y </tspan><tspan font-family="SimSun">方向预翻转</tspan></text>
+<polyline points="1065,820 1065,875" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1065,875 1070.0,863.0 1060.0,863.0" fill="#000000"/>
+<rect x="780" y="875" width="570" height="110" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1065.0" y="917" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">图像读回</tspan></text>
+<text x="1065.0" y="959" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">glReadPixels → RGBA</tspan><tspan font-family="SimSun">（约</tspan><tspan font-family="Times New Roman"> 45 ms</tspan><tspan font-family="SimSun">）</tspan></text>
+<polyline points="490,467 780,467" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="780,467 768.0,462.0 768.0,472.0" fill="#000000"/>
+<text x="635" y="440" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">stdin · </tspan><tspan font-family="SimSun">请求</tspan></text>
+<text x="635" y="504" xml:space="preserve" text-anchor="middle" font-size="25" fill="#595959"><tspan font-family="SimSun">历史数据</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">参数</tspan></text>
+<polyline points="780,930 620,930 620,545 490,545" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="490,545 502.0,550.0 502.0,540.0" fill="#000000"/>
+<text x="641" y="714" xml:space="preserve" text-anchor="start" font-size="28" fill="#595959"><tspan font-family="Times New Roman">stdout</tspan></text>
+<text x="641" y="751" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="Times New Roman">RGBA</tspan></text>
+<text x="641" y="788" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">图像</tspan></text>
+<rect x="1500" y="400" width="270" height="585" rx="14" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1635" y="449" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">GPU </tspan><tspan font-family="SimSun">与驱动</tspan></text>
+<polyline points="1520,472 1750,472" fill="none" stroke="#50632A" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="1635" y="524" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">Mesa 22 lima_dri</tspan></text>
+<text x="1635" y="564" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">OpenGL ES 2.0</tspan></text>
+<polyline points="1520,605 1750,605" fill="none" stroke="#50632A" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="1635" y="654" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">lima </tspan><tspan font-family="SimSun">内核驱动</tspan></text>
+<text x="1635" y="694" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">外部模块</tspan></text>
+<text x="1635" y="732" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">板上编译</tspan></text>
+<polyline points="1520,771 1750,771" fill="none" stroke="#50632A" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="1635" y="824" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">Mali-400 MP2</tspan></text>
+<text x="1635" y="870" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">1 GP + 2 PP</tspan></text>
+<text x="1635" y="912" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">500 MHz</tspan></text>
+<polyline points="1350,730 1500,730" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1500,730 1488.0,725.0 1488.0,735.0" fill="#000000"/>
+<text x="1425" y="704" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">绘制</tspan></text>
+<polyline points="1500,930 1350,930" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1350,930 1362.0,935.0 1362.0,925.0" fill="#000000"/>
+<text x="1425" y="904" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">读回</tspan></text>
+<text x="900" y="1130" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">每帧约</tspan><tspan font-family="Times New Roman"> 60 ms    ·    </tspan><tspan font-family="SimSun">曲面刷新</tspan><tspan font-family="Times New Roman"> 2.5 </tspan><tspan font-family="SimSun">次</tspan><tspan font-family="Times New Roman">/s    ·    </tspan><tspan font-family="SimSun">渲染进程约占一个</tspan><tspan font-family="Times New Roman"> CPU </tspan><tspan font-family="SimSun">核的</tspan><tspan font-family="Times New Roman"> 10%</tspan></text>
+</svg>

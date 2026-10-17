@@ -1,0 +1,109 @@
+[
+  {
+    "figure": "1-1",
+    "png": "design_flow.png",
+    "editable": [
+      "redraw/design_flow.svg",
+      "redraw/design_flow.drawio"
+    ],
+    "sha256": "3d90809bf4d83590a9dc5631e113c86f8f3e0642e5a71ed410dbdcd04eddf95d"
+  },
+  {
+    "figure": "2-3",
+    "png": "hw/block_rtl.png",
+    "editable": [
+      "redraw/fig2_3_block_rtl.svg",
+      "visio/block_rtl.vsdx"
+    ],
+    "sha256": "9c0cdc2858e31e916b42fe2c0a9fab798b43186722fea9b906c4c3f273d142c3"
+  },
+  {
+    "figure": "2-5",
+    "png": "hw/gdn_unit.png",
+    "editable": [
+      "redraw/fig2_5_gdn.svg",
+      "redraw/fig2_5_gdn.drawio"
+    ],
+    "sha256": "c20ed198987bd25807922c378dd088f0c5e18087826e0a49409aa4d879923943"
+  },
+  {
+    "figure": "2-6",
+    "png": "network/fig07_memory.png",
+    "editable": [
+      "redraw/fig2_6_resource_plan.svg"
+    ],
+    "sha256": "b9e8a93d4a2191ae46828667f5362fb2650da3b8fc23f11d94a6e9fcab0a4d1b"
+  },
+  {
+    "figure": "2-7",
+    "png": "hw/tx_chain.png",
+    "editable": [
+      "redraw/fig2_7_tx_chain.svg",
+      "redraw/fig2_7_tx_chain.drawio"
+    ],
+    "sha256": "e3849f5567b477ba01ec27bdcf9b5daa267d4cc37ed2187e08e66e322a721989"
+  },
+  {
+    "figure": "2-9",
+    "png": "hw/rx_chain.png",
+    "editable": [
+      "redraw/fig2_9_rx_chain.svg",
+      "redraw/fig2_9_rx_chain.drawio"
+    ],
+    "sha256": "faccd6e2972385c38f1f4240142af196f0ed1b4abe5c1583a011d8c9949f0d93"
+  },
+  {
+    "figure": "2-17",
+    "png": "hw/ad9361_ctrl.png",
+    "editable": [
+      "redraw/fig2_17_ad9361_control.svg",
+      "redraw/fig2_17_ad9361_control.drawio"
+    ],
+    "sha256": "41f8315f6eece4348429a6dabba1bf0da952044195824068efc7d1c67f7864e4"
+  },
+  {
+    "figure": "2-18",
+    "png": "sw/sw_arch.png",
+    "editable": [
+      "redraw/fig2_18_software_arch.svg",
+      "redraw/fig2_18_software_arch.drawio"
+    ],
+    "sha256": "c3b90453652d951e9db52d140ee787b69dac03d648d8b3f3513e588ca229f99c"
+  },
+  {
+    "figure": "2-19",
+    "png": "sw/tx_flow.png",
+    "editable": [
+      "redraw/fig2_19_tx_main_flow.svg",
+      "redraw/fig2_19_tx_main_flow.drawio"
+    ],
+    "sha256": "3db92269c498a06519fc76b82e76d803097ad0cabd1e6a7fcc09e6cf0c2ff246"
+  },
+  {
+    "figure": "2-20",
+    "png": "sw/agc_flow.png",
+    "editable": [
+      "redraw/fig2_20_ad9361_ps_agc.svg",
+      "redraw/fig2_20_ad9361_ps_agc.drawio"
+    ],
+    "sha256": "3d7d72fa16a37315e18acd90734d6a81a9cbdd8347ca8fdac3ebdf2fb3e6beb2"
+  },
+  {
+    "figure": "2-23",
+    "png": "sw/gpu_pipeline.png",
+    "editable": [
+      "redraw/fig2_23_mali_pipeline.svg",
+      "redraw/fig2_23_mali_pipeline.drawio"
+    ],
+    "sha256": "218b9e4dc294b1587c3e23559f84a8a55712198a62d2f76729160b0f721d86e0"
+  },
+  {
+    "figure": "2-24",
+    "png": "sw/pc_toolchain.png",
+    "editable": [
+      "redraw/fig2_24_pc_toolchain.svg",
+      "redraw/fig2_24_pc_toolchain.drawio"
+    ],
+    "sha256": "dcfceab4b25a9106ad5975bb712d8260a61a31284441ed5cf43ecd561543140b"
+  }
+]

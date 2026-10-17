@@ -44,4 +44,6 @@ if ($MathType) {
 # Word re-assigns the East Asian font to Greek letters on save; put them back to Times New Roman
 & $Python -I (Join-Path $tools 'fix_greek_fonts.py') $out
 if ($LASTEXITCODE -ne 0) { throw 'fix_greek_fonts.py failed' }
+& $Python -I (Join-Path $tools 'fix_docx_layout.py') $out
+if ($LASTEXITCODE -ne 0) { throw 'fix_docx_layout.py failed' }
 "written $out"

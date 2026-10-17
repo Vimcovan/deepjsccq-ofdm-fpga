@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1700" height="1600" viewBox="0 0 1700 1600" role="img">
+<title>AD9361 的 PS 初始化与 AGC 看门狗</title>
+<rect width="1700" height="1600" fill="white"/>
+<text x="380" y="52" xml:space="preserve" text-anchor="middle" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(a) PS </tspan><tspan font-family="SimSun">初始化</tspan></text>
+<text x="380" y="96" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">AD9361.init()</tspan></text>
+<text x="1230" y="52" xml:space="preserve" text-anchor="middle" font-size="35" fill="#000000"><tspan font-family="Times New Roman">(b) AGC </tspan><tspan font-family="SimSun">看门狗</tspan></text>
+<text x="1230" y="96" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">AgcGuard.check()</tspan></text>
+<rect x="205.0" y="130" width="350" height="90" rx="45.0" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="380" y="166" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">JsccRx() </tspan><tspan font-family="SimSun">加载比特流</tspan></text>
+<text x="380" y="202" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">比特流版本号</tspan><tspan font-family="Times New Roman"> ≥ 2</tspan></text>
+<rect x="1015.0" y="130" width="430" height="80" rx="40.0" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1230" y="180" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">RX </tspan><tspan font-family="SimSun">服务每</tspan><tspan font-family="Times New Roman"> 0.5 s </tspan><tspan font-family="SimSun">调用一次</tspan></text>
+<rect x="165.0" y="260" width="430" height="100" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="380.0" y="300" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">射频控制寄存器写</tspan><tspan font-family="Times New Roman"> 001</tspan></text>
+<text x="380.0" y="340" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">切到</tspan><tspan font-family="Times New Roman"> PS </tspan><tspan font-family="SimSun">控制，</tspan><tspan font-family="Times New Roman">RESETB </tspan><tspan font-family="SimSun">拉低</tspan></text>
+<rect x="150.0" y="400" width="460" height="75" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="380.0" y="447" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">2 ms </tspan><tspan font-family="SimSun">后写</tspan><tspan font-family="Times New Roman"> 011</tspan><tspan font-family="SimSun">，释放</tspan><tspan font-family="Times New Roman"> RESETB</tspan></text>
+<rect x="140.0" y="515" width="480" height="100" rx="12" fill="#EBE7F2" stroke="#574781" stroke-width="2"/>
+<text x="380.0" y="555" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">读取</tspan><tspan font-family="Times New Roman"> ad9361_rx_init.json</tspan></text>
+<text x="380.0" y="595" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">操作列表由</tspan><tspan font-family="Times New Roman"> PL </tspan><tspan font-family="SimSun">初始化</tspan><tspan font-family="Times New Roman"> LUT </tspan><tspan font-family="SimSun">转换</tspan></text>
+<polygon points="380,650.0 605.0,715 380,780.0 155.0,715" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="380" y="725" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">还有未执行操作？</tspan></text>
+<polyline points="380,615 380,650" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,650 385.0,638.0 375.0,638.0" fill="#000000"/>
+<polyline points="380,780 380,825" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,825 385.0,813.0 375.0,813.0" fill="#000000"/>
+<text x="402" y="813" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<rect x="100" y="825" width="560" height="260" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="380" y="865" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">取下一条并执行</tspan></text>
+<polyline points="121,883 639,883" fill="none" stroke="#205867" stroke-width="1.1" stroke-linejoin="round"/>
+<polyline points="408,903 408,1040" fill="none" stroke="#205867" stroke-width="1.0" stroke-linejoin="round"/>
+<text x="124" y="919" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">w addr val</tspan></text>
+<text x="432" y="919" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="Times New Roman">SPI </tspan><tspan font-family="SimSun">写</tspan></text>
+<text x="124" y="954" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">r addr</tspan></text>
+<text x="432" y="954" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="Times New Roman">SPI </tspan><tspan font-family="SimSun">读</tspan></text>
+<text x="124" y="989" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">delay ms</tspan></text>
+<text x="432" y="989" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="SimSun">延时</tspan></text>
+<text x="124" y="1024" xml:space="preserve" text-anchor="start" font-size="28" fill="#000000"><tspan font-family="Times New Roman">poll addr mask want</tspan></text>
+<text x="432" y="1024" xml:space="preserve" text-anchor="start" font-size="27" fill="#000000"><tspan font-family="SimSun">轮询，超时</tspan><tspan font-family="Times New Roman"> 2 s</tspan></text>
+<text x="380" y="1066" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="SimSun">出错时报出操作序号</tspan></text>
+<polyline points="380,1085 380,1110 55,1110 55,715 155,715" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="155,715 143.0,710.0 143.0,720.0" fill="#000000"/>
+<rect x="105.0" y="1155" width="550" height="120" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="380.0" y="1193" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">写</tspan><tspan font-family="Times New Roman"> 111</tspan><tspan font-family="SimSun">：初始化完成</tspan></text>
+<text x="380.0" y="1230" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">释放</tspan><tspan font-family="Times New Roman"> FIFO</tspan></text>
+<text x="380.0" y="1263" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">收发控制引脚</tspan><tspan font-family="Times New Roman"> ENABLE / TXNRX </tspan><tspan font-family="SimSun">拉高</tspan></text>
+<polyline points="605,715 745,715 745,1215 655.0,1215" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="655.0,1215 667.0,1220.0 667.0,1210.0" fill="#000000"/>
+<text x="672" y="697" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<rect x="120.0" y="1315" width="520" height="80" rx="40.0" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="380" y="1365" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">打印操作数、耗时与</tspan><tspan font-family="Times New Roman"> ENSM </tspan><tspan font-family="SimSun">状态</tspan></text>
+<polyline points="380,220 380,260" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,260 385.0,248.0 375.0,248.0" fill="#000000"/>
+<polyline points="380,360 380,400" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,400 385.0,388.0 375.0,388.0" fill="#000000"/>
+<polyline points="380,475 380,515" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,515 385.0,503.0 375.0,503.0" fill="#000000"/>
+<polyline points="380,1275 380,1315" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="380,1315 385.0,1303.0 375.0,1303.0" fill="#000000"/>
+<rect x="930.0" y="260" width="600" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1230.0" y="302" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">MMIO </tspan><tspan font-family="SimSun">读</tspan><tspan font-family="Times New Roman"> PHY </tspan><tspan font-family="SimSun">同步帧计数</tspan><tspan font-family="Times New Roman"> n </tspan><tspan font-family="SimSun">与增益索引</tspan><tspan font-family="Times New Roman"> g</tspan></text>
+<text x="1230.0" y="344" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">PL </tspan><tspan font-family="SimSun">寄存器，不经过</tspan><tspan font-family="Times New Roman"> SPI</tspan></text>
+<rect x="1010.0" y="410" width="440" height="110" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1230.0" y="452" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">保留至少</tspan><tspan font-family="Times New Roman"> 0.5 s </tspan><tspan font-family="SimSun">前的历史样点</tspan></text>
+<text x="1230.0" y="494" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">同步率</tspan><tspan font-family="Times New Roman"> = Δn / Δt</tspan></text>
+<polyline points="1230,210 1230,260" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,260 1235.0,248.0 1225.0,248.0" fill="#000000"/>
+<polyline points="1230,370 1230,410" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,410 1235.0,398.0 1225.0,398.0" fill="#000000"/>
+<polyline points="1230,520 1230,552.5" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,552.5 1235.0,540.5 1225.0,540.5" fill="#000000"/>
+<polygon points="1230,552.5 1445.0,620 1230,687.5 1015.0,620" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1230" y="610" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">跨度</tspan><tspan font-family="Times New Roman"> ≥ 0.5 s </tspan><tspan font-family="SimSun">且</tspan></text>
+<text x="1230" y="642" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">同步率</tspan><tspan font-family="Times New Roman"> &lt; 5 </tspan><tspan font-family="SimSun">帧</tspan><tspan font-family="Times New Roman">/s</tspan><tspan font-family="SimSun">？</tspan></text>
+<polygon points="1230,745.0 1530.0,815 1230,885.0 930.0,815" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1230" y="805" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">g &lt; </tspan><tspan font-family="SimSun">增益表上限？</tspan></text>
+<text x="1230" y="837" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">0x0FD</tspan><tspan font-family="SimSun">：最大增益索引）</tspan></text>
+<polygon points="1230,950.0 1455.0,1010 1230,1070.0 1005.0,1010" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1230" y="1020" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">距上次复位</tspan><tspan font-family="Times New Roman"> &gt; 3 s</tspan><tspan font-family="SimSun">？</tspan></text>
+<polyline points="1230,687.5 1230,745" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,745 1235.0,733.0 1225.0,733.0" fill="#000000"/>
+<text x="1252" y="725.25" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<polyline points="1230,885 1230,950" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,950 1235.0,938.0 1225.0,938.0" fill="#000000"/>
+<text x="1252" y="926.5" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<polyline points="1230,1070 1230,1130" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,1130 1235.0,1118.0 1225.0,1118.0" fill="#000000"/>
+<text x="1252" y="1109.0" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="SimSun">是</tspan></text>
+<rect x="910.0" y="1130" width="640" height="120" rx="12" fill="#F2DEDA" stroke="#843C35" stroke-width="2"/>
+<text x="1230.0" y="1168" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">加锁并复位快速</tspan><tspan font-family="Times New Roman"> AGC </tspan><tspan font-family="SimSun">状态机</tspan></text>
+<text x="1230.0" y="1205" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">SPI</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">0x0FA</tspan><tspan font-family="SimSun">（</tspan><tspan font-family="Times New Roman">AGC </tspan><tspan font-family="SimSun">配置</tspan><tspan font-family="Times New Roman"> 1</tspan><tspan font-family="SimSun">）</tspan><tspan font-family="Times New Roman">← 0x05</tspan><tspan font-family="SimSun">，再</tspan><tspan font-family="Times New Roman"> ← 0xE5</tspan></text>
+<text x="1230.0" y="1238" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">更新复位计数并记日志</tspan></text>
+<polyline points="1230,1250 1230,1315" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1230,1315 1235.0,1303.0 1225.0,1303.0" fill="#000000"/>
+<rect x="995.0" y="1315" width="470" height="90" rx="45.0" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1230" y="1351" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">返回增益、同步率、是否停滞</tspan></text>
+<text x="1230" y="1387" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">以及本次是否复位</tspan></text>
+<polyline points="1445,620 1640,620" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="1542.5" y="602" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1530,815 1640,815" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="1585.0" y="797" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1455,1010 1640,1010" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<text x="1547.5" y="992" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="SimSun">否</tspan></text>
+<polyline points="1640,620 1640,1360 1465.0,1360" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1465.0,1360 1477.0,1365.0 1477.0,1355.0" fill="#000000"/>
+<circle cx="1640" cy="815" r="3.0" fill="#000000"/>
+<circle cx="1640" cy="1010" r="3.0" fill="#000000"/>
+<polyline points="55,1430 705,1430" fill="none" stroke="#A6A6A6" stroke-width="1.1" stroke-linejoin="round"/>
+<polyline points="900,1430 1560,1430" fill="none" stroke="#A6A6A6" stroke-width="1.1" stroke-linejoin="round"/>
+<text x="55" y="1465" xml:space="preserve" text-anchor="start" font-size="28" fill="#595959"><tspan font-family="SimSun">每次</tspan><tspan font-family="Times New Roman"> SPI </tspan><tspan font-family="SimSun">传输</tspan></text>
+<text x="55" y="1499" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">向</tspan><tspan font-family="Times New Roman"> SPI </tspan><tspan font-family="SimSun">命令寄存器写入地址、数据和读</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">写位；</tspan></text>
+<text x="55" y="1531" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">等待</tspan><tspan font-family="Times New Roman"> SPI </tspan><tspan font-family="SimSun">状态寄存器中的传输计数加一</tspan></text>
+<text x="55" y="1563" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">（跨</tspan><tspan font-family="Times New Roman"> 20 MHz </tspan><tspan font-family="SimSun">时钟域），再从状态寄存器读出数据。</tspan></text>
+<text x="900" y="1465" xml:space="preserve" text-anchor="start" font-size="28" fill="#595959"><tspan font-family="SimSun">看门狗判据</tspan></text>
+<text x="900" y="1499" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">仅用同步率与增益是否到顶；</tspan></text>
+<text x="900" y="1531" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">只读</tspan><tspan font-family="Times New Roman"> PL </tspan><tspan font-family="SimSun">计数器，不与基带耦合。</tspan></text>
+</svg>

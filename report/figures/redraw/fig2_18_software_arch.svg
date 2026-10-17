@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1850" viewBox="0 0 2400 1850" role="img">
+<title>板上软件架构：服务、进程、线程与硬件接口</title>
+<rect width="2400" height="1850" fill="white"/>
+<rect x="25" y="25" width="660" height="1510" rx="18" fill="white" stroke="#333333" stroke-width="2"/>
+<text x="50" y="70" xml:space="preserve" text-anchor="start" font-size="36" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">板</tspan></text>
+<rect x="900" y="25" width="1475" height="1750" rx="18" fill="white" stroke="#333333" stroke-width="2"/>
+<text x="925" y="70" xml:space="preserve" text-anchor="start" font-size="36" fill="#000000"><tspan font-family="Times New Roman">RX </tspan><tspan font-family="SimSun">板</tspan></text>
+<text x="660" y="73" xml:space="preserve" text-anchor="end" font-size="27" fill="#595959"><tspan font-family="Times New Roman">PS · PYNQ 3.1 · Python 3</tspan></text>
+<text x="2345" y="73" xml:space="preserve" text-anchor="end" font-size="27" fill="#595959"><tspan font-family="Times New Roman">PS · PYNQ 3.1 · Python 3</tspan></text>
+<rect x="60" y="150" width="590" height="780" rx="14" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="355.0" y="195" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="Times New Roman">tx_camera.py</tspan></text>
+<text x="355.0" y="236" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">jscc-tx.service</tspan></text>
+<rect x="90" y="290" width="315" height="160" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="247.5" y="341.52" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">数据源线程</tspan><tspan font-family="Times New Roman"> × 3</tspan></text>
+<text x="247.5" y="379.52" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">摄像头</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">预设视频</tspan></text>
+<text x="247.5" y="417.52" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">预设图</tspan></text>
+<rect x="435" y="305" width="190" height="130" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="530.0" y="360.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">主循环</tspan></text>
+<text x="530.0" y="398.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">取帧</tspan><tspan font-family="Times New Roman"> → </tspan><tspan font-family="SimSun">送图</tspan></text>
+<polyline points="405,370 435,370" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="435,370 423.0,365.0 423.0,375.0" fill="#000000"/>
+<rect x="115" y="510" width="510" height="115" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="370.0" y="558.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">预览线程：只保留最新一帧</tspan></text>
+<text x="370.0" y="596.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">预览帧异步发送</tspan></text>
+<polyline points="530,435 530,510" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="530,510 535.0,498.0 525.0,498.0" fill="#000000"/>
+<rect x="90" y="685" width="250" height="110" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="215.0" y="730.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">衰减线程</tspan></text>
+<text x="215.0" y="768.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">衰减斜坡</tspan></text>
+<rect x="375" y="685" width="250" height="110" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="500.0" y="730.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">控制线程</tspan></text>
+<text x="500.0" y="768.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">信源</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">模式</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">衰减</tspan></text>
+<polyline points="85,830 625,830" fill="none" stroke="#50632A" stroke-width="1" stroke-linejoin="round"/>
+<text x="355" y="866" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">摄像头控制：</tspan><tspan font-family="Times New Roman">v4l2ctl.py → V4L2 ioctl</tspan></text>
+<text x="355" y="905" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="Times New Roman">USB </tspan><tspan font-family="SimSun">摄像头：</tspan><tspan font-family="Times New Roman">/dev/video0</tspan></text>
+<rect x="60" y="1010" width="590" height="160" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="355.0" y="1076.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">jscc_tx.py</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">Overlay / MMIO / DMA / SPI</tspan></text>
+<text x="355.0" y="1123.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">sscc_pkt.py</tspan><tspan font-family="SimSun">：包格式、</tspan><tspan font-family="Times New Roman">JpegFit</tspan></text>
+<polyline points="355,930 355,1010" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="355,1010 360.0,998.0 350.0,998.0" fill="#000000"/>
+<text x="355" y="1234" xml:space="preserve" text-anchor="middle" font-size="29" fill="#595959"><tspan font-family="SimSun">访问的</tspan><tspan font-family="Times New Roman"> PL </tspan><tspan font-family="SimSun">接口</tspan></text>
+<rect x="60" y="1290" width="270" height="175" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="195.0" y="1345.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">图像</tspan><tspan font-family="Times New Roman"> DMA</tspan></text>
+<text x="195.0" y="1387.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">MM2S</tspan></text>
+<text x="195.0" y="1429.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">0x8000_0000</tspan></text>
+<rect x="370" y="1290" width="280" height="175" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="510.0" y="1344.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">控制寄存器组</tspan></text>
+<text x="510.0" y="1386.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">AXI4-Lite / SPI </tspan><tspan font-family="SimSun">命令</tspan></text>
+<text x="510.0" y="1428.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">0x8002_0000</tspan></text>
+<polyline points="195,1170 195,1290" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="195,1290 200.0,1278.0 190.0,1278.0" fill="#000000"/>
+<polyline points="510,1170 510,1290" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="510,1290 515.0,1278.0 505.0,1278.0" fill="#000000"/>
+<rect x="945" y="150" width="685" height="1160" rx="14" fill="white" stroke="#595959" stroke-width="1.7" stroke-dasharray="10 7"/>
+<text x="1287.5" y="200" xml:space="preserve" text-anchor="middle" font-size="34" fill="#000000"><tspan font-family="SimSun">触摸屏</tspan><tspan font-family="Times New Roman"> GUI </tspan><tspan font-family="SimSun">服务</tspan></text>
+<text x="1287.5" y="244" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">jscc-gui.service</tspan></text>
+<rect x="980" y="300" width="615" height="235" rx="14" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1287.5" y="345" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="SimSun">网络接收子进程</tspan></text>
+<text x="1287.5" y="386" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">net_proc</tspan></text>
+<text x="1287.5" y="432" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">订阅</tspan><tspan font-family="Times New Roman"> · UDP </tspan><tspan font-family="SimSun">分片重组</tspan><tspan font-family="Times New Roman"> · TX </tspan><tspan font-family="SimSun">命令收发</tspan></text>
+<text x="1287.5" y="482" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">向</tspan><tspan font-family="Times New Roman"> GUI </tspan><tspan font-family="SimSun">交付完整消息</tspan></text>
+<rect x="980" y="650" width="615" height="430" rx="14" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1287.5" y="695" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="Times New Roman">GUI </tspan><tspan font-family="SimSun">主进程</tspan></text>
+<text x="1287.5" y="736" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">jscc_gui.py</tspan></text>
+<rect x="1000" y="764" width="575" height="60" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1287.5" y="803.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">接收线程：完整消息</tspan><tspan font-family="Times New Roman"> → Qt </tspan><tspan font-family="SimSun">信号</tspan></text>
+<rect x="1000" y="837" width="575" height="60" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1287.5" y="876.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">Qt </tspan><tspan font-family="SimSun">主线程：页面、</tspan><tspan font-family="Times New Roman">PSNR </tspan><tspan font-family="SimSun">配对、控制</tspan></text>
+<rect x="1050" y="910" width="475" height="60" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1287.5" y="949.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">触摸线程：</tspan><tspan font-family="Times New Roman">evdev </tspan><tspan font-family="SimSun">长按</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">拖动</tspan></text>
+<rect x="1090" y="983" width="395" height="60" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="1287.5" y="1022.86" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">三维渲染工作线程</tspan></text>
+<polyline points="1140,535 1140,650" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1140,650 1145.0,638.0 1135.0,638.0" fill="#000000"/>
+<text x="1110" y="584" xml:space="preserve" text-anchor="end" font-size="27" fill="#595959"><tspan font-family="Times New Roman">Pipe</tspan></text>
+<text x="1110" y="620" xml:space="preserve" text-anchor="end" font-size="26" fill="#595959"><tspan font-family="SimSun">完整消息</tspan></text>
+<polyline points="1480,650 1480,535" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1480,535 1475.0,547.0 1485.0,547.0" fill="#000000"/>
+<text x="1450" y="599" xml:space="preserve" text-anchor="end" font-size="27" fill="#595959"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">命令</tspan></text>
+<rect x="1015" y="1160" width="545" height="120" rx="12" fill="#F2DEDA" stroke="#843C35" stroke-width="2"/>
+<text x="1287.5" y="1208.7" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">h3d_render.py </tspan><tspan font-family="SimSun">子进程</tspan></text>
+<text x="1287.5" y="1251.7" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">GBM + EGL + GLES2</tspan><tspan font-family="SimSun">（离屏）</tspan></text>
+<polyline points="1115,1080 1115,1160" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1115,1160 1120.0,1148.0 1110.0,1148.0" fill="#000000"/>
+<text x="1140" y="1114" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="Times New Roman">stdin</tspan><tspan font-family="SimSun">：请求</tspan></text>
+<polyline points="1500,1160 1500,1080" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1500,1080 1495.0,1092.0 1505.0,1092.0" fill="#000000"/>
+<text x="1475" y="1147" xml:space="preserve" text-anchor="end" font-size="26" fill="#595959"><tspan font-family="Times New Roman">stdout</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">RGBA</tspan></text>
+<rect x="1115" y="1390" width="345" height="90" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1287.5" y="1427.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">Mali-400 MP2</tspan></text>
+<text x="1287.5" y="1462.36" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">lima </tspan><tspan font-family="SimSun">驱动</tspan></text>
+<polyline points="1287.5,1280 1287.5,1390" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1287.5,1390 1292.5,1378.0 1282.5,1378.0" fill="#000000"/>
+<text x="1310" y="1356" xml:space="preserve" text-anchor="start" font-size="26" fill="#595959"><tspan font-family="SimSun">离屏绘制</tspan></text>
+<rect x="980" y="1570" width="615" height="110" rx="12" fill="#F2F2F2" stroke="#595959" stroke-width="2"/>
+<text x="1287.5" y="1613.7" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="Times New Roman">X / armsoc → DisplayPort</tspan></text>
+<text x="1287.5" y="1656.7" xml:space="preserve" text-anchor="middle" font-size="30" fill="#000000"><tspan font-family="SimSun">触摸屏</tspan><tspan font-family="Times New Roman"> 1024 × 600</tspan></text>
+<polyline points="980,866 920,866 920,1625 980,1625" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="980,1625 968.0,1620.0 968.0,1630.0" fill="#000000"/>
+<text x="1287.5" y="1540" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="Times New Roman">Qt </tspan><tspan font-family="SimSun">页面与返回的渲染图像</tspan></text>
+<rect x="1830" y="150" width="520" height="780" rx="14" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="2090.0" y="195" xml:space="preserve" text-anchor="middle" font-size="33" fill="#000000"><tspan font-family="Times New Roman">rx_server.py</tspan></text>
+<text x="2090.0" y="236" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="Times New Roman">jscc-rx.service</tspan></text>
+<rect x="1850" y="285" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="326.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">图像接收：</tspan><tspan font-family="Times New Roman">S2MM DMA / </tspan><tspan font-family="SimSun">双缓冲</tspan></text>
+<rect x="1850" y="363" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="404.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">图像发送：</tspan><tspan font-family="Times New Roman">UDP </tspan><tspan font-family="SimSun">图像消息</tspan></text>
+<rect x="1850" y="441" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="482.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">遥测：</tspan><tspan font-family="Times New Roman">10 Hz</tspan></text>
+<rect x="1850" y="519" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="560.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">频谱：</tspan><tspan font-family="Times New Roman">ADC </tspan><tspan font-family="SimSun">抓取</tspan><tspan font-family="Times New Roman"> / 2 Hz</tspan></text>
+<rect x="1850" y="597" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="638.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">SSCC </tspan><tspan font-family="SimSun">包转发：</tspan><tspan font-family="Times New Roman">250 Hz </tspan><tspan font-family="SimSun">轮询</tspan></text>
+<rect x="1850" y="675" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="716.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">AGC </tspan><tspan font-family="SimSun">记录：失步</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">恢复，只读</tspan></text>
+<rect x="1850" y="753" width="480" height="65" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="2090.0" y="794.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">AGC </tspan><tspan font-family="SimSun">看门狗：</tspan><tspan font-family="Times New Roman">2 Hz</tspan></text>
+<text x="2090" y="878" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">共享锁保护</tspan><tspan font-family="Times New Roman"> MMIO </tspan><tspan font-family="SimSun">写入与</tspan><tspan font-family="Times New Roman"> DMA</tspan></text>
+<text x="2090" y="914" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">另有订阅管理：</tspan><tspan font-family="Times New Roman">ctrl_loop</tspan></text>
+<rect x="1830" y="1010" width="520" height="160" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="2090.0" y="1059.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">jscc_rx.py</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">Overlay / DMA / </tspan><tspan font-family="SimSun">遥测</tspan></text>
+<text x="2090.0" y="1099.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">ad9361_ps.py</tspan><tspan font-family="SimSun">：</tspan><tspan font-family="Times New Roman">PS </tspan><tspan font-family="SimSun">初始化</tspan></text>
+<text x="2090.0" y="1139.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">与</tspan><tspan font-family="Times New Roman"> AGC </tspan><tspan font-family="SimSun">看门狗</tspan></text>
+<polyline points="2090,930 2090,1010" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="2090,1010 2095.0,998.0 2085.0,998.0" fill="#000000"/>
+<text x="2090" y="1234" xml:space="preserve" text-anchor="middle" font-size="29" fill="#595959"><tspan font-family="SimSun">访问的</tspan><tspan font-family="Times New Roman"> PL </tspan><tspan font-family="SimSun">接口</tspan></text>
+<rect x="1830" y="1290" width="245" height="175" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="1952.5" y="1345.02" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">图像</tspan><tspan font-family="Times New Roman"> DMA</tspan></text>
+<text x="1952.5" y="1387.02" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">ADC </tspan><tspan font-family="SimSun">抓取</tspan><tspan font-family="Times New Roman"> DMA</tspan></text>
+<text x="1952.5" y="1429.02" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="Times New Roman">S2MM</tspan></text>
+<rect x="2100" y="1290" width="250" height="175" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="2225.0" y="1365.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">RX </tspan><tspan font-family="SimSun">控制寄存器组</tspan></text>
+<text x="2225.0" y="1407.68" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">遥测接口</tspan></text>
+<polyline points="1952.5,1170 1952.5,1290" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1952.5,1290 1957.5,1278.0 1947.5,1278.0" fill="#000000"/>
+<polyline points="2225,1170 2225,1290" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="2225,1290 2230.0,1278.0 2220.0,1278.0" fill="#000000"/>
+<polyline points="650,405 980,405" fill="none" stroke="#333333" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="980,405 968.0,400.0 968.0,410.0" fill="#333333"/>
+<text x="795" y="342" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">预览帧</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">时间戳</tspan></text>
+<text x="795" y="376" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="Times New Roman">TX </tspan><tspan font-family="SimSun">状态</tspan></text>
+<polyline points="980,490 650,490" fill="none" stroke="#333333" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="650,490 662.0,495.0 662.0,485.0" fill="#333333"/>
+<text x="795" y="466" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">命令</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">订阅</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">对时</tspan></text>
+<polyline points="1830,405 1595,405" fill="none" stroke="#333333" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1595,405 1607.0,410.0 1607.0,400.0" fill="#333333"/>
+<text x="1732" y="342" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">图像</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">遥测</tspan></text>
+<text x="1732" y="376" xml:space="preserve" text-anchor="middle" font-size="26" fill="#595959"><tspan font-family="SimSun">频谱</tspan><tspan font-family="Times New Roman"> / SSCC </tspan><tspan font-family="SimSun">包</tspan></text>
+<polyline points="1595,490 1830,490" fill="none" stroke="#333333" stroke-width="2.2" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="1830,490 1818.0,485.0 1818.0,495.0" fill="#333333"/>
+<text x="1732" y="466" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="Times New Roman">HELLO </tspan><tspan font-family="SimSun">订阅</tspan></text>
+<rect x="1830" y="1570" width="520" height="150" rx="12" fill="#EBF1DF" stroke="#50632A" stroke-width="2"/>
+<text x="2090.0" y="1615.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">web_server.py · jscc-web.service</tspan></text>
+<text x="2090.0" y="1654.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">HTTP / WebSocket · </tspan><tspan font-family="SimSun">手机控制页</tspan></text>
+<text x="2090.0" y="1693.18" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="SimSun">订阅</tspan><tspan font-family="Times New Roman"> RX · GUI </tspan><tspan font-family="SimSun">控制联动（图</tspan><tspan font-family="Times New Roman">2-22</tspan><tspan font-family="SimSun">）</tspan></text>
+<polyline points="1830,850 1720,850 1720,1645 1830,1645" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1830,1645 1818.0,1640.0 1818.0,1650.0" fill="#000000"/>
+<text x="1740" y="1510" xml:space="preserve" text-anchor="start" font-size="25" fill="#595959"><tspan font-family="Times New Roman">UDP </tspan><tspan font-family="SimSun">数据</tspan></text>
+<rect x="60" y="1605" width="750" height="165" rx="12" fill="white" stroke="#A6A6A6" stroke-width="1.2"/>
+<polyline points="85,1645 175,1645" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="175,1645 163.0,1640.0 163.0,1650.0" fill="#000000"/>
+<text x="195" y="1654" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="Times New Roman">UDP </tspan><tspan font-family="SimSun">数据</tspan></text>
+<polyline points="375,1645 465,1645" fill="none" stroke="#000000" stroke-width="2" stroke-linejoin="round" stroke-dasharray="10 7"/>
+<polygon points="465,1645 453.0,1640.0 453.0,1650.0" fill="#000000"/>
+<text x="485" y="1654" xml:space="preserve" text-anchor="start" font-size="27" fill="#595959"><tspan font-family="Times New Roman">UDP </tspan><tspan font-family="SimSun">命令</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">订阅</tspan></text>
+<text x="435" y="1702" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">UDP </tspan><tspan font-family="SimSun">公共库：</tspan><tspan font-family="Times New Roman">jscc_udp.py</tspan></text>
+<text x="435" y="1744" xml:space="preserve" text-anchor="middle" font-size="27" fill="#595959"><tspan font-family="Times New Roman">20 B </tspan><tspan font-family="SimSun">包头</tspan><tspan font-family="Times New Roman"> · </tspan><tspan font-family="SimSun">分片</tspan><tspan font-family="Times New Roman"> ≤ 1400 B · </tspan><tspan font-family="SimSun">订阅每秒续期</tspan></text>
+<text x="1200" y="1825" xml:space="preserve" text-anchor="middle" font-size="28" fill="#595959"><tspan font-family="SimSun">黄色框为线程或主循环，蓝色框为库；</tspan><tspan font-family="Times New Roman">GUI </tspan><tspan font-family="SimSun">服务内以独立边框区分三个进程。</tspan></text>
+</svg>

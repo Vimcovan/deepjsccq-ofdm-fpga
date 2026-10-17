@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="940" viewBox="0 0 1400 940" role="img">
+<title>GDN / IGDN 模块硬件结构</title>
+<rect width="1400" height="940" fill="white"/>
+<rect x="90" y="200" width="140" height="140" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="160.0" y="252" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">平方</tspan></text>
+<text x="160.0" y="305" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">LUT</tspan></text>
+<rect x="300" y="200" width="250" height="140" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="425.0" y="252" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">像素缓存</tspan></text>
+<text x="425.0" y="305" xml:space="preserve" text-anchor="middle" font-size="28" fill="#000000"><tspan font-family="SimSun">乒乓</tspan><tspan font-family="Times New Roman"> · LUTRAM</tspan></text>
+<rect x="630" y="200" width="250" height="140" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="755.0" y="252" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="SimSun">乘加通路</tspan><tspan font-family="Times New Roman"> × L</tspan></text>
+<text x="755.0" y="305" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">DSP</tspan></text>
+<rect x="970" y="200" width="270" height="140" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1105.0" y="252" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">分母寄存器</tspan></text>
+<text x="1105.0" y="305" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">× L</tspan></text>
+<rect x="640" y="55" width="230" height="85" rx="12" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="755" y="108" xml:space="preserve" text-anchor="middle" font-size="31" fill="#000000"><tspan font-family="Times New Roman">γ ROM</tspan><tspan font-family="SimSun">、</tspan><tspan font-family="Times New Roman">β</tspan></text>
+<polyline points="755,140 755,200" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="755,200 760.0,188.0 750.0,188.0" fill="#000000"/>
+<text x="48" y="245" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">x</tspan></text>
+<polyline points="25,270 90,270" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="90,270 78.0,265.0 78.0,275.0" fill="#000000"/>
+<polyline points="230,270 300,270" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="300,270 288.0,265.0 288.0,275.0" fill="#000000"/>
+<text x="265" y="249" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">x, x²</tspan></text>
+<polyline points="550,270 630,270" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="630,270 618.0,265.0 618.0,275.0" fill="#000000"/>
+<text x="590" y="249" xml:space="preserve" text-anchor="middle" font-size="26" fill="#000000"><tspan font-family="Times New Roman">x, x²</tspan></text>
+<polyline points="880,270 970,270" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="970,270 958.0,265.0 958.0,275.0" fill="#000000"/>
+<polyline points="1240,270 1320,270 1320,660 1220,660" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1220,660 1232.0,665.0 1232.0,655.0" fill="#000000"/>
+<text x="1301" y="426" xml:space="preserve" text-anchor="end" font-size="30" fill="#000000"><tspan font-family="Times New Roman">D, x</tspan></text>
+<polygon points="1120,480 1220,560 1220,760 1120,840" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<polygon points="630,480 530,560 530,760 630,840" fill="#DBEEF3" stroke="#205867" stroke-width="2"/>
+<text x="1170" y="648" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">轮询</tspan></text>
+<text x="1170" y="692" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">派发</tspan></text>
+<text x="580" y="648" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">轮询</tspan></text>
+<text x="580" y="692" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">回收</tspan></text>
+<rect x="710" y="490" width="330" height="80" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="875" y="540" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">开方</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">除法单元</tspan><tspan font-family="Times New Roman"> 1</tspan></text>
+<polyline points="1120,530 1040,530" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1040,530 1052.0,535.0 1052.0,525.0" fill="#000000"/>
+<polyline points="710,530 630,530" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="630,530 642.0,535.0 642.0,525.0" fill="#000000"/>
+<rect x="710" y="610" width="330" height="80" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="875" y="660" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">开方</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">除法单元</tspan><tspan font-family="Times New Roman"> 2</tspan></text>
+<polyline points="1120,650 1040,650" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1040,650 1052.0,655.0 1052.0,645.0" fill="#000000"/>
+<polyline points="710,650 630,650" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="630,650 642.0,655.0 642.0,645.0" fill="#000000"/>
+<rect x="710" y="750" width="330" height="80" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="875" y="800" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="SimSun">开方</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">除法单元</tspan><tspan font-family="Times New Roman"> N</tspan></text>
+<polyline points="1120,790 1040,790" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="1040,790 1052.0,795.0 1052.0,785.0" fill="#000000"/>
+<polyline points="710,790 630,790" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="630,790 642.0,795.0 642.0,785.0" fill="#000000"/>
+<circle cx="875" cy="712" r="2.4" fill="#000000"/>
+<circle cx="875" cy="723" r="2.4" fill="#000000"/>
+<circle cx="875" cy="734" r="2.4" fill="#000000"/>
+<text x="875" y="879" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">IGDN</tspan><tspan font-family="SimSun">：除法替换为乘法</tspan></text>
+<polyline points="530,660 440,660" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="440,660 452.0,665.0 452.0,655.0" fill="#000000"/>
+<rect x="230" y="590" width="210" height="140" rx="12" fill="#FFF2CC" stroke="#7F6000" stroke-width="2"/>
+<text x="335.0" y="642" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="SimSun">重定标</tspan></text>
+<text x="335.0" y="695" xml:space="preserve" text-anchor="middle" font-size="29" fill="#000000"><tspan font-family="Times New Roman">LUT</tspan></text>
+<polyline points="230,660 70,660" fill="none" stroke="#000000" stroke-width="2.2" stroke-linejoin="round"/>
+<polygon points="70,660 82.0,665.0 82.0,655.0" fill="#000000"/>
+<text x="96" y="632" xml:space="preserve" text-anchor="middle" font-size="32" fill="#000000"><tspan font-family="Times New Roman">y</tspan></text>
+<text x="700" y="925" xml:space="preserve" text-anchor="middle" font-size="27" fill="#000000"><tspan font-family="Times New Roman">L</tspan><tspan font-family="SimSun">：乘加通路数</tspan><tspan font-family="Times New Roman">      N</tspan><tspan font-family="SimSun">：开方</tspan><tspan font-family="Times New Roman"> / </tspan><tspan font-family="SimSun">除法单元数；结果按通道顺序回收</tspan></text>
+</svg>
